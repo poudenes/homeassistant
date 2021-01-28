@@ -1,0 +1,32 @@
+#   _____ _____ _____ _____    _____ _____ _____ ____  _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ __
+#  |   | |   __|   __|_   _|  |   __|     |     |    \|   | |     |   __|  |  |_   _|  |     |     |   | |_   _| __  |     |  |
+#  | | | |   __|__   | | |    |  |  |  |  |  |  |  |  | | | |-   -|  |  |     | | |    |   --|  |  | | | | | | |    -|  |  |  |__
+#  |_|___|_____|_____| |_|    |_____|_____|_____|____/|_|___|_____|_____|__|__| |_|    |_____|_____|_|___| |_| |__|__|_____|_____|
+###########################################################################################
+# NEST CONTROL TEMP BASED ON SCENE GOODNIGHT
+###########################################################################################
+- alias: "Control - Nest Control - Goodnight Scene"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_goodnight
+      to: "on"
+
+    - platform: state
+      entity_id: climate.entryway
+
+  condition:
+    - condition: state
+      entity_id:
+        - binary_sensor.sensor_manual_family_home
+        - switch.scene_goodnight
+      state: "on"
+
+    - condition: state
+      entity_id: switch.dnc
+      state: "off"
+
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        temperature: 9

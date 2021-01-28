@@ -1,0 +1,34 @@
+#   _____ _____ _____ _____ _____ _____    ____  _____ _____ _____ _____ _____ _____ ____
+#  |     |     |_   _|     |     |   | |  |    \|   __|_   _|   __|     |_   _|   __|    \
+#  | | | |  |  | | | |-   -|  |  | | | |  |  |  |   __| | | |   __|   --| | | |   __|  |  |
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |____/|_____| |_| |_____|_____| |_| |_____|____/
+###########################################################################################
+# NOTIFY WHEN THERE IS MOTION AND NOBODY IS HOME
+###########################################################################################
+- alias: "Notification - Motion Detectionn"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.neo_diningroomdoor_custom_sensor
+        - binary_sensor.neo_bedroomdoor_custom_sensor
+        - binary_sensor.fibaro_frontdoor_custom_sensor
+        - binary_sensor.zwave2mqtt_nodeid_87_contact
+        - binary_sensor.zwave2mqtt_nodeid_88_contact
+        - binary_sensor.zwave2mqtt_nodeid_90_contact
+        - binary_sensor.zwave2mqtt_nodeid_91_contact
+        - binary_sensor.zwave2mqtt_nodeid_106_contact
+        - binary_sensor.zwave2mqtt_nodeid_107_contact
+        - binary_sensor.zwave2mqtt_nodeid_108_contact
+      to: "on"
+
+  condition: "{{ is_state('binary_sensor.sensor_manual_family_home', 'off') }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "registered motion {{ trigger.from_state.attributes.friendly_name  }}"
+        title: "HA Security ALERT"
+        data:
+          push:
+            thread-id: "Notify System"

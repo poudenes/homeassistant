@@ -1,0 +1,21 @@
+#   _____ ____  _ _ _    _____ _____ _____ _____ _____ _____ _____ _____ _____
+#  | __  |    \| | | |  |     |   | |   __|  |  | __  |  _  |   | |     |   __|
+#  |    -|  |  | | | |  |-   -| | | |__   |  |  |    -|     | | | |   --|   __|
+#  |__|__|____/|_____|  |_____|_|___|_____|_____|__|__|__|__|_|___|_____|_____|
+###########################################################################################
+# NOTIFY WHEN INSURANCE HAS BEEN EXPIRED FOR THE CAR OF MY SISTER
+###########################################################################################
+- alias: "Notification - RDW - Verzekering"
+  trigger:
+    - platform: state
+      entity_id: sensor.toyota_aygo_insured
+      to: "false"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "De auto van Martina is niet verzekerd! Sluit een autoverzekering af voordat je ermee de weg op gaat."
+        title: "HA - Auto verzekering verlopen"
+        data:
+          push:
+            thread-id: "RDW System"

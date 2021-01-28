@@ -1,0 +1,72 @@
+#   _____ _____ _____ _____ _____    ____  _____ _____ _____ _____ _____ 
+#  |   __|     |   __|   | |   __|  |    \|     |   | |   | |   __| __  |
+#  |__   |   --|   __| | | |   __|  |  |  |-   -| | | | | | |   __|    -|
+#  |_____|_____|_____|_|___|_____|  |____/|_____|_|___|_|___|_____|__|__|
+###########################################################################################
+# SCENE DINNER WHEN SUN IS BELOW HORIZON AND WE HAVE DINNER
+###########################################################################################
+- alias: "Scene - Dinner Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_dinner
+      from: "off"
+      to: "on"
+
+  variables:
+    door_sensor_diningroom: binary_sensor.neo_diningroomdoor_custom_sensor
+    kay_learning: switch.kay_learning
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+
+    - condition: state
+      entity_id: switch.scene_goodnight
+      state: "off"
+
+  action:
+    - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+      data:
+        media_player: media_player.this_device
+        call_scene_dinner: 1
+
+    - service: homeassistant.turn_off
+      entity_id: group.dinner_switches_scene # TURN OFF ALL OTHER SCENE SWITCHES
+
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        brightness_pct: 30
+        effect: Kay
+
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.newkaku_01401eb6_a
+        brightness_pct: 50
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_all
+        brightness_pct: 100
+        kelvin: "{{ adaptive }}"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.balcony_all
+        brightness_pct: 100
+        effect: 0
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_all
+        brightness_pct: 100
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Scene dinner is activated. All lights are on correctly"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Scenes System"

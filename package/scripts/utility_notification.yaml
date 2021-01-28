@@ -1,0 +1,82 @@
+#
+#   _____ _____ _____ _____ _____ _____    _____ _____ _____ __    _____ _____ __ __
+#  |   __|     | __  |     |  _  |_   _|  |  |  |_   _|     |  |  |     |_   _|  |  |
+#  |__   |   --|    -|-   -|   __| | |    |  |  | | | |-   -|  |__|-   -| | | |_   _|
+#  |_____|_____|__|__|_____|__|    |_|    |_____| |_| |_____|_____|_____| |_|   |_|
+#
+###########################################################################################
+# SCRIPT
+# https://www.home-assistant.io/docs/scripts/
+###########################################################################################
+utility_notification:
+  mode: parallel
+  max: 20
+  fields:
+    name:
+      description: name
+      example: washing_machine
+    emojis:
+      description: emojis
+      example: "👚👕"
+
+  variables:
+    sensor: "{{ 'binary_sensor.{}'.format(name) }}"
+    friendly_name: "{{ state_attr(sensor, 'friendly_name') }}"
+  sequence:
+
+    - variables:
+        start_time: "{{ as_timestamp(now()) }}"
+        start_kwh: "{{ state_attr(sensor, 'kwh') }}"
+
+    - wait_for_trigger:
+        platform: template
+        value_template: "{{ is_state(sensor, 'off') }}"
+      timeout: "03:00:00"
+      continue_on_timeout: false
+
+    - variables:
+        end_time: "{{ as_timestamp(now()) }}"
+        end_kwh: "{{ state_attr(sensor, 'kwh') }}"
+
+    - variables:
+        total_time: "{{ (end_time - start_time) }}"
+        total_kwh: "{{ end_kwh - start_kwh }}"
+
+    - variables:
+        minutes: "{{ (total_time / 60) | round(0) }}"
+        total_kwh_rounded: "{{ (total_kwh) | round(2) }}"
+        price: "{{ (0.30 * total_kwh) | round(2) }}"
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "{{ friendly_name }} is done"
+        message: "The {{ friendly_name }} is done after {{ minutes }} minutes and it used {{ total_kwh_rounded }} kWh (€{{ price }}) {{ emojis }}"
+        data:
+          push:
+            thread-id: "Cleaning System"
+
+    - variables:
+        mqtt_message: "{{ message }}"
+
+    - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+      data:
+        media_player: media_player.this_device
+        message: "The {{ friendly_name }} is done"
+
+# TESTING
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_other/{{ name }}_data/state"
+        retain: "true"
+        payload: "{{ mqtt_message }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_other/{{ name }}_data/attributes"
+        retain: "true"
+        payload: >-
+          {
+            "minutes": "{{ minutes }}",
+            "total_kwh_rounded": "{{ total_kwh_rounded }}",
+            "price": "{{ price }}"
+          }

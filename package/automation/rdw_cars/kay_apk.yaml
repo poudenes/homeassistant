@@ -1,0 +1,20 @@
+#   _____ ____  _ _ _    _____ _____ _____
+#  | __  |    \| | | |  |  _  |  _  |  |  |
+#  |    -|  |  | | | |  |     |   __|    -|
+#  |__|__|____/|_____|  |__|__|__|  |__|__|
+###########################################################################################
+# NOTIFY WHEN APK DATE IS EXPIRED SOON FOR THE CAR OF MY SISTER
+###########################################################################################
+- alias: "Notification - RDW - APK vervaldatum"
+  trigger:
+    - platform: template
+      value_template: "{{ ((as_timestamp(strptime(states('sensor.fiat_panda_expdate'), '%d %b %Y')) / 86400) | int) == ((as_timestamp(strptime(states('sensor.date'), '%Y-%m-%d')) / 86400) | int) + 21 }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "De APK keuring van Martina verloopt op {{ states('sensor.fiat_panda_expdate') }}. Plan een APK keuring bij de garage."
+        title: "HA - APK Keuring loop af"
+        data:
+          push:
+            thread-id: "RDW System"

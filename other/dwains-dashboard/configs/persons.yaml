@@ -1,0 +1,34 @@
+# https://dwainscheeren.github.io/dwains-lovelace-dashboard/configuration/persons.html
+
+persons:
+  - name: Peter
+    track: input_boolean.peter_home_manual
+    more_entities:
+      columns: 1 #optional
+      entities:
+        - entity: device_tracker.peter_iphone_ios_app
+        - entity: device_tracker.peter_iphone_geofency
+    page_entities:
+      columns: 2 #optional
+      entities:
+        - entity: device_tracker.peter_iphone_ios_app
+        - entity: device_tracker.peter_iphone_geofency
+
+  - name: Kay
+    track: input_boolean.kay_home_manual
+    more_entities:
+      columns: 1 #optional
+      entities:
+        - entity: device_tracker.kay_iphone_geofency
+        - entity: device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f
+    page_entities:
+      columns: 2 #optional
+      entities:
+        - entity: device_tracker.kay_iphone_geofency
+        - entity: device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f
+    # addons:
+    #   - name: Test addon
+    #     icon: fas:chart-area
+    #     path: 'dwains-dashboard/addons/persons/test/test.yaml'
+    #     data:
+    #       battery_level: sensor.battery_level

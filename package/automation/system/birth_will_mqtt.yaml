@@ -1,0 +1,46 @@
+#   _____ _____ _____ _____    _____ _____ _____ _____ _____      _    _ _ _ _____ __    __
+#  |     |     |_   _|_   _|  | __  |     | __  |_   _|  |  |    / |  | | | |     |  |  |  |
+#  | | | |  |  | | |   | |    | __ -|-   -|    -| | | |     |   / /   | | | |-   -|  |__|  |__
+#  |_|_|_|__  _| |_|   |_|    |_____|_____|__|__| |_| |__|__|  |_/    |_____|_____|_____|_____|
+#           |__|
+###########################################################################################
+# SEND A BIRTH SIGNAL MQTT OUT AND ALSO WHEN THERE IS A WILL SIGNAL WHEN OFFLINE HA
+###########################################################################################
+- alias: "System - HA Birth MQTT Signal"
+  trigger:
+    - platform: homeassistant
+      event: start
+
+  action:
+    - delay: "00:00:10"
+
+    - service: mqtt.publish
+      data:
+        topic: "hass/status"
+        payload: "online"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/status"
+        payload: "online"
+
+- alias: "System - HA Will MQTT Signal"
+  trigger:
+
+    - platform: homeassistant
+      event: shutdown
+
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "hass/status"
+        payload: "offline"
+        qos: 0
+        retain: "false"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/status"
+        payload: "offline"
+        qos: 0
+        retain: "false"

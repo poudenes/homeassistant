@@ -1,0 +1,32 @@
+#   _____ _____ _____    _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |     |     |   __|  |   __|  _  |  _  |     |   __|  |   __|_   _|  _  |_   _|     |     |   | |
+#  |-   -|-   -|__   |  |__   |   __|     |   --|   __|  |__   | | | |     | | | |-   -|  |  | | | |
+#  |_____|_____|_____|  |_____|__|  |__|__|_____|_____|  |_____| |_| |__|__| |_| |_____|_____|_|___|
+###########################################################################################
+# NOTIFY when ISS is above me
+###########################################################################################
+# - alias: "Notification - ISS is above me"
+#   trigger:
+#     - platform: state
+#       entity_id: device_tracker.iss_space_station
+#       from: "not_home"
+#       to: "home"
+
+#   action:
+#     - service: script.tweet_engine_image
+#       data:
+#         tweet: >-
+#           {{ [
+#           "The ISS is above me right now!",
+#           "The International Space Station flys by once a day & that time is NOW! (Netherlands)",
+#           "I can look up RIGHT NOW and see the International Space Station. (Netherlands)",
+#           "The #ISS just flew by and there is 1 Starman driving a #Tesla and {{ state_attr('binary_sensor.iss','number_of_people_in_space') }} people in. (Netherlands)",
+#           "The #ISS just flew by and there are {{ state_attr('binary_sensor.iss','number_of_people_in_space') }} people in. (Netherlands)",
+#           "The International Space Station Rocks! And it's above me RIGHT NOW! (Netherlands)"
+#           ] | random + " #Space #iss #nasa #universe"}}
+#         image: >-
+#           {{ [
+#           "/config/www/images/twitter/ha.png",
+#           "/config/www/images/twitter/ha.png",
+#           "/config/www/images/twitter/ha.png"
+#           ] | random }}

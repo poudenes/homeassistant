@@ -1,0 +1,35 @@
+#   _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____
+#  |     |     |_   _|     |     |   | |  | __  |  _  |_   _|  |  | __  |     |     |     |
+#  | | | |  |  | | | |-   -|  |  | | | |  | __ -|     | | | |     |    -|  |  |  |  | | | |
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |_____|__|__| |_| |__|__|__|__|_____|_____|_|_|_|
+###########################################################################################
+# CONTROL LIGHT KITCHEN WHEN DAYTIME SCENE IS OFF
+###########################################################################################
+- alias: "Motion Detection - Bathroom On Off"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_88_contact
+
+  variables:
+    goodnight: switch.scene_goodnight
+    motion_bathroom: binary_sensor.zwave2mqtt_nodeid_88_contact
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition: "{{ is_state('switch.bathroom', 'off') }}"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_all
+        brightness_pct: >-
+          {% if is_state(goodnight, 'on') and is_state(motion_bathroom, 'on') %} 50
+          {% elif is_state(goodnight, 'off') and is_state(motion_bathroom, 'on') %} 100
+          {% else %} 0
+          {% endif %}
+        kelvin: "{{ adaptive }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_motion/bathroom"
+        payload: "{{ 1 if is_state(motion_bathroom, 'on') else 0 }}"

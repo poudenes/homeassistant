@@ -1,0 +1,30 @@
+#   _____ _ _ _ _____ _____ _____    ____  _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ __
+#  |__   | | | |  _  |  |  |   __|  |    \|   __|  |  |     |     |   __|  |     |     |   | |_   _| __  |     |  |
+#  |   __| | | |     |  |  |   __|  |  |  |   __|  |  |-   -|   --|   __|  |   --|  |  | | | | | | |    -|  |  |  |__
+#  |_____|_____|__|__|\___/|_____|  |____/|_____|\___/|_____|_____|_____|  |_____|_____|_|___| |_| |__|__|_____|_____|
+###########################################################################################
+# Z_WAVE TURN OFF WALL SWITCHES WHEN NOBODY IS HOME
+###########################################################################################
+- alias: "Control - Turn On Off Zwave 5 6 7"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sensor_manual_family_home
+
+  variables:
+    family_home: binary_sensor.sensor_manual_family_home
+
+  action:
+    - choose:
+# CHRISTMAS
+        - conditions: "{{ is_state('sensor.holiday', 'Christmas') }}"
+          sequence:
+            - service: "{{ 'homeassistant.turn_on' if is_state(family_home, 'on') else 'homeassistant.turn_off' }}"
+              data:
+                entity_id:
+                  - group.xmas_nobody_home_zwave
+
+      default:
+        - service: "{{ 'homeassistant.turn_on' if is_state(family_home, 'on') else 'homeassistant.turn_off' }}"
+          data:
+            entity_id:
+              - group.zwave_switches

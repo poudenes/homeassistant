@@ -1,0 +1,110 @@
+#   _____ _____ _____ _____      _____ _____ _____ _____ _____ __ __    _____ _____ _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    | __  |     |   | |  _  | __  |  |  |  |   __|   __|   | |   __|     | __  |
+#  |   --|  |  |__   | | |  _   | __ -|-   -| | | |     |    -|_   _|  |__   |   __| | | |__   |  |  |    -|
+#  |_____|_____|_____| |_| |_|  |_____|_____|_|___|__|__|__|__| |_|    |_____|_____|_|___|_____|_____|__|__|
+###########################################################################################
+# BINARY_SENSOR OTHER
+###########################################################################################
+---
+binary_sensor.snapshots_stale:
+  icon: mdi:cloud-upload
+
+binary_sensor.updater:
+  friendly_name: "HA Updater"
+
+binary_sensor.update_available:
+  friendly_name: "Home Assistant Update Available"
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+###########################################################################################
+# NEXTCLOUD
+###########################################################################################
+binary_sensor.nextcloud_system_filelocking_enabled:
+  friendly_name: "File lock enabled"
+
+binary_sensor.nextcloud_system_enable_previews:
+  friendly_name: "Enable previews"
+
+binary_sensor.nextcloud_system_enable_avatars:
+  friendly_name: "Enable avatars"
+
+binary_sensor.nextcloud_system_debug:
+  friendly_name: "System debug"
+
+###########################################################################################
+# NEST and PROTECT
+###########################################################################################
+binary_sensor.entryway_thermostat_has_leaf:
+  friendly_name: "Nest Thermostat Leaf"
+  icon: mdi:leaf
+
+binary_sensor.entryway_thermostat_is_locked:
+  friendly_name: "Nest Thermostat locked"
+
+binary_sensor.entryway_thermostat_is_using_emergency_heat:
+  friendly_name: "Nest Thermostat emergency heat"
+
+binary_sensor.entryway_thermostat_fan:
+  friendly_name: "Nest Thermostat Fan"
+
+binary_sensor.asingaborg_away:
+  friendly_name: "Nest Thermostat away"
+
+binary_sensor.bedroom_nest_protect_online:
+  friendly_name: "Nest Proect Bedroom"
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+binary_sensor.dining_room_nest_protect_online:
+  friendly_name: "Nest Proect Diningroom"
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+binary_sensor.living_room_nest_protect_online:
+  friendly_name: "Nest Protect Livingroom"
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+binary_sensor.entryway_thermostat_online:
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+###########################################################################################
+# FAMILY and SENSOR IF SOMEONE IS HOME
+###########################################################################################
+binary_sensor.sensor_manual_family_home:
+  friendly_name: "Group Family Manual"
+
+binary_sensor.manual_peter_home:
+  friendly_name: "Peter"
+  templates:
+    entity_picture: if (state === 'on') return '/local/images/person/peter-home.jpg'; return '/local/images/person/peter-away.jpg'
+
+binary_sensor.manual_kay_home:
+  friendly_name: "Kay"
+  templates:
+    entity_picture: if (state === 'on') return '/local/images/person/kay-home.jpg'; return '/local/images/person/kay-away.jpg'
+
+###########################################################################################
+#MVPS
+###########################################################################################
+binary_sensor.asia_oudenes:
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+binary_sensor.oudenes_photography:
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+binary_sensor.hairdelicious:
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';

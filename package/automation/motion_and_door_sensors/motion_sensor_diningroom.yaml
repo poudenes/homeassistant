@@ -1,0 +1,39 @@
+#   _____ _____ _____ _____ _____ _____    ____  _____ _____ _____ _____ _____ _____ _____ _____ _____
+#  |     |     |_   _|     |     |   | |  |    \|     |   | |     |   | |   __| __  |     |     |     |
+#  | | | |  |  | | | |-   -|  |  | | | |  |  |  |-   -| | | |-   -| | | |  |  |    -|  |  |  |  | | | |
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |____/|_____|_|___|_____|_|___|_____|__|__|_____|_____|_|_|_|
+###########################################################################################
+# CONTROL LIGHT DRESSOIR WHEN GOODNIGHT SCENE IS ACTIVE
+###########################################################################################
+- alias: "Motion Detection - Diningroom On Off"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_108_contact
+
+  variables:
+    motion_diningroom: binary_sensor.zwave2mqtt_nodeid_108_contact
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: switch.scene_goodnight
+      state: "on"
+
+    - condition: state
+      entity_id:
+        - switch.scene_guests
+        - switch.dressoir
+      state: "off"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_all
+        brightness_pct: "{{ 10 if is_state(motion_diningroom, 'on') else 0 }}"
+        kelvin: "{{ adaptive }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_motion/diningroom"
+        payload: "{{ 1 if is_state(motion_diningroom, 'on') else 0 }}"

@@ -1,0 +1,842 @@
+#   _____ _____ _____ _____      _____ _____ _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |   __|   __|   | |   __|     | __  |
+#  |   --|  |  |__   | | |  _   |__   |   __| | | |__   |  |  |    -|
+#  |_____|_____|_____| |_| |_|  |_____|_____|_|___|_____|_____|__|__|
+###########################################################################################
+# CUSTOMIZE
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+###########################################################################################
+---
+sensor.peter_iphone_ios_app_geocoded_location:
+  friendly_name: "Peter HA iOS App"
+  entity_picture: "/local/images/person/peter-home.jpg"
+
+
+###########################################################################################
+# VERSION UPDATES FOR SUPERVISOR ADDONS
+###########################################################################################
+sensor.version_update_bitwarden:
+  friendly_name: "Biwardem"
+
+sensor.version_update_adguard:
+  friendly_name: "Adguard"
+
+sensor.version_update_core_checker:
+  friendly_name: "Core Checker"
+
+sensor.version_update_google_backup:
+  friendly_name: "Google Backup"
+
+sensor.version_update_grafana:
+  friendly_name: "Grafana"
+
+sensor.version_update_influxdb:
+  friendly_name: "InfluxDB"
+
+sensor.version_update_letscrypt:
+  friendly_name: "Letscrypt"
+
+sensor.version_update_mailserver:
+  friendly_name: "Mailserver"
+
+sensor.version_update_mariadb:
+  friendly_name: "MariaDB"
+
+sensor.version_update_mosquitto:
+  friendly_name: "Moquitt0"
+
+sensor.version_update_nextcloud_backup:
+  friendly_name: "Nextcloud Backup"
+
+sensor.version_update_phpmyadmin:
+  friendly_name: "phpMyAdmin"
+
+sensor.version_update_portainer:
+  friendly_name: "Portainer"
+
+sensor.version_update_signal_messenger:
+  friendly_name: "Signal"
+
+sensor.version_update_toogoodtogo:
+  friendly_name: "TooGooToGo"
+
+sensor.version_update_vscode:
+  friendly_name: "VSCode"
+
+sensor.version_update_wireguard:
+  friendly_name: "Wireguard"
+
+sensor.version_update_zwave2mqtt:
+  friendly_name: "ZWav2MQTT"
+
+###########################################################################################
+# TOOGOODTOGO
+###########################################################################################
+sensor.toogoodtogo_brood_en_banketbakkerij_hulleman_buitenveldertselaan_amsterdam:
+  friendly_name: "Brood Banket Hulleman"
+
+sensor.toogoodtogo_jumbo_velu_kastelenstraat_amsterdam:
+  friendly_name: "Jumbo Kastelenstr"
+
+sensor.toogoodtogo_broodhuys_meijer_magic_box:
+  friendly_name: "Broodhuys Meijer"
+
+sensor.toogoodtogo_albert_heijn_amsterdamseweg_amstelveen_magic_box:
+  friendly_name: "AH A'damweg"
+
+sensor.toogoodtogo_albert_heijn_to_go_amsterdam_wtc_magic_box:
+  friendly_name: "AH ToGo WTC"
+
+sensor.toogoodtogo_boulangerie_noe_gustav_mahlerlaan_amsterdam:
+  friendly_name: "Boulangerie Neo Gutav"
+
+sensor.toogoodtogo_de_drie_graefjes_stadionplein_amsterdam:
+  friendly_name: "De Drie Graefjes"
+
+sensor.toogoodtogo_hema_gelderlandplein:
+  friendly_name: "Hema GP"
+
+sensor.toogoodtogo_lidl_amsterdamseweg_188_groente_fruit_box:
+  friendly_name: "LIDL A'damweg"
+
+sensor.toogoodtogo_lidl_bankrashof_groente_fruit_box:
+  friendly_name: "LIDL Bankras"
+
+sensor.toogoodtogo_starbucks_gustav_mahler_amsterdam:
+  friendly_name: "Starbucks Gustav"
+
+sensor.toogoodtogo_sushi_time_wtc_amsterdam_magic_box:
+  friendly_name: "Sushi Time WTC"
+
+sensor.toogoodtogo_the_roastary_magic_box:
+  friendly_name: "The Roastery"
+
+sensor.toogoodtogo_poke_perfect_zuidas_magic_box:
+  friendly_name: "Poke Perfect WTC"
+
+sensor.toogoodtogo_juicebrothers_gustav_mahlerlaan_magic_box:
+  friendly_name: "Juice Brothers Gustav"
+
+sensor.toogoodtogo_le_pain_quotidien_gelderlandplein_magic_box:
+  friendly_name: "Le Pain Quotidien GP"
+
+sensor.toogoodtogo_stadsbakker_jongejans_gelderlandplein_magic_box:
+  friendly_name: "Jongejans GP"
+
+sensor.toogoodtogo_hema_spoorslag_magic_box:
+  friendly_name: "Hema Station Zuid"
+
+sensor.toogoodtogo_biem_s_kitchen_market_33_amsterdam_zuid:
+  friendly_name: "Biem's Kitchen Market 33"
+
+###########################################################################################
+# MEEK SWITCH UP TIME
+###########################################################################################
+sensor.wifi_up_time_kitchen:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_toilet:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_bathroom:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_bedroom:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_dressoir:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_livingroom:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_diningroom:
+  icon: mdi:nintendo-switch
+
+sensor.wifi_up_time_hallway:
+  icon: mdi:nintendo-switch
+
+###########################################################################################
+# GITHUB
+###########################################################################################
+sensor.github_espeasy_version:
+  friendly_name: "ESPEasy Latest Version"
+
+sensor.github_milight_hub_version:
+  friendly_name: "Milight Latest Version"
+
+###########################################################################################
+# OTHER
+###########################################################################################
+sensor.browser_ae1b43e7_eb57c683:
+  friendly_name: "Fully Kiosk Sensor"
+
+sensor.home_assistant_log:
+  icon: mdi:paper-roll
+
+###########################################################################################
+# MVPS Webserver
+###########################################################################################
+sensor.ssh_login_ip:
+  friendly_name: "Client login IP"
+
+sensor.ssh_login_date:
+  friendly_name: "Client login date"
+
+sensor.ssh_login_time:
+  friendly_name: "Client login time"
+
+sensor.ssh_login_user:
+  friendly_name: "Client username"
+
+sensor.www_oudenes_size:
+  friendly_name: "WWW Oudenes Size"
+  icon: mdi:harddisk
+
+sensor.www_asia_size:
+  friendly_name: "WWW Asia Size"
+  icon: mdi:harddisk
+
+sensor.www_hairdelicious_size:
+  friendly_name: "WWW Hair Size"
+  icon: mdi:harddisk
+
+sensor.vmail_backup_date:
+  friendly_name: "VMail Backup Date"
+  icon: mdi:backup-restore
+
+sensor.vmail_backup_time:
+  friendly_name: "VMail Backup Time"
+  icon: mdi:backup-restore
+
+sensor.vmail_backup_size:
+  friendly_name: "VMail Backup Size"
+  icon: mdi:harddisk
+
+sensor.www_backup_date:
+  friendly_name: "WWW Backup Date"
+  icon: mdi:backup-restore
+
+sensor.www_backup_time:
+  friendly_name: "WWW Backup Time"
+  icon: mdi:backup-restore
+
+###########################################################################################
+# SYSTEM INFO MILIGHT
+###########################################################################################
+sensor.milight_firmware:
+  friendly_name: "Firmware"
+
+sensor.milight_dropped_packets:
+  friendly_name: "Dropped Packets"
+
+sensor.milight_length:
+  friendly_name: "Packet Queue Length"
+
+sensor.milight_arduino_version:
+  friendly_name: "Arduino Version"
+
+sensor.milight_free_heap:
+  friendly_name: "Free heap"
+
+sensor.milight_reset_reason:
+  friendly_name: "Reset reason"
+
+sensor.milight_transitions:
+  friendly_name: "Transitions"
+
+sensor.milight_variant:
+  friendly_name: "Board type"
+
+sensor.milight_version:
+  friendly_name: "Version"
+
+###########################################################################################
+# SENSOR.PETER_S_ECHO_DOT
+###########################################################################################
+sensor.this_device_next_reminder:
+  friendly_name: "This Deivce Next Reminder"
+
+sensor.last_alexa:
+  friendly_name: "Last Alexa Device"
+
+sensor.peter_s_echo_dot_next_alarm:
+  friendly_name: "Alexa Echo Dot Alarm"
+
+sensor.peter_s_echo_dot_next_reminder:
+  friendly_name: "Alexa Echo Dot Reminder"
+
+sensor.peter_s_echo_dot_next_timer:
+  friendly_name: "Alexa Echo Dot Timer"
+
+sensor.alexa_last_message:
+  friendly_name: "Last message"
+  icon: mdi:amazon-alexa
+
+###########################################################################################
+# SENSOR.DSMR
+###########################################################################################
+sensor.dsmr_day_consumption_electricity1_cost:
+  friendly_name: "Low cost power today"
+
+sensor.dsmr_day_consumption_electricity2_cost:
+  friendly_name: "High cost power today"
+
+sensor.dsmr_day_consumption_electricity_cost_merged:
+  friendly_name: "Total cost power today"
+
+sensor.dsmr_day_consumption_energy_supplier_price_electricity_delivered_1:
+  friendly_name: "Low cost price kWh"
+
+sensor.dsmr_day_consumption_energy_supplier_price_electricity_delivered_2:
+  friendly_name: "High cost price kWh"
+
+sensor.dsmr_day_consumption_energy_supplier_price_gas:
+  friendly_name: "Gas cost price m3h"
+
+sensor.dsmr_day_consumption_gas_cost:
+  friendly_name: "Total cost gas today"
+
+sensor.dsmr_consumption_gas_read_at:
+  friendly_name: "DSMR update"
+
+sensor.dsmr_consumption_gas_currently_delivered:
+  friendly_name: "Gas used now"
+
+sensor.dsmr_reading_extra_device_delivered:
+  friendly_name: "Gas used total - extra"
+
+sensor.dsmr_consumption_gas_delivered:
+  friendly_name: "Gas used total"
+
+sensor.dsmr_day_consumption_gas:
+  friendly_name: "Gas used today"
+
+sensor.dsmr_day_consumption_electricity1:
+  friendly_name: "Power low used today"
+
+sensor.dsmr_day_consumption_electricity2:
+  friendly_name: "Power high used today"
+
+sensor.dsmr_day_consumption_electricity_merged:
+  friendly_name: "Power used total today"
+
+sensor.dsmr_reading_electricity_currently_delivered:
+  friendly_name: "Power used now"
+
+sensor.dsmr_reading_electricity_delivered_1:
+  friendly_name: "Power low total"
+
+sensor.dsmr_reading_electricity_delivered_2:
+  friendly_name: "Power high total"
+
+sensor.dsmr_reading_phase_currently_delivered_l1:
+  friendly_name: "Phase current use"
+
+sensor.dsmr_reading_phase_voltage_l1:
+  friendly_name: "Phase current volatge"
+
+sensor.dsmr_meter_stats_dsmr_version:
+  friendly_name: "DSMR Version"
+
+sensor.dsmr_meter_stats_electricity_tariff:
+  friendly_name: "Power tariff"
+
+sensor.dsmr_meter_stats_long_power_failure_count:
+  friendly_name: "Long power failure"
+
+sensor.dsmr_meter_stats_power_failure_count:
+  friendly_name: "Power failure"
+
+sensor.dsmr_meter_stats_rejected_telegrams:
+  friendly_name: "Rejected telegrams"
+
+sensor.dsmr_meter_stats_voltage_sag_count_l1:
+  friendly_name: "Voltage sag count"
+
+sensor.dsmr_meter_stats_voltage_swell_count_l1:
+  friendly_name: "Voltage swell count"
+
+###########################################################################################
+# SENSOR.DSMR SYSTEM INFO
+###########################################################################################
+sensor.dsmr_last_update:
+  friendly_name: "Last Sensors Update"
+
+sensor.dsmr_boot_time:
+  friendly_name: "Last Boot Time"
+
+sensor.dsmr_cpu_usage:
+  friendly_name: "CPU Usage"
+
+sensor.dsmr_disk_size:
+  friendly_name: "Disk Size"
+
+sensor.dsmr_disk_usage:
+  friendly_name: "Disk Usage"
+
+sensor.dsmr_memory_used:
+  friendly_name: "Memory Usage"
+
+sensor.dsmr_cpu_temperature:
+  friendly_name: "CPU Temp."
+
+###########################################################################################
+# SENSOR.NEXTCLOUD SYSTEM INFO
+###########################################################################################
+sensor.nextcloud_last_update:
+  friendly_name: "Last Sensors Update"
+
+sensor.nextcloud_boot_time:
+  friendly_name: "Last Boot Time"
+
+sensor.nextcloud_cpu_usage:
+  friendly_name: "CPU Usage"
+
+sensor.nextcloud_disk_size:
+  friendly_name: "Disk Size"
+
+sensor.nextcloud_disk_usage:
+  friendly_name: "Disk Usage"
+
+sensor.nextcloud_memory_used:
+  friendly_name: "Memory Usage"
+
+sensor.nextcloud_cpu_temperature:
+  friendly_name: "CPU Temp."
+
+###########################################################################################
+# SENSOR.SPEEDTEST
+###########################################################################################
+sensor.speedtest_download:
+  friendly_name: "Download"
+
+sensor.speedtest_ping:
+  friendly_name: "Ping"
+
+sensor.speedtest_upload:
+  friendly_name: "Upload"
+
+###########################################################################################
+# SENSOR.TOYOTA.*
+###########################################################################################
+sensor.toyota_aygo_expdate:
+  friendly_name: "APK Vervaldatum"
+
+sensor.toyota_aygo_insured:
+  friendly_name: "Verzekerd"
+
+sensor.toyota_aygo_recall:
+  friendly_name: "Terugroepstatus"
+
+###########################################################################################
+# SENSOR.HP_*
+###########################################################################################
+sensor.hp_printer_ink_black:
+  icon: mdi:cup-water
+
+sensor.hp_printer_ink_cyan:
+  icon_color: rgb(rgb(0,255,255))
+  icon: mdi:cup-water
+
+sensor.hp_printer_ink_magenta:
+  icon_color: rgb(rgb(255,0,255)
+  icon: mdi:cup-water
+
+sensor.hp_printer_ink_yellow:
+  icon_color: rgb(rgb(255,255,0)
+  icon: mdi:cup-water
+
+sensor.hp_printer_printer:
+  icon: mdi:file-outline
+
+sensor.hp_printer_printhead_cmyk:
+  icon: mdi:file-outline
+
+sensor.hp_printer_scanner:
+  icon: mdi:scanner
+
+###########################################################################################
+# SENSOR CLIMATE
+###########################################################################################
+sensor.entryway_thermostat_humidity:
+  friendly_name: "Nest Humidity"
+
+sensor.entryway_thermostat_hvac_state:
+  friendly_name: "Nest HVAC State"
+
+sensor.entryway_thermostat_operation_mode:
+  friendly_name: "Nest Operation Mode"
+
+sensor.entryway_thermostat_target:
+  friendly_name: "Nest Temp. Target"
+
+sensor.entryway_thermostat_temperature:
+  friendly_name: "Nest Temperature Now"
+
+sensor.asingaborg_eta:
+  friendly_name: "Nest ETA"
+
+sensor.bedroom_nest_protect_battery_health:
+  icon: mdi:battery
+
+sensor.bedroom_nest_protect_co_status:
+  icon: mdi:smoke-detector
+
+sensor.bedroom_nest_protect_color_status:
+  friendly_name: "Bedroom"
+  icon: mdi:palette
+
+sensor.bedroom_nest_protect_smoke_status:
+  icon: mdi:smoke-detector
+
+sensor.dining_room_nest_protect_battery_health:
+  icon: mdi:battery
+
+sensor.dining_room_nest_protect_co_status:
+  icon: mdi:smoke-detector
+
+sensor.dining_room_nest_protect_color_status:
+  friendly_name: "Diningroom"
+  icon: mdi:palette
+
+sensor.dining_room_nest_protect_smoke_status:
+  icon: mdi:smoke-detector
+
+sensor.living_room_nest_protect_battery_health:
+  icon: mdi:battery
+
+sensor.living_room_nest_protect_co_status:
+  icon: mdi:smoke-detector
+
+sensor.living_room_nest_protect_color_status:
+  friendly_name: "Livingroom"
+  icon: mdi:palette
+
+sensor.living_room_nest_protect_smoke_status:
+  icon: mdi:smoke-detector
+
+sensor.climate_inside_temperature:
+  friendly_name: "Temperature inside"
+
+###########################################################################################
+# SENSOR - GOOGLE BACKUP
+###########################################################################################
+sensor.snapshot_backup:
+  icon: mdi:cloud-upload
+
+###########################################################################################
+# SENSOR - ITHO
+###########################################################################################
+sensor.itho_speed:
+  friendly_name: "Speed"
+
+sensor.itho_tijd:
+  friendly_name: "Time"
+
+###########################################################################################
+# HA SYSTEM
+###########################################################################################
+sensor.hacs:
+  friendly_name: "HACS Update"
+
+sensor.date_time:
+  friendly_name: "Date and Time"
+
+sensor.date_time_iso:
+  friendly_name: "Date and Time ISO"
+
+sensor.nextsunrise:
+  friendly_name: "Next Sunrise"
+
+sensor.nextsunset:
+  friendly_name: "Next Sunset"
+
+sensor.period_of_day:
+  friendly_name: "Period of Day"
+
+sensor.time_date:
+  friendly_name: "Time and Date"
+
+sensor.time_utc:
+  friendly_name: "Time UTC"
+
+sensor.internet_time:
+  friendly_name: "Swatch Internet Time"
+
+sensor.ipv4_address_wlan0:
+  friendly_name: "wlan0 IPv4 Address"
+
+sensor.ssl_certificate_expiry:
+  friendly_name: "Letscrypt SSL Cert. Expiry"
+
+sensor.memory_free:
+  friendly_name: "HA Free Memory"
+
+sensor.memory_use_percent:
+  friendly_name: "HA Memory Usage"
+
+sensor.current_version:
+  friendly_name: "HA Current Version"
+
+sensor.disk_free:
+  friendly_name: "HA Free Diskspace"
+
+sensor.disk_use_percent:
+  friendly_name: "HA Diskpace Usage"
+
+sensor.last_boot:
+  friendly_name: "HA Last Boot"
+
+sensor.last_boot_2:
+  friendly_name: "HA Last Boot"
+
+sensor.latest_version:
+  friendly_name: "HA Latest Version"
+
+sensor.swap_use_percent:
+  friendly_name: "Swap Usage"
+
+sensor.local_ip:
+  icon: mdi:wan
+
+sensor.external_ip:
+  icon: mdi:wan
+
+sensor.mqtt_vpn_ext_ip:
+  icon: mdi:wan
+
+sensor.database_size:
+  icon: mdi:database
+
+sensor.processor_use:
+  friendly_name: "HA CPU Usage"
+
+sensor.birthday:
+  friendly_name: "Birthday!"
+  icon: mdi:balloon
+
+sensor.season:
+  friendly_name: "Season Period"
+
+sensor.dayofyear:
+  friendly_name: "Day of Year"
+  icon: mdi:calendar-today
+
+sensor.weekofyear:
+  friendly_name: "Week of Year"
+  icon: mdi:calendar-week-begin
+
+sensor.holiday:
+  friendly_name: "Holiday!"
+  icon: mdi:palm-tree
+
+###########################################################################################
+# BUIENRADAR
+###########################################################################################
+sensor.buienradar_stationname:
+  friendly_name: "Station name"
+
+sensor.buienradar_sunchance_1d:
+  friendly_name: "Sun change 1 day"
+
+sensor.buienradar_sunchance_2d:
+  friendly_name: "Sun change 2 days"
+
+sensor.buienradar_barometer:
+  friendly_name: "Barometer"
+
+sensor.buienradar_barometer_value:
+  friendly_name: "Barometer value"
+
+sensor.buienradar_condition:
+  friendly_name: "Condition now"
+
+sensor.buienradar_condition_1d:
+  friendly_name: "Condition 1 day"
+
+sensor.buienradar_condition_2d:
+  friendly_name: "Condition 3 days"
+
+sensor.buienradar_condition_code:
+  friendly_name: "Condition code"
+
+sensor.buienradar_condition_code_1d:
+  friendly_name: "Condition code 1 day"
+
+sensor.buienradar_condition_code_2d:
+  friendly_name: "Condition code 2 days"
+
+sensor.buienradar_detailed_condition:
+  friendly_name: "Condition simple now"
+
+sensor.buienradar_detailed_condition_1d:
+  friendly_name: "Condition simple 1 day"
+
+sensor.buienradar_detailed_condition_2d:
+  friendly_name: "Condition simple 2 days"
+
+sensor.buienradar_full_condition:
+  friendly_name: "Condition details now"
+
+sensor.buienradar_full_condition_1d:
+  friendly_name: "Condition detals 1 day"
+
+sensor.buienradar_full_condition_2d:
+  friendly_name: "Condition details 2 days"
+
+sensor.buienradar_symbol:
+  friendly_name: "Symbol now"
+
+sensor.buienradar_symbol_1d:
+  friendly_name: "Symbol 1 day"
+
+sensor.buienradar_symbol_2d:
+  friendly_name: "Symbol 2 days"
+
+sensor.buienradar_wind_speed:
+  friendly_name: "Wind speed now"
+
+sensor.buienradar_wind_speed_1d:
+  friendly_name: "Wind speed 1 day"
+
+sensor.buienradar_wind_speed_2d:
+  friendly_name: "Winf speed 2 days"
+
+sensor.buienradar_wind_force:
+  friendly_name: "Wind force now"
+
+sensor.buienradar_wind_force_1d:
+  friendly_name: "Wind force 1 day"
+
+sensor.buienradar_wind_force_2d:
+  friendly_name: "Wind force 2 days"
+
+sensor.buienradar_wind_direction:
+  friendly_name: "Wind direction now"
+
+sensor.buienradar_wind_direction_1d:
+  friendly_name: "Wind direction 1 day"
+
+sensor.buienradar_wind_direction_2d:
+  friendly_name: "Wind direction 2 days"
+
+sensor.buienradar_wind_direction_azimuth:
+  friendly_name: "Wind azimuth now"
+
+sensor.buienradar_wind_direction_azimuth_1d:
+  friendly_name: "Wind azimuth 1 day"
+
+sensor.buienradar_wind_direction_azimuth_2d:
+  friendly_name: "Wind azimuth 2 days"
+
+sensor.buienradar_pressure:
+  friendly_name: "Pressure"
+
+sensor.buienradar_visibility:
+  friendly_name: "Visibility"
+
+sensor.buienradar_wind_gust:
+  friendly_name: "Wind gust"
+
+sensor.buienradar_precipitation:
+  friendly_name: "Precipitation"
+
+sensor.buienradar_precipitation_forecast_average:
+  friendly_name: "Precipitation forecast average"
+
+sensor.buienradar_precipitation_forecast_total:
+  friendly_name: "Precipitation forecast total"
+
+sensor.buienradar_irradiance:
+  friendly_name: "Watt m2"
+
+sensor.buienradar_rain_last_24h:
+  friendly_name: "Rain within 24h"
+
+sensor.buienradar_rain_last_hour:
+  friendly_name: "Rain within last hour"
+
+sensor.buienradar_rain_1d:
+  friendly_name: "Rain 1 day"
+
+sensor.buienradar_rain_2d:
+  friendly_name: "Rain 2 days"
+
+sensor.buienradar_rainchance_1d:
+  friendly_name: "Rain change 1 day"
+
+sensor.buienradar_rainchance_2d:
+  friendly_name: "Rain change 2 days"
+
+sensor.buienradar_maximum_rain_1d:
+  friendly_name: "Max rain 1 day"
+
+sensor.buienradar_minimum_rain_1d:
+  friendly_name: "Min rain 1 day"
+
+sensor.buienradar_humidity:
+  friendly_name: "Humidity"
+
+sensor.buienradar_feel_temperature:
+  friendly_name: "Feel Temp."
+
+sensor.buienradar_temperature:
+  friendly_name: "Temp now"
+
+sensor.buienradar_temperature_1d:
+  friendly_name: "Temp. after 1 day"
+
+sensor.buienradar_temperature_2d:
+  friendly_name: "Temp. after 2 days"
+
+sensor.buienradar_minimum_temperature_1d:
+  friendly_name: "Min. Temp. after 1 day"
+
+sensor.buienradar_minimum_temperature_2d:
+  friendly_name: "Min. Temp. after 2 days"
+
+sensor.buienradar_ground_temperature:
+  friendly_name: "Ground Temp."
+
+###########################################################################################
+# NEXTCLOUD
+###########################################################################################
+sensor.nextcloud_system_apps_num_installed:
+  friendly_name: "Apps installed"
+
+sensor.nextcloud_system_apps_num_updates_available:
+  friendly_name: "Apps need updated"
+
+sensor.nextcloud_system_cpuload:
+  friendly_name: "CPU Load"
+
+sensor.nextcloud_system_freespace:
+  friendly_name: "Free space"
+
+sensor.nextcloud_system_mem_free:
+  friendly_name: "Free memory"
+
+sensor.nextcloud_system_mem_total:
+  friendly_name: "Total memory"
+
+sensor.nextcloud_system_memcache_distributed:
+  friendly_name: "Memcache distributed"
+
+sensor.nextcloud_system_memcache_local:
+  friendly_name: "Memcache local"
+
+sensor.nextcloud_system_memcache_locking:
+  friendly_name: "Memchache locking"
+
+sensor.nextcloud_system_swap_free:
+  friendly_name: "Free swapfile"
+
+sensor.nextcloud_system_swap_total:
+  friendly_name: "Total swapfile"
+
+sensor.nextcloud_system_theme:
+  friendly_name: "Thene"
+
+sensor.nextcloud_system_version:
+  friendly_name: "System version"

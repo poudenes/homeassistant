@@ -1,0 +1,27 @@
+#   _____ _____ _____ _____ _____ _____ __       _____ _____ _____ _____ _____ _____ _____
+#  |     |     |   | |_   _| __  |     |  |     |     |     |     |  |  |     |   | |   __|
+#  |   --|  |  | | | | | | |    -|  |  |  |__   |   --|  |  |  |  |    -|-   -| | | |  |  |
+#  |_____|_____|_|___| |_| |__|__|_____|_____|  |_____|_____|_____|__|__|_____|_|___|_____|
+###########################################################################################
+# TURN ON COOKING SCENE WHEN FAN GOES TO HIGH CONTROLLED BY REMOTE KITCHEN
+###########################################################################################
+- alias: "Control - Light - Cooking Scene"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.itho_remote
+        - sensor.itho_speed
+
+  variables:
+    remote: sensor.itho_remote
+    speed: sensor.itho_speed
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+
+  action:
+    - service: "{{ 'switch.turn_on' if is_state('sensor.itho_remote', 'Kitchen') and is_state('sensor.itho_speed', 'High') else 'switch.turn_off' }}"
+      entity_id: switch.scene_cooking

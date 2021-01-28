@@ -1,0 +1,28 @@
+#   _____ _____ _____ ____  _____ _____    _____ _ _ _ _____ _____ _____
+#  | __  |  _  |   | |    \|     |     |  |_   _| | | |   __|   __|_   _|
+#  |    -|     | | | |  |  |  |  | | | |    | | | | | |   __|   __| | |
+#  |__|__|__|__|_|___|____/|_____|_|_|_|    |_| |_____|_____|_____| |_|
+###########################################################################################
+# POST TWITTER MSG WHEN Twitter switch goes on
+###########################################################################################
+- alias: "Notification - Twitter Random"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.post_twitter_random
+      to: "on"
+
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.post_twitter_random
+
+    - service: script.tweet_random_post
+      data:
+        pick: >-
+          {% set pick = [
+            "promo",
+            "robot",
+            "weather",
+            "internet",
+            "p1meter"
+          ] %}
+          {{ pick|random }}

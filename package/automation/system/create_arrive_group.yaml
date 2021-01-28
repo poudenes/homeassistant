@@ -1,0 +1,21 @@
+#   _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____
+#  |     | __  |   __|  _  |_   _|   __|  |  _  | __  | __  |     |  |  |   __|  |   __| __  |     |  |  |  _  |
+#  |   --|    -|   __|     | | | |   __|  |     |    -|    -|-   -|  |  |   __|  |  |  |    -|  |  |  |  |   __|
+#  |_____|__|__|_____|__|__| |_| |_____|  |__|__|__|__|__|__|_____|\___/|_____|  |_____|__|__|_____|_____|__|
+###########################################################################################
+# CREATE A GROUP.ARRIVING for "Notify - Greets People Home" automation
+###########################################################################################
+- alias: "System - Create group.arriving for Greetings People Engine"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.kay_home_manual
+        - input_boolean.peter_home_manual
+      from: "off"
+      to: "on"
+
+  action:
+    - service: group.set
+      data:
+        object_id: "arriving"
+        add_entities: "{{ trigger.to_state.entity_id }}"

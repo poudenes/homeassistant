@@ -1,0 +1,16 @@
+#   _____ _____ _____ _____      _____ _____ _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |  _  |   __| __  |   __|     |   | |
+#  |   --|  |  |__   | | |  _   |   __|   __|    -|__   |  |  | | | |
+#  |_____|_____|_____| |_| |_|  |__|  |_____|__|__|_____|_____|_|___|
+###########################################################################################
+# PERSON
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+###########################################################################################
+---
+person.kay_acar:
+  friendly_name: "Kay"
+  entity_picture: "/local/images/person/kay-home.jpg"
+
+person.peter_oudenes:
+  friendly_name: "Peter"
+  entity_picture: "/local/images/person/peter-home.jpg"

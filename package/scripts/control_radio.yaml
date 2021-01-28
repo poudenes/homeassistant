@@ -1,0 +1,67 @@
+#
+#   _____         _     _      _____         _           _    _____       _ _
+#  |   __|___ ___|_|___| |_   |     |___ ___| |_ ___ ___| |  | __  |___ _| |_|___
+#  |__   |  _|  _| | . |  _|  |   --| . |   |  _|  _| . | |  |    -| .'| . | | . |
+#  |_____|___|_| |_|  _|_|    |_____|___|_|_|_| |_| |___|_|  |__|__|__,|___|_|___|
+#                  |_|
+###########################################################################################
+# SCRIPT
+# https://www.home-assistant.io/docs/scripts/
+###########################################################################################
+
+###########################################################################################
+# RADIO STREAM SEQUENCE
+###########################################################################################
+stream_radio:
+  alias: "Play Radio"
+  description: "Radio - Here all channels can be selected and turn them on or off on Tablet or Alexa"
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: >-
+          {% if is_state('input_select.radio_selector', 'Kitchen') %} media_player.browser_ae1b43e7_eb57c683
+          {% elif is_state('input_select.radio_selector', 'Alexa') %} media_player.peter_s_echo_dot
+          {% endif %}
+        media_content_id: >-
+            {% if is_state('input_select.radio_station', 'Radio 538') and is_state('input_select.radio_selector', 'Kitchen') %} https://18973.live.streamtheworld.com/RADIO538.mp3
+            {% elif is_state('input_select.radio_station', 'Q-Music') and is_state('input_select.radio_selector', 'Kitchen') %} http://icecast-qmusic.cdp.triple-it.nl/Qmusic_nl_live_96.mp3
+            {% elif is_state('input_select.radio_station', '3FM') and is_state('input_select.radio_selector', 'Kitchen')  %} http://icecast.omroep.nl/3fm-bb-mp3
+            {% elif is_state('input_select.radio_station', '100% NL') and is_state('input_select.radio_selector', 'Kitchen') %} http://stream.100p.nl/100pctnl.mp3
+            {% elif is_state('input_select.radio_station', 'Veronica') and is_state('input_select.radio_selector', 'Kitchen') %} https://21633.live.streamtheworld.com/SRGSTR09.mp3
+            {% elif is_state('input_select.radio_station', 'Sky Radio') and is_state('input_select.radio_selector', 'Kitchen') %} https://19993.live.streamtheworld.com/SKYRADIO.mp3
+            {% elif is_state('input_select.radio_station', 'Sky Radio Christmas') and is_state('input_select.radio_selector', 'Kitchen') %} https://21303.live.streamtheworld.com/SRGSTR08AAC.aac
+            {% elif is_state('input_select.radio_station', 'Classic FM') and is_state('input_select.radio_selector', 'Kitchen') %} http://21303.live.streamtheworld.com/CLASSICFM.mp3
+            {% elif is_state('input_select.radio_station', 'BNR Nieuwsradio') and is_state('input_select.radio_selector', 'Kitchen') %} http://icecast-bnr-cdp.triple-it.nl/bnr_mp3_96_04
+            {% elif is_state('input_select.radio_station', 'SLAM! Hardstyle') and is_state('input_select.radio_selector', 'Kitchen') %} http://streaming.slam.nl/web11_mp3
+            {% elif is_state('input_select.radio_station', 'SLAM!') and is_state('input_select.radio_selector', 'Kitchen') %} http://stream.radiocorp.nl/web14_mp3
+
+            {% elif is_state('input_select.radio_station', '538') and is_state('input_select.radio_selector', 'Alexa') %} 538 Non Stop
+            {% elif is_state('input_select.radio_station', 'Qmusic Non-stop')  and is_state('input_select.radio_selector', 'Alexa') %} Qmusic Non-stop
+            {% elif is_state('input_select.radio_station', '3FM')  and is_state('input_select.radio_selector', 'Alexa') %} 3FM
+            {% elif is_state('input_select.radio_station', '100% NL')  and is_state('input_select.radio_selector', 'Alexa') %} 100% NL
+            {% elif is_state('input_select.radio_station', 'Veronica')  and is_state('input_select.radio_selector', 'Alexa') %} Radio Veronica
+            {% elif is_state('input_select.radio_station', 'Sky Radio')  and is_state('input_select.radio_selector', 'Alexa') %} Sky Radio 101 FM
+            {% elif is_state('input_select.radio_station', 'Sky Radio Christmas')  and is_state('input_select.radio_selector', 'Alexa') %} Sky Radio Christmas
+            {% elif is_state('input_select.radio_station', 'Classic FM')  and is_state('input_select.radio_selector', 'Alexa') %} classicnl
+            {% elif is_state('input_select.radio_station', 'BNR Nieuwsradio')  and is_state('input_select.radio_selector', 'Alexa') %} BNR Nieuwsradio
+            {% elif is_state('input_select.radio_station', 'SLAM! Hardstyle')  and is_state('input_select.radio_selector', 'Alexa') %} SLAM! Hardstyle
+            {% elif is_state('input_select.radio_station', 'SLAM!')  and is_state('input_select.radio_selector', 'Alexa') %} SLAM!
+            {% endif %}
+
+        media_content_type: >-
+          {% if is_state('input_select.radio_selector', 'Kitchen') %} audio/mp3
+          {% elif is_state('input_select.radio_selector', 'Alexa') %} TUNEIN
+          {% endif %}
+
+stream_radio_stop:
+  alias: "Stop Radio"
+  sequence:
+    - service: >-
+        {% if is_state('input_select.radio_selector', 'Kitchen') %} media_player.media_stop
+        {% elif is_state('input_select.radio_selector', 'Alexa') %} media_player.media_pause
+        {% endif %}
+      data:
+        entity_id: >-
+          {% if is_state('input_select.radio_selector', 'Kitchen') %} media_player.browser_ae1b43e7_eb57c683
+          {% elif is_state('input_select.radio_selector', 'Alexa') %} media_player.peter_s_echo_dot
+          {% endif %}

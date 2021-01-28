@@ -1,0 +1,33 @@
+#   _____ _____ _____ __    _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  _  |     |_   _|     |     |   | |   __|
+#  |     |   __|   __|  |__|   __| | | |  |  |  |     |   --| | | |-   -|  |  | | | |__   |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |__|__|_____| |_| |_____|_____|_|___|_____|
+###########################################################################################
+# APPLE WATCH ILLUMINANCE REPORT
+###########################################################################################
+- alias: "Apple Watch: Illuminance Report"
+  mode: parallel
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: illuminance report
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "Illuminance"
+        message: >
+          Living room: {{ states('sensor.zwave2mqtt_nodeid_91_illuminance') }}
+
+          Bedroom: {{ states('sensor.zwave2mqtt_nodeid_106_illuminance') }}
+
+          Bathroom: {{ states('sensor.zwave2mqtt_nodeid_88_illuminance') }}
+
+          Hallway: {{ states('sensor.zwave2mqtt_nodeid_90_illuminance') }}
+
+          Kitchen: {{ states('sensor.zwave2mqtt_nodeid_106_illuminance') }}
+
+          Diningroom: {{ states('sensor.zwave2mqtt_nodeid_108_illuminance') }}
+
+          Toilet: {{ states('sensor.zwave2mqtt_nodeid_87_illuminance') }}

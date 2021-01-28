@@ -1,0 +1,43 @@
+#   ____  _____ _____ _____    _____ _____ ____  _____ _____ _____ _____
+#  |    \|     |     | __  |  | __  |   __|    \| __  |     |     |     |
+#  |  |  |  |  |  |  |    -|  | __ -|   __|  |  |    -|  |  |  |  | | | |
+#  |____/|_____|_____|__|__|  |_____|_____|____/|__|__|_____|_____|_|_|_|
+###########################################################################################
+# CONTROL BEDROOM LIGHTS WHEN DOOR SENSOR IS ON OR OFF
+###########################################################################################
+- alias: "Door Sensor - Bedroom Door Open Close"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_104_contact
+
+  variables:
+    season: sensor.season
+    door_sensor_bedroom: binary_sensor.zwave2mqtt_nodeid_104_contact
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+
+    - condition: state
+      entity_id: light.bedroom_all
+      state: "on"
+
+    - condition: state
+      entity_id: 
+        - switch.bedroom
+        - switch.full_manual_mode
+      state: "off"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_all
+        brightness_pct: >-
+          {% if is_state(door_sensor_bedroom, 'on') and (is_state(season, 'autumn') or is_state(season, 'winter')) %} 100
+          {% elif is_state(door_sensor_bedroom, 'on') and (is_state(season, 'spring') or is_state(season, 'summer')) %} 20
+          {% else %} 100
+          {% endif %}
+        kelvin: "{{ adaptive }}"

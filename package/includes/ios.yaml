@@ -1,0 +1,130 @@
+#
+#   _ _____ _____
+#  |_|     |   __|
+#  | |  |  |__   |
+#  |_|_____|_____|
+#
+###########################################################################################
+# IOS
+# https://www.home-assistant.io/integrations/ios/
+# https://companion.home-assistant.io/docs/core/actions
+# https://companion.home-assistant.io/docs/notifications/actionable-notifications
+###########################################################################################
+---
+actions:
+  - name: battery level report
+    background_color: "#000000"
+    label:
+      text: "Receive battery levels"
+      color: "#ff0000"
+    icon:
+      icon: earth
+      color: "#ffffff"
+
+  - name: illuminance report
+    background_color: "#000000"
+    label:
+      text: "Receive lux levels"
+      color: "#ff0000"
+    icon:
+      icon: earth
+      color: "#ff0000"
+
+  - name: temperature report
+    background_color: "#000000"
+    label:
+      text: "Receive temperature info"
+      color: "#ff0000"
+    icon:
+      icon: earth
+      color: "#ff0000"
+
+  - name: Set lights
+    background_color: "#000000"
+    label:
+      text: "Set lights"
+      color: "#ff0000"
+    icon:
+      icon: lamp
+      color: "#ff0000"
+
+# Below you can create categories with the actions inside
+# Those categories can be triggered inside automation actions
+push:
+  categories:
+    - name: medicine
+      identifier: 'medicine'
+      actions:
+        - identifier: 'MEDICINE_SNOOZE'
+          title: 'Remind me later again'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: true
+          behavior: 'default'
+
+        - identifier: 'MEDICINE_TAKE_THEM'
+          title: 'I take my medicine'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: true
+          behavior: 'default'
+
+    - name: Alarm
+      identifier: 'alarm'
+      actions:
+        - identifier: 'MOTION_LIGHT_BLUE'
+          title: 'Motion Light Blue'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: true
+          behavior: 'default'
+
+        - identifier: 'MOTION_LIGHT_RED'
+          title: 'Motion Light Red'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+          behavior: 'default'
+          # behavior: 'textInput'
+          # textInputButtonTitle: 'Silencio!'
+          # textInputPlaceholder: 'Placeholder'
+
+    - name: Set lights
+      identifier: set_lights
+      actions:
+        - identifier: ALL
+          title: All
+        - identifier: BEDROOM
+          title: Bedroom
+        - identifier: LIVINGROOM
+          title: Livingroom
+        - identifier: BATHROOM
+          title: Bathroom
+        - identifier: HALL
+          title: Hall
+        - identifier: TOILET
+          title: Toilet
+        - identifier: KITCHEN
+          title: Kitchen
+        - identifier: BALCONY
+          title: Balcony
+        - identifier: DININGROOM
+          title: diningroom
+
+    - name: Light options
+      identifier: light_options
+      actions:
+        - identifier: "OFF"
+          title: "Off"
+        - identifier: "ON"
+          title: "On"
+        - identifier: FIFTY
+          title: "50%"
+        - identifier: HUNDRED
+          title: "100%"
+        - identifier: ONE
+          title: "1%"
+        - identifier: WHITE
+          title: White lights
+        - identifier: COZY
+          title: Cozy lights

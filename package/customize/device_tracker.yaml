@@ -1,0 +1,55 @@
+#   _____ _____ _____ _____      ____  _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |    \|   __|  |  |     |     |   __|  |_   _| __  |  _  |     |  |  |   __| __  |
+#  |   --|  |  |__   | | |  _   |  |  |   __|  |  |-   -|   --|   __|    | | |    -|     |   --|    -|   __|    -|
+#  |_____|_____|_____| |_| |_|  |____/|_____|\___/|_____|_____|_____|    |_| |__|__|__|__|_____|__|__|_____|__|__|
+###########################################################################################
+# DEVICE_TRACKER
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+###########################################################################################
+---
+# PETER
+device_tracker.1717fe36_3c70_4599_963c_b70b6ee95eba:
+  friendly_name: "Peter Locative"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/peter-home.jpg'; return '/local/images/person/peter-away.jpg';
+
+device_tracker.peter_iphone_geofency:
+  friendly_name: "Peter Geofency"
+  templates:
+    entity_picture: if (state === 'home' ) return '/local/images/person/peter-home.jpg'; return '/local/images/person/peter-away.jpg';
+
+device_tracker.peter_iphone:
+  friendly_name: "Peter iCloud3"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/peter-home.jpg'; return '/local/images/person/peter-away.jpg';
+
+device_tracker.peter_iphone_ios_app:
+  friendly_name: "Peter iOS App"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/peter-home.jpg'; return '/local/images/person/peter-away.jpg';
+
+device_tracker.peter_iphone_icloud_intergration:
+  friendly_name: "Peter iCloud Int"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/peter-home.jpg'; return '/local/images/person/peter-away.jpg';
+
+# KAY
+device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f:
+  friendly_name: "Kay Locative"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/kay-home.jpg'; return '/local/images/person/kay-away.jpg';
+
+device_tracker.kay_iphone_geofency:
+  friendly_name: "Kay Geofency"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/kay-home.jpg'; return '/local/images/person/kay-away.jpg';
+
+device_tracker.cenkay_xr:
+  friendly_name: "Kay iCloud3"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/kay-home.jpg'; return '/local/images/person/kay-away.jpg';
+
+device_tracker.cenkay_xr_icloud_intergration:
+  friendly_name: "Kay iCloud Int"
+  templates:
+    entity_picture: if (state === 'home') return '/local/images/person/kay-home.jpg'; return '/local/images/person/kay-away.jpg';

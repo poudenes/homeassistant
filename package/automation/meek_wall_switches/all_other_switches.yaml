@@ -1,0 +1,42 @@
+#   _____ _____ _____ _____    _____ _ _ _ _____ _____ _____ _____ _____ _____
+#  |     |   __|   __|  |  |  |   __| | | |     |_   _|     |  |  |   __|   __|
+#  | | | |   __|   __|    -|  |__   | | | |-   -| | | |   --|     |   __|__   |
+#  |_|_|_|_____|_____|__|__|  |_____|_____|_____| |_| |_____|__|__|_____|_____|
+###########################################################################################
+# SWITCH CONTROL FOR ALL LIGHTS USNING MILIGHT BULBS
+###########################################################################################
+- alias: "Switches - All other Meek switches"
+  trigger:
+    - platform: state
+      entity_id:
+        - switch.balcony
+        - switch.bathroom
+        - switch.bedroom
+        - switch.dressoir
+        - switch.hallway
+        - switch.kitchen
+        - switch.sink
+        - switch.toilet
+        - switch.wall
+        - switch.window
+
+  variables:
+    from_state: "{{ trigger.from_state.state }}"
+    to_state: "{{ trigger.to_state.state }}"
+    name: "{{ trigger.entity_id.split('.', 1)[1] }}"
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  action:
+    - choose:
+        - conditions: "{{ to_state == 'on' }}"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: "light.{{ name }}_all"
+                brightness_pct: 100
+                kelvin: "{{ adaptive }}"
+
+      default:
+        - service: light.turn_off
+          data:
+            entity_id: "light.{{ name }}_all"

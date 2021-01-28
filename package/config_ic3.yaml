@@ -1,0 +1,52 @@
+#   _ _____ _           _ ___    _____         ___ _           _     ___
+#  |_|     | |___ _ _ _| |_  |  |     |___ ___|  _|_|___      |_|___|_  |
+#  | |   --| | . | | | . |_  |  |   --| . |   |  _| | . |     | |  _|_  |
+#  |_|_____|_|___|___|___|___|  |_____|___|_|_|_| |_|_  |_____|_|___|___|
+#                                                   |___|_____|
+###########################################################################################
+# CONFIG FILE FOR ICLOUD3 YOU CAN CHANGE THIS RESTART ICLOUD TO MAKE IT ACTIVE
+# https://gcobb321.github.io/icloud3/#/chapters/2-config-parms
+###########################################################################################
+devices:
+  - device_name: 'peter_iphone'
+    name: 'Peter'
+    picture: 'local/images/person/peter-home.jpg'
+
+  - device_name: 'cenkay_xr'
+    picture: 'local/images/person/kay-home.jpg'
+    name: 'Kay'
+    noiosapp: true
+
+###########################################################################################
+# General Parameters
+###########################################################################################
+# group: family
+event_log_card_directory: '/log'
+unit_of_measurement: km
+
+###########################################################################################
+# Zone/Tracking Parameters
+###########################################################################################
+inzone_interval: '60 min'
+max_interval: '4 hrs'
+center_in_zone: true
+stationary_inzone_interval: '30 min'
+stationary_still_time: '8 min'
+stationary_zone_offset: 1, 0
+travel_time_factor: .6
+
+###########################################################################################
+# Accuracy Parameters
+###########################################################################################
+gps_accuracy_threshold: 75
+ignore_gps_accuracy_inzone: true
+old_location_threshold: '3 min'
+
+###########################################################################################
+# Waze Parameters
+###########################################################################################
+distance_method: waze
+waze_region: EU
+waze_min_distance: 1
+waze_max_distance: 1000
+waze_realtime: false

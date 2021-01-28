@@ -1,0 +1,27 @@
+#   ____  _____ _____ _____    _____ _____ _____ _____      _    _____ __    _____ _____ _____
+#  |    \|     |     | __  |  |     |  _  |   __|   | |    / |  |     |  |  |     |   __|   __|
+#  |  |  |  |  |  |  |    -|  |  |  |   __|   __| | | |   / /   |   --|  |__|  |  |__   |   __|
+#  |____/|_____|_____|__|__|  |_____|__|  |_____|_|___|  |_/    |_____|_____|_____|_____|_____|
+###########################################################################################
+# NOTIFY WHEN DOORS OPEN OR CLOSE
+###########################################################################################
+- alias: "Notification - Fibraro Doors Open Close"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.neo_diningroomdoor_custom_sensor
+        - binary_sensor.neo_bedroomdoor_custom_sensor
+        - binary_sensor.fibaro_frontdoor_custom_sensor
+        - binary_sensor.fibaro_imac_custom_sensor
+
+  condition: "{{ is_state('binary_sensor.sensor_manual_family_home', 'off') }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "{{ trigger.from_state.attributes.friendly_name }} is {{ 'open' if trigger.to_state.state == 'on' else 'closed' }}"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Notify System"

@@ -1,0 +1,28 @@
+#   _____ _____ _____ _____ _____    _____ _____ __ __    __    _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |  |  |  _  |  |  |  |  |  |   __|  _  | __  |   | |
+#  |__   |   --|   __| | | |   __|  |    -|     |_   _|  |  |__|   __|     |    -| | | |
+#  |_____|_____|_____|_|___|_____|  |__|__|__|__| |_|    |_____|_____|__|__|__|__|_|___|
+###########################################################################################
+# SCENE KAY WHEN HE IS STUDY THE DININGTABLE LIGHT STAY AT 100%
+###########################################################################################
+- alias: "Scene - Kay Learning Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.kay_learning
+
+  variables:
+    goodnight: switch.scene_goodnight
+    kay_learning: switch.kay_learning
+
+  condition: "{{ is_state('switch.scene_daytime', 'off') }}"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.newkaku_01401eb6_a
+        brightness_pct: >-
+          {% if is_state(kay_learning, 'on')  and is_state(goodnight, 'off') %} 100
+          {% elif is_state(kay_learning, 'on')  and is_state(goodnight, 'on')  %} 100
+          {% elif is_state(kay_learning, 'off') and is_state(goodnight, 'off') %} 50
+          {% else %} 0
+          {% endif %}

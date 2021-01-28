@@ -1,0 +1,185 @@
+#
+#   _____ _                _____               _      _____
+#  |  _  | |___ _ _ ___   |   __|_____ ___ ___| |_   |  |  |___ _____ ___
+#  |     | | -_|_'_| .'|  |__   |     | .'|  _|  _|  |     | . |     | -_|
+#  |__|__|_|___|_,_|__,|  |_____|_|_|_|__,|_| |_|    |__|__|___|_|_|_|___|
+#
+###########################################################################################
+# SMART_HOME
+# https://www.home-assistant.io/integrations/alexa/
+###########################################################################################
+---
+flash_briefings:
+  password: !secret amazon_flash_briefing_password
+  ha_briefing:
+    - title: "Temperature"
+      text: >
+        Inside the house, it is {{ (states('sensor.entryway_thermostat_temperature') | int) }} degrees.
+        Outside it is "{{ (states('sensor.buienradar_temperature')) | int }}" degrees.
+        The forcast for today is "{{ (states('sensor.buienradar_full_condition')) }}", tomorrow it will be "{{ (states('sensor.buienradar_full_condition_1d')) }}".
+        There is {% set ns = namespace(res=0) %}{% for count in state_attr('group.meek_switches', 'entity_id') if is_state(count, 'on') %}{% set ns.res = ns.res + 1 %}{%endfor%}{{ ns.res }} wall switch on.
+        {% for entity_id in state_attr('group.meek_switches','entity_id') if not is_state(entity_id, 'off') %} The {{ entity_id }} is on.{% endfor %},
+        Home Assistant CPU temperature is {{ (states('sensor.ha_cpu_temperature') | int) }} degrees.
+        DMRS CPU temperature is {{ (states('sensor.dsmr_cpu_temperature')  |int) }} degrees.
+        Nextcloud temperature is {{ (states('sensor.nextcloud_cpu_temperature') | int) }} degrees.
+
+smart_home:
+  endpoint: https://api.eu.amazonalexa.com/v3/events
+  client_id: !secret alexa_client_id_smart_home_messaging
+  client_secret: !secret alexa_client_secret_smart_home_messaging
+  filter:
+    include_entities:
+      - media_player.android
+      - media_player.woonkamer
+      - input_number.fullykiosk_brightness_slider
+      - fan.afzuiging_badkamer
+      - switch.briefing
+
+# Lights
+      - light.livingroom_all
+      - light.dressoir_all
+      - light.hallway_all
+      - light.balcony_all
+      - light.kitchen_all
+      - light.sink_all
+      - light.bedroom_all
+      - light.bathroom_all
+      - light.toilet_all
+      - light.nanoleaf
+      - light.browser_ae1b43e7_eb57c683
+      - light.newkaku_01401eb6_a
+
+# Motion Sensors - Not seen as motion sensors
+      - binary_sensor.zwave2mqtt_nodeid_87_contact
+      - binary_sensor.zwave2mqtt_nodeid_88_contact
+      - binary_sensor.zwave2mqtt_nodeid_90_contact
+      - binary_sensor.zwave2mqtt_nodeid_91_contact
+      - binary_sensor.zwave2mqtt_nodeid_106_contact
+      - binary_sensor.zwave2mqtt_nodeid_107_contact
+      - binary_sensor.zwave2mqtt_nodeid_108_contact
+
+# Scenes
+      - switch.scene_sleeping
+      - switch.scene_romantic
+      - switch.scene_kodi
+      - switch.scene_goodnight
+      - switch.scene_morning
+      - switch.scene_appletv
+      - switch.scene_daytime
+      - switch.scene_tv
+      - switch.scene_evening
+      - switch.scene_disco
+      - switch.scene_cooking
+      - switch.kay_learning
+      - switch.dnc
+      - switch.scene_dinner
+
+# Logitech Activities
+      - switch.airplay
+      - switch.iptv
+      - switch.kodi
+      - switch.tv
+      - switch.appletv
+
+# NEST
+      - climate.entryway
+
+# Temperature sensors
+      - sensor.zwave2mqtt_nodeid_101_temperature_air
+      - sensor.zwave2mqtt_nodeid_100_temperature_air
+      - sensor.zwave2mqtt_nodeid_106_temperature_air
+      - sensor.zwave2mqtt_nodeid_88_temperature_air
+      - sensor.zwave2mqtt_nodeid_107_temperature_air
+      - sensor.zwave2mqtt_nodeid_90_temperature_air
+      - sensor.zwave2mqtt_nodeid_108_temperature_air
+      - sensor.zwave2mqtt_nodeid_91_temperature_air
+      - sensor.zwave2mqtt_nodeid_87_temperature_air
+
+  entity_config:
+    fan.afzuiging_badkamer:
+      display_categories: FAN
+    media_player.android:
+      name: "Kodi Mediaplayer"
+      display_categories: STREAMING_DEVICE
+    media_player.woonkamer:
+      name: "AppleTV Mediaplayer"
+      display_categories: STREAMING_DEVICE
+
+    switch.dnc:
+      name: "Disable Nest Control"
+      display_categories: SWITCH
+
+    sensor.zwave2mqtt_nodeid_101_temperature_air:
+      name: "Temp. Frontdoor"
+      description: "Temp. at the frontdoor"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_100_temperature_air:
+      name: "Temp. iMac"
+      description: "Temp. iMac"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_106_temperature_air:
+      name: "Temp. Bedroom"
+      description: "Temp. in the dedroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_88_temperature_air:
+      name: "Temp. Bathroom"
+      description: "Temp. in the bathroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_107_temperature_air:
+      name: "Temp. Kitchen"
+      description: "Temp. in the kitchen"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_90_temperature_air:
+      name: "Temp. Hallway"
+      description: "Temp. in the hallway"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_108_temperature_air:
+      name: "Temp. Diningroom"
+      description: "Temp. in the diningroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_91_temperature_air:
+      name: "Temp Livingroom"
+      description: "Temp. in the livingroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.zwave2mqtt_nodeid_87_temperature_air:
+      name: "Temp. Toilet"
+      description: "Temp. in the toilet"
+      display_categories: TEMPERATURE_SENSOR
+
+    binary_sensor.zwave2mqtt_nodeid_87_contact:
+      name: "Motion Toilet"
+      description: "Motion sensor in the toilet"
+      display_categories: MOTION_SENSOR
+    binary_sensor.zwave2mqtt_nodeid_88_contact:
+      name: "Motion Bathroom"
+      description: "Motion sensor in the bathroom"
+      display_categories: MOTION_SENSOR
+    binary_sensor.zwave2mqtt_nodeid_90_contact:
+      name: "Motion Hallway"
+      description: "Motion sensor in the hallway"
+      display_categories: MOTION_SENSOR
+    binary_sensor.zwave2mqtt_nodeid_91_contact:
+      name: "Motion Livingroom"
+      description: "Motion sensor in the livingroom"
+      display_categories: MOTION_SENSOR
+    binary_sensor.zwave2mqtt_nodeid_106_contact:
+      name: "Motion Bedroom"
+      description: "Motion sensor in the bedroom"
+      display_categories: MOTION_SENSOR
+    binary_sensor.zwave2mqtt_nodeid_107_contact:
+      name: "Motion Kitchen"
+      description: "Motion sensor in the kitchen"
+      display_categories: MOTION_SENSOR
+    binary_sensor.zwave2mqtt_nodeid_108_contact:
+      name: "Motion Diningroom"
+      description: "Motion sensor in the diningroom"
+      display_categories: MOTION_SENSOR
+
+    binary_sensor.manual_kay_home:
+      name: "Presence Kay"
+      description: "Indication that Kay is home"
+      display_categories: MOTION_SENSOR
+    binary_sensor.manual_peter_home:
+      name: "Presence Peter"
+      description: "Indication that Peter is home"
+      display_categories: MOTION_SENSOR

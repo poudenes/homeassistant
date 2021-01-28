@@ -1,0 +1,157 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ ____  _____ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |   __|     |     |    \|   | |     |   __|  |  |_   _|
+#  |__   |   --|   __| | | |   __|  |  |  |  |  |  |  |  |  | | | |-   -|  |  |     | | |
+#  |_____|_____|_____|_|___|_____|  |_____|_____|_____|____/|_|___|_____|_____|__|__| |_|
+###########################################################################################
+# SCENE GOODNIGHT WHEN WE GONNA SLEEP
+###########################################################################################
+- alias: "Scene - Goodnight Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_goodnight
+      to: "on"
+
+  variables:
+    season: sensor.season
+    kay_learning: switch.kay_learning
+    peter_early_up: switch.peter_early_up
+    guests: switch.scene_guests
+    motion_toilet: binary_sensor.zwave2mqtt_nodeid_87_contact
+    motion_bedroom: binary_sensor.zwave2mqtt_nodeid_106_contact
+    door_sensor_diningroom: binary_sensor.neo_diningroomdoor_custom_sensor
+    door_sensor_bedroom: binary_sensor.neo_bedroomdoor_custom_sensor
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  action:
+    - service: "{{ 'homeassistant.turn_off' if is_state('sensor.holiday', 'Christmas') else 'script.none' }}"
+      entity_id: group.xmas_zwave
+
+    - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+      data:
+        media_player: media_player.this_device
+        call_scene_goodnight: 1
+
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_all
+        brightness_pct: >
+          {% if is_state(peter_early_up, 'on') %} 0
+          {% elif is_state(motion_bedroom, 'on') and is_state(door_sensor_bedroom, 'on') and (is_state(season, 'autumn') or is_state(season, 'winter')) %} 100
+          {% elif is_state(motion_bedroom, 'on') and is_state(door_sensor_bedroom, 'on') and (is_state(season, 'spring') or is_state(season, 'summer')) %} 20
+          {% else %} 100
+          {% endif %}
+        kelvin: "{{ adaptive }}"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_all
+        brightness_pct: "{{ 0 if is_state(peter_early_up, 'on') else 100 }}"
+        kelvin: "{{ adaptive }}"
+
+    - service: homeassistant.turn_off
+      entity_id: group.goodnight_switches_scene # TURN OFF ALL OTHER SCENE SWITCHES
+
+    - service: light.turn_off
+      entity_id: light.nanoleaf
+
+    ###########################################################################################
+    # Guest sleepover part
+    ###########################################################################################
+    - service: "{{ 'switch.turn_on' if is_state(guests, 'on') else 'switch.turn_off' }}"
+      entity_id:
+        - switch.wall
+        - switch.window
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_all
+        brightness_pct: "{{ 100 if is_state(guests, 'on') else 10 }}"
+        kelvin: "{{ adaptive }}"
+
+    ###########################################################################################
+    # END Guest sleepover part
+    ###########################################################################################
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.dressoir_all
+          - light.hallway_all
+          - light.kitchen_all
+          - light.sink_all
+        brightness_pct: 10
+        kelvin: "{{ adaptive }}"
+
+    - delay: "00:00:01"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_all
+        brightness_pct: "{{ 0 if is_state(guests, 'off') }}"
+        kelvin: "{{ adaptive }}"
+
+    - delay: "00:00:01"
+
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.balcony_all
+          - light.dressoir_all
+          - light.newkaku_011fad02_c
+          - light.hallway_all
+          - light.kitchen_all
+          - light.sink_all
+
+    - delay: "00:00:01"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.toilet_all
+        brightness_pct: "{{ 50 if is_state(motion_toilet, 'on') else 0 }}"
+        kelvin: "{{ adaptive }}"
+
+    ###########################################################################################
+    # Kay is learning in diningroom
+    ###########################################################################################
+    - service: light.turn_on
+      data:
+        entity_id: light.newkaku_01401eb6_a # Diningtable
+        brightness_pct: "{{ 100 if is_state(kay_learning, 'on') else 0 }}"
+
+    ###########################################################################################
+    # END Kay is learning in diningroom
+    ###########################################################################################
+
+    ###########################################################################################
+    # Switch off the Peter early up option
+    ###########################################################################################
+    - service: switch.turn_off
+      entity_id:
+        - switch.peter_early_up
+        - switch.full_manual_mode
+
+    ###########################################################################################
+    # END Switch off the Peter early up option
+    ###########################################################################################
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.fullykiosk_brightness_slider
+        value: 10
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Scene Goodnight is activated."
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Scenes System"
+
+    ###########################################################################################
+    # Change brightness Toilet after motion is off and everyone went to bed
+    ###########################################################################################
+    - delay: 00:02:00
+
+    - service: light.turn_on
+      data:
+        entity_id: light.toilet_all
+        brightness_pct: "{{ 50 if is_state(motion_toilet, 'on') else 0 }}"
+        kelvin: "{{ adaptive }}"

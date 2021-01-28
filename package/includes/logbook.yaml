@@ -1,0 +1,82 @@
+#
+#   __            _           _
+#  |  |   ___ ___| |_ ___ ___| |_
+#  |  |__| . | . | . | . | . | '_|
+#  |_____|___|_  |___|___|___|_,_|
+#            |___|
+###################################################
+#  LOGBOOK
+# https://www.home-assistant.io/integrations/logbook/
+###################################################
+---
+include:
+  domains:
+    - light
+    - automation
+    - climate
+    - fan
+    - group
+    - light
+    - media_player
+    - script
+    - sun
+    - switch
+    - zone
+
+  entities:
+    - binary_sensor.zwave2mqtt_nodeid_87_contact
+    - binary_sensor.zwave2mqtt_nodeid_88_contact
+    - binary_sensor.zwave2mqtt_nodeid_90_contact
+    - binary_sensor.zwave2mqtt_nodeid_91_contact
+    - binary_sensor.zwave2mqtt_nodeid_106_contact
+    - binary_sensor.zwave2mqtt_nodeid_107_contact
+    - binary_sensor.zwave2mqtt_nodeid_108_contact
+    - binary_sensor.hallway_door_hallway_contact
+    - binary_sensor.manual_kay_home
+    - binary_sensor.manual_peter_home
+    - binary_sensor.neo_bedroomdoor_custom_sensor
+    - binary_sensor.neo_diningroomdoor_custom_sensor
+    - binary_sensor.sensor_manual_family_home
+    - binary_sensor.washing_machine
+    - binary_sensor.dryer_machine
+    - device_tracker.cenkay_xr
+    - device_tracker.peter_iphone
+    - device_tracker.peter_iphone_geofency
+    - device_tracker.peter_iphone_ios_app
+    - device_tracker.kay_iphone_geofency
+    - device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337d
+    - device_tracker.1717fe36_3c70_4599_963c_b70b6ee95eba
+    - device_tracker.peter_iphone_ios_app
+
+###################################################
+#  EXCLUDE
+###################################################
+exclude:
+  entity_globs:
+    - sensor.*
+  entities:
+    - automation.patches_milight_bedroom_group_0
+    - automation.patches_milight_bathroom_group_0
+    - automation.patches_milight_livingroom_group_0
+    - automation.patches_milight_kitchen_group_0
+    - automation.patches_milight_sink_group_0
+    - automation.patches_milight_dressoir_group_0
+    - automation.patches_milight_toilet_group_0
+    - automation.system_automatic_theme_change_day_night
+
+###################################################
+#  ALL OTHER DOMAINS YOU CAN USE
+###################################################
+#    - binary_sensor
+#    - calendar
+#    - device_tracker
+#    - geo_location
+#    - input_boolean
+#    - input_number
+#    - input_select
+#    - input_text
+#    - person
+#    - remote
+#    - timer
+#    - variable
+#    - sensor

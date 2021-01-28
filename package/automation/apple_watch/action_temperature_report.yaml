@@ -1,0 +1,43 @@
+#   _____ _____ _____ __    _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  _  |     |_   _|     |     |   | |   __|
+#  |     |   __|   __|  |__|   __| | | |  |  |  |     |   --| | | |-   -|  |  | | | |__   |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |__|__|_____| |_| |_____|_____|_|___|_____|
+###########################################################################################
+# APPLE WATCH TEMPERATURE REPORT
+###########################################################################################
+- alias: "Apple Watch: Temperature Report"
+  mode: parallel
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: temperature report
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "Temperature"
+        message: >
+          Living room: {{ states('sensor.zwave2mqtt_nodeid_91_temperature_air') }}°C
+
+          Bedroom: {{ states('sensor.zwave2mqtt_nodeid_106_temperature_air') }}°C
+
+          Bathroom: {{ states('sensor.zwave2mqtt_nodeid_88_temperature_air') }}°C
+
+          Hallway: {{ states('sensor.zwave2mqtt_nodeid_90_temperature_air') }}°C
+
+          Kitchen: {{ states('sensor.zwave2mqtt_nodeid_106_temperature_air') }}°C
+
+          Diningroom: {{ states('sensor.zwave2mqtt_nodeid_108_temperature_air') }}°C
+
+          Toilet: {{ states('sensor.zwave2mqtt_nodeid_87_temperature_air') }}°C
+
+          Thermostat: {{ state_attr('climate.entryway', 'temperature') }}°C
+
+          Outside: {{ states('sensor.buienradar_temperature') }}°C
+
+          HA CPU: {{ states('sensor.ha_cpu_temperature') }}°C
+
+          Nextcloud CPU: {{ states('sensor.nextcloud_cpu_temperature') }} °C
+
+          DSMR CPU: {{ states('sensor.dsmr_cpu_temperature') }} °C

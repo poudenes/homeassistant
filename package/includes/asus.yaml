@@ -1,0 +1,21 @@
+#
+#   _____             _ _ _ _____ _____
+#  |  _  |___ _ _ ___| | | | __  |_   _|
+#  |     |_ -| | |_ -| | | |    -| | |
+#  |__|__|___|___|___|_____|__|__| |_|
+#
+###########################################################################################
+# ASUSWRT
+# https://www.home-assistant.io/integrations/asuswrt/
+###########################################################################################
+---
+host: !secret asus_ip
+username: !secret asus_user
+password: !secret asus_pass
+protocol: ssh
+port: 7055
+sensors:
+  - upload
+  - download
+  - upload_speed
+  - download_speed

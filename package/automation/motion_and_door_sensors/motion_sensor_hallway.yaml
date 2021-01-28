@@ -1,0 +1,37 @@
+#   _____ _____ _____ _____ _____ _____    _____ _____ __    __    _ _ _ _____ __ __
+#  |     |     |_   _|     |     |   | |  |  |  |  _  |  |  |  |  | | | |  _  |  |  |
+#  | | | |  |  | | | |-   -|  |  | | | |  |     |     |  |__|  |__| | | |     |_   _|
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |__|__|__|__|_____|_____|_____|__|__| |_|
+###########################################################################################
+# CONTROL LIGHT HALLWAY WHEN GOODNIGHT SCENE IS ACTIVE
+###########################################################################################
+- alias: "Motion Detection - Hallway On Off"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_90_contact
+
+  variables:
+    motion_hallway: binary_sensor.zwave2mqtt_nodeid_90_contact
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: switch.hallway
+      state: "off"
+
+    - condition: state
+      entity_id: switch.scene_goodnight
+      state: "on"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_all
+        brightness_pct: "{{ 10 if is_state(motion_hallway, 'on') else 0 }}"
+        kelvin: "{{ adaptive }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_motion/hallway"
+        payload: "{{ 1 if is_state(motion_hallway, 'on') else 0 }}"

@@ -1,0 +1,25 @@
+#   _____ _____ _____ _____    _____ _____    ____  _____ _ _ _ _____
+#  |     |     |_   _|_   _|  |     |   __|  |    \|     | | | |   | |
+#  | | | |  |  | | |   | |    |-   -|__   |  |  |  |  |  | | | | | | |
+#  |_|_|_|__  _| |_|   |_|    |_____|_____|  |____/|_____|_____|_|___|
+#           |__|
+###########################################################################################
+# NOTIFY WHEN MQTT IS DOWN
+###########################################################################################
+- alias: "System: MQTT sensors are not updating"
+  trigger:
+    - platform: time_pattern
+      minutes: "/5"
+
+  condition: "{{ (as_timestamp(now()) - as_timestamp(states.sensor.dsmr_reading_electricity_currently_delivered.last_changed)) > 20 * 60 }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Not receiving MQTT updates, maybe reboot the other HA instance! ⚠️"
+        title: "HA Security ALERT"
+        data:
+          push:
+            thread-id: "Notify System"
+
+    - delay: "00:30:00"  # don't tell me again for three hours

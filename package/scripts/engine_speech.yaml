@@ -1,0 +1,89 @@
+#
+#   _____         _     _      _____         _            _____                 _
+#  |   __|___ ___|_|___| |_   |   __|___ ___|_|___ ___   |   __|___ ___ ___ ___| |_
+#  |__   |  _|  _| | . |  _|  |   __|   | . | |   | -_|  |__   | . | -_| -_|  _|   |
+#  |_____|___|_| |_|  _|_|    |_____|_|_|_  |_|_|_|___|  |_____|  _|___|___|___|_|_|
+#                  |_|                  |___|                  |_|
+###########################################################################################
+# SCRIPT
+# https://www.home-assistant.io/docs/scripts/
+###########################################################################################
+
+###########################################################################################
+# SPEAK ENGINE - NOTIFY SPEECH
+###########################################################################################
+engine_notify_speech:
+  alias: "TTS Notify Engine"
+  description: "Engine to collect the message from other scripts"
+  mode: parallel
+  sequence:
+    - service: script.engine_say
+      data:
+        media_player: "{{ media_player }}"
+        message: "{{ message }}"
+
+###########################################################################################
+# SPEAK ENGINE - SAY
+###########################################################################################
+engine_say:
+  alias: "TTS Say Briefing Engine"
+  description: "Engine to collect messages from the scripts but also add aditional briefing parts to it"
+  mode: parallel
+  sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.peter_s_echo_dot
+        volume_level: >-
+          {% if now().strftime('%H')|int < 11 and now().strftime('%H')|int > 6 %}
+            0.3
+          {% elif now().strftime('%H')|int > 11 and now().strftime('%H')|int < 19 %}
+            0.4
+          {% else %}
+            0.3
+          {% endif %}
+
+    - delay: "00:00:02"
+
+    - service: script.engine_speech_processing
+      data:
+        media_player: "{{ media_player }}"
+        briefing: !include ../../package/templates/briefing.yaml
+        title: "{{ title }}"
+
+###########################################################################################
+# SPEAK ENGINE - PROSESSING
+###########################################################################################
+engine_speech_processing:
+  alias: "TTS Processing Engine"
+  description: "Engine that collect all messages and briefing and send it to Alexa"
+  mode: parallel
+  sequence:
+    - service: notify.alexa_media_peter_s_echo_dot
+      data:
+        data:
+          type: announce
+          method: all
+        title: >-
+          {%- if title is not string -%}
+            Home Assistant
+          {%- else -%}
+            {{ title }}
+          {%- endif -%}
+        message: "{{ briefing }}"
+        target: "{{ media_player }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_other/alexa_last_message/state"
+        retain: "true"
+        payload: "{{ briefing }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_other/alexa_last_message/attributes"
+        retain: "true"
+        payload: >-
+          {
+            "day": "{{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }}",
+            "time": "{{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }}"
+          }

@@ -1,0 +1,141 @@
+#
+#   _____   _         _   _            __    _     _   _       _     _
+#  |  _  |_| |___ ___| |_|_|_ _ ___   |  |  |_|___| |_| |_ ___|_|___| |_
+#  |     | . | .'| . |  _| | | | -_|  |  |__| | . |   |  _|   | | . |   |
+#  |__|__|___|__,|  _|_| |_|\_/|___|  |_____|_|_  |_|_|_| |_|_|_|_  |_|_|
+#                |_|                          |___|             |___|
+###########################################################################################
+# ADAPTIVE LIGHTING
+# https://github.com/home-assistant/core/pull/40626
+###########################################################################################
+---
+- name: "Sensor"
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Livingroom"
+  lights:
+    - light.livingroom_all
+    - light.livingroom_1
+    - light.livingroom_2
+    - light.livingroom_3
+    - light.livingroom_4
+    - light.wall_all
+    - light.window_all
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Diningroom"
+  lights:
+    - light.diningroom_all
+    - light.diningroom_1
+    - light.diningroom_2
+    - light.diningroom_3
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Hallway"
+  lights:
+    - light.hallway_all
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Bedroom"
+  lights:
+    - light.bedroom_all
+    - light.bedroom_1
+    - light.bedroom_2
+    - light.bedroom_3
+    - light.bedroom_4
+    - light.bedroom_5
+    - light.bedroom_6
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Bathroomn"
+  lights:
+    - light.bathroom_all
+    - light.bathroom_1
+    - light.bathroom_2
+    - light.bathroom_3
+    - light.bathroom_4
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Kitchen"
+  lights:
+    - light.kitchen_all
+    - light.kitchen_1
+    - light.kitchen_2
+    - light.kitchen_3
+    - light.sink_all
+    - light.sink_1
+    - light.sink_2
+    - light.sink_3
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true
+
+- name: "Toilet"
+  lights:
+    - light.toilet_all
+    - light.toilet_1
+    - light.toilet_2
+    - light.toilet_3
+  sleep_brightness: 20
+  min_brightness: 70
+  only_once: true
+  max_color_temp: 3800
+  min_color_temp: 2000
+  interval: 30
+  prefer_rgb_color: false
+  take_over_control: true
+  detect_non_ha_changes: true

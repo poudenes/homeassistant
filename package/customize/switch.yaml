@@ -1,0 +1,91 @@
+#   _____ _____ _____ _____      _____ _ _ _ _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |   __| | | |     |_   _|     |  |  |
+#  |   --|  |  |__   | | |  _   |__   | | | |-   -| | | |   --|     |
+#  |_____|_____|_____| |_| |_|  |_____|_____|_____| |_| |_____|__|__|
+###########################################################################################
+# MEEK SWITCHES
+###########################################################################################
+---
+switch.kitchen:
+  friendly_name: "Kitchen Switch"
+
+switch.sink:
+  friendly_name: "Sink Switch"
+
+switch.hallway:
+  friendly_name: "Hallway Switch"
+
+switch.bedroom:
+  friendly_name: "Bedroom Switch"
+
+switch.bathroom:
+  friendly_name: "Bathroom Switch"
+
+switch.toilet:
+  friendly_name: "Toilet Switch"
+
+switch.cooking:
+  friendly_name: "Cooking Switch"
+
+switch.dressoir:
+  friendly_name: "Dressoir Switch"
+
+switch.diningroom:
+  friendly_name: "Diningroom Switch"
+
+switch.wall:
+  friendly_name: "Wall Switch"
+
+switch.window:
+  friendly_name: "Window Switch"
+
+switch.balcony:
+  friendly_name: "Balcony Switch"
+
+switch.newkaku_014e5906_a:
+  friendly_name: "TEST Switch"
+  icon: mdi:nintendo-switch
+
+switch.full_manual_mode:
+  icon: mdi:home-automation
+###########################################################################################
+# SWITCH.PETER_S_ALEXA
+###########################################################################################
+switch.peter_s_echo_dot_do_not_disturb_switch:
+  friendly_name: "Alexa Echo Dot do not disturb"
+
+switch.peter_s_echo_dot_repeat_switch:
+  friendly_name: "Alexa Echo Dot repeat"
+
+switch.peter_s_echo_dot_shuffle_switch:
+  friendly_name: "Alexa Echo Dot suffle"
+
+###########################################################################################
+# HARMONY
+###########################################################################################
+switch.airplay:
+  icon: mdi:apple-airplay
+
+switch.appletv:
+  icon: mdi:apple-airplay
+
+switch.kodi:
+  icon: mdi:kodi
+
+switch.tv:
+  icon: mdi:television-box
+
+###########################################################################################
+# ADAPTIVE LIGHTING SWITCHES
+###########################################################################################
+switch.adaptive_lighting_sensor:
+  friendly_name: "Sensor"
+
+switch.adaptive_lighting_adapt_color_sensor:
+  friendly_name: "Color"
+
+switch.adaptive_lighting_adapt_brightness_sensor:
+  friendly_name: "Brightness"
+
+switch.adaptive_lighting_sleep_mode_sensor:
+  friendly_name: "Sleep Mode"

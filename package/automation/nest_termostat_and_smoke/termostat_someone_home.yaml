@@ -1,0 +1,43 @@
+#   _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ _____
+#  |   | |   __|   __|_   _|  |   __|     |     |   __|     |   | |   __|  |  |  |     |     |   __|
+#  | | | |   __|__   | | |    |__   |  |  | | | |   __|  |  | | | |   __|  |     |  |  | | | |   __|
+#  |_|___|_____|_____| |_|    |_____|_____|_|_|_|_____|_____|_|___|_____|  |__|__|_____|_|_|_|_____|
+###########################################################################################
+# NEST CONTROL TEMP BASED ON SOMEONE HOME AND TEMP INSIDE AND OUTSIDE
+###########################################################################################
+- alias: "Control - Nest Control - Someone Home"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      to: "on"
+
+    - platform: state
+      entity_id: switch.scene_goodnight
+      to: "off"
+
+    - platform: state
+      entity_id: climate.entryway
+
+  condition:
+    - condition: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      state: "on"
+
+    - condition: state
+      entity_id:
+        - switch.scene_goodnight
+        - switch.dnc
+      state: "off"
+
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        temperature: >-
+          {% set outside = states('sensor.buienradar_temperature') | float %}
+          {% set inside = states('sensor.climate_inside_temperature') | float %}
+          {% if outside > 12 and inside > 15 %} 10
+          {% elif outside < 12 and inside > 15 %} 10
+          {% elif outside < 12 and inside < 15 %} 21
+          {% else %} 9
+          {% endif %}

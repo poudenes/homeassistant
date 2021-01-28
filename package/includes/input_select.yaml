@@ -1,0 +1,240 @@
+#
+#   _____             _                 _         _
+#  |     |___ ___ _ _| |_       ___ ___| |___ ___| |_
+#  |-   -|   | . | | |  _|     |_ -| -_| | -_|  _|  _|
+#  |_____|_|_|  _|___|_|  _____|___|___|_|___|___|_|
+#            |_|         |_____|
+###########################################################################################
+# INPUT_SELECT
+# https://www.home-assistant.io/integrations/input_select
+###########################################################################################
+---
+radio_selector:
+  name: "Select Player"
+  icon: mdi:speaker-wireless
+  options:
+    - "Kitchen"
+    - "Alexa"
+  initial: "Kitchen"
+
+radio_station:
+  name: "Select Radio Station"
+  options:
+    - "Radio 538"
+    - "Q-Music"
+    - "Q-Music Christmas"
+    - "3FM"
+    - "100% NL"
+    - "Veronica"
+    - "Sky Radio"
+    - "Sky Radio Christmas"
+    - "Classic FM"
+    - "SLAM! Hardstyle"
+    - "SLAM!"
+
+system_other_state_select_switch:
+  name: "System Other"
+  options:
+    - "AdGuard"
+    - "Device Trackers"
+    - "External IP"
+    - "Global Disaster Alert"
+    - "Google Drive Snapshots"
+    - "Home Assistant Update"
+    - "HP Printer"
+    - "ITHO"
+    - "Meek Uptime"
+    - "Milight Hub"
+    - "OpenUV"
+    - "RDW"
+    - "Speedtest"
+    - "World Air Quility Index"
+  initial: "Home Assistant Update"
+
+system_server_state_select_switch:
+  name: "Server Statistics"
+  options:
+    - "Asus Router Stats"
+    - "DSMR Reader"
+    - "Home Assistant"
+    - "Milight Hub"
+    - "MVPS VMail and WWW"
+    - "MVPS SSH Login"
+    - "Nextcloud"
+    - "UpTimeRobot"
+  initial: "Home Assistant"
+
+log_level_components_automation:
+  name: "Automation"
+  <<: &GLOBAL_SWITCH_PARAMS
+    options:
+      - critical
+      - fatal
+      - error
+      - warning
+      - info
+      - debug
+      - notset
+    initial: warning
+    icon: mdi:bug
+
+log_level_components_websocket_api:
+  name: "Websocket Api"
+  <<: *GLOBAL_SWITCH_PARAMS
+
+log_level_components_zwave:
+  name: "Zwave"
+  <<: *GLOBAL_SWITCH_PARAMS
+
+log_level_components_pushover:
+  name: "Pushover"
+  <<: *GLOBAL_SWITCH_PARAMS
+
+log_level_components_alexa_state_report:
+  name: "Alexa State"
+  <<: *GLOBAL_SWITCH_PARAMS
+
+log_level_helpers_service:
+  name: "Helpers Service"
+  <<: *GLOBAL_SWITCH_PARAMS
+
+log_level_loader:
+  name: "Loader"
+  <<: *GLOBAL_SWITCH_PARAMS
+
+yamaha_power_mute_info:
+  name: "Yamaha Power/Mute/Info"
+  options:
+    - "PowerOff"
+    - "PowerOn"
+    - "PowerToggle"
+    - "Mute"
+    - "Info"
+
+yamaha_input:
+  name: "Yamaha Input"
+  options:
+    - "InputAudio1"
+    - "InputAudio2"
+    - "InputAv1"
+    - "InputAv2"
+    - "InputAv3"
+    - "InputAv4"
+    - "InputAv5"
+    - "InputAv6"
+    - "InputDock"
+    - "InputHdmi1"
+    - "InputHdmi2"
+    - "InputHdmi3"
+    - "InputHdmi4"
+    - "InputHdmi5"
+    - "InputMultiCh"
+    - "InputPhono"
+    - "InputTuner"
+    - "InputV-Aux"
+
+yamaha_dsp:
+  name: "Yamaha DSP"
+  options:
+    - "2ChStereo"
+    - "7ChStereo"
+    - "ActionGame"
+    - "AdaptiveDrcOff"
+    - "AdaptiveDrcOn"
+    - "AdaptiveDspOff"
+    - "AdaptiveDspOn"
+    - "Adventure"
+    - "CellarClub"
+    - "Chamber"
+    - "Drama"
+    - "DspMovie"
+    - "DspMusic"
+    - "DspPureDirect"
+    - "DspStereoEnhancer"
+    - "DspStraight"
+    - "DspSurDecode"
+    - "EffectOn"
+    - "EnhancerAuto"
+    - "EnhancerOff"
+    - "ExtedSur.Auto"
+    - "ExtedSur.Off"
+    - "ExtedSur.On"
+    - "ExtedSur.PLIIXMovie"
+    - "ExtedSur.PLIIXMusic"
+    - "HallInMunich"
+    - "MonoMovie"
+    - "MovieStandard"
+    - "MusicVideo"
+    - "PLIIXGame"
+    - "PLIIXMovie"
+    - "PLIIXMusic"
+    - "PureDirectOff"
+    - "PureDirectOn"
+    - "Sci-Fi"
+    - "Spectacle"
+    - "Straight"
+
+appletv_commands:
+  name: "AppleTV Options"
+  options:
+    - "Stop"
+    - "Play"
+    - "Pause"
+    - "Menu"
+    - "Back"
+    - "Home"
+
+lg_power_mute:
+  name: "LG Power/Mute"
+  options:
+    - "PowerOff"
+    - "PowerOn"
+    - "PowerToggle"
+    - "Mute"
+
+lg_input:
+  name: "LG Input"
+  options:
+    - "Input"
+    - "InputAv1"
+    - "InputAv2"
+    - "InputComponent1"
+    - "InputHdmi1"
+    - "InputHdmi2"
+    - "InputHdmi3"
+    - "InputTv"
+
+
+kodi_commands:
+  name: "Kodi commands"
+  options:
+    - "Power Off"
+    - "Power On"
+    - "Power Toggle"
+    - "Enter"
+    - "Mute"
+    - "Back"
+    - "OK"
+    - "Stop"
+    - "Play"
+    - "Pause"
+    - "DVD Menu"
+    - "Subtitle"
+    - "My Videos"
+    - "Guide"
+    - "Info"
+
+horizon:
+  name: "Ziggo commands"
+  options:
+    - "Power Toggle"
+    - "Channel Down"
+    - "Channel Up"
+    - "Select"
+    - "Stop"
+    - "Play"
+    - "Pause"
+    - "Menu"
+    - "Back"
+    - "Guide"
+    - "Info"

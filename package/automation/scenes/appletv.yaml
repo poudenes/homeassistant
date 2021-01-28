@@ -1,0 +1,264 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ __    _____ _____ _____
+#  |   __|     |   __|   | |   __|  |  _  |  _  |  _  |  |  |   __|_   _|  |  |
+#  |__   |   --|   __| | | |   __|  |     |   __|   __|  |__|   __| | | |  |  |
+#  |_____|_____|_____|_|___|_____|  |__|__|__|  |__|  |_____|_____| |_|  \___/
+###########################################################################################
+# SCENE FOR APPLE TV WHEN SUN IS BELOW HORIZON
+###########################################################################################
+- alias: "Scene - AppleTV Automation"
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+
+    - platform: state
+      entity_id: sun.sun
+
+    - platform: state
+      entity_id: sensor.harmony
+      to: "AppleTV"
+
+  variables:
+    door_sensor_diningroom: binary_sensor.neo_diningroomdoor_custom_sensor
+    kay_learning: switch.kay_learning
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+    appletv: media_player.woonkamer
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+
+    - condition: state
+      entity_id:
+        - switch.scene_appletv
+        - switch.scene_goodnight
+        - switch.scene_dinner
+        - switch.full_manual_mode
+      state: "off"
+
+    - condition: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      state: "on"
+
+    - condition: state
+      entity_id: sensor.harmony
+      state: "AppleTV"
+
+  action:
+    - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+      data:
+        media_player: media_player.this_device
+        call_scene_appletv: 1
+
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.fullykiosk_brightness_slider
+        value: 50
+
+    - service: switch.turn_on
+      entity_id: switch.scene_appletv
+
+    - service: homeassistant.turn_off
+      entity_id: group.appletv_switches_scene # TURN OFF ALL OTHER SCENE SWITCHES
+
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        brightness_pct: 20
+        effect: >-
+          {% if is_state('sensor.holiday', 'Christmas') %} Christmas
+          {% elif is_state('sensor.holiday', 'Halloween') %} Halloween
+          {% elif is_state('sensor.holiday', 'Kingsday') %} Kingsday
+          {% elif is_state('sensor.holiday', 'Birthday') %} Kingsday
+          {% else %} Kay
+          {% endif %}
+
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.newkaku_01401eb6_a
+        brightness_pct: "{{ 100 if is_state(kay_learning, 'on') else 0 }}"
+
+    - choose:
+        # CHRISTMAS
+        - conditions: "{{ is_state('sensor.holiday', 'Christmas') }}"
+
+          sequence:
+            - service: homeassistant.turn_on
+              entity_id: group.xmas_zwave
+
+            - service: light.turn_on
+              data:
+                entity_id: light.livingroom_all
+                color_name: "red"
+                brightness_pct: "{{ 50 if is_state(appletv, 'playing') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_4
+                color_name: "green"
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_all
+                color_name: "blue"
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 75 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_2
+                color_temp: 153
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 75 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.balcony_all
+                color_name: "blue"
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+        # HALLOWEEN
+        - conditions: "{{ is_state('sensor.holiday', 'Halloween') }}"
+
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.livingroom_all
+                color_name: "orange"
+                brightness_pct: "{{ 50 if is_state(appletv, 'playing') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.window_all
+                color_name: "orange"
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_all
+                color_name: "blue"
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_2
+                color_name: "purple"
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.balcony_all
+                color_name: "blue"
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+        # KINGSDAY
+        - conditions: "{{ is_state('sensor.holiday', 'Kingsday') }}"
+
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.livingroom_all
+                brightness_pct: "{{ 50 if is_state(appletv, 'playing') else 100 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.window_all
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_1
+                color_name: "red"
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_2
+                color_temp: 153
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_3
+                color_name: "blue"
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.balcony_all
+                color_name: "blue"
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+        # BITHRDAY
+        - conditions: "{{ is_state('sensor.holiday', 'Birthday') }}"
+
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.livingroom_all
+                brightness_pct: "{{ 50 if is_state(appletv, 'playing') else 100 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.window_all
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.dressoir_1
+                  - light.dressoir_2
+                  - light.dressoir_3
+                effect: 0
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.balcony_all
+                color_name: "blue"
+                brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+      # DEFAULT
+      default:
+        - service: light.turn_on
+          data:
+            entity_id: light.livingroom_all
+            brightness_pct: "{{ 50 if is_state(appletv, 'playing') else 100 }}"
+            kelvin: "{{ adaptive }}"
+
+        - service: light.turn_on
+          data:
+            entity_id: light.window_all
+            brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+            kelvin: "{{ adaptive }}"
+
+        - service: light.turn_on
+          data:
+            entity_id: light.dressoir_all
+            brightness_pct: >-
+              {% if is_state(appletv, 'playing') and is_state(door_sensor_diningroom, 'on') %} 0
+              {% elif is_state(appletv, 'playing') and is_state(door_sensor_diningroom, 'off') %} 50
+              {% elif is_state(appletv, 'idle') and is_state(door_sensor_diningroom, 'on') %} 0
+              {% elif is_state(appletv, 'idle') and is_state(door_sensor_diningroom, 'off') %} 100
+              {% else %} 100
+              {% endif %}
+            kelvin: "{{ adaptive }}"
+
+        - service: light.turn_on
+          data:
+            entity_id: light.balcony_all
+            color_name: "blue"
+            brightness_pct: "{{ 20 if is_state(appletv, 'playing') else 100 }}"
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Scene Apple TV is activated. All lights are on correctly"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Scenes System"

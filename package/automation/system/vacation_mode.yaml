@@ -1,0 +1,50 @@
+#   _____ _____ _____ _____ _____ _____ _____ _____    _____ _____ ____  _____
+#  |  |  |  _  |     |  _  |_   _|     |     |   | |  |     |     |    \|   __|
+#  |  |  |     |   --|     | | | |-   -|  |  | | | |  | | | |  |  |  |  |   __|
+#   \___/|__|__|_____|__|__| |_| |_____|_____|_|___|  |_|_|_|_____|____/|_____|
+###########################################################################################
+# SYSTEM - TURN ON VACATION IF FAMILY IS GONE FOR 24 HOURS
+##########################################################################################
+- alias: "System - Vacation mode: Auto turn on"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      from: "home"
+      to: "not_home"
+      for: "01:00:00"
+
+  action:
+    - service: switch.turn_on
+      entity_id: switch.vacation
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "System - No one at home for 1 hour, switching on vacation mode."
+        title: "HA Vacation Mode"
+        data:
+          push:
+            thread-id: "Holiday System"
+
+###########################################################################################
+# SYSTEM - TURN OFF VACATION IF FAMILY IS BACK HOME
+##########################################################################################
+- alias: "System - Vacation mode: Auto turn off"
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: "not_home"
+      to: "home"
+
+  condition: "{{ is_state('switch.vacation', 'on') }}"
+
+  action:
+    - service: switch.turn_off
+      entity_id: switch.vacation
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "System - Welcome back! Switching off the vacation mode."
+        title: "HA Vacation Mode"
+        data:
+          push:
+            thread-id: "Holiday System"

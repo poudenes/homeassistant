@@ -1,0 +1,44 @@
+#   __    _____ _ _ _    _____ _____ _____ _____ _____ _____ __ __
+#  |  |  |     | | | |  | __  |  _  |_   _|_   _|   __| __  |  |  |
+#  |  |__|  |  | | | |  | __ -|     | | |   | | |   __|    -|_   _|
+#  |_____|_____|_____|  |_____|__|__| |_|   |_| |_____|__|__| |_|
+###########################################################################################
+# NOTIFY ME WHEN SOME BATTERIES ARE LOW
+###########################################################################################
+- alias: "Notification - Low Battery Nodes"
+  trigger:
+    - platform: time
+      at: "14:30:00"
+
+  variables:
+    min_battery_level: 25
+    battery_ids: ""
+    current: ""
+
+  action:
+    - variables:
+        battery_ids: >
+          {% set ns = namespace(battery=[]) %}
+          {% for s in states.sensor if 'battery_level' in s.entity_id %}
+            {% set ns.battery = ns.battery + [s] %}
+          {% endfor %}
+          {{ ns.battery | map(attribute='entity_id') | list }}
+
+    - alias: Repeat
+
+      repeat:
+        count: "{{ battery_ids | length }}"
+        sequence:
+          - variables:
+              current: "{{ battery_ids[repeat.index - 1] }}"
+          - condition: template
+            value_template: "{{ 'iphone' not in current and 'ipad' not in current }}"
+          - condition: template
+            value_template: "{{ 0 < (states(current) | float) < (min_battery_level | float ) }}"
+          - service: notify.mobile_app_peter_iphone
+            data:
+              message: "Battery level low of {{ current }}: {{ states(current) }}%! ⚠️"
+              title: "HA Notify"
+              data:
+                push:
+                  thread-id: "Notify System"

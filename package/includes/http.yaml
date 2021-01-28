@@ -1,0 +1,18 @@
+#
+#   _   _   _
+#  | |_| |_| |_ ___
+#  |   |  _|  _| . |
+#  |_|_|_| |_| |  _|
+#              |_|
+####################################################
+# HTTP
+# https://www.home-assistant.io/integrations/http/
+####################################################
+---
+# ssl_certificate: /ssl/fullchain.pem
+# ssl_key: /ssl/privkey.pem
+ip_ban_enabled: true
+login_attempts_threshold: 5
+use_x_forwarded_for: true
+trusted_proxies:
+  - !secret local_network

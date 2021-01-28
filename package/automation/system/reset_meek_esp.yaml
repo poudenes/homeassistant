@@ -1,0 +1,26 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ _____    _____ _____ _____
+#  | __  |   __|   __|   __|_   _|  |     |   __|   __|  |  |  |   __|   __|  _  |
+#  |    -|   __|__   |   __| | |    | | | |   __|   __|    -|  |   __|__   |   __|
+#  |__|__|_____|_____|_____| |_|    |_|_|_|_____|_____|__|__|  |_____|_____|__|
+###########################################################################################
+# SYSTEM FKB CHANGE BRIGHTNESS
+###########################################################################################
+- alias: "System - Reset all Meek Switches"
+  trigger:
+    - platform: state
+      entity_id: switch.reset_switches
+      to: "on"
+
+  action:
+    - service: shell_command.meekdoorbell
+    - service: shell_command.meekkitchen
+    - service: shell_command.meekwc
+    - service: shell_command.meekbathroom
+    - service: shell_command.meekbedroom
+    - service: shell_command.meekdressoir
+    - service: shell_command.meeklivingroom
+    - service: shell_command.meekdiningtable
+    - service: shell_command.meekhallway
+
+    - service: switch.turn_off
+      entity_id: switch.reset_switches

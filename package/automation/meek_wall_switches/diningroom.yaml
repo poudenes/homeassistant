@@ -1,0 +1,32 @@
+#   _____ _____ _____ _____    _____ _ _ _ _____ _____ _____ _____    ____  _____ _____ _____ _____ _____ _____ _____ _____ _____
+#  |     |   __|   __|  |  |  |   __| | | |     |_   _|     |  |  |  |    \|     |   | |     |   | |   __| __  |     |     |     |
+#  | | | |   __|   __|    -|  |__   | | | |-   -| | | |   --|     |  |  |  |-   -| | | |-   -| | | |  |  |    -|  |  |  |  | | | |
+#  |_|_|_|_____|_____|__|__|  |_____|_____|_____| |_| |_____|__|__|  |____/|_____|_|___|_____|_|___|_____|__|__|_____|_____|_|_|_|
+###########################################################################################
+# SWITCH CONTROL FOR DININGROOM
+###########################################################################################
+- alias: "Switch - Meek Diningtable"
+  trigger:
+    - platform: state
+      entity_id: switch.diningroom
+
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: switch.diningroom
+              state: "on"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.newkaku_01401eb6_a
+                brightness_pct: 98
+
+      default:
+        - service: light.turn_on
+          data:
+            entity_id: light.newkaku_01401eb6_a
+            brightness_pct: 50
+
+        - service: light.turn_off
+          entity_id: light.newkaku_01401eb6_a

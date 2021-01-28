@@ -1,0 +1,34 @@
+#
+#   _____ _   _ _ _ _          _____     _
+#  |  |  | |_|_| |_| |_ _ _   |     |___| |_ ___ ___
+#  |  |  |  _| | | |  _| | |  | | | | -_|  _| -_|  _|
+#  |_____|_| |_|_|_|_| |_  |  |_|_|_|___|_| |___|_|
+#                      |___|
+###########################################################################################
+# UTILITY_METER
+# https://www.home-assistant.io/integrations/utility_meter/
+###########################################################################################
+---
+energy_hourly:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  cycle: hourly
+
+gas_hourly:
+  source: sensor.dsmr_day_consumption_gas
+  cycle: hourly
+
+energy_daily:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  cycle: daily
+
+gas_daily:
+  source: sensor.dsmr_day_consumption_gas
+  cycle: daily
+
+energy_monthly:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  cycle: monthly
+
+gas_monthly:
+  source: sensor.dsmr_day_consumption_gas
+  cycle: monthly

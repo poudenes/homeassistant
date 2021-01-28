@@ -1,0 +1,56 @@
+#   _____ _____ _____ _____ _____    _____ __    _____ _____ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |   __|  |  |   __|   __|  _  |     |   | |   __|
+#  |__   |   --|   __| | | |   __|  |__   |  |__|   __|   __|   __|-   -| | | |  |  |
+#  |_____|_____|_____|_|___|_____|  |_____|_____|_____|_____|__|  |_____|_|___|_____|
+###########################################################################################
+# SCENE SLEEPING TRANSITION BEDROOM LIGHTS TO 0% AND THEN 6 MIN 2 LIGHTS COLOR WAVE
+###########################################################################################
+- alias: "Scene - Sleeping Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_sleeping
+      to: "on"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_all
+        brightness_pct: 1
+        transition: "10"
+
+    - delay: "00:00:10"
+
+    - service: light.turn_off
+      entity_id: light.bedroom_all
+
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_5
+        brightness_pct: 1
+        effect: 0
+
+    - delay:
+        milliseconds: 700
+
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_6
+        brightness_pct: 1
+        effect: 0
+
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.scene_sleeping
+          - switch.newkaku_01616a32_a
+
+    - delay: "00:06:00"
+
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.bedroom_5
+          - light.bedroom_6
+
+    - service: homeassistant.turn_off
+      entity_id: group.sleeping_switches_scene # TURN OFF ALL SWITCHES IN THE HOUSE

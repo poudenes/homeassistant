@@ -1,0 +1,106 @@
+#   _____ _____ _____ _____ _____ _____ __       ____  _____ _____ _____ _____ _____ _____
+#  |     |     |   | |_   _| __  |     |  |     |    \|   __|  |  |     |     |   __|   __|
+#  |   --|  |  | | | | | | |    -|  |  |  |__   |  |  |   __|  |  |-   -|   --|   __|__   |
+#  |_____|_____|_|___| |_| |__|__|_____|_____|  |____/|_____|\___/|_____|_____|_____|_____|
+#
+###########################################################################################
+# CONTROL DEVICES USING HARMONY HUB
+###########################################################################################
+
+###########################################################################################
+#   __ __ _____ _____ _____ _____ _____
+#  |  |  |  _  |     |  _  |  |  |  _  |
+#  |_   _|     | | | |     |     |     |
+#    |_| |__|__|_|_|_|__|__|__|__|__|__|
+###########################################################################################
+- alias: "Harmony Hub - Yamaha Receiver"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_select.yamaha_dsp
+        - input_select.yamaha_power_mute_info
+        - input_select.yamaha_input
+
+  action:
+    - service: remote.send_command
+      data_template:
+        command: "{{ trigger.to_state.state }}"
+        device: 41633063
+        entity_id: remote.logitech_harmony
+
+###########################################################################################
+#   __    _____    _____ _____
+#  |  |  |   __|  |_   _|  |  |
+#  |  |__|  |  |    | | |  |  |
+#  |_____|_____|    |_|  \___/
+###########################################################################################
+- alias: "Harmony Hub - LG TV"
+  trigger:
+    - platform: state
+      entity_id:
+        - input_select.lg_power_mute
+        - input_select.lg_input
+        - input_select.yamaha_input
+
+  action:
+    - service: remote.send_command
+      data_template:
+        command: "{{ trigger.to.state.state }}"
+        device: 41535866
+        entity_id: remote.logitech_harmony
+
+###########################################################################################
+#   _____ _____ _____ __    _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |
+#  |     |   __|   __|  |__|   __| | | |  |  |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/
+#
+###########################################################################################
+
+- alias: "Harmony Hub - AppleTV"
+  trigger:
+    - platform: state
+      entity_id: input_select.appletv_commands
+
+  action:
+    - service: remote.send_command
+      data_template:
+        command: "{{ states('input_select.appletv_commands') }}"
+        device: 41536434
+        entity_id: remote.logitech_harmony
+
+###########################################################################################
+#   _____ _____ ____  _____
+#  |  |  |     |    \|     |
+#  |    -|  |  |  |  |-   -|
+#  |__|__|_____|____/|_____|
+###########################################################################################
+- alias: "Harmony Hub - KODI"
+  trigger:
+    - platform: state
+      entity_id: input_select.kodi_commands
+
+  action:
+    - service: remote.send_command
+      data_template:
+        command: "{{ states('input_select.kodi_commands') }}"
+        device: 42894670
+        entity_id: remote.logitech_harmony
+
+###########################################################################################
+#   _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____
+#  |  |  |     | __  |     |__   |     |   | |  |__   |     |   __|   __|     |
+#  |     |  |  |    -|-   -|   __|  |  | | | |  |   __|-   -|  |  |  |  |  |  |
+#  |__|__|_____|__|__|_____|_____|_____|_|___|  |_____|_____|_____|_____|_____|
+###########################################################################################
+- alias: "Harmony Hub - Horizon / Ziggo"
+  trigger:
+    - platform: state
+      entity_id: input_select.horizon
+
+  action:
+    - service: remote.send_command
+      data_template:
+        command: "{{ states('input_select.horizon') }}"
+        device: 41536023
+        entity_id: remote.logitech_harmony

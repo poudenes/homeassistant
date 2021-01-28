@@ -1,0 +1,35 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |   __|  |  |   | |   __|   __|_   _|
+#  |__   |   --|   __| | | |   __|  |__   |  |  | | | |__   |   __| | |
+#  |_____|_____|_____|_|___|_____|  |_____|_____|_|___|_____|_____| |_|
+###########################################################################################
+# SCENE NANOLEAF TURN ON 20MIN BEFORE THE SUN GOES DOWN
+###########################################################################################
+- alias: "Scene - 20Min before sunset Automation"
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "-00:14:00"
+
+  condition:
+    - condition: state
+      entity_id:
+        - switch.scene_daytime
+        - binary_sensor.sensor_manual_family_home
+      state: "on"
+
+    - condition: state
+      entity_id: switch.full_manual_mode
+      state: "off"
+
+  action:
+    - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+      data:
+        media_player: media_player.this_device
+        call_scene_sunset: 1
+
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        brightness_pct: 30
+        effect: "{{ 'Christmas' if is_state('sensor.holiday', 'Christmas') else '20MinSunset' }}"

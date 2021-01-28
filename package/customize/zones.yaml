@@ -1,0 +1,17 @@
+#   _____ _____ _____ _____      _____ _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |__   |     |   | |   __|   __|
+#  |   --|  |  |__   | | |  _   |   __|  |  | | | |   __|__   |
+#  |_____|_____|_____| |_| |_|  |_____|_____|_|___|_____|_____|
+###########################################################################################
+# ZONE
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+###########################################################################################
+---
+zone.home:
+  friendly_name: "Huize Asingaborg"
+
+zone.peter_iphone_stationary:
+  friendly_name: "Peter Stationary"
+
+zone.cenkay_xr_stationary:
+  friendly_name: "Kay Stationary"

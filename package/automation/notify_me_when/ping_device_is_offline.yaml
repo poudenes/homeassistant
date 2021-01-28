@@ -1,0 +1,63 @@
+#   _____ _____ _____ _____    ____  _____ _____ _____ _____ _____    _____ _____      _    _____ _____ _____ __    _____ _____ _____
+#  |  _  |     |   | |   __|  |    \|   __|  |  |     |     |   __|  |     |   | |    / |  |     |   __|   __|  |  |     |   | |   __|
+#  |   __|-   -| | | |  |  |  |  |  |   __|  |  |-   -|   --|   __|  |  |  | | | |   / /   |  |  |   __|   __|  |__|-   -| | | |   __|
+#  |__|  |_____|_|___|_____|  |____/|_____|\___/|_____|_____|_____|  |_____|_|___|  |_/    |_____|__|  |__|  |_____|_____|_|___|_____|
+###########################################################################################
+# NOTIFY WHEN WRT DEVICES GOES OFFLINE OR ONLINE
+###########################################################################################
+- alias: "Notification - PING Devices Offline"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.ping_dsmr_reader
+        - binary_sensor.ping_itho_hub
+        - binary_sensor.ping_meek_bathroom
+        - binary_sensor.ping_meek_bedroom
+        - binary_sensor.ping_meek_diningroom
+        - binary_sensor.ping_meek_dressoir
+        - binary_sensor.ping_meek_hallway
+        - binary_sensor.ping_meek_kitchen
+        - binary_sensor.ping_meek_livingroom
+        - binary_sensor.ping_meek_wc
+        - binary_sensor.ping_milight_hub
+        - binary_sensor.ping_nextcloud
+      to: "off"
+      for: "00:00:15"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Ping device: {{ trigger.from_state.attributes.friendly_name }} is offline!"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Notify System"
+
+- alias: "Notification - PING Devices Online"
+  trigger:
+
+    - platform: state
+      entity_id:
+        - binary_sensor.ping_dsmr_reader
+        - binary_sensor.ping_itho_hub
+        - binary_sensor.ping_meek_bathroom
+        - binary_sensor.ping_meek_bedroom
+        - binary_sensor.ping_meek_diningroom
+        - binary_sensor.ping_meek_dressoir
+        - binary_sensor.ping_meek_hallway
+        - binary_sensor.ping_meek_kitchen
+        - binary_sensor.ping_meek_livingroom
+        - binary_sensor.ping_meek_wc
+        - binary_sensor.ping_milight_hub
+        - binary_sensor.ping_nextcloud
+      to: "on"
+      for: "00:00:15"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Ping device: {{ trigger.from_state.attributes.friendly_name }} is online!"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Notify System"

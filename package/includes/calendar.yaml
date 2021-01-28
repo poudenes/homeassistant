@@ -1,0 +1,19 @@
+#
+#   _____     _   _
+#  |     |___| |_| |___ _ _
+#  |   --| .'| | . | .'| | |
+#  |_____|__,|_|___|__,|\_/
+#
+###########################################################################################
+# CALDAV
+# https://www.home-assistant.io/integrations/caldav/
+###########################################################################################
+---
+- platform: caldav
+  username: !secret icloud_peter_username
+  password: !secret icloud_app_specific_password_ha
+  url: https://caldav.icloud.com
+  calendars:
+    - "Werk"
+    - "Vangrail"
+    - "Werk_admin"

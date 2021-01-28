@@ -1,0 +1,97 @@
+#   _____ _____ _____ _____ _____    ____  _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |    \|     |   __|     |     |
+#  |__   |   --|   __| | | |   __|  |  |  |-   -|__   |   --|  |  |
+#  |_____|_____|_____|_|___|_____|  |____/|_____|_____|_____|_____|
+###########################################################################################
+# SCENE DISCO WHEN THERE IS A PARTY OUR HOUSE IS A DISCOBALL
+###########################################################################################
+- alias: "Scene - Disco Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_disco
+      to: "on"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        brightness_pct: 30
+        effect: NorthernLight
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_1
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_2
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_3
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_1
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_2
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_3
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_4
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.balcony_all
+        effect: 0
+        brightness_pct: 100
+
+    - delay:
+        milliseconds: 200
+
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_all
+        effect: 0
+        brightness_pct: 100

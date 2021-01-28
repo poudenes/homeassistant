@@ -1,0 +1,29 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  | __  |     |     |  _  |   | |_   _|     |     |
+#  |__   |   --|   __| | | |   __|  |    -|  |  | | | |     | | | | | | |-   -|   --|
+#  |_____|_____|_____|_|___|_____|  |__|__|_____|_|_|_|__|__|_|___| |_| |_____|_____|
+###########################################################################################
+# SCENE ROMANTIC WHEN WE IN THE MOOD FOR SOME ROMANCE
+###########################################################################################
+- alias: "Scene - Sexy Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_romantic
+      to: "on"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        brightness_pct: 30
+        effect: Romantic
+
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.dressoir_all
+          - light.livingroom_all
+          - light.hallway_all
+          - light.balcony_all
+        color_name: "red"
+        brightness_pct: 50

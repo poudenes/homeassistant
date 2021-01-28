@@ -1,0 +1,26 @@
+#   __    _____ _____ _____ _____ _____ __ __ _____ _____    _____ _____ _____ _____ _ _ _
+#  |  |  |   __|_   _|   __|     | __  |  |  |  _  |_   _|  | __  |   __|   | |   __| | | |
+#  |  |__|   __| | | |__   |   --|    -|_   _|   __| | |    |    -|   __| | | |   __| | | |
+#  |_____|_____| |_| |_____|_____|__|__| |_| |__|    |_|    |__|__|_____|_|___|_____|_____|
+###########################################################################################
+# SYSTEM LETSCRYPT RENEWAL CHECK EVERY NIGHT 2AM
+###########################################################################################
+- alias: "System - LetsEncrypt renewal"
+  trigger:
+    - platform: time
+      at: "02:00:00"
+
+  action:
+    - service: hassio.addon_stop
+      data:
+        addon: core_nginx_proxy
+
+    - service: hassio.addon_restart
+      data:
+        addon: core_letsencrypt
+
+    - delay: "00:01:30"
+
+    - service: hassio.addon_start
+      data:
+        addon: core_nginx_proxy

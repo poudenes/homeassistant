@@ -1,0 +1,45 @@
+#   _____ _____ _____ _____ _____    __    _____ _____ _____      _    _____ _____ _____ _____ _____ _____
+#  |  _  |   __|_   _|   __| __  |  |  |  |   __|   __|_   _|    / |  |  _  | __  | __  |     |  |  |   __|
+#  |   __|   __| | | |   __|    -|  |  |__|   __|   __| | |     / /   |     |    -|    -|-   -|  |  |   __|
+#  |__|  |_____| |_| |_____|__|__|  |_____|_____|__|    |_|    |_/    |__|__|__|__|__|__|_____|\___/|_____|
+###########################################################################################
+# SYSTEM WHEN AUTOMATION TRACKER NOT WORK WE CAN MANUAL TURN ON OFF OF PETER IS AT HOME OR NOT
+###########################################################################################
+- alias: "System - Peter Left or Arrive Locative or GeoFency Manual"
+  trigger:
+    - platform: state
+      entity_id: device_tracker.peter_iphone_ios_app
+        # - device_tracker.1717fe36_3c70_4599_963c_b70b6ee95eba
+        # - device_tracker.peter_iphone_geofency
+
+  action:
+    - service: "{{ 'input_boolean.turn_on' if trigger.to_state.state == 'home' else 'input_boolean.turn_off' }}"
+      entity_id: input_boolean.peter_home_manual
+
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.kay_home_manual
+              state: "on"
+          sequence:
+            - service: script.none
+
+      default:
+        - service: >-
+              {% if trigger.from_state.state == 'not_home' and trigger.to_state.state == 'home' %}
+                notify.mobile_app_peter_iphone
+              {% elif trigger.from_state.state == 'home' and trigger.to_state.state == 'not_home'  %}
+                notify.mobile_app_peter_iphone
+              {% else %} script.none
+              {% endif %}
+          data:
+            message: >-
+              {% if trigger.from_state.state == 'not_home' and trigger.to_state.state == 'home' %}
+                Peter arrived home
+              {% elif trigger.from_state.state == 'home' and trigger.to_state.state == 'not_home'  %}
+                Peter left home
+              {% endif %}
+            title: "HA Notify Engine"
+            data:
+              push:
+                thread-id: "Precence System"

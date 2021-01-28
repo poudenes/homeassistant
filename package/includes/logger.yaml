@@ -1,0 +1,22 @@
+#
+#   __
+#  |  |   ___ ___ ___ ___ ___
+#  |  |__| . | . | . | -_|  _|
+#  |_____|___|_  |_  |___|_|
+#            |___|___|
+###########################################################################################
+# LOGGER
+# https://www.home-assistant.io/integrations/logger/
+# critical < fatal < error < warning < info < debug < notset
+###########################################################################################
+---
+default: error
+logs:
+  aiohttp.server: error
+  pynanoleaf.pynanoleaf: fatal
+  homeassistant.core: error
+  homeassistant.components: error
+  homeassistant.components.alexa.state_report: fatal
+  homeassistant.components.websocket_api.http.connection: fatal
+  homeassistant.components.influxdb: fatal
+  homeassistant.components.nanoleaf.light: fatal

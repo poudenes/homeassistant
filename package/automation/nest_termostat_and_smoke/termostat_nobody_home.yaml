@@ -1,0 +1,28 @@
+#   _____ _____ _____ _____    _____ _____ _____ _____ ____  __ __    _____ _____ _____ _____
+#  |   | |   __|   __|_   _|  |   | |     | __  |     |    \|  |  |  |  |  |     |     |   __|
+#  | | | |   __|__   | | |    | | | |  |  | __ -|  |  |  |  |_   _|  |     |  |  | | | |   __|
+#  |_|___|_____|_____| |_|    |_|___|_____|_____|_____|____/  |_|    |__|__|_____|_|_|_|_____|
+###########################################################################################
+# NEST CONTROL TEMP BASED ON NOBODY HOME
+###########################################################################################
+- alias: "Control - Nest Control - Nobody Home"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      to: "off"
+
+    - platform: state
+      entity_id: climate.entryway
+
+  condition:
+    - condition: state
+      entity_id:
+        - binary_sensor.sensor_manual_family_home
+        - switch.dnc
+      state: "off"
+
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.entryway
+        temperature: 9

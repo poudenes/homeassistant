@@ -1,0 +1,29 @@
+#   _____ _____ __    _____ _____ _____ _____    _____ _____ _____ _____    _____ _____ _____ _____ _____
+#  |     |     |  |  |     |   __|  |  |_   _|  |     |     |_   _|_   _|  |  _  |  _  |_   _|     |  |  |
+#  | | | |-   -|  |__|-   -|  |  |     | | |    | | | |  |  | | |   | |    |   __|     | | | |   --|     |
+#  |_|_|_|_____|_____|_____|_____|__|__| |_|    |_|_|_|__  _| |_|   |_|    |__|  |__|__| |_| |_____|__|__|
+#                                                        |__|
+###########################################################################################
+# PATCH WHEN GROUP 0 IS ON OR OFF THE CORRECT STATUS WILL SEND TO MILIGHT HUB FOR ALL LIGHTS INSIDE GROUP
+###########################################################################################
+- alias: "Patches - MiLight Toilet Group 0"
+  initial_state: true
+  trigger:
+    - platform: mqtt
+      topic: "Milight_Hub/states/0xAAAE/rgb_cct/0"
+
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "Milight_Hub/states/0xAAAE/rgb_cct/1"
+        payload_template: "{{ trigger.payload }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "Milight_Hub/states/0xAAAE/rgb_cct/2"
+        payload_template: "{{ trigger.payload }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "Milight_Hub/states/0xAAAE/rgb_cct/3"
+        payload_template: "{{ trigger.payload }}"

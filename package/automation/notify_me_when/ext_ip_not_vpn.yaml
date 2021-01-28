@@ -1,0 +1,25 @@
+#   _____ _____ _____    _____ _____ _____    _____ _____ _____ _____ _____ _____
+#  |  |  |  _  |   | |  |   | |     |_   _|  |  _  |     |_   _|     |  |  |   __|
+#  |  |  |   __| | | |  | | | |  |  | | |    |     |   --| | | |-   -|  |  |   __|
+#   \___/|__|  |_|___|  |_|___|_____| |_|    |__|__|_____| |_| |_____|\___/|_____|
+###########################################################################################
+# NOTIFY WHEN MQTT SERVER EXT IP IS NOT VPN ANYMORE
+###########################################################################################
+- alias: "Notification - VPN not running on Asus"
+  trigger:
+    - platform: state
+      entity_id: sensor.dsmr_ext_ip
+
+    - platform: time_pattern
+      minutes: "/5"
+
+  condition: "{{ (states('sensor.dsmr_ext_ip') == states('sensor.external_ip')) }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "HA Critical VPN on router not work. {{now().strftime('%d-%m-%Y') }}"
+        title: "HA System"
+        data:
+          push:
+            thread-id: "Notify System"

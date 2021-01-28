@@ -1,0 +1,25 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |     |     |     |  |  |     |   | |   __|
+#  |__   |   --|   __| | | |   __|  |   --|  |  |  |  |    -|-   -| | | |  |  |
+#  |_____|_____|_____|_|___|_____|  |_____|_____|_____|__|__|_____|_|___|_____|
+###########################################################################################
+# SCENE FOR COOKING TURN ON LIGHTS KITCHEN BRIGHTNESS 100%
+###########################################################################################
+- alias: "Scene - Cooking Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_cooking
+
+  variables:
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition: "{{ is_state('switch.scene_goodnight', 'off') }}"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.sink_all
+          - light.kitchen_all
+        brightness_pct: "{{ 100 if is_state('switch.scene_cooking', 'on') else 0 }}"
+        kelvin: "{{ adaptive }}"

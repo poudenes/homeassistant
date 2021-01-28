@@ -1,0 +1,21 @@
+#   _____ ____  _ _ _    _____ _____ _____ _____ __    __
+#  | __  |    \| | | |  | __  |   __|     |  _  |  |  |  |
+#  |    -|  |  | | | |  |    -|   __|   --|     |  |__|  |__
+#  |__|__|____/|_____|  |__|__|_____|_____|__|__|_____|_____|
+###########################################################################################
+# NOTIFY WHEN THERE IS A RECALL FOR THE CAR OF MY SISTER
+###########################################################################################
+- alias: "Notification - RDW - Terugroep verzoek"
+  trigger:
+    - platform: state
+      entity_id: sensor.toyota_aygo_recall
+      to: "true"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Er is een terugroepactie uitgevaardigd voor de autovan Martina. Maak een afspraak bij de garage om het probleem te verhelpen."
+        title: HA - Terugroepactie"
+        data:
+          push:
+            thread-id: "RDW System"

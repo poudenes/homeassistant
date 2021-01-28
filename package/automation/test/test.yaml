@@ -1,0 +1,241 @@
+#   _____ _____ _____ _____    _____ _____ _____ _____    _____ _____ _____ _____
+#  |_   _|   __|   __|_   _|  |_   _|   __|   __|_   _|  |_   _|   __|   __|_   _|
+#    | | |   __|__   | | |      | | |   __|__   | | |      | | |   __|__   | | |
+#    |_| |_____|_____| |_|      |_| |_____|_____| |_|      |_| |_____|_____| |_|
+# ##########################################################################################
+# PLAY TEST AND SEE IF THINGS WORK OR NOT
+# ##########################################################################################
+- alias: "TEST - TEST DRYER"
+  trigger:
+    - platform: state
+      entity_id: switch.newkaku_014e5906_a
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "registered motion"
+        title: "HA Security ALERT"
+        data:
+          subtitle: "Notify System"
+          push:
+            thread-id: "Notify System"
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.hallway_all
+#         transition: 5
+#         color_name: red
+
+# - alias: "TEST - TEST DRYER"
+#   trigger:
+#     - platform: state
+#       entity_id: switch.newkaku_014e5906_a
+
+#   action:
+#     - variables:
+#         name: "washing_machine"
+#         mqtt_message: "TEST MESSAGE"
+#         total_kwh_rounded: "3,2"
+#         price: "0,32"
+#         minutes: "66"
+
+#     - service: mqtt.publish
+#       data:
+#         topic: "homeassistant/ha_other/{{ name }}_data/state"
+#         retain: "true"
+#         payload: "{{ mqtt_message }}"
+
+#     - service: mqtt.publish
+#       data:
+#         topic: "homeassistant/ha_other/{{ name }}_data/attributes"
+#         retain: "true"
+#         payload: >-
+#           {
+#             "minutes": "{{ minutes }}",
+#             "total_kwh_rounded": "{{ total_kwh_rounded }}",
+#             "price": "{{ price }}"
+#           }
+
+# TEST
+# - alias: "Test Yamaha DSP Select"
+#   trigger:
+#     - platform: state
+#       entity_id: input_select.yamaha_dsp
+
+#   action:
+#     service: remote.send_command
+#     data_template:
+#       command: "{{ (states('input_select.yamaha_dsp')) }}"
+#       device: 41633063
+#       entity_id: remote.logitech_harmony
+
+# - alias: "Test AppleTV Select"
+#   trigger:
+#     - platform: state
+#       entity_id: input_select.appletv_options
+
+#   action:
+#     service: remote.send_command
+#     data_template:
+#       command: "{{ (states('input_select.appletv_options')) }}"
+#       device: 41536434
+#       entity_id: remote.logitech_harmony
+
+# - alias: "Utilities: TEST DRYER"
+#   trigger:
+#     platform: state
+#     entity_id: switch.newkaku_014e5906_a
+
+#   action:
+#     service: script.utility_notification
+#     data:
+#       name: "dryer"
+#       emojis: "👚👕"
+
+# - alias: "Test with event platform"
+#   mode: parallel
+#   max: 20
+#   trigger:
+#     - platform: event
+#       event_type: state_changed
+
+#   variables:
+#     light: "{{ trigger.event.data.entity_id }}"
+
+#   condition: "{{ 'bedroom' in light and 'kitchen' in light }}"
+
+#   action:
+#     - service: system_log.write
+#       data:
+#         message: "{{ light }} is manually controlled"
+#         level: error
+#         logger: homeassistant.components.automation
+
+#     - service: notify.mobile_app_peter_iphone
+#       data:
+#         title: "TEST"
+#         message: "{{ light }} is now, context={{ trigger.event.context }}"
+
+# - alias: "Repeat"
+
+#   trigger:
+
+#     - platform: time_pattern
+#       minutes: "/1"
+
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: red
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: green
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: red
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: green
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: red
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: green
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: red
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: green
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: red
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: green
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: red
+
+#     - delay: "00:00:5"
+
+#     - service: light.turn_on
+#       entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: 100
+#         color_name: green
+
+#     - delay: "00:00:05"
+
+# - alias: "TEST - Diningroom Lights"
+#   trigger:
+
+#     - platform: state
+#       entity_id: switch.newkaku_014e5906_a
+
+#   action:
+#     - service: notify.mobile_app_peter_iphone
+#       data:
+#         push:
+#           category: map
+#         action_data:
+#           latitude: "40.785091"
+#           longitude: "-73.968285"
+
+# - service: system_log.write
+#   data:
+#     message: "Choose 1: {{ name }} is switch for light.{{ name }}_all and state is {{ to_state }}"
+#     level: debug
+#     logger: homeassistant.components.automation

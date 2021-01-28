@@ -1,0 +1,39 @@
+#   _____ _____ _____ __    _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  _  |     |_   _|     |     |   | |   __|
+#  |     |   __|   __|  |__|   __| | | |  |  |  |     |   --| | | |-   -|  |  | | | |__   |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |__|__|_____| |_| |_____|_____|_|___|_____|
+###########################################################################################
+# TAKE MEDICINE SNOOZE
+###########################################################################################
+- alias: "iOS Remind me again take medicine"
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: MEDICINE_SNOOZE
+
+  action:
+    - delay: "00:15:00"
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "HA Medication ALERT"
+        message: "Take your medication!"
+        data:
+          push:
+            category: "medicine"
+
+###########################################################################################
+# I TOOK MY MEDICINE
+###########################################################################################
+- alias: "iOS I took my medicine"
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: MEDICINE_TAKE_THEM
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Well done, now you can sleep this night"
+        title: "HA Notify"

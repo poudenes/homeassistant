@@ -1,0 +1,20 @@
+#   _____ _____ ____     __    _____ _____ _____ _____
+#  | __  |  _  |    \   |  |  |     |   __|     |   | |
+#  | __ -|     |  |  |  |  |__|  |  |  |  |-   -| | | |
+#  |_____|__|__|____/   |_____|_____|_____|_____|_|___|
+###########################################################################################
+# NOTIFY WHEN THERE IS A BAD LOGIN
+###########################################################################################
+- alias: "Notification - Login Failure"
+  trigger:
+    - platform: template
+      value_template: "{{ (states('persistent_notification.http_login') != 'unknown') }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "There is a bad login registered on Home Assistant"
+        title: "HA Security ALERT"
+        data:
+          push:
+            thread-id: "Notify System"

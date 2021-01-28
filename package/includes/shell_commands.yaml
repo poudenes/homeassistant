@@ -1,0 +1,30 @@
+#
+#       _       _ _                                     _
+#   ___| |_ ___| | |      ___ ___ _____ _____ ___ ___ _| |
+#  |_ -|   | -_| | |     |  _| . |     |     | .'|   | . |
+#  |___|_|_|___|_|_|_____|___|___|_|_|_|_|_|_|__,|_|_|___|
+#                  |_____|
+###########################################################################################
+# SHELL_COMMAND
+# https://www.home-assistant.io/integrations/shell_command/
+###########################################################################################
+---
+fullykiosk_brightness_slider: !secret fullykiosk_brightness_slider
+fullykiosk_load_start_url: !secret fullykiosk_load_start_url
+fullykiosk_restart_app: !secret fullykiosk_restart_app
+fullykiosk_screensaver_on: !secret fullykiosk_screensaver_on
+fullykiosk_screensaver_off: !secret fullykiosk_screensaver_off
+fullykiosk_screen_on: !secret fullykiosk_screen_on
+fullykiosk_sceen_off: !secret fullykiosk_screen_off
+
+clear_logs: truncate -s 0 /config/home-assistant.log
+
+meekdoorbell: !secret meekdoorbell
+meekkitchen: !secret meekkitchen
+meekwc: !secret meekwc
+meekbathroom: !secret meekbathroom
+meekbedroom: !secret meekbedroom
+meekdressoir: !secret meekdressoir
+meeklivingroom: !secret meeklivingroom
+meekdiningtable: !secret meekdiningtable
+meekhallway: !secret meekhallway

@@ -1,0 +1,335 @@
+#
+#   _____       _ _       _
+#  |   __|_ _ _|_| |_ ___| |_
+#  |__   | | | | |  _|  _|   |
+#  |_____|_____|_|_| |___|_|_|
+#
+###########################################################################################
+# RFLINK SWITCH
+# https://www.home-assistant.io/integrations/switch.rflink/
+###########################################################################################
+---
+- platform: rflink
+  devices:
+    newkaku_014e5906_a: {}
+    # newkaku_0114ef92_b: {}
+    # newkaku_0114ef92_c: {}
+    # newkaku_011fdd46_b: {}
+    # newkaku_011fdd46_c: {}
+    # newkaku_01616a32_a: {}
+    # newkaku_014ad3ba_a: {}
+    # newkaku_011fad02_b: {}
+    # newkaku_01074522_a: {}
+    # newkaku_016138ba_a: {}
+
+###########################################################################################
+# MQTT SWITCH
+# https://www.home-assistant.io/integrations/switch.mqtt/
+###########################################################################################
+- name: "Vacation"
+  command_topic: "homeassistant/ha_other/emulateholiday"
+  state_topic: "homeassistant/ha_other/emulateholiday"
+  icon: mdi:palm-tree
+  <<: &GLOBAL_SWITCH_PARAMS
+    platform: mqtt
+    payload_on: "1"
+    payload_off: "0"
+    state_on: "1"
+    state_off: "0"
+    optimistic: false
+    qos: 1
+    retain: true
+
+- name: "Full Manual Mode"
+  command_topic: "homeassistant/ha_other/manual_mode"
+  state_topic: "homeassistant/ha_other/manual_mode"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Toilet Fan"
+  command_topic: "homeassistant/ha_other/fan_toilet"
+  state_topic: "homeassistant/ha_other/fan_toilet"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Peter early up"
+  command_topic: "homeassistant/ha_other/peter_early_up"
+  state_topic: "homeassistant/ha_other/peter_early_up"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Lux Low"
+  command_topic: "homeassistant/ha_other/luxlevelow"
+  state_topic: "homeassistant/ha_other/luxlevelow"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "DNC"
+  command_topic: "homeassistant/ha_other/disable_nest_control"
+  state_topic: "homeassistant/ha_other/disable_nest_control"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Reset Switches"
+  command_topic: "homeassistant/ha_other/resetmeekswitches"
+  state_topic: "homeassistant/ha_other/resetmeekswitches"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Briefing"
+  command_topic: "homeassistant/ha_other/briefing"
+  state_topic: "homeassistant/ha_other/briefing"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+###########################################################################################
+# MEEK SWITCHES
+###########################################################################################
+- name: "Balcony"
+  command_topic: "homeassistant/ha_switches/balcony"
+  state_topic: "homeassistant/ha_switches/balcony"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Bathroom"
+  command_topic: "homeassistant/ha_switches/bathroom"
+  state_topic: "homeassistant/ha_switches/bathroom"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Bedroom"
+  command_topic: "homeassistant/ha_switches/bedroom"
+  state_topic: "homeassistant/ha_switches/bedroom"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Cooking"
+  command_topic: "homeassistant/ha_switches/cooking"
+  state_topic: "homeassistant/ha_switches/cooking"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Diningroom"
+  command_topic: "homeassistant/ha_switches/diningtable"
+  state_topic: "homeassistant/ha_switches/diningtable"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Dressoir"
+  command_topic: "homeassistant/ha_switches/dressoir"
+  state_topic: "homeassistant/ha_switches/dressoir"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Hallway"
+  command_topic: "homeassistant/ha_switches/hallway"
+  state_topic: "homeassistant/ha_switches/hallway"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Kitchen"
+  command_topic: "homeassistant/ha_switches/kitchenseeling"
+  state_topic: "homeassistant/ha_switches/kitchenseeling"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Sink"
+  command_topic: "homeassistant/ha_switches/kitchensink"
+  state_topic: "homeassistant/ha_switches/kitchensink"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "livingroom"
+  command_topic: "homeassistant/ha_switches/livingroom"
+  state_topic: "homeassistant/ha_switches/livingroom"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Toilet"
+  command_topic: "homeassistant/ha_switches/toilet"
+  state_topic: "homeassistant/ha_switches/toilet"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Wall"
+  command_topic: "homeassistant/ha_switches/wall"
+  state_topic: "homeassistant/ha_switches/wall"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Window"
+  command_topic: "homeassistant/ha_switches/window"
+  state_topic: "homeassistant/ha_switches/window"
+  icon: mdi:nintendo-switch
+  <<: *GLOBAL_SWITCH_PARAMS
+
+###########################################################################################
+# SCENES
+###########################################################################################
+- name: "Scene AppleTV"
+  command_topic: "homeassistant/ha_scenes/appletv"
+  state_topic: "homeassistant/ha_scenes/appletv"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Cooking"
+  command_topic: "homeassistant/ha_scenes/cooking"
+  state_topic: "homeassistant/ha_scenes/cooking"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Daytime"
+  command_topic: "homeassistant/ha_scenes/daytime"
+  state_topic: "homeassistant/ha_scenes/daytime"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Disco"
+  command_topic: "homeassistant/ha_scenes/disco"
+  state_topic: "homeassistant/ha_scenes/disco"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Evening"
+  command_topic: "homeassistant/ha_scenes/evening"
+  state_topic: "homeassistant/ha_scenes/evening"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Goodnight"
+  command_topic: "homeassistant/ha_scenes/goodnight"
+  state_topic: "homeassistant/ha_scenes/goodnight"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Morning"
+  command_topic: "homeassistant/ha_scenes/morning"
+  state_topic: "homeassistant/ha_scenes/morning"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Guests"
+  command_topic: "homeassistant/ha_scenes/guests"
+  state_topic: "homeassistant/ha_scenes/guests"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Kodi"
+  command_topic: "homeassistant/ha_scenes/kodi"
+  state_topic: "homeassistant/ha_scenes/kodi"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Romantic"
+  command_topic: "homeassistant/ha_scenes/romantic"
+  state_topic: "homeassistant/ha_scenes/romantic"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Sleeping"
+  command_topic: "homeassistant/ha_scenes/sleeping"
+  state_topic: "homeassistant/ha_scenes/sleeping"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene TV"
+  command_topic: "homeassistant/ha_scenes/tv"
+  state_topic: "homeassistant/ha_scenes/tv"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Scene Dinner"
+  command_topic: "homeassistant/ha_scenes/dinner"
+  state_topic: "homeassistant/ha_scenes/dinner"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+- name: "Kay Learning"
+  command_topic: "homeassistant/ha_other/kaylearning"
+  state_topic: "homeassistant/ha_other/kaylearning"
+  icon: mdi:arrow-decision-auto
+  <<: *GLOBAL_SWITCH_PARAMS
+
+###########################################################################################
+# LOGITECH HARMONY
+# https://www.home-assistant.io/integrations/switch.template/
+###########################################################################################
+- platform: template
+  switches:
+    airplay:
+      friendly_name: "AirPlay"
+      value_template: "{{ is_state_attr('remote.logitech_harmony', 'current_activity', 'AirPlay') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "AirPlay"
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "PowerOff"
+
+- platform: template
+  switches:
+    appletv:
+      friendly_name: "AppleTV"
+      value_template: "{{ is_state_attr('remote.logitech_harmony', 'current_activity', 'AppleTV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "AppleTV"
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "PowerOff"
+
+- platform: template
+  switches:
+    domoticz:
+      friendly_name: "Domoticz"
+      value_template: "{{ is_state_attr('remote.logitech_harmony', 'current_activity', 'Domoticz') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "Domoticz"
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "PowerOff"
+
+- platform: template
+  switches:
+    kodi:
+      friendly_name: "Kodi"
+      value_template: "{{ is_state_attr('remote.logitech_harmony', 'current_activity', 'Kodi') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "Kodi"
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "PowerOff"
+
+- platform: template
+  switches:
+    tv:
+      friendly_name: "TV"
+      value_template: "{{ is_state_attr('remote.logitech_harmony', 'current_activity', 'Ziggo') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "Ziggo"
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.logitech_harmony
+          activity: "PowerOff"

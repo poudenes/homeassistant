@@ -1,0 +1,188 @@
+#
+#   _____               _   _ _
+#  |  |  |___ _____ ___| |_|_| |_
+#  |     | . |     | -_| '_| |  _|
+#  |__|__|___|_|_|_|___|_,_|_|_|
+#
+###########################################################################################
+# HOMEKIT
+# https://www.home-assistant.io/integrations/homekit/
+###########################################################################################
+---
+auto_start: "false"
+filter:
+  include_domains:
+    - climate
+    - media_player
+  include_entities:
+    - fan.afzuiging_badkamer
+
+# Motion Sensors
+    - binary_sensor.zwave2mqtt_nodeid_87_contact
+    - binary_sensor.zwave2mqtt_nodeid_88_contact
+    - binary_sensor.zwave2mqtt_nodeid_90_contact
+    - binary_sensor.zwave2mqtt_nodeid_91_contact
+    - binary_sensor.zwave2mqtt_nodeid_106_contact
+    - binary_sensor.zwave2mqtt_nodeid_107_contact
+    - binary_sensor.zwave2mqtt_nodeid_108_contact
+
+# Nest Protect
+    - sensor.bedroom_nest_protect_co_status
+    - sensor.bedroom_nest_protect_smoke_status
+    - sensor.dining_room_nest_protect_co_status
+    - sensor.dining_room_nest_protect_smoke_status
+    - sensor.living_room_nest_protect_co_status
+    - sensor.living_room_nest_protect_smoke_status
+    - sensor.nest_protect_bedroom_status_homekit
+    - sensor.nest_protect_diningroom_status_homekit
+    - sensor.nest_protect_livingroom_status_homekit
+
+# Lights
+    - light.livingroom_all
+    - light.dressoir_all
+    - light.hallway_all
+    - light.balcony_all
+    - light.kitchen_all
+    - light.sink_all
+    - light.bedroom_all
+    - light.bathroom_all
+    - light.toilet_all
+
+# Scenes
+    - switch.scene_sleeping
+    - switch.scene_romantic
+    - switch.scene_kodi
+    - switch.scene_goodnight
+    - switch.scene_morning
+    - switch.scene_appletv
+    - switch.scene_daytime
+    - switch.scene_tv
+    - switch.scene_evening
+    - switch.scene_disco
+    - switch.scene_cooking
+    - switch.kay_learning
+    - switch.dnc
+    - switch.scene_dinner
+
+# Logitech Activities
+    - switch.airplay
+    - switch.kodi
+    - switch.tv
+    - switch.appletv
+
+# NEST
+    - climate.entryway
+
+# Device trackers
+    - binary_sensor.manual_kay_home
+    - binary_sensor.manual_peter_home
+
+# Temperature sensors
+    - sensor.zwave2mqtt_nodeid_88_temperature_air
+    - sensor.zwave2mqtt_nodeid_87_temperature_air
+    - sensor.zwave2mqtt_nodeid_90_temperature_air
+    - sensor.zwave2mqtt_nodeid_91_temperature_air
+    - sensor.zwave2mqtt_nodeid_101_temperature_air
+    - sensor.zwave2mqtt_nodeid_100_temperature_air
+    - sensor.zwave2mqtt_nodeid_106_temperature_air
+    - sensor.zwave2mqtt_nodeid_107_temperature_air
+    - sensor.zwave2mqtt_nodeid_108_temperature_air
+
+
+  exclude_entities:
+    - binary_sensor.bedroom_nest_protect_online
+    - binary_sensor.dining_room_nest_protect_online
+    - binary_sensor.living_room_nest_protect_online
+    - binary_sensor.entryway_thermostat_has_leaf
+    - binary_sensor.entryway_thermostat_online
+    - binary_sensor.asingaborg_away
+    - media_player.peter_s_alexa_apps
+    - media_player.peter_s_echo_dot
+    - media_player.this_device
+    - media_player.browser_67ae634f_11d3ea2c
+
+entity_config:
+  media_player.android:
+    name: "Kodi Media Player"
+    feature_list:
+      - feature: play_pause
+      - feature: play_stop
+      - feature: toggle_mute
+
+  media_player.woonkamer:
+    name: "AppleTV Media Player"
+    feature_list:
+      - feature: play_pause
+      - feature: play_stop
+
+  binary_sensor.zwave2mqtt_nodeid_106_contact:
+    name: "Bedroom Motion"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_106_battery_level
+    low_battery_threshold: 20
+  binary_sensor.zwave2mqtt_nodeid_90_contact:
+    name: "Hallway Motion"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_90_battery_level
+    low_battery_threshold: 20
+  binary_sensor.zwave2mqtt_nodeid_88_contact:
+    name: "Bathroom Motion"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_88_battery_level
+    low_battery_threshold: 20
+  binary_sensor.zwave2mqtt_nodeid_108_contact:
+    name: "Diningroom Motion"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_108_battery_level
+    low_battery_threshold: 20
+  binary_sensor.zwave2mqtt_nodeid_91_contact:
+    name: "Livingroom Motion"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_91_battery_level
+    low_battery_threshold: 20
+  binary_sensor.zwave2mqtt_nodeid_87_contact:
+    name: "Toilet Motion"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_87_battery_level
+    low_battery_threshold: 20
+
+  sensor.zwave2mqtt_nodeid_101_temperature_air:
+    name: "Temp. Frontdoor"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_101_battery_level
+  sensor.zwave2mqtt_nodeid_100_temperature_air:
+    name: "Temp. iMac"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_100_battery_level
+  sensor.zwave2mqtt_nodeid_106_temperature_air:
+    name: "Temp. Bedroom"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_106_battery_level
+  sensor.zwave2mqtt_nodeid_88_temperature_air:
+    name: "Temp. Bathroom"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_88_battery_level
+  sensor.zwave2mqtt_nodeid_107_temperature_air:
+    name: "Temp. Kitchen"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_107_battery_level
+  sensor.zwave2mqtt_nodeid_90_temperature_air:
+    name: "Temp. Hallway"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_90_battery_level
+  sensor.zwave2mqtt_nodeid_108_temperature_air:
+    name: "Temp. Diningroom"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_108_battery_level
+  sensor.zwave2mqtt_nodeid_91_temperature_air:
+    name: "Temp Livingroom"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_91_battery_level
+  sensor.zwave2mqtt_nodeid_87_temperature_air:
+    name: "Temp. Toilet"
+    linked_battery_sensor: sensor.zwave2mqtt_nodeid_87_battery_level
+
+  switch.scene_sleeping:
+    name: "Sleeping"
+  switch.kay_learning:
+    name: "Kay Learn"
+  switch.dnc:
+    name: "Disable Nest Control"
+  light.livingroom_all:
+    name: "Livingroom"
+  light.dressoir_all:
+    name: "Dressoir"
+  light.kitchen_all:
+    name: "Kitchen"
+  light.bedroom_all:
+    name: "Bedroom"
+  light.bathroom_all:
+    name: "Bathroom"
+  light.newkaku_01401eb6_a:
+    name: "Diningroom"

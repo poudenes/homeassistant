@@ -1,0 +1,75 @@
+#   _ _ _ _____ _____ _____    ____  _____ __ __ _____ _____    ____  _____ _____ _____
+#  | | | |  _  |   __|  |  |  |    \| __  |  |  |   __| __  |  |    \|     |   __|  |  |
+#  | | | |     |__   |     |  |  |  |    -|_   _|   __|    -|  |  |  |-   -|__   |     |
+#  |_____|__|__|_____|__|__|  |____/|__|__| |_| |_____|__|__|  |____/|_____|_____|__|__|
+###########################################################################################
+# TO CALCULATE THE COST OF USAGE WASH, DISH, DRYER MACHINE
+###########################################################################################
+- alias: "Utilities - Washing, Dishwasher or Dryer machine start/stop"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.dishwasher_machine
+        - binary_sensor.washing_machine
+        - binary_sensor.dryer_machine
+
+  variables:
+    from_state: "{{ trigger.from_state.state }}"
+    to_state: "{{ trigger.to_state.state }}"
+    name: "{{ trigger.entity_id.split('.', 1)[1] }}"
+
+  condition: "{{ (to_state == 'on' and from_state == 'off') or (to_state == 'off' and from_state == 'on') }}"
+
+  action:
+    - service: input_datetime.set_datetime
+      data:
+        entity_id: "input_datetime.{{ name }}_{{ to_state }}"
+        timestamp: "{{ now().timestamp() }}"
+
+###########################################################################################
+# START SCRIPT FOR WASHING MACHINE
+###########################################################################################
+- alias: "Utilities - wWshing machine notification"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.washing_machine
+      from: "off"
+      to: "on"
+
+  action:
+    - service: script.utility_notification
+      data:
+        name: "washing_machine"
+        emojis: "👚👕"
+
+###########################################################################################
+# START SCRIPT FOR DISHWASHER MACHINE
+###########################################################################################
+- alias: "Utilities - Dishwasher notification"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dishwasher_machine
+      from: "off"
+      to: "on"
+
+  action:
+    - service: script.utility_notification
+      data:
+        name: "dishwasher_machine"
+        emojis: "🍽🍳"
+
+###########################################################################################
+# START SCRIPT FOR DRYER MACHINE
+###########################################################################################
+- alias: "Utilities - Dryer machine notification"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dryer_machine
+      from: "off"
+      to: "on"
+
+  action:
+    - service: script.utility_notification
+      data:
+        name: "dryer_machine"
+        emojis: "👚👕"

@@ -1,0 +1,22 @@
+# Here i store all the variables i use in my automations. To have mostly same everywhere
+
+season: sensor.season
+kay_learning: switch.kay_learning
+peter_early_up: switch.peter_early_up
+guests: switch.scene_guests
+family_home: binary_sensor.sensor_manual_family_home
+adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+appletv: media_player.woonkamer
+kodi: media_player.woonkamer
+    
+motion_toilet: binary_sensor.zwave2mqtt_nodeid_87_contact
+motion_bathroom: binary_sensor.zwave2mqtt_nodeid_88_contact
+motion_hallway: inary_sensor.zwave2mqtt_nodeid_90_contact
+motion_livingroom: binary_sensor.zwave2mqtt_nodeid_91_contact
+motion_bedroom: binary_sensor.zwave2mqtt_nodeid_106_contact
+motion_kitchen: binary_sensor.zwave2mqtt_nodeid_107_contact
+motion_diningroom: binary_sensor.zwave2mqtt_nodeid_108_contact
+
+door_sensor_diningroom: binary_sensor.neo_diningroomdoor_custom_sensor
+door_sensor_bedroom: binary_sensor.neo_bedroomdoor_custom_sensor

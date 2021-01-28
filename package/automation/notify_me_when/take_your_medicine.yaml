@@ -1,0 +1,26 @@
+#   _____ _____ _____ _____    _____ _____ ____  _____ _____ _____ _____ _____
+#  |_   _|  _  |  |  |   __|  |     |   __|    \|     |     |     |   | |   __|
+#    | | |     |    -|   __|  | | | |   __|  |  |-   -|   --|-   -| | | |   __|
+#    |_| |__|__|__|__|_____|  |_|_|_|_____|____/|_____|_____|_____|_|___|_____|
+###########################################################################################
+# NOTIFY WHEN YOU HAVE TAKE YOUR MEDICINE
+###########################################################################################
+- alias: "Notification - Take medication"
+  trigger:
+    - platform: time
+      at: "20:00:00"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "HA Medication ALERT"
+        message: "Take your medication!"
+        data:
+          push:
+            thread-id: "Notify System"
+            category: "medicine"
+            sound:
+              name: default
+              critical: 1
+              volume: 1.0
+

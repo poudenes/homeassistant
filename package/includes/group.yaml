@@ -1,0 +1,323 @@
+#
+#   _____
+#  |   __|___ ___ _ _ ___
+#  |  |  |  _| . | | | . |
+#  |_____|_| |___|___|  _|
+#                    |_|
+###########################################################################################
+# GROUP
+# https://www.home-assistant.io/integrations/group/
+###########################################################################################
+---
+###########################################################################################
+# TRACKER
+###########################################################################################
+family:
+  name: "Group Family"
+  entities:
+    - device_tracker.peter_iphone_geofency
+    - device_tracker.1717fe36_3c70_4599_963c_b70b6ee95eba
+    - device_tracker.peter_iphone_ios_app
+    - device_tracker.kay_iphone_geofency
+    - device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f
+
+###########################################################################################
+# ARRIVING
+###########################################################################################
+arriving:
+  name: "Arriving"
+  entities: []
+
+###########################################################################################
+# MEEK WALL SWITCHES
+###########################################################################################
+meek_switches:
+  name: "Meek Wall Switches"
+  entities:
+    - switch.kitchen
+    - switch.sink
+    - switch.hallway
+    - switch.bedroom
+    - switch.bathroom
+    - switch.toilet
+    - switch.cooking
+    - switch.dressoir
+    - switch.diningroom
+    - switch.wall
+    - switch.window
+    - switch.balcony
+
+###########################################################################################
+# LIGHT
+###########################################################################################
+lights_group_all:
+  name: "Group All Lights Group 0"
+  entities:
+    - light.hallway_all
+    - light.balcony_all
+    - light.kitchen_all
+    - light.livingroom_all
+    - light.dressoir_all
+    - light.sink_all
+    - light.bathroom_all
+    - light.bedroom_all
+    - light.toilet_all
+
+lights_livingroom_all:
+  name: "All lights in livingroom"
+  entities:
+    - light.livingroom_all
+    - light.livingroom_1
+    - light.livingroom_2
+    - light.livingroom_3
+    - light.livingroom_4
+
+lights_bedroom_all:
+  name: "All lights in bedroom"
+  entities:
+    - light.bedroom_all
+    - light.bedroom_1
+    - light.bedroom_2
+    - light.bedroom_3
+    - light.bedroom_4
+    - light.bedroom_5
+    - light.bedroom_6
+
+lights_bathroom_all:
+  name: "All lights in bathroom"
+  entities:
+    - light.bathroom_all
+    - light.bathroom_1
+    - light.bathroom_2
+    - light.bathroom_3
+    - light.bathroom_4
+
+lights_kitchen_all:
+  name: "All lights in kitchen"
+  entities:
+    - light.kitchen_all
+    - light.sink_all
+    - light.kitchen_1
+    - light.kitchen_2
+    - light.kitchen_3
+    - light.sink_1
+    - light.sink_2
+    - light.sink_3
+    - light.newkaku_011fad02_c
+
+lights_toilet_all:
+  name: "All lights in toilet"
+  entities:
+    - light.toilet_all
+    - light.toilet_1
+    - light.toilet_2
+    - light.toilet_3
+
+lights_diningroom_all:
+  name: "All lights in diningroom"
+  entities:
+    - light.dressoir_all
+    - light.dressoir_1
+    - light.dressoir_2
+    - light.dressoir_3
+
+###########################################################################################
+# ZWAVE MOTION SENSOR
+###########################################################################################
+motion_sensors:
+  name: "Group Motion Sensors"
+  entities:
+    - binary_sensor.zwave2mqtt_nodeid_87_contact
+    - binary_sensor.zwave2mqtt_nodeid_88_contact
+    - binary_sensor.zwave2mqtt_nodeid_90_contact
+    - binary_sensor.zwave2mqtt_nodeid_91_contact
+    - binary_sensor.zwave2mqtt_nodeid_106_contact
+    - binary_sensor.zwave2mqtt_nodeid_107_contact
+    - binary_sensor.zwave2mqtt_nodeid_108_contact
+
+###########################################################################################
+# ZWAVE DOOR SENSOR
+###########################################################################################
+door_sensors:
+  name: "Group Door Sensors"
+  entities:
+    - binary_sensor.neo_bedroomdoor_custom_sensor
+    - binary_sensor.neo_diningroomdoor_custom_sensor
+    - binary_sensor.fibaro_frontdoor_custom_sensor
+    - binary_sensor.fibaro_imac_custom_sensor
+
+###########################################################################################
+# ZWAVE WALL PLUGS
+###########################################################################################
+zwave_switches:
+  name: "Zwave switches"
+  entities:
+    - switch.zwave2mqtt_nodeid_73_switch # iMac
+    - switch.zwave2mqtt_nodeid_74_switch # Diningroom
+    - switch.zwave2mqtt_nodeid_75_switch # Toog
+    - switch.zwave2mqtt_nodeid_71_switch # Bedroom
+    - switch.zwave2mqtt_nodeid_78_switch # Hallway
+    - switch.zwave2mqtt_nodeid_110_switch # Kay
+    - switch.zwave2mqtt_nodeid_109_switch # Peter
+
+xmas_nobody_home_zwave:
+  name: "Christmas Gone Zwave Switches"
+  entities:
+    - switch.zwave2mqtt_nodeid_78_switch # Hallway
+    - switch.zwave2mqtt_nodeid_110_switch # Kay
+    - switch.zwave2mqtt_nodeid_109_switch # Peter
+
+xmas_zwave:
+  name: "Christmas Switches Zwave"
+  entities:
+    - switch.zwave2mqtt_nodeid_79_switch # Bank
+    - switch.zwave2mqtt_nodeid_73_switch # iMac
+    - switch.zwave2mqtt_nodeid_74_switch # Diningroom
+    - switch.zwave2mqtt_nodeid_75_switch # Toog
+
+###########################################################################################
+# RADIO
+###########################################################################################
+residence_radio:
+  name: "Residentie Radio"
+  entities:
+    - input_select.radio_station
+    - input_select.radio_selector
+    - script.stream_radio
+    - input_number.volume_radio
+
+###########################################################################################
+# SWITCH SCENE COMBINATIONS
+###########################################################################################
+sleeping_switches_scene:
+  name: "Sleeping Switches Scene"
+  entities:
+    - switch.kitchen
+    - switch.sink
+    - switch.hallway
+    - switch.bedroom
+    - switch.bathroom
+    - switch.toilet
+    - switch.cooking
+    - switch.dressoir
+    - switch.diningroom
+    - switch.wall
+    - switch.window
+    - switch.balcony
+    - switch.newkaku_014e5906_a
+
+appletv_switches_scene:
+  name: "AppleTV Switches Scene"
+  entities:
+    - switch.scene_daytime
+    - switch.scene_disco
+    - switch.scene_evening
+    - switch.scene_goodnight
+    - switch.scene_kodi
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.scene_tv
+    - switch.lux_low
+
+evening_switches_scene:
+  name: "Evening Switches Scene"
+  entities:
+    - switch.scene_appletv
+    - switch.scene_daytime
+    - switch.scene_disco
+    - switch.scene_goodnight
+    - switch.scene_kodi
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.scene_tv
+    - switch.lux_low
+
+dinner_switches_scene:
+  name: "Evening Switches Scene"
+  entities:
+    - switch.scene_appletv
+    - switch.scene_daytime
+    - switch.scene_disco
+    - switch.scene_evening
+    - switch.scene_goodnight
+    - switch.scene_kodi
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.scene_tv
+    - switch.lux_low
+
+goodnight_switches_scene:
+  name: "Goodnight Switches Scene"
+  entities:
+    - switch.scene_appletv
+    - switch.scene_cooking
+    - switch.scene_daytime
+    - switch.scene_dinner
+    - switch.scene_disco
+    - switch.scene_evening
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.scene_tv
+    - switch.lux_low
+
+kodi_switches_scene:
+  name: "Kodi Switches Scene"
+  entities:
+    - switch.scene_appletv
+    - switch.scene_daytime
+    - switch.scene_disco
+    - switch.scene_evening
+    - switch.scene_goodnight
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.scene_tv
+    - switch.lux_low
+
+tv_switches_scene:
+  name: "TV Switches Scene"
+  entities:
+    - switch.scene_appletv
+    - switch.scene_daytime
+    - switch.scene_disco
+    - switch.scene_evening
+    - switch.scene_goodnight
+    - switch.scene_kodi
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.lux_low
+
+daylight_switches_scene:
+  name: "Daylight Switches Scene"
+  entities:
+    - switch.scene_appletv
+    - switch.scene_cooking
+    - switch.scene_disco
+    - switch.scene_dinner
+    - switch.scene_evening
+    - switch.scene_goodnight
+    - switch.scene_guests
+    - switch.scene_kodi
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    - switch.scene_tv
+    - switch.lux_low
+    - switch.kitchen
+    - switch.sink
+    - switch.hallway
+    - switch.cooking
+    - switch.dressoir
+    - switch.diningroom
+    - switch.wall
+    - switch.window
+    - switch.balcony
+    - switch.newkaku_014e5906_a
+    - light.livingroom_all
+    - light.dressoir_all
+    - light.kitchen_all
+    - light.sink_all
+    - light.livingroom_all
+    - light.hallway_all
+    - light.balcony_all
+    - light.toilet_all
+    - light.nanoleaf
+    - light.newkaku_01401eb6_a

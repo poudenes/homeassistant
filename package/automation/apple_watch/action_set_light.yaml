@@ -1,0 +1,98 @@
+#   _____ _____ _____ __    _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  _  |     |_   _|     |     |   | |   __|
+#  |     |   __|   __|  |__|   __| | | |  |  |  |     |   --| | | |-   -|  |  | | | |__   |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |__|__|_____| |_| |_____|_____|_|___|_____|
+###########################################################################################
+# APPLE WATCH SET LIGHTS
+###########################################################################################
+- alias: "Apple Watch: set lights"
+  mode: parallel
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: Set lights
+
+  action:
+    - variables:
+        iphone: notify.mobile_app_peter_iphone
+
+    - service: "{{ iphone }}"
+      data:
+        message: "Apple Watch: set lights"
+        data:
+          push:
+            category: set_lights
+
+    - wait_for_trigger:
+        - platform: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: set_lights
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        light: >
+          {{
+            {'ALL': 'all',
+            'BEDROOM': 'light.bedroom_all',
+            'LIVING_ROOM': 'light.livingroom_all',
+            'BATHROOM': 'light.bathroom_all',
+            'HALL': 'light.hallway_all',
+            'TOILET': 'light.toilet',
+            'KITCHEN': 'light.kitchenall',
+            'BALCONY': 'light.balcony_all',
+            'DININGROOM': 'light_dressoir_all',
+            }[wait.trigger.event.data.actionName] }}
+
+    - service: "{{ iphone }}"
+      data:
+        message: "Apple Watch: choose option"
+        data:
+          push:
+            category: light_options
+
+    - wait_for_trigger:
+        - platform: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: light_options
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        option: "{{ wait.trigger.event.data.actionName }}"
+    - choose:
+        - conditions: "{{ option == 'OFF' }}"
+          sequence:
+            service: light.turn_off
+            data:
+              entity_id: "{{ light }}"
+
+        - conditions: "{{ option == 'ON' }}"
+          sequence:
+            service: script.turn_on_lights
+            data:
+              entity_id: "{{ light }}"
+
+        - conditions: "{{ option == 'FIFTY' }}"
+          sequence:
+            service: light.turn_on
+            data:
+              entity_id: "{{ light }}"
+              brightness_pct: 50
+
+        - conditions: "{{ option == 'HUNDRED' }}"
+          sequence:
+            service: light.turn_on
+            data:
+              entity_id: "{{ light }}"
+              brightness_pct: 100
+
+        - conditions: "{{ option == 'ONE' }}"
+          sequence:
+            service: light.turn_on
+            data:
+              entity_id: "{{ light }}"
+              brightness_pct: 1

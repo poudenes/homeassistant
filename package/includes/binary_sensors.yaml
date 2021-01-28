@@ -1,0 +1,148 @@
+#
+#   _____ _
+#  | __  |_|___ ___ ___ _ _       ___ ___ ___ ___ ___ ___
+#  | __ -| |   | .'|  _| | |     |_ -| -_|   |_ -| . |  _|
+#  |_____|_|_|_|__,|_| |_  |_____|___|___|_|_|___|___|_|
+#                      |___|_____|
+###########################################################################################
+# BINARY_SENSOR
+###########################################################################################
+---
+###########################################################################################
+# BINARY_SENSOR ISS
+# https://www.home-assistant.io/integrations/iss/
+###########################################################################################
+- platform: iss
+  show_on_map: true
+
+###########################################################################################
+# BINARY_SENSOR UPTIMEROBOT
+# https://www.home-assistant.io/integrations/uptimerobot/
+###########################################################################################
+- platform: uptimerobot
+  api_key: !secret uptimerobot_api
+  scan_interval: 60
+
+###########################################################################################
+# SENSOR MQTT
+# https://www.home-assistant.io/integrations/sensor.mqtt/
+###########################################################################################
+- name: "ITHO LWT"
+  state_topic: "Servers/ITHO/LWT"
+  <<: &MQTT_PARAMS
+    platform: mqtt
+    payload_on: "online"
+    payload_off: "offline"
+    qos: 1
+    device_class: connectivity
+
+- name: "Meek WC LWT"
+  state_topic: "Meek/WC/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Bathroom LWT"
+  state_topic: "Meek/Bathroom/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Hallway LWT"
+  state_topic: "Meek/Hallway/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Kitchen LWT"
+  state_topic: "Meek/Kitchen/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Bedroom LWT"
+  state_topic: "Meek/Bedroom/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Dressoir LWT"
+  state_topic: "Meek/Dressoir/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Livingroom LWT"
+  state_topic: "Meek/Livingroom/LWT"
+  <<: *MQTT_PARAMS
+
+- name: "Meek Diningtable LWT"
+  state_topic: "Meek/Diningtable/LWT"
+  <<: *MQTT_PARAMS
+
+###########################################################################################
+# SENSOR TEMPLATE
+# https://www.home-assistant.io/integrations/template/
+###########################################################################################
+- platform: template
+  sensors:
+    fibaro_imac_custom_sensor:
+      friendly_name: "Fibaro iMac"
+      value_template: "{{ is_state('sensor.zwave2mqtt_nodeid_100_alarm_access_control', 'Door/Window Open') }}"
+      device_class: opening
+
+    fibaro_frontdoor_custom_sensor:
+      friendly_name: "Fibaro Frontdoor"
+      value_template: "{{ is_state('sensor.zwave2mqtt_nodeid_101_alarm_access_control', 'Door/Window Open') }}"
+      device_class: opening
+
+    neo_diningroomdoor_custom_sensor:
+      friendly_name: "Neo Diningroom door"
+      value_template: "{{ is_state('sensor.zwave2mqtt_nodeid_104_alarm_access_control', 'Door/Window Open') }}"
+      device_class: opening
+
+    neo_bedroomdoor_custom_sensor:
+      friendly_name: "Neo Bedroom door"
+      value_template: "{{ is_state('sensor.zwave2mqtt_nodeid_105_alarm_access_control', 'Door/Window Open') }}"
+      device_class: opening
+
+    sensor_manual_family_home:
+      value_template: "{{ is_state('input_boolean.kay_home_manual', 'on') or is_state('input_boolean.peter_home_manual', 'on') }}"
+      device_class: presence
+
+    manual_kay_home:
+      value_template: "{{ is_state('input_boolean.kay_home_manual', 'on') }}"
+
+    manual_peter_home:
+      value_template: "{{ is_state('input_boolean.peter_home_manual', 'on') }}"
+
+    update_available:
+      value_template: "{{ (states('sensor.current_version') < states('sensor.latest_version')) }}"
+
+    washing_machine:
+      friendly_name: "Washing machine"
+      value_template: "{{ states('sensor.zwave2mqtt_nodeid_77_electricity_w_meter') | float(0) > 5 }}"
+      attribute_templates:
+        kwh: "{{ state_attr('sensor.zwave2mqtt_nodeid_77_electricity_kwh_meter', 'value') | float('Unavailable') }}"
+
+      delay_off: "00:05:00"
+      icon_template: >-
+        {% if is_state("binary_sensor.washing_machine", "on") %}
+          mdi:washing-machine
+        {% else %}
+          mdi:washing-machine-off
+        {% endif %}
+
+    dryer_machine:
+      friendly_name: "Dryer machine"
+      value_template: "{{ states('sensor.zwave2mqtt_nodeid_116_electricity_w_meter') | float(0) > 5 }}"
+      attribute_templates:
+        kwh: "{{ state_attr('sensor.zwave2mqtt_nodeid_116_electricity_kwh_meter', 'value') | float('Unavailable') }}"
+      delay_off: "00:05:00"
+      icon_template: >-
+        {% if is_state("binary_sensor.dryer_machine", "on") %}
+          mdi:tumble-dryer
+        {% else %}
+          mdi:tumble-dryer-off
+        {% endif %}
+
+    dishwasher_machine:
+      friendly_name: "Dishwasher"
+      value_template: "{{ states('sensor.zwave2mqtt_nodeid_80_electricity_w_meter') | float(0) > 5 }}"
+      attribute_templates:
+        kwh: "{{ state_attr('sensor.zwave2mqtt_nodeid_80_electricity_kwh_meter', 'value') | float('Unavailable') }}"
+      delay_off: "00:05:00"
+      icon_template: >-
+        {% if is_state("binary_sensor.dishwasher_machine", "on") %}
+          mdi:dishwasher
+        {% else %}
+          mdi:dishwasher-off
+        {% endif %}

@@ -1,0 +1,116 @@
+#   _____ _____ _____ _____ _____    _____ _____ __    _____ ____  _____ __ __
+#  |   __|     |   __|   | |   __|  |  |  |     |  |  |     |    \|  _  |  |  |
+#  |__   |   --|   __| | | |   __|  |     |  |  |  |__|-   -|  |  |     |_   _|
+#  |_____|_____|_____|_|___|_____|  |__|__|_____|_____|_____|____/|__|__| |_|
+###########################################################################################
+# SCENE FOR EMULATE SOMEONE IS HOME BUT WE ARE ON HOLIDAY
+###########################################################################################
+- alias: "Scene - Emulate Vacation Automation"
+  trigger:
+    - platform: sun
+      event: sunset
+
+    - platform: time
+      at: "17:30:00"
+
+    - platform: time
+      at: "23:00:00"
+
+  variables:
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition: "{{ is_state('switch.vacation', 'on') }}"
+
+  action:
+    - choose:
+###########################################################################################
+# WHEN THE SUN IS ABOVE HORIZON
+###########################################################################################
+        - conditions:
+            - condition: time
+              after: "17:25:00"
+              before: "17:35:00"
+
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.nanoleaf
+                brightness_pct: 30
+                effect: Fireplace
+
+            - service: light.turn_on
+              data:
+                entity_id: light.livingroom_all
+                brightness_pct: 100
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.balcony_all
+                brightness_pct: 100
+                effect: 0
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_all
+                brightness_pct: 100
+                kelvin: "{{ adaptive }}"
+
+            - service: homeassistant.turn_on
+              data:
+                entity_id: light.newkaku_01401eb6_a
+                brightness_pct: 50
+
+            - service: script.pushover_engine
+              data:
+                message: "Enjoy holiday, the emulate vacation scene is activated"
+                priority: 0
+                sound: "bike"
+                title: "HA Notify Engine"
+
+###########################################################################################
+# HERE WHEN TIME IS BETWEEN TO TURN OFF THE LIGHTS
+###########################################################################################
+        - conditions:
+            - condition: time
+              after: "22:45:00"
+              before: "23:15:00"
+
+            - condition: state
+              entity_id: sun.sun
+              state: "above_horizon"
+
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.bedroom_all
+                  - light.bathroom_all
+                brightness_pct: 100
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_off
+              data:
+                entity_id:
+                  - light.dressoir_all
+                  - light.livingroom_all
+                  - light.nanoleaf
+                  - light.balcony_all
+                  - light.newkaku_01401eb6_a
+
+            - delay: "00:{{ (range(5, 10)|random|int) }}:00"
+
+            - service: light.turn_off
+              entity_id: light.bathroom_all
+
+            - delay: "00:{{ (range(30, 35)|random|int) }}:00"
+
+            - service: light.turn_off
+              entity_id: light.bedroom_all
+
+            - service: script.pushover_engine
+              data:
+                message: "Enjoy holiday, the emulate vacation scene is deactivated"
+                priority: 0
+                sound: "bike"
+                title: "HA Notify Engine"

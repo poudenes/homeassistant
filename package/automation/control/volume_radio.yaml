@@ -1,0 +1,17 @@
+#   _____ _____ __    _____ _____ _____    _____ _____ ____  _____ _____
+#  |  |  |     |  |  |  |  |     |   __|  | __  |  _  |    \|     |     |
+#  |  |  |  |  |  |__|  |  | | | |   __|  |    -|     |  |  |-   -|  |  |
+#   \___/|_____|_____|_____|_|_|_|_____|  |__|__|__|__|____/|_____|_____|
+###########################################################################################
+# SYSTEM CONTROL VOLUME ON FKB
+###########################################################################################
+- alias: "Radio - Set Radio Volume"
+  trigger:
+    - platform: state
+      entity_id: input_number.volume_radio
+
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ 'media_player.browser_ae1b43e7_eb57c683' if is_state('input_select.radio_selector', 'Kitchen') else 'media_player.peter_s_echo_dot' }}" 
+        volume_level: "{{ states('input_number.volume_radio')  }}"

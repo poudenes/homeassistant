@@ -1,0 +1,30 @@
+#
+#   _____
+#  |   __|___ ___
+#  |   __| .'|   |
+#  |__|  |__,|_|_|
+#
+###########################################################################################
+# MQTT FAN
+# https://www.home-assistant.io/integrations/fan.mqtt/
+###########################################################################################
+---
+- platform: mqtt
+  command_topic: "Servers/itho/fan/cmd"
+  state_topic: "Servers/itho/fan/state"
+  speed_command_topic: "Servers/itho/fan/cmd"
+  speed_state_topic: "Servers/itho/fan/state"
+  state_value_template: "{% if value|float==0 %}state 0{% endif %}{% if value|float >0 %}State 1{% endif %}"
+  speed_value_template: "{% if value|float==0 %}state 0{% endif %}{% if value|float >0 and value|float <=4 %}state {{value}}{% endif %}{% if value|float >=11 %}state 3{% endif %}"
+  payload_on: "State 1"
+  payload_off: "State 0"
+  payload_low_speed: "State 1"
+  payload_medium_speed: "State 2"
+  payload_high_speed: "State 3"
+  optimistic: true
+  name: "Afzuiging badkamer"
+  speeds:
+    - "off"
+    - "low"
+    - "medium"
+    - "high"

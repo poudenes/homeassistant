@@ -1,0 +1,26 @@
+#   _____ _____ _____ _____    _____ _____ ____  _____ _____ _____ _____ 
+#  |  |  |  _  |     |   __|  |  |  |  _  |    \|  _  |_   _|   __|   __|
+#  |     |     |   --|__   |  |  |  |   __|  |  |     | | | |   __|__   |
+#  |__|__|__|__|_____|_____|  |_____|__|  |____/|__|__| |_| |_____|_____|
+###########################################################################################
+# NOTIFY WHEN HASC HAVE UPDATES
+###########################################################################################
+- alias: "Notification - Fibraro Doors Open Close"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: sensor.hacs
+
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.hacs
+      above: 0
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "{{ trigger.to_state.attributes.friendly_name }} have {{ trigger.to_state.state }} updates"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Notify System"

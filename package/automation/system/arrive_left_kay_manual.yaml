@@ -1,0 +1,30 @@
+#   _____ _____ __ __    __    _____ _____ _____      _    _____ _____ _____ _____ _____ _____
+#  |  |  |  _  |  |  |  |  |  |   __|   __|_   _|    / |  |  _  | __  | __  |     |  |  |   __|
+#  |    -|     |_   _|  |  |__|   __|   __| | |     / /   |     |    -|    -|-   -|  |  |   __|
+#  |__|__|__|__| |_|    |_____|_____|__|    |_|    |_/    |__|__|__|__|__|__|_____|\___/|_____|
+###########################################################################################
+# SYSTEM WHEN AUTOMATION TRACKER NOT WORK WE CAN MANUAL TURN ON OFF OF KAY IS AT HOME OR NOT
+###########################################################################################
+- alias: "System - Kay Left or Arrive Locative or GeoFency Manual"
+  trigger:
+    - platform: state
+      entity_id:
+        - device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f
+        - device_tracker.kay_iphone_geofency
+
+  action:
+    - service: "{{ 'input_boolean.turn_on' if trigger.to_state.state == 'home' else 'input_boolean.turn_off' }}"
+      entity_id: input_boolean.kay_home_manual
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "{{ 'Kay arrived home' if trigger.to_state.state == 'home' else 'Kat left home' }}"
+        title:
+          "HA Notify Engine"
+          #   kay arrived home
+          # {% else %}
+          #   Kay left home
+          # {% endif %}
+        data:
+          push:
+            thread-id: "Precence System"

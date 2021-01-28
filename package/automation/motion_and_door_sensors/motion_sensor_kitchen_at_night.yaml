@@ -1,0 +1,40 @@
+#   _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____    _____ _____    _____ _____ _____ _____ _____
+#  |     |     |_   _|     |     |   | |  |  |  |     |_   _|     |  |  |   __|   | |  |  _  |_   _|  |   | |     |   __|  |  |_   _|
+#  | | | |  |  | | | |-   -|  |  | | | |  |    -|-   -| | | |   --|     |   __| | | |  |     | | |    | | | |-   -|  |  |     | | |
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |__|__|_____| |_| |_____|__|__|_____|_|___|  |__|__| |_|    |_|___|_____|_____|__|__| |_|
+###########################################################################################
+# CONTROL LIGHT KITCHEN WHEN GOODNIGHT SCENE IS ACTIVE
+###########################################################################################
+- alias: "Motion Detection - Kitchen On Off Goodnight Scene Active"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_107_contact
+
+  variables:
+    goodnight: switch.scene_goodnight
+    motion_kitchen: binary_sensor.zwave2mqtt_nodeid_107_contact
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: switch.scene_goodnight
+      state: "on"
+
+    - condition: state
+      entity_id:
+        - switch.sink
+        - switch.kitchen
+      state: "off"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.sink_all
+        brightness_pct: "{{ 10 if is_state(motion_kitchen, 'on') else 0 }}"
+        kelvin: "{{ adaptive }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_motion/kitchen"
+        payload: "{{ 1 if is_state(motion_kitchen, 'on') else 0 }}"

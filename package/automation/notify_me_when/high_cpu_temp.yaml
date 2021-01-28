@@ -1,0 +1,27 @@
+#   _____ _____ _____ _____    _____ _____ _____
+#  |  |  |     |   __|  |  |  |     |  _  |  |  |
+#  |     |-   -|  |  |     |  |   --|   __|  |  |
+#  |__|__|_____|_____|__|__|  |_____|__|  |_____|
+###########################################################################################
+# NOTIFY WHEN RPI HAVE HIGH CPU TEMPERATURE
+###########################################################################################
+- alias: "Notification - CPU High Temperature"
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.nextcloud_cpu_temperature
+        - sensor.dsmr_cpu_temperature
+        - sensor.ha_cpu_temperature
+      above: 50
+
+  variables:
+    name: "{{ trigger.entity_id.split('_', 1)[0] }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Temperature of {{ name }} RPi is {{ trigger.to_state.state }} °C! ⚠️"
+        title: "HA Scene System"
+        data:
+          push:
+            thread-id: "Notify System"

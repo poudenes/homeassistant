@@ -1,0 +1,53 @@
+#   _____ _____ _____ _____    _ _ _ _____ _____ _____
+#  |   __|     |_   _|     |  | | | |     | __  |  |  |
+#  |  |  |  |  | | | |  |  |  | | | |  |  |    -|    -|
+#  |_____|_____| |_| |_____|  |_____|_____|__|__|__|__|
+###########################################################################################
+# NOTIFY WHEN I HAVE TO GO HOME FROM WORK
+###########################################################################################
+- alias: "Notification - Goto Work"
+  trigger:
+    - platform: template
+      value_template: >-
+        {% if state_attr('calendar.werk', 'start_time') == none %}
+          {{ false }}
+        {% else %}
+          {{ (states('sensor.time') == (as_timestamp(state_attr('calendar.werk', 'start_time')) - 3600 )|timestamp_custom('%H:%M')) }}
+        {% endif %}
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Within a hour you have to work"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Notify System"
+
+###########################################################################################
+#   _____ _____ _____ _____    _____ _____ _____ _____
+#  |   __|     |_   _|     |  |  |  |     |     |   __|
+#  |  |  |  |  | | | |  |  |  |     |  |  | | | |   __|
+#  |_____|_____| |_| |_____|  |__|__|_____|_|_|_|_____|
+###########################################################################################
+# NOTIFY WHEN I HAVE TO GO HOME FROM WORK
+###########################################################################################
+
+- alias: "Notification - Done Work"
+  trigger:
+    - platform: template
+      value_template: >-
+        {% if state_attr('calendar.werk', 'end_time') == none %}
+          {{ false }}
+        {% else %}
+          {{ (states('sensor.time') == (as_timestamp(state_attr('calendar.werk', 'end_time')) - 900 )|timestamp_custom('%H:%M')) }}
+        {% endif %}
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "After 15 minutes you work is done, go home"
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "Notify System"

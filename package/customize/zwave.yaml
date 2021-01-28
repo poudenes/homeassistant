@@ -1,0 +1,543 @@
+#   _____ _____ _____ _____      _____ _ _ _ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |__   | | | |  _  |  |  |   __|
+#  |   --|  |  |__   | | |  _   |   __| | | |     |  |  |   __|
+#  |_____|_____|_____| |_| |_|  |_____|_____|__|__|\___/|_____|
+###########################################################################################
+# ZWAVE CUSTOMIZE FILE
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+###########################################################################################
+---
+###########################################################################################
+# NODEID 73 - SWITCH IMAC
+###########################################################################################
+sensor.zwave2mqtt_nodeid_73_electricity_a_meter:
+  friendly_name: "Switch iMac Current Amp"
+
+sensor.zwave2mqtt_nodeid_73_electricity_w_meter:
+  friendly_name: "Switch iMac Current Watt"
+
+sensor.zwave2mqtt_nodeid_73_alarm_power_management:
+  friendly_name: "Switch iMac Power Man"
+
+switch.zwave2mqtt_nodeid_73_switch:
+  friendly_name: "Switch iMac Switch"
+
+sensor.zwave2mqtt_nodeid_73_electricity_v_meter:
+  friendly_name: "Switch iMac Voltage"
+
+sensor.zwave2mqtt_nodeid_73_electricity_kwh_meter:
+  friendly_name: "Switch iMac kWh"
+
+sensor.zwave2mqtt_nodeid_73_electricity_unknown_meter:
+  friendly_name: "Switch iMac Unkwown"
+
+sensor.zwave2mqtt_nodeid_73_alarm_previous_event_cleared:
+  friendly_name: "Switch iMac Previous Alarm"
+
+###########################################################################################
+# NODEID 74 - SWITCH DININGROOM
+###########################################################################################
+sensor.zwave2mqtt_nodeid_74_electricity_a_meter:
+  friendly_name: "Switch Diningroom Current Amp"
+
+sensor.zwave2mqtt_nodeid_74_electricity_w_meter:
+  friendly_name: "Switch Diningroom Current Watt"
+
+sensor.zwave2mqtt_nodeid_74_alarm_power_management:
+  friendly_name: "Switch Diningroom Power Man"
+
+switch.zwave2mqtt_nodeid_74_switch:
+  friendly_name: "Switch Diningroom Switch"
+
+sensor.zwave2mqtt_nodeid_74_electricity_v_meter:
+  friendly_name: "Switch Diningroom Voltage"
+
+sensor.zwave2mqtt_nodeid_74_electricity_kwh_meter:
+  friendly_name: "Switch Diningroom kWh"
+
+sensor.zwave2mqtt_nodeid_74_electricity_unknown_meter:
+  friendly_name: "Switch Diningroom Unkwown"
+
+sensor.zwave2mqtt_nodeid_74_alarm_previous_event_cleared:
+  friendly_name: "Switch Diningroom Previous Alarm"
+
+###########################################################################################
+# NODEID 75 - SWITCH TOOG
+###########################################################################################
+sensor.zwave2mqtt_nodeid_75_electricity_a_meter:
+  friendly_name: "Switch Toog Current Amp"
+
+sensor.zwave2mqtt_nodeid_75_electricity_w_meter:
+  friendly_name: "Switch Toog Current Watt"
+
+sensor.zwave2mqtt_nodeid_75_alarm_power_management:
+  friendly_name: "Switch Toog Power Man"
+
+switch.zwave2mqtt_nodeid_75_switch:
+  friendly_name: "Switch Toog Switch"
+
+sensor.zwave2mqtt_nodeid_75_electricity_v_meter:
+  friendly_name: "Switch Toog Voltage"
+
+sensor.zwave2mqtt_nodeid_75_electricity_kwh_meter:
+  friendly_name: "Switch Toog kWh"
+
+sensor.zwave2mqtt_nodeid_75_electricity_unknown_meter:
+  friendly_name: "Switch Toog Unkwown"
+
+sensor.zwave2mqtt_nodeid_75_alarm_previous_event_cleared:
+  friendly_name: "Switch Toog Previous Alarm"
+
+###########################################################################################
+# NODEID 77 - SWITCH WASHER
+###########################################################################################
+sensor.zwave2mqtt_nodeid_77_electricity_a_meter:
+  friendly_name: "Switch Washer Current Amp"
+
+sensor.zwave2mqtt_nodeid_77_electricity_w_meter:
+  friendly_name: "Switch Washer Current Watt"
+
+sensor.zwave2mqtt_nodeid_77_alarm_power_management:
+  friendly_name: "Switch Washer Power Man"
+
+switch.zwave2mqtt_nodeid_77_switch:
+  friendly_name: "Switch Washer Switch"
+
+sensor.zwave2mqtt_nodeid_77_electricity_v_meter:
+  friendly_name: "Switch Washer Voltage"
+
+sensor.zwave2mqtt_nodeid_77_electricity_kwh_meter:
+  friendly_name: "Switch Washer kWh"
+
+sensor.zwave2mqtt_nodeid_77_electricity_unknown_meter:
+  friendly_name: "Switch Washer Unkwown"
+
+sensor.zwave2mqtt_nodeid_77_alarm_previous_event_cleared:
+  friendly_name: "Switch Washer Previous Alarm"
+
+###########################################################################################
+# NODEID 80 - SWITCH DISHWASHER
+###########################################################################################
+sensor.zwave2mqtt_nodeid_80_electricity_a_meter:
+  friendly_name: "Switch Dishwasher Current Amp"
+
+sensor.zwave2mqtt_nodeid_80_electricity_w_meter:
+  friendly_name: "Switch Dishwasher Current Watt"
+
+sensor.zwave2mqtt_nodeid_80_alarm_power_management:
+  friendly_name: "Switch Dishwasher Power Man"
+
+switch.zwave2mqtt_nodeid_80_switch:
+  friendly_name: "Switch Dishwasher Switch"
+
+sensor.zwave2mqtt_nodeid_80_electricity_v_meter:
+  friendly_name: "Switch Dishwasher Voltage"
+
+sensor.zwave2mqtt_nodeid_80_electricity_kwh_meter:
+  friendly_name: "Switch Dishwasher kWh"
+
+sensor.zwave2mqtt_nodeid_80_electricity_unknown_meter:
+  friendly_name: "Switch Dishwasher Unkwown"
+
+sensor.zwave2mqtt_nodeid_80_alarm_previous_event_cleared:
+  friendly_name: "Switch Dishwasher Previous Alarm"
+
+###########################################################################################
+# NODEID 79 - SWITCH BANK
+###########################################################################################
+sensor.zwave2mqtt_nodeid_79_electricity_a_meter:
+  friendly_name: "Switch Bank Current Amp"
+
+sensor.zwave2mqtt_nodeid_79_electricity_w_meter:
+  friendly_name: "Switch Bank Current Watt"
+
+sensor.zwave2mqtt_nodeid_79_alarm_power_management:
+  friendly_name: "Switch Bank Power Man"
+
+switch.zwave2mqtt_nodeid_79_switch:
+  friendly_name: "Switch Bank Switch"
+
+sensor.zwave2mqtt_nodeid_79_electricity_v_meter:
+  friendly_name: "Switch Bank Voltage"
+
+sensor.zwave2mqtt_nodeid_79_electricity_kwh_meter:
+  friendly_name: "Switch Bank kWh"
+
+sensor.zwave2mqtt_nodeid_79_electricity_unknown_meter:
+  friendly_name: "Switch Bank Unkwown"
+
+sensor.zwave2mqtt_nodeid_79_alarm_previous_event_cleared:
+  friendly_name: "Switch Bank Previous Alarm"
+
+###########################################################################################
+# NODEID 78 - SWITCH HALLWAY
+###########################################################################################
+sensor.zwave2mqtt_nodeid_78_electricity_a_meter:
+  friendly_name: "Switch Hall Current Amp"
+
+sensor.zwave2mqtt_nodeid_78_electricity_w_meter:
+  friendly_name: "Switch Hall Current Watt"
+
+sensor.zwave2mqtt_nodeid_78_alarm_power_management:
+  friendly_name: "Switch Hall Power Man"
+
+switch.zwave2mqtt_nodeid_78_switch:
+  friendly_name: "Switch Hall Switch"
+
+sensor.zwave2mqtt_nodeid_78_electricity_v_meter:
+  friendly_name: "Switch Hall Voltage"
+
+sensor.zwave2mqtt_nodeid_78_electricity_kwh_meter:
+  friendly_name: "Switch Hall kWh"
+
+sensor.zwave2mqtt_nodeid_78_electricity_unknown_meter:
+  friendly_name: "Switch Hall Unkwown"
+
+sensor.zwave2mqtt_nodeid_78_alarm_previous_event_cleared:
+  friendly_name: "Switch Hall Previous Alarm"
+
+###########################################################################################
+# NODEID 81 - SWITCH BEDROOM
+###########################################################################################
+sensor.zwave2mqtt_nodeid_81_electricity_a_meter:
+  friendly_name: "Switch Bedroom Current Amp"
+
+sensor.zwave2mqtt_nodeid_81_electricity_w_meter:
+  friendly_name: "Switch Bedroom Current Watt"
+
+sensor.zwave2mqtt_nodeid_81_alarm_power_management:
+  friendly_name: "Switch Bedroom Power Man"
+
+switch.zwave2mqtt_nodeid_81_switch:
+  friendly_name: "Switch Bedroom Switch"
+
+sensor.zwave2mqtt_nodeid_81_electricity_v_meter:
+  friendly_name: "Switch Bedroom Voltage"
+
+sensor.zwave2mqtt_nodeid_81_electricity_kwh_meter:
+  friendly_name: "Switch Bedroom kWh"
+
+sensor.zwave2mqtt_nodeid_81_electricity_unknown_meter:
+  friendly_name: "Switch Bedroom Unkwown"
+
+sensor.zwave2mqtt_nodeid_81_alarm_previous_event_cleared:
+  friendly_name: "Switch Bedroom Previous Alarm"
+
+###########################################################################################
+# NODEID 96 - SWITCH DRYER
+###########################################################################################
+sensor.zwave2mqtt_nodeid_116_electricity_a_meter:
+  friendly_name: "Switch Dryer Current Amp"
+
+sensor.zwave2mqtt_nodeid_116_electricity_w_meter:
+  friendly_name: "Switch Dryer Current Watt"
+
+sensor.zwave2mqtt_nodeid_116_alarm_power_management:
+  friendly_name: "Switch Dryer Power Man"
+
+switch.zwave2mqtt_nodeid_116_switch:
+  friendly_name: "Switch Dryer Switch"
+
+sensor.zwave2mqtt_nodeid_116_electricity_v_meter:
+  friendly_name: "Switch Dryer Voltage"
+
+sensor.zwave2mqtt_nodeid_116_electricity_kwh_meter:
+  friendly_name: "Switch Dryer kWh"
+
+sensor.zwave2mqtt_nodeid_116_electricity_unknown_meter:
+  friendly_name: "Switch Dryer Unkwown"
+
+sensor.zwave2mqtt_nodeid_116_alarm_previous_event_cleared:
+  friendly_name: "Switch Dryer Previous Alarm"
+
+###########################################################################################
+# NODEID 100 - MOTION DOOR IMAC
+###########################################################################################
+sensor.zwave2mqtt_nodeid_100_alarm_access_control:
+  friendly_name: "Door iMac Access Control"
+
+sensor.zwave2mqtt_nodeid_100_alarm_heat:
+  friendly_name: "Door iMac Heat"
+
+sensor.zwave2mqtt_nodeid_100_alarm_home_security:
+  friendly_name: "Door iMac Burglar"
+
+sensor.zwave2mqtt_nodeid_100_alarm_power_management:
+  friendly_name: "Door iMac Power Man"
+
+sensor.zwave2mqtt_nodeid_100_alarm_previous_event_cleared:
+  friendly_name: "Door iMac Alarm Type"
+
+sensor.zwave2mqtt_nodeid_100_battery_level:
+  friendly_name: "Door iMac Battery"
+
+binary_sensor.zwave2mqtt_nodeid_100_contact:
+  friendly_name: "Door iMac"
+
+sensor.zwave2mqtt_nodeid_100_temperature_air:
+  riendly_name: "Door iMac Temp"
+
+###########################################################################################
+# NODEID 101 - MOTION DOOR HALLWAY
+###########################################################################################
+sensor.zwave2mqtt_nodeid_101_alarm_access_control:
+  friendly_name: "Door Frontdoor Access Control"
+
+sensor.zwave2mqtt_nodeid_101_alarm_heat:
+  friendly_name: "Door Frontdoor Heat"
+
+sensor.zwave2mqtt_nodeid_101_alarm_home_security:
+  friendly_name: "Door Frontdoor Burglar"
+
+sensor.zwave2mqtt_nodeid_101_alarm_power_management:
+  friendly_name: "Door Frontdoor Power Man"
+
+sensor.zwave2mqtt_nodeid_101_alarm_previous_event_cleared:
+  friendly_name: "Door Frontdoor Alarm Type"
+
+sensor.zwave2mqtt_nodeid_101_battery_level:
+  friendly_name: "Door Frontdoor Battery"
+
+binary_sensor.zwave2mqtt_nodeid_101_contact:
+  friendly_name: "Door Frontdoor"
+
+sensor.zwave2mqtt_nodeid_101_temperature_air:
+  riendly_name: "Door Frontdoor Temp"
+
+###########################################################################################
+# NODEID 104 - DININGROOM DOOR
+###########################################################################################
+sensor.zwave2mqtt_nodeid_104_alarm_access_control:
+  friendly_name: "Diningroom Door Access Control"
+
+sensor.zwave2mqtt_nodeid_104_alarm_previous_event_cleared:
+  friendly_name: "Diningroom Door Alarm Level"
+
+sensor.zwave2mqtt_nodeid_104_battery_level:
+  friendly_name: "Diningroom Door Battery"
+
+binary_sensor.zwave2mqtt_nodeid_104_contact:
+  friendly_name: "Diningroom Door"
+
+###########################################################################################
+# NODEID 105 - MOTION DOOR BEDROOM
+###########################################################################################
+sensor.zwave2mqtt_nodeid_105_alarm_access_control:
+  friendly_name: "Bedroom Door Access Control"
+
+sensor.zwave2mqtt_nodeid_105_alarm_previous_event_cleared:
+  friendly_name: "Bedroom Door Alarm Level"
+
+sensor.zwave2mqtt_nodeid_105_battery_level:
+  friendly_name: "Bedroom Door Battery"
+
+binary_sensor.zwave2mqtt_nodeid_105_contact:
+  friendly_name: "Bedroom Door"
+
+###########################################################################################
+# NODEID 109 - SWITCH PETER
+###########################################################################################
+switch.zwave2mqtt_nodeid_109_switch:
+  friendly_name: "Switch Peter Switch"
+
+sensor.zwave2mqtt_nodeid_109_alarm_power_management:
+  friendly_name: "Switch Peter Power Man"
+
+sensor.zwave2mqtt_nodeid_109_alarm_previous_event_cleared:
+  friendly_name: "Switch Peter Previous Alarm"
+
+sensor.zwave2mqtt_nodeid_109_electricity_a_meter:
+  friendly_name: "Switch Peter Current Amp"
+
+sensor.zwave2mqtt_nodeid_109_electricity_kwh_meter:
+  friendly_name: "Switch Peter kWh"
+
+sensor.zwave2mqtt_nodeid_109_electricity_unknown_meter:
+  friendly_name: "Switch Peter Unkwown"
+
+sensor.zwave2mqtt_nodeid_109_electricity_v_meter:
+  friendly_name: "Switch Peter Voltage"
+
+sensor.zwave2mqtt_nodeid_109_electricity_w_meter:
+  friendly_name: "Switch Peter Current Watt"
+
+###########################################################################################
+# NODEID 110 - SWITCH KAY
+###########################################################################################
+sensor.zwave2mqtt_nodeid_110_electricity_a_meter:
+  friendly_name: "Switch Kay Current Amp"
+
+sensor.zwave2mqtt_nodeid_110_electricity_w_meter:
+  friendly_name: "Switch Kay Current Watt"
+
+sensor.zwave2mqtt_nodeid_110_alarm_power_management:
+  friendly_name: "Switch Kay Power Man"
+
+switch.zwave2mqtt_nodeid_110_switch:
+  friendly_name: "Switch Kay Switch"
+
+sensor.zwave2mqtt_nodeid_110_electricity_v_meter:
+  friendly_name: "Switch Kay Voltage"
+
+sensor.zwave2mqtt_nodeid_110_electricity_kwh_meter:
+  friendly_name: "Switch Kay kWh"
+
+sensor.zwave2mqtt_nodeid_110_electricity_unknown_meter:
+  friendly_name: "Switch Kay Unkwown"
+
+sensor.zwave2mqtt_nodeid_110_alarm_previous_event_cleared:
+  friendly_name: "Switch Kay Previous Alarm"
+
+###########################################################################################
+# NODEID 106 - MOTION BEDROOM
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_106_contact:
+  friendly_name: "PIR Bedroom"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_106_temperature_air:
+  friendly_name: "PIR Bedroom Temp"
+
+sensor.zwave2mqtt_nodeid_106_illuminance:
+  friendly_name: "PIR Bedroom Lux"
+
+sensor.zwave2mqtt_nodeid_106_alarm_home_security:
+  friendly_name: "PIR Bedroom Alarm Level"
+
+sensor.zwave2mqtt_nodeid_106_battery_level:
+  friendly_name: "PIR Bedroom Battery"
+
+sensor.zwave2mqtt_nodeid_106_alarm_previous_event_cleared:
+  friendly_name: "PIR Bedroom Burglar"
+
+###########################################################################################
+# NODEID 88 - MOTION BATHROOM
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_88_contact:
+  friendly_name: "PIR Bathroom"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_88_temperature_air:
+  friendly_name: "PIR Bathroom Temp"
+
+sensor.zwave2mqtt_nodeid_88_illuminance:
+  friendly_name: "PIR Bathroom Lux"
+
+sensor.zwave2mqtt_nodeid_88_alarm_home_security:
+  friendly_name: "PIR Bathroom Alarm Level"
+
+sensor.zwave2mqtt_nodeid_88_battery_level:
+  friendly_name: "PIR Bathroom Battery"
+
+sensor.zwave2mqtt_nodeid_88_alarm_previous_event_cleared:
+  friendly_name: "PIR Bathroom Burglar"
+
+###########################################################################################
+# NODEID 107 - MOTION KITCHEN
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_107_contact:
+  friendly_name: "PIR Kitchen"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_107_temperature_air:
+  friendly_name: "PIR Kitchen Temp"
+
+sensor.zwave2mqtt_nodeid_107_illuminance:
+  friendly_name: "PIR Kitchen Lux"
+
+sensor.zwave2mqtt_nodeid_107_alarm_home_security:
+  friendly_name: "PIR Kitchen Alarm Level"
+
+sensor.zwave2mqtt_nodeid_107_battery_level:
+  friendly_name: "PIR Kitchen Battery"
+
+sensor.zwave2mqtt_nodeid_107_alarm_previous_event_cleared:
+  friendly_name: "PIR Kitchen Burglar"
+
+###########################################################################################
+# NODEID 90 - MOTION HALLWAY
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_90_contact:
+  friendly_name: "PIR Hallway"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_90_temperature_air:
+  friendly_name: "PIR Hallway Temp"
+
+sensor.zwave2mqtt_nodeid_90_illuminance:
+  friendly_name: "PIR Hallway Lux"
+
+sensor.zwave2mqtt_nodeid_90_alarm_home_security:
+  friendly_name: "PIR Hallway Alarm Level"
+
+sensor.zwave2mqtt_nodeid_90_battery_level:
+  friendly_name: "PIR Hallway Battery"
+
+sensor.zwave2mqtt_nodeid_90_alarm_previous_event_cleared:
+  friendly_name: "PIR Hallway Burglar"
+
+###########################################################################################
+# NODEID 108 - MOTION DININGROOM
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_108_contact:
+  friendly_name: "PIR Diningroom"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_108_temperature_air:
+  friendly_name: "PIR Diningroom Temp"
+
+sensor.zwave2mqtt_nodeid_108_illuminance:
+  friendly_name: "PIR Diningroom Lux"
+
+sensor.zwave2mqtt_nodeid_108_alarm_home_security:
+  friendly_name: "PIR Diningroom Alarm Level"
+
+sensor.zwave2mqtt_nodeid_108_battery_level:
+  friendly_name: "PIR Diningroom Battery"
+
+sensor.zwave2mqtt_nodeid_108_alarm_previous_event_cleared:
+  friendly_name: "PIR Diningroom Burglar"
+
+###########################################################################################
+# NODEID 91 - MOTION LIVINGROOM
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_91_contact:
+  friendly_name: "PIR Livingroom"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_91_temperature_air:
+  friendly_name: "PIR Livingroom Temp"
+
+sensor.zwave2mqtt_nodeid_91_illuminance:
+  friendly_name: "PIR Livingroom Lux"
+
+sensor.zwave2mqtt_nodeid_91_alarm_home_security:
+  friendly_name: "PIR Livingroom Alarm Level"
+
+sensor.zwave2mqtt_nodeid_91_battery_level:
+  friendly_name: "PIR Livingroom Battery"
+
+sensor.zwave2mqtt_nodeid_91_alarm_previous_event_cleared:
+  friendly_name: "PIR Livingroom Burglar"
+
+###########################################################################################
+# NODEID 87 - MOTION TOILET
+###########################################################################################
+binary_sensor.zwave2mqtt_nodeid_87_contact:
+  friendly_name: "PIR Toilet"
+  device_class: motion
+
+sensor.zwave2mqtt_nodeid_87_temperature_air:
+  friendly_name: "PIR Toilet Temp"
+
+sensor.zwave2mqtt_nodeid_87_illuminance:
+  friendly_name: "PIR Toilet Lux"
+
+sensor.zwave2mqtt_nodeid_87_alarm_home_security:
+  friendly_name: "PIR Toilet Alarm Level"
+
+sensor.zwave2mqtt_nodeid_87_battery_level:
+  friendly_name: "PIR Toilet Battery"
+
+sensor.zwave2mqtt_nodeid_87_alarm_previous_event_cleared:
+  friendly_name: "PIR Toilet Burglar"

@@ -1,0 +1,47 @@
+#   _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+#  |_   _|     |     |   __|     |     |   __|_   _|     |   __|     |
+#    | | |  |  |  |  |  |  |  |  |  |  |  |  | | | |  |  |  |  |  |  |
+#    |_| |_____|_____|_____|_____|_____|_____| |_| |_____|_____|_____|
+###########################################################################################
+# NOTIFY ME WHEN BOXES ARE IN STOCK AT TOGOODTOGO
+###########################################################################################
+- alias: "ToGoodToGo - All shops"
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.toogoodtogo_broodhuys_meijer_magic_box
+        - sensor.toogoodtogo_albert_heijn_amsterdamseweg_amstelveen_magic_box
+        - sensor.toogoodtogo_albert_heijn_to_go_amsterdam_wtc_magic_box
+        - sensor.toogoodtogo_boulangerie_noe_gustav_mahlerlaan_amsterdam
+        - sensor.toogoodtogo_de_drie_graefjes_stadionplein_amsterdam
+        - sensor.toogoodtogo_hema_gelderlandplein
+        - sensor.toogoodtogo_lidl_amsterdamseweg_188_groente_fruit_box
+        - sensor.toogoodtogo_lidl_bankrashof_groente_fruit_box
+        - sensor.toogoodtogo_starbucks_gustav_mahler_amsterdam
+        - sensor.toogoodtogo_sushi_time_wtc_amsterdam_magic_box
+        - sensor.toogoodtogo_the_roastary_magic_box
+        - sensor.toogoodtogo_poke_perfect_zuidas_magic_box
+        - sensor.toogoodtogo_juicebrothers_gustav_mahlerlaan_magic_box
+        - sensor.toogoodtogo_le_pain_quotidien_gelderlandplein_magic_box
+        - sensor.toogoodtogo_stadsbakker_jongejans_gelderlandplein_magic_box
+        - sensor.toogoodtogo_brood_en_banketbakkerij_hulleman_buitenveldertselaan_amsterdam
+        - sensor.toogoodtogo_jumbo_velu_kastelenstraat_amsterdam
+
+      from: false
+      to: true
+      attribute: stock_available
+
+  variables:
+    stock: "{{ states(trigger.to_state.entity_id) }}"
+    stock_available: "{{ state_attr(trigger.to_state.entity_id, 'stock_available') }}"
+    price: "{{ state_attr(trigger.to_state.entity_id, 'price') }}"
+    name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "TooGoodToGo"
+        message: "Name: {{ name }}, Stock: {{ stock }}, Price: {{ price }}"
+        data:
+          push:
+            thread-id: "Notify System"

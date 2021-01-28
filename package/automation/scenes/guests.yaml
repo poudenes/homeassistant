@@ -1,0 +1,30 @@
+#   _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |   __|  |  |   __|   __|_   _|   __|
+#  |__   |   --|   __| | | |   __|  |  |  |  |  |   __|__   | | | |__   |
+#  |_____|_____|_____|_|___|_____|  |_____|_____|_____|_____| |_| |_____|
+###########################################################################################
+# SCENE GUESTS TURN OFF SOME AUTOMATIONS
+###########################################################################################
+- alias: "Scene - Guests Automation"
+  trigger:
+    - platform: state
+      entity_id: switch.scene_guests
+
+  action:
+    - service: script.pushover_engine
+      data:
+        message: "{{ 'Scene Guests is activated' if is_state('switch.scene_guests', 'on') else 'Scene Guests is deactivated' }}"
+        priority: 0
+        sound: bike
+        title: "HA Scene System"
+
+###########################################################################################
+# Those automations make use of the guest scene:
+#
+# package/automation/control_light_status/control_light_status_lux_level_livingroom.yaml
+# package/automation/motion_and_door_sensors/control_motion_sensor_diningroom.yaml
+# package/automation/motion_and_door_sensors/control_motion_sensor_livingroom.yaml
+# package/automation/scenes/scene_daylight.yaml
+# package/automation/scenes/scene_goodnight.yaml
+# package/automation/scenes/scene_nobody_home.yaml
+###########################################################################################

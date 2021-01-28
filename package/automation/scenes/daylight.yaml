@@ -1,0 +1,45 @@
+#   _____ _____ _____ _____ _____    ____  _____ __ __ _____ _____ _____ _____
+#  |   __|     |   __|   | |   __|  |    \|  _  |  |  |_   _|     |     |   __|
+#  |__   |   --|   __| | | |   __|  |  |  |     |_   _| | | |-   -| | | |   __|
+#  |_____|_____|_____|_|___|_____|  |____/|__|__| |_|   |_| |_____|_|_|_|_____|
+###########################################################################################
+# SCENE FOR DAYTIME WHEN SUN IS ABOVE HORIZON TURN OFF EVERYTHING THATS NOT NEEDED AT DAYTIME
+###########################################################################################
+- alias: "Scene - Daylight Someone Home Automation"
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+
+    - platform: state
+      entity_id: sun.sun
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "above_horizon"
+
+    - condition: state
+      entity_id: switch.scene_daytime
+      state: "off"
+
+    - condition: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      state: "on"
+
+  action:
+    - service: switch.turn_on
+      entity_id: switch.scene_daytime
+
+    - service: homeassistant.turn_off
+      entity_id: group.daylight_switches_scene # TURN OFF ALL OTHER SCENE SWITCHES
+
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.fullykiosk_brightness_slider
+        value: 80
+
+    - service: "{{ 'light.turn_on' if is_state('binary_sensor.zwave2mqtt_nodeid_88_contact', 'on') else 'light.turn_off' }}"
+      entity_id: light.bathroom_all
+
+    - service: "{{ 'homeassistant.turn_off' if is_state('sensor.holiday', 'Christmas') else 'script.none' }}"
+      entity_id: group.xmas_zwave

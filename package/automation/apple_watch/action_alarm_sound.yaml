@@ -1,0 +1,71 @@
+#   _____ _____ _____ __    _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  _  |     |_   _|     |     |   | |   __|
+#  |     |   __|   __|  |__|   __| | | |  |  |  |     |   --| | | |-   -|  |  | | | |__   |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |__|__|_____| |_| |_____|_____|_|___|_____|
+###########################################################################################
+# APPLE WATCH FIRST TEST SCRIPT
+###########################################################################################
+- alias: "iOS Motion Detected"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.neo_diningroomdoor_custom_sensor
+        - binary_sensor.neo_bedroomdoor_custom_sensor
+        - binary_sensor.fibaro_frontdoor_custom_sensor
+        - binary_sensor.zwave2mqtt_nodeid_87_contact
+        - binary_sensor.zwave2mqtt_nodeid_88_contact
+        - binary_sensor.zwave2mqtt_nodeid_90_contact
+        - binary_sensor.zwave2mqtt_nodeid_91_contact
+        - binary_sensor.zwave2mqtt_nodeid_106_contact
+        - binary_sensor.zwave2mqtt_nodeid_107_contact
+        - binary_sensor.zwave2mqtt_nodeid_108_contact
+      to: "on"
+
+  condition: "{{ is_state('binary_sensor.sensor_manual_family_home', 'off') }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "Motion Detected!"
+        message: "{{ trigger.from_state.attributes.friendly_name }}"
+        data:
+          push:
+            category: "alarm" # Needs to match the top level identifier you used in the ios configuration
+            sound:
+              name: default
+              critical: 1
+              volume: 1.0
+
+###########################################################################################
+# SOUND_ALARM IS CONFIGURED IN IOS INTERGRATION PART OF CONFIGURATION.YAML
+###########################################################################################
+- alias: "iOS Alarm On action"
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: MOTION_LIGHT_BLUE
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_all
+        color_name: "blue"
+        brightness_pct: 100
+
+###########################################################################################
+# SILENCE_ALARM IS CONFIGURED IN IOS INTERGRATION PART OF CONFIGURATION.YAML
+###########################################################################################
+- alias: "iOS Alarm Silence action"
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: MOTION_LIGHT_RED
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_all
+        color_name: "red"
+        brightness_pct: 100

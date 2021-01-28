@@ -1,0 +1,40 @@
+#   _____ ____  ____  _____ _____    _____ _____ ____  _____ _____ _____ _____
+#  |  _  |    \|    \|     |   | |  |  |  |  _  |    \|  _  |_   _|   __|   __|
+#  |     |  |  |  |  |  |  | | | |  |  |  |   __|  |  |     | | | |   __|__   |
+#  |__|__|____/|____/|_____|_|___|  |_____|__|  |____/|__|__| |_| |_____|_____|
+###########################################################################################
+# NOTIFY ME WHEN SOME BATTERIES ARE LOW
+###########################################################################################
+- alias: "Notification - New version for Addon"
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.version_update_adguard
+        - sensor.version_update_bitwarden
+        - sensor.version_update_core_checker
+        - sensor.version_update_google_backup
+        - sensor.version_update_grafana
+        - sensor.version_update_influxdb
+        - sensor.version_update_letscrypt
+        - sensor.version_update_mailserver
+        - sensor.version_update_mariadb
+        - sensor.version_update_mosquitto
+        - sensor.version_update_nextcloud_backup
+        - sensor.version_update_phpmyadmin
+        - sensor.version_update_portainer
+        - sensor.version_update_signal_messenger
+        - sensor.version_update_toogoodtogo
+        - sensor.version_update_vscode
+        - sensor.version_update_wireguard
+        - sensor.version_update_zwave2mqtt
+      from: "False"
+      to: "True"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "New version for Addon {{ trigger.to_state.attributes.friendly_name  }}"
+        title: "HA - Notification"
+        data:
+          push:
+            thread-id: "Notify System"

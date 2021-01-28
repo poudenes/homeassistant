@@ -1,0 +1,22 @@
+#   _____ _____    _____ _____ _ _ _    _____ _____ ____  _____ _____ _____
+#  |  |  |  _  |  |   | |   __| | | |  |  |  |  _  |    \|  _  |_   _|   __|
+#  |     |     |  | | | |   __| | | |  |  |  |   __|  |  |     | | | |   __|
+#  |__|__|__|__|  |_|___|_____|_____|  |_____|__|  |____/|__|__| |_| |_____|
+###########################################################################################
+# NOTIFY WHEN NEW HOME ASSISTANRT UPDATE IS AVAILABLE
+###########################################################################################
+- alias: "Notification - Update Available Notification"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.update_available
+
+  condition: "{{ (states('sensor.current_version') != states('sensor.latest_version')) }}"
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "HA version {{ (states('sensor.latest_version')) }} is available!. {{now().strftime('%d-%m-%Y') }}"
+        title: "HA Scene System"
+        data:
+          push:
+            thread-id: "Notify System"

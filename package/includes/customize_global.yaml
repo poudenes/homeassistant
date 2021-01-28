@@ -1,0 +1,188 @@
+#
+#   _____         _                 _                   _     _       _
+#  |     |_ _ ___| |_ ___ ___ _____|_|___ ___       ___| |___| |_ ___| |
+#  |   --| | |_ -|  _|  _| . |     | |- _| -_|     | . | | . | . | .'| |
+#  |_____|___|___|_| |_| |___|_|_|_|_|___|___|_____|_  |_|___|___|__,|_|
+#                                            |_____|___|
+###########################################################################################
+# CUSTOMIZE_GLOBAL
+# https://www.home-assistant.io/docs/configuration/customizing-devices
+###########################################################################################
+---
+###########################################################################################
+# DOMAIN LEVEL
+###########################################################################################
+"input_select.*":
+  templates:
+    icon_color: rgba(71,116,157,1)
+
+"input_number.*":
+  templates:
+    icon_color: rgba(71,116,157,1)
+
+"group.*":
+  templates:
+    icon: mdi:group
+    icon_color: if (state === 'on') return 'rgba(251,214,67,1)'; return 'rgba(71,116,157,1)';
+
+"sensor.*":
+  templates:
+    icon_color: if (state === 'on') return 'rgba(251,214,67,1)'; return 'rgba(71,116,157,1)';
+
+"input_boolean.*":
+  templates:
+    icon_color: if (state === 'on') return 'rgba(251,214,67,1)'; return 'rgba(71,116,157,1)';
+
+"switch.*":
+  templates:
+    icon_color: if (state === 'on') return 'rgba(251,214,67,1)'; return 'rgba(71,116,157,1)';
+
+"fan.*":
+  templates:
+    icon_color: if (state === 'on') return 'rgba(251,214,67,1)'; return 'rgba(71,116,157,1)';
+
+"binary_sensor.*":
+  templates:
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+"device_tracker.*":
+  templates:
+    icon: mdi:radar
+    icon_color: if (state === 'home') return 'rgba(251,214,67,1)'; return 'rgba(71,116,157,1)';
+
+# "light.*":
+#   assumed_state: false
+
+###########################################################################################
+# SPECIFIC CUSTOMIZATION
+###########################################################################################
+"input_select.log_level_*":
+  templates:
+    icon_color: >-
+      if (state == 'critical') return 'rgb(181,14,2)';
+      if (state == 'fatal') return 'rgb(255,0,0)';
+      if (state == 'error') return 'rgb(255,204,0)';
+      if (state == 'warning') return 'rgb(4,181,4)';
+      if (state == 'info') return 'rgb(0,0,255)';
+      if (state == 'debug') return 'rgb(176,0,189)';
+      if (state == 'notset') return 'rgb(189,0,107)';
+      return 'rgb(0,0,0)';
+
+"sensor.version_update_*":
+  templates:
+    icon: mdi:update
+    icon_color: if (state === 'True') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+"sensor.toogoodtogo_*":
+  templates:
+    icon_color: if (state == 0 ) return 'rgba(71,116,157,1)'; return 'rgba(251, 214, 67,1)';
+
+"binary_sensor.ping_*":
+  templates:
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+
+"binary_sensor.*_custom_sensor":
+  device_class: "door"
+
+"sensor.*_protect_color_status":
+  templates:
+    icon: mdi:palette
+    icon_color: >-
+      if (state == 'green') return 'rgb(0,255,0)';
+      if (state == 'red') return 'rgb(255,0,0)';
+      if (state == 'yellow') return 'rgb(255,255,0)';
+      return 'rgb(0,0,0)';
+
+"sensor.skin_type_*_safe_exposure_time":
+  templates:
+    icon: mdi:timer-outline
+    icon_color: >-
+      if (state > 300) return 'rgb(4,181,4)';
+      if (state > 250) return 'rgb(0,255,0)';
+      if (state > 200) return 'rgb(255,204,0)';
+      if (state > 150) return 'rgb(255,150,0)';
+      if (state > 100) return 'rgb(255,0,0)';
+      if (state > 50) return 'rgb(214,18,4)';
+      if (state > 0) return 'rgb(181,14,2)';
+      return 'rgb(0,0,0)';
+
+"sensor.*_temperature":
+  device_class: temperature
+  unit_of_measurement: "°C"
+  templates:
+    icon_color: >-
+      if (state > 38) return 'rgb(181,14,2)';
+      if (state > 32) return 'rgb(214,18,4)';
+      if (state > 27) return 'rgb(255,0,0)';
+      if (state > 21) return 'rgb(255,150,0)';
+      if (state > 16) return 'rgb(255,204,0)';
+      if (state > 10) return 'rgb(0,255,0)';
+      if (state > 4) return 'rgb(4,181,4)';
+      if (state > -1) return 'rgb(0,170,217)';
+      if (state > -7) return 'rgb(0,0,255)';
+      if (state > -12) return 'rgb(121,24,196)';
+      if (state > -18) return 'rgb(176,0,189)';
+      if (state > -23) return 'rgb(189,0,107)';
+      return 'rgb(0,0,0)';
+
+"sensor.*_temperature_*":
+  device_class: temperature
+  unit_of_measurement: "°C"
+  templates:
+    icon_color: >-
+      if (state > 38) return 'rgb(181,14,2)';
+      if (state > 32) return 'rgb(214,18,4)';
+      if (state > 27) return 'rgb(255,0,0)';
+      if (state > 21) return 'rgb(255,150,0)';
+      if (state > 16) return 'rgb(255,204,0)';
+      if (state > 10) return 'rgb(0,255,0)';
+      if (state > 4) return 'rgb(4,181,4)';
+      if (state > -1) return 'rgb(0,170,217)';
+      if (state > -7) return 'rgb(0,0,255)';
+      if (state > -12) return 'rgb(121,24,196)';
+      if (state > -18) return 'rgb(176,0,189)';
+      if (state > -23) return 'rgb(189,0,107)';
+      return 'rgb(0,0,0)';
+###########################################################################################
+# ZWAVE CUSTOMIZATION
+###########################################################################################
+"binary_sensor.node_*":
+  templates:
+    icon: if (state === 'on') return 'mdi:motion-sensor'; return 'mdi:motion-sensor-off';
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+"sensor.node_*_energy":
+  icon: mdi:power-socket-eu
+
+"switch.zwave2mqtt_nodeid_*":
+  templates:
+    icon: mdi:power-socket-eu
+    icon_color: if (state === 'on') return 'rgba(251, 214, 67,1)'; return 'rgba(71,116,157,1)';
+
+"sensor.node_*_luminance":
+  device_class: illuminance
+  unit_of_measurement: "Lux"
+  icon: mdi:weather-partly-cloudy
+
+"sensor.node_*_power":
+  icon: mdi:flash
+
+"sensor.node_*_temperature":
+  device_class: temperature
+  unit_of_measurement: "°C"
+  templates:
+    icon_color: >-
+      if (state > 38) return 'rgb(181,14,2)';
+      if (state > 32) return 'rgb(214,18,4)';
+      if (state > 27) return 'rgb(255,0,0)';
+      if (state > 21) return 'rgb(255,150,0)';
+      if (state > 16) return 'rgb(255,204,0)';
+      if (state > 10) return 'rgb(0,255,0)';
+      if (state > 4) return 'rgb(4,181,4)';
+      if (state > -1) return 'rgb(0,170,217)';
+      if (state > -7) return 'rgb(0,0,255)';
+      if (state > -12) return 'rgb(121,24,196)';
+      if (state > -18) return 'rgb(176,0,189)';
+      if (state > -23) return 'rgb(189,0,107)';
+      return 'rgb(0,0,0)';

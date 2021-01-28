@@ -1,0 +1,100 @@
+#   _____ __ __ _____ _____ _____ __    _____ _____
+#  |   __|  |  |  _  |     |  _  |  |  |   __|   __|
+#  |   __|-   -|     | | | |   __|  |__|   __|__   |
+#  |_____|__|__|__|__|_|_|_|__|  |_____|_____|_____|
+###########################################################################################
+
+###########################################################################################
+# Use this to get the friendly_name from triggered entity:
+###########################################################################################
+# "{{ trigger.from_state.attributes.friendly_name }}"
+# "{{ trigger.to_state.attributes.friendly_name }}"
+
+###########################################################################################
+# Give 2 different values based on state:
+###########################################################################################
+# "{{ 'open' if trigger.from_state.state == 'on' else 'closed' }}"
+# "{{ 'open' if trigger.to_state.state == 'on' else 'closed' }}"
+# "{{ 'off' if is_state('sensor.bedroom_nest_protect_color_status', 'green') else 'on' }}"
+
+###########################################################################################
+# Give 2 different values based on sattributes tate:
+###########################################################################################
+# "{{ 'off' if is_state_attr('remote.logitech_harmony', 'current_activity', 'PowerOff') else 'on' }}"
+
+###########################################################################################
+# Show information of a entity state:
+###########################################################################################
+#"{{ (states("sensor.monthly_gas")|float * 0.7884) | round(2) }}"
+
+###########################################################################################
+# Show information of a entity attributes state:
+###########################################################################################
+# "{{ (state_attr("sensor.monthly_gas", "last_period")|float * 0.7884) | round(2) }}"
+
+###########################################################################################
+# Show information of a JSON filled sensor here www > Connected msec
+###########################################################################################
+# "{{ state_attr('sensor.meek_hallway_wifi_info', 'WiFi')['Connected msec'] }}"
+
+###########################################################################################
+# Add entities to a group
+###########################################################################################
+# action:
+#   - service: group.set
+#     data:
+#       object_id: "arriving"
+#       add_entities: "{{ trigger.to_state.entity_id }}"
+
+###########################################################################################
+# CHOOSE IN ACTION
+# You can use more then 1 time the choose option
+###########################################################################################
+#    - choose:
+#        - conditions: >
+
+
+###########################################################################################
+#other scripts
+###########################################################################################
+- alias: 'harmony family room setup after startup'
+  initial_state: on
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: input_select.select_option
+      entity_id: input_select.harmonytvsource
+      data_template:
+      option: >
+        {%- set activity = state_attr('remote.familyroom_hub', 'current_activity' ) %}
+        {%- set options = state_attr('input_select.harmonytvsource', 'options') %}
+        {%- if activity in options %}
+          {{ activity }}
+        {%- else %}
+          Select Activity
+        {%- endif %}
+
+###########################################################################################
+# Trigger and turn off with delay
+###########################################################################################
+- id: boolean_reset
+  alias: Input boolean reset after 5 seconds
+  description: ''
+  mode: parallel
+  trigger:
+    - platform: state
+      entity_id:
+      - input_boolean.x
+      - input_boolean.y
+      - input_boolean.z
+      to: 'on'
+  condition: []
+  action:
+    - delay:
+        seconds: 5
+
+    - service: input_boolean.turn_off
+      data:
+        entity_id: >-
+          {% trigger.to_state.entity_id %}

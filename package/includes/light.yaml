@@ -1,0 +1,270 @@
+#
+#   __    _     _   _
+#  |  |  |_|___| |_| |_
+#  |  |__| | . |   |  _|
+#  |_____|_|_  |_|_|_|
+#          |___|
+###########################################################################################
+# RFLINK LINGHT
+# https://www.home-assistant.io/integrations/light.rflink/
+###########################################################################################
+---
+- platform: rflink
+  automatic_add: "true"
+  devices:
+    newkaku_01401eb6_a: # Dining table
+      type: dimmable
+    newkaku_011fad02_c: # Cooking
+      type: dimmable
+
+###########################################################################################
+# NANOLEAF
+# https://www.home-assistant.io/integrations/nanoleaf/
+###########################################################################################
+- platform: nanoleaf
+  host: 192.168.100.2
+  token: !secret nanoleaf_token
+  name: Nanoleaf
+
+- platform: nanoleaf
+  host: 192.168.100.61
+  token: !secret nanoleaf3_token
+  name: Elements
+
+###########################################################################################
+# BALCONY
+# https://www.home-assistant.io/integrations/light.mqtt/
+###########################################################################################
+- name: "Balcony All"
+  command_topic: "Milight_Hub/0xAAA4/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAA4/rgb_cct/1"
+
+  <<: &MILIGHT_PARAMS
+    platform: mqtt
+    schema: json
+    color_temp: true
+    rgb: true
+    brightness: true
+    effect: true
+    qos: 1
+    optimistic: true
+    retain: false
+    availability_topic: "Milight_Hub/client_status"
+    payload_available: "connected"
+    payload_not_available: "disconnected"
+    effect_list:
+      - "night_mode"
+      - "white_mode"
+      - "0"
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+
+###########################################################################################
+# HALLWAY
+###########################################################################################
+- name: "Hallway All"
+  command_topic: "Milight_Hub/0xAAA3/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAA3/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# BATHROOM
+###########################################################################################
+- name: "Bathroom 1"
+  command_topic: "Milight_Hub/0xAAAD/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAAD/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bathroom 2"
+  command_topic: "Milight_Hub/0xAAAD/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAAD/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bathroom 3"
+  command_topic: "Milight_Hub/0xAAAD/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAAD/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bathroom 4"
+  command_topic: "Milight_Hub/0xAAAD/rgb_cct/4"
+  state_topic: "Milight_Hub/states/0xAAAD/rgb_cct/4"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bathroom All"
+  command_topic: "Milight_Hub/0xAAAD/rgb_cct/0"
+  state_topic: "Milight_Hub/states/0xAAAD/rgb_cct/0"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# BEDROOM
+###########################################################################################
+- name: "Bedroom 1"
+  command_topic: "Milight_Hub/0xAAAA/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAAA/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bedroom 2"
+  command_topic: "Milight_Hub/0xAAAA/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAAA/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bedroom 3"
+  command_topic: "Milight_Hub/0xAAAA/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAAA/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bedroom 4"
+  command_topic: "Milight_Hub/0xAAAA/rgb_cct/4"
+  state_topic: "Milight_Hub/states/0xAAAA/rgb_cct/4"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bedroom 5"
+  command_topic: "Milight_Hub/0xAAAB/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAAB/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bedroom 6"
+  command_topic: "Milight_Hub/0xAAAB/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAAB/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Bedroom All"
+  command_topic: "Milight_Hub/0xAABA/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAABA/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# DRESSOIR
+###########################################################################################
+- name: "Dressoir 1"
+  command_topic: "Milight_Hub/0xAAAF/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAAF/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Dressoir 2"
+  command_topic: "Milight_Hub/0xAAAF/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAAF/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Dressoir 3"
+  command_topic: "Milight_Hub/0xAAAF/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAAF/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Dressoir All"
+  command_topic: "Milight_Hub/0xAAAF/rgb_cct/0"
+  state_topic: "Milight_Hub/states/0xAAAF/rgb_cct/0"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# KITCHEN
+###########################################################################################
+- name: "Kitchen 1"
+  command_topic: "Milight_Hub/0xAAA2/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAA2/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Kitchen 2"
+  command_topic: "Milight_Hub/0xAAA2/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAA2/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Kitchen 3"
+  command_topic: "Milight_Hub/0xAAA2/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAA2/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Kitchen All"
+  command_topic: "Milight_Hub/0xAAA2/rgb_cct/0"
+  state_topic: "Milight_Hub/states/0xAAA2/rgb_cct/0"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# KITCHEN SINK
+###########################################################################################
+- name: "Sink 1"
+  command_topic: "Milight_Hub/0xAAA1/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAA1/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Sink 2"
+  command_topic: "Milight_Hub/0xAAA1/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAA1/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Sink 3"
+  command_topic: "Milight_Hub/0xAAA1/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAA1/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Sink All"
+  command_topic: "Milight_Hub/0xAAA1/rgb_cct/0"
+  state_topic: "Milight_Hub/states/0xAAA1/rgb_cct/0"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# LIVINGROOM
+###########################################################################################
+- name: "Livingroom 1"
+  command_topic: "Milight_Hub/0xAAAC/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAAC/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Livingroom 2"
+  command_topic: "Milight_Hub/0xAAAC/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAAC/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Livingroom 3"
+  command_topic: "Milight_Hub/0xAAAC/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAAC/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Livingroom 4"
+  command_topic: "Milight_Hub/0xAAAC/rgb_cct/4"
+  state_topic: "Milight_Hub/states/0xAAAC/rgb_cct/4"
+  <<: *MILIGHT_PARAMS
+
+- name: "Livingroom All"
+  command_topic: "Milight_Hub/0xAAAC/rgb_cct/0"
+  state_topic: "Milight_Hub/states/0xAAAC/rgb_cct/0"
+  <<: *MILIGHT_PARAMS
+
+- name: "Wall All"
+  command_topic: "Milight_Hub/0xAABB/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAABB/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Window All"
+  command_topic: "Milight_Hub/0xAABB/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAABB/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+###########################################################################################
+# TOILET
+###########################################################################################
+- name: "Toilet 1"
+  command_topic: "Milight_Hub/0xAAAE/rgb_cct/1"
+  state_topic: "Milight_Hub/states/0xAAAE/rgb_cct/1"
+  <<: *MILIGHT_PARAMS
+
+- name: "Toilet 2"
+  command_topic: "Milight_Hub/0xAAAE/rgb_cct/2"
+  state_topic: "Milight_Hub/states/0xAAAE/rgb_cct/2"
+  <<: *MILIGHT_PARAMS
+
+- name: "Toilet 3"
+  command_topic: "Milight_Hub/0xAAAE/rgb_cct/3"
+  state_topic: "Milight_Hub/states/0xAAAE/rgb_cct/3"
+  <<: *MILIGHT_PARAMS
+
+- name: "Toilet All"
+  command_topic: "Milight_Hub/0xAAAE/rgb_cct/0"
+  state_topic: "Milight_Hub/states/0xAAAE/rgb_cct/0"
+  <<: *MILIGHT_PARAMS

@@ -1,0 +1,105 @@
+#   __    _____ __ __    __    _____ _____ _____ __       __    _____ _____ _____ _____ _____ _____ _____ _____ _____
+#  |  |  |  |  |  |  |  |  |  |   __|  |  |   __|  |     |  |  |     |  |  |     |   | |   __| __  |     |     |     |
+#  |  |__|  |  |-   -|  |  |__|   __|  |  |   __|  |__   |  |__|-   -|  |  |-   -| | | |  |  |    -|  |  |  |  | | | |
+#  |_____|_____|__|__|  |_____|_____|\___/|_____|_____|  |_____|_____|\___/|_____|_|___|_____|__|__|_____|_____|_|_|_|
+###########################################################################################
+# LIVINGROOM AND DINGROOM CONTROL LIGHTS BASED ON LUX LEVEL ON STATUS
+###########################################################################################
+- alias: "Control - Light - Lux Control"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.zwave2mqtt_nodeid_91_illuminance
+        - binary_sensor.zwave2mqtt_nodeid_91_contact
+        - binary_sensor.zwave2mqtt_nodeid_108_contact
+
+  variables:
+    door_sensor_diningroom: binary_sensor.neo_diningroomdoor_custom_sensor
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "above_horizon"
+
+    - condition: state
+      entity_id: binary_sensor.sensor_manual_family_home
+      state: "on"
+
+    - condition: state
+      entity_id: switch.full_manual_mode
+      state: "off"
+
+  action:
+    - choose:
+        - conditions:
+            - condition: numeric_state
+              entity_id: sensor.zwave2mqtt_nodeid_91_illuminance
+              above: 100
+              below: 220
+
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: binary_sensor.zwave2mqtt_nodeid_91_contact
+                  state: "on"
+
+                - condition: state
+                  entity_id: binary_sensor.zwave2mqtt_nodeid_108_contact
+                  state: "on"
+
+            - condition: state
+              entity_id:
+                - switch.scene_guests
+                - switch.lux_low
+              state: "off"
+
+          sequence:
+            - service: switch.turn_on
+              entity_id: switch.lux_low
+
+            - service: light.turn_on
+              entity_id: light.livingroom_all
+              data:
+                brightness_pct: 75
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_all
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 75 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+              data:
+                media_player: media_player.this_device
+                call_lux_evening_on: 1
+
+        - conditions:
+            - condition: numeric_state
+              entity_id: sensor.zwave2mqtt_nodeid_91_illuminance
+              above: 400
+
+            - condition: state
+              entity_id:
+                - switch.scene_guests
+              state: "off"
+
+            - condition: state
+              entity_id: switch.lux_low
+              state: "on"
+
+          sequence:
+            - service: switch.turn_off
+              entity_id: switch.lux_low
+              
+            - service: light.turn_off
+              entity_id:
+                - light.livingroom_all
+                - light.dressoir_all
+
+            - service: "{{ 'script.engine_say' if states.media_player.peter_s_echo_dot.state is defined else 'script.none' }}"
+              data:
+                media_player: media_player.this_device
+                call_lux_evening_off: 1

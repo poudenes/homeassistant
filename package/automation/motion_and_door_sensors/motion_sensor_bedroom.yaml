@@ -1,0 +1,51 @@
+#   _____ _____ _____ _____ _____ _____    _____ _____ ____  _____ _____ _____ _____
+#  |     |     |_   _|     |     |   | |  | __  |   __|    \| __  |     |     |     |
+#  | | | |  |  | | | |-   -|  |  | | | |  | __ -|   __|  |  |    -|  |  |  |  | | | |
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |_____|_____|____/|__|__|_____|_____|_|_|_|
+###########################################################################################
+# BEDROOM CONTROL LIGHTS BASED ON SENSOR AND DOOR SENSOR
+###########################################################################################
+- alias: "Motion Detection - Bedroom On Off"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_106_contact
+
+  variables:
+    peter_early_up: switch.peter_early_up
+    motion_bedroom: binary_sensor.zwave2mqtt_nodeid_106_contact
+    door_sensor_bedroom: binary_sensor.neo_bedroomdoor_custom_sensor
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id: switch.scene_daytime
+      state: "off"
+
+    - condition: state
+      entity_id:
+        - switch.scene_goodnight
+        - switch.bedroom
+        - switch.full_manual_mode
+      state: "off"
+
+  action:
+    - service: light.turn_on
+      entity_id: light.bedroom_all
+
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_all
+        brightness_pct: >-
+          {% if is_state(peter_early_up, 'on') %} 0
+          {% elif is_state(motion_bedroom, 'on') and is_state(door_sensor_bedroom, 'on') and (is_state('sensor.season', 'autumn') or is_state('sensor.season', 'winter')) %} 100
+          {% elif is_state(motion_bedroom, 'on') and is_state(door_sensor_bedroom, 'on') and (is_state('sensor.season', 'spring') or is_state('sensor.season', 'summer')) %} 20
+          {% elif is_state(motion_bedroom, 'on') and is_state(door_sensor_bedroom, 'off') %} 100
+          {% else %} 0
+          {% endif %}
+        kelvin: "{{ adaptive }}"
+
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_motion/bedroom"
+        payload: "{{ 1 if is_state(motion_bedroom, 'on') else 0 }}"

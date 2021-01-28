@@ -1,0 +1,47 @@
+#
+#   _____             _         _           _
+#  |     |___ ___ _ _| |_      | |_ ___ ___| |___ ___ ___
+#  |-   -|   | . | | |  _|     | . | . | . | | -_| .'|   |
+#  |_____|_|_|  _|___|_|  _____|___|___|___|_|___|__,|_|_|
+#            |_|         |_____|
+###########################################################################################
+# INPUT_BOOLEAN
+# https://www.home-assistant.io/integrations/input_boolean/
+###########################################################################################
+---
+kay_home_manual:
+  name: "Kay"
+  initial: on
+
+peter_home_manual:
+  name: "Peter"
+  initial: on
+
+radio_play:
+  name: "Play radio"
+  icon: mdi:radio
+
+scenes_pulldown:
+  name: "Scene Switches"
+  icon: mdi:arrow-decision-auto
+  initial: off
+
+switches_pulldown:
+  name: "Light Switches"
+  icon: mdi:ceiling-light
+  initial: off
+
+other_pulldown:
+  name: "Other Switches"
+  icon: mdi:nintendo-switch
+  initial: off
+
+system_pulldown:
+  name: "System Ping / Log"
+  icon: mdi:nintendo-switch
+  initial: off
+
+post_twitter_random:
+  name: "Post Twitter Random"
+  icon: mdi:twitter
+  initial: off

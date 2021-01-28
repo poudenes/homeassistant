@@ -1,0 +1,31 @@
+#   _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____    _____ _____
+#  | __  |   __|   __|_   _|  _  | __  |_   _|  |   __|   __| __  |  |  |     |     |   __|  |  |  |  _  |
+#  |    -|   __|__   | | | |     |    -| | |    |__   |   __|    -|  |  |-   -|   --|   __|  |     |     |
+#  |__|__|_____|_____| |_| |__|__|__|__| |_|    |_____|_____|__|__|\___/|_____|_____|_____|  |__|__|__|__|
+###########################################################################################
+# SYSTEM ENABLE RANDOM DOORS OPEN AUTOMATION AFTER HA START OTHERWISE VALUES ARE INCORRECT
+###########################################################################################
+- alias: "System - After HA Restart start services"
+  trigger:
+    - platform: homeassistant
+      event: start
+
+  action:
+    - delay: "00:01:00"
+
+    - service: shell_command.fullykiosk_load_start_url
+
+    - service: homeassistant.update_entity
+      entity_id: sensor.ssl_certificate_expiry
+
+    - delay: "00:02:00"
+
+    - service: homekit.start
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "HA has been restarted, all services are up and running again."
+        title: "HA Notify"
+        data:
+          push:
+            thread-id: "System"

@@ -1,0 +1,26 @@
+#
+#   _____             _                       _
+#  |     |___ ___ _ _| |_       ___ _ _ _____| |_ ___ ___
+#  |-   -|   | . | | |  _|     |   | | |     | . | -_|  _|
+#  |_____|_|_|  _|___|_|  _____|_|_|___|_|_|_|___|___|_|
+#            |_|         |_____|
+###########################################################################################
+# INPUT_NUMBERS
+# https://www.home-assistant.io/integrations/input_number/
+###########################################################################################
+---
+fullykiosk_brightness_slider:
+  name: "FKB Brightness"
+  icon: mdi:brightness-percent
+  initial: 20
+  min: 0
+  max: 100
+  step: 1
+  unit_of_measurement: "%"
+
+volume_radio:
+  name: "Volume Radio"
+  icon: mdi:volume-high
+  min: 0
+  max: 1
+  step: 0.1

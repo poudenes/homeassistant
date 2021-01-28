@@ -1,0 +1,58 @@
+# https://dwainscheeren.github.io/dwains-lovelace-dashboard/configuration/rooms.html
+
+
+rooms:
+  - name: Hallway
+    icon: fas:key
+    light: light.hallway_all
+    temperature: sensor.zwave2mqtt_nodeid_90_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_90_contact
+    door: binary_sensor.fibaro_frontdoor_custom_sensor
+    safety: sensor.bedroom_nest_protect_smoke_status
+
+  - name: Kitchen
+    icon: fas:key
+    light: group.lights_kitchen_all
+    temperature: sensor.zwave2mqtt_nodeid_107_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_107_contact
+
+  - name: Bedroom
+    icon: fas:key
+    light: group.lights_bedroom_all
+    temperature: sensor.zwave2mqtt_nodeid_106_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_106_contact
+    door: binary_sensor.neo_bedroomdoor_custom_sensor
+    safety: sensor.bedroom_nest_protect_smoke_status
+
+  - name: Bathroom
+    icon: fas:key
+    light: group.lights_bathroom_all
+    temperature: sensor.zwave2mqtt_nodeid_88_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_88_contact
+
+  - name: Diningroom
+    icon: fas:key
+    light: group.lights_diningroom_all
+    temperature: sensor.zwave2mqtt_nodeid_108_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_108_contact
+    door: binary_sensor.neo_diningroomdoor_custom_sensor
+    safety: sensor.dining_room_nest_protect_smoke_status
+
+  - name: Livingroom
+    icon: fas:key
+    light: group.lights_livingroom_all
+    temperature: sensor.zwave2mqtt_nodeid_91_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_91_contact
+    safety: sensor.living_room_nest_protect_smoke_status
+    media_player: media_player.woonkamer
+
+  - name: Toilet
+    icon: fas:key
+    light: group.lights_toilet_all
+    temperature: sensor.zwave2mqtt_nodeid_87_temperature_air
+    motion: binary_sensor.zwave2mqtt_nodeid_87_contact
+
+
+  - name: Balcony
+    icon: fas:key
+    light: light.balcony_all

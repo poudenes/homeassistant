@@ -1,0 +1,25 @@
+#   _____ _____ _____ _____      __    _____ _____ _____ _____ 
+#  |     |  |  |   __|_   _|    |  |  |     |   __|  |  |_   _|
+#  |   --|  |  |__   | | |  _   |  |__|-   -|  |  |     | | |  
+#  |_____|_____|_____| |_| |_|  |_____|_____|_____|__|__| |_|  
+###########################################################################################
+# LIGHT
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+###########################################################################################
+---
+light.browser_ae1b43e7_eb57c683:
+  friendly_name: Fully Kiosk Screen
+
+light.newkaku_01401eb6_a:
+  icon: mdi:ceiling-light
+  friendly_name: "Diningtable"
+
+light.newkaku_011fad02_c:
+  icon: mdi:ceiling-light
+  friendly_name: "Cooking"
+
+light.nanoleaf:
+  friendly_name: "NanoLeaf"
+
+light.elements:
+  icon: mdi:hexagon-outline

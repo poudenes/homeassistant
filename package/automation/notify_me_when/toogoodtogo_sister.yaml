@@ -1,0 +1,31 @@
+#   _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+#  |_   _|     |     |   __|     |     |   __|_   _|     |   __|     |
+#    | | |  |  |  |  |  |  |  |  |  |  |  |  | | | |  |  |  |  |  |  |
+#    |_| |_____|_____|_____|_____|_____|_____| |_| |_____|_____|_____|
+###########################################################################################
+# NOTIFY ME WHEN BOXES ARE IN STOCK AT TOGOODTOGO
+###########################################################################################
+- alias: "ToGoodToGo - Sister"
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.toogoodtogo_broodhuys_meijer_magic_box
+        - sensor.toogoodtogo_lidl_amsterdamseweg_188_groente_fruit_box
+        - sensor.toogoodtogo_lidl_bankrashof_groente_fruit_box
+        - sensor.toogoodtogo_the_roastary_magic_box
+        - sensor.toogoodtogo_le_pain_quotidien_gelderlandplein_magic_box
+        - sensor.toogoodtogo_stadsbakker_jongejans_gelderlandplein_magic_box
+      from: false
+      to: true
+      attribute: stock_available
+
+  variables:
+    stock: "{{ states(trigger.to_state.entity_id) }}"
+    stock_available: "{{ state_attr(trigger.to_state.entity_id, 'stock_available') }}"
+    price: "{{ state_attr(trigger.to_state.entity_id, 'price') }}"
+    name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
+
+  action:
+    - service: notify.signal_to_sister
+      data:
+        message: "Name: {{ name }}, Stock: {{ stock }}, Price: {{ price }}"

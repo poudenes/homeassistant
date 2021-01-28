@@ -1,0 +1,1403 @@
+#
+#   _____ _____ _____ _____ _____ _____ _____    _____ __    __
+#  |   __|   __|   | |   __|     | __  |   __|  |  _  |  |  |  |
+#  |__   |   __| | | |__   |  |  |    -|__   |  |     |  |__|  |__
+#  |_____|_____|_|___|_____|_____|__|__|_____|  |__|__|_____|_____|
+#
+###########################################################################################
+---
+###########################################################################################
+# SENSOR CERT EXPIRY
+# https://www.home-assistant.io/integrations/cert_expiry/
+###########################################################################################
+- platform: cert_expiry
+  host: !secret cert_expire
+
+###########################################################################################
+# SENSOR MOON
+# https://www.home-assistant.io/integrations/moon/
+###########################################################################################
+- platform: moon
+
+###########################################################################################
+# SENSOR DSMR_READER
+# https://www.home-assistant.io/integrations/dsmr_reader/
+###########################################################################################
+- platform: dsmr_reader
+
+###########################################################################################
+# SENSOR FIlESIZE
+# https://www.home-assistant.io/integrations/filesize/
+###########################################################################################
+- platform: filesize
+  file_paths:
+    - /config/home-assistant.log
+
+###########################################################################################
+# SENSOR RFLINK
+# https://www.home-assistant.io/integrations/rflink/
+###########################################################################################
+- platform: rflink
+  automatic_add: true
+
+###########################################################################################
+# SENSOR SEASON
+# https://www.home-assistant.io/integrations/season/
+###########################################################################################
+- platform: season
+  type: astronomical
+
+###########################################################################################
+# SENSOR UPTIME
+# https://www.home-assistant.io/integrations/uptime/
+###########################################################################################
+- platform: uptime
+  name: "HA Uptime Sensor"
+
+###########################################################################################
+# SENSOR WAQI
+# https://www.home-assistant.io/integrations/waqi/
+###########################################################################################
+- platform: waqi
+  token: !secret waqi_api
+  locations:
+    - amsterdam
+
+###########################################################################################
+# SENSOR SQL
+# https://www.home-assistant.io/integrations/sql/
+###########################################################################################
+- platform: sql
+  db_url: !secret mariadb
+  queries:
+    - name: Database Size
+      query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema'
+      column: "value"
+      unit_of_measurement: MB
+
+###########################################################################################
+# SENSOR VERSION
+# https://www.home-assistant.io/integrations/version/
+###########################################################################################
+- platform: version
+  source: local
+
+- platform: version
+  source: hassio
+
+###########################################################################################
+# SENSOR SYSTEM MONITOR
+# https://www.home-assistant.io/integrations/systemmonitor/
+###########################################################################################
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: memory_free
+    - type: swap_use_percent
+    - type: ipv4_address
+      arg: wlan0
+    - type: processor_use
+    - type: last_boot
+    - type: disk_free
+      arg: /
+
+###########################################################################################
+# SENSOR TIME_DATE
+# https://www.home-assistant.io/integrations/time_date/
+###########################################################################################
+- platform: time_date
+  display_options:
+    - "time"
+    - "date"
+    - "date_time"
+    - "date_time_iso"
+    - "time_date"
+    - "time_utc"
+    - "beat"
+
+###########################################################################################
+# SENSOR GITHUB
+# https://www.home-assistant.io/integrations/filesize/
+###########################################################################################
+- platform: github
+  access_token: !secret github_token
+  repositories:
+    - path: "letscontrolit/ESPEasy"
+      name: "Github ESPEasy"
+    - path: "home-assistant/core"
+      name: "Github Home Assistant"
+    - path: "sidoh/esp8266_milight_hub"
+      name: "Github Milight Hub"
+
+###########################################################################################
+# FEEDPARSER
+# https://github.com/custom-components/feedparser
+###########################################################################################
+- platform: feedparser
+  name: Engineering Feed
+  feed_url: "https://alerts.home-assistant.io/feed.xml"
+  date_format: "%a, %b %d %I:%M %p"
+  inclusions:
+    - title
+    - updated
+    - content
+    - link
+  exclusions:
+    - published
+
+###########################################################################################
+# SENSOR AUTHENTICATED
+# https://github.com/custom-components/authenticated
+###########################################################################################
+- platform: authenticated
+  log_location: /config/log/
+
+###########################################################################################
+# SENSOR HISTORY_STATS
+# https://www.home-assistant.io/integrations/history_stats/
+###########################################################################################
+- platform: history_stats
+  name: "Times waching machine has been on last 14 days"
+  entity_id: binary_sensor.washing_machine
+  state: "on"
+  type: count
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "Times dryer has been on last 14 days"
+  entity_id: binary_sensor.dryer_machine
+  state: "on"
+  type: count
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "Times dishwasher has been on last 14 days"
+  entity_id: binary_sensor.dishwasher_machine
+  state: "on"
+  type: count
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+###########################################################################################
+# SENSOR TEMPLATE
+# https://www.home-assistant.io/integrations/template/
+###########################################################################################
+- platform: template
+  sensors:
+    harmony:
+      friendly_name: "Harmony Status"
+      icon_template: mdi:remote-tv
+      value_template: >-
+        {% if is_state_attr('remote.logitech_harmony', 'current_activity', 'PowerOff') %}
+          off
+        {% elif is_state_attr('remote.logitech_harmony', 'current_activity', 'AppleTV') %}
+          AppleTV
+        {% elif is_state_attr('remote.logitech_harmony', 'current_activity', 'Ziggo') %}
+          TV
+        {% elif is_state_attr('remote.logitech_harmony', 'current_activity', 'AirPlay') %}
+          Airplay
+        {% elif is_state_attr('remote.logitech_harmony', 'current_activity', 'Kodi') %}
+          Kodi
+        {% elif is_state_attr('remote.logitech_harmony', 'current_activity', 'Domoticz') %}
+          Domoticz
+        {% endif %}
+
+    living_room_hvac_mode:
+      friendly_name: "Nest HVAC mode"
+      value_template: "{{ states('climate.entryway') }}"
+
+    living_room_preset_mode:
+      friendly_name: "Nest Preset mode"
+      value_template: "{{ state_attr('climate.entryway','preset_mode') }}"
+
+    living_room_eco_temp:
+      friendly_name: "Nest Temp. Eco range"
+      value_template: >
+        {% if 19.5 < state_attr('climate.entryway', 'temperature')|round(1,"half") < 28 %}
+          none
+        {% else %}
+          eco
+        {% endif %}
+
+    ###########################################################################################
+    # APPLE WATCH TO ADD ON WATCH
+    ###########################################################################################
+    apple_watch_people_at_home:
+      friendly_name: "Apple Watch People At Home"
+      value_template: >-
+        {% if is_state('input_boolean.kay_home_manual', 'on') and is_state('input_boolean.peter_home_manual', 'on') %}
+          CP
+        {% elif is_state('input_boolean.peter_home_manual', 'on') %}
+          P
+        {% elif is_state('input_boolean.kay_home_manual', 'on') %}
+          C
+        {% else %}
+          N
+        {% endif %}
+
+    apple_watch_scene:
+      friendly_name: "Apple Watch Scene"
+      value_template: >-
+        {% if is_state('switch.scene_evening', 'on') %}
+          E
+        {% elif is_state('switch.scene_daytime', 'on') %}
+          D
+        {% elif is_state('switch.scene_goodnight', 'on') %}
+          G
+        {% elif is_state('switch.scene_tv', 'on') %}
+          T
+        {% elif is_state('switch.scene_kodi', 'on')  %}
+          K
+        {% elif is_state('switch.scene_appletv', 'on') %}
+          A
+        {% else %}
+          O
+        {% endif %}
+
+    ###########################################################################################
+    # MEEK WIFI UP TIME
+    ###########################################################################################
+    wifi_up_time_hallway:
+      value_template: "{{ ((state_attr('sensor.meek_hallway_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_kitchen:
+      value_template: "{{ ((state_attr('sensor.meek_kitchen_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_bedroom:
+      value_template: "{{ ((state_attr('sensor.meek_bedroom_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_bathroom:
+      value_template: "{{ ((state_attr('sensor.meek_bathroom_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_toilet:
+      value_template: "{{ ((state_attr('sensor.meek_toilet_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_livingroom:
+      value_template: "{{ ((state_attr('sensor.meek_livingroom_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_dressoir:
+      value_template: "{{ ((state_attr('sensor.meek_dressoir_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    wifi_up_time_diningroom:
+      value_template: "{{ ((state_attr('sensor.meek_diningroom_wifi_info', 'WiFi')['Connected msec']) / 1000 / 60 / 60 ) | float('offline') | int  }}"
+      unit_of_measurement: "Hr"
+
+    ###########################################################################################
+    # MEEK WIFI RECONNECTS
+    ###########################################################################################
+    wifi_reconnect_hallway:
+      value_template: "{{ (state_attr('sensor.meek_hallway_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_kitchen:
+      value_template: "{{ (state_attr('sensor.meek_kitchen_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_bedroom:
+      value_template: "{{ (state_attr('sensor.meek_bedroom_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_bathroom:
+      value_template: "{{ (state_attr('sensor.meek_bathroom_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_toilet:
+      value_template: "{{ (state_attr('sensor.meek_toilet_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_livingroom:
+      value_template: "{{ (state_attr('sensor.meek_livingroom_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_dressoir:
+      value_template: "{{ (state_attr('sensor.meek_dressoir_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    wifi_reconnect_diningroom:
+      value_template: "{{ (state_attr('sensor.meek_diningroom_wifi_info', 'WiFi')['Number Reconnects']) | float('offline') | int  }}"
+
+    ###########################################################################################
+    # MEEK WIFI RSSI
+    ###########################################################################################
+    wifi_rssi_hallway:
+      value_template: "{{ (state_attr('sensor.meek_hallway_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_kitchen:
+      value_template: "{{ (state_attr('sensor.meek_kitchen_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_bedroom:
+      value_template: "{{ (state_attr('sensor.meek_bedroom_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_bathroom:
+      value_template: "{{ (state_attr('sensor.meek_bathroom_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_toilet:
+      value_template: "{{ (state_attr('sensor.meek_toilet_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_livingroom:
+      value_template: "{{ (state_attr('sensor.meek_livingroom_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_dressoir:
+      value_template: "{{ (state_attr('sensor.meek_dressoir_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    wifi_rssi_diningroom:
+      value_template: "{{ (state_attr('sensor.meek_diningroom_wifi_info', 'WiFi')['RSSI']) | float('offline') | int  }}"
+
+    ###########################################################################################
+    # MEEK WIFI IP NUMBER
+    ###########################################################################################
+    wifi_ip_hallway:
+      value_template: "{{ (state_attr('sensor.meek_hallway_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_kitchen:
+      value_template: "{{ (state_attr('sensor.meek_kitchen_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_bedroom:
+      value_template: "{{ (state_attr('sensor.meek_bedroom_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_bathroom:
+      value_template: "{{ (state_attr('sensor.meek_bathroom_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_toilet:
+      value_template: "{{ (state_attr('sensor.meek_toilet_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_livingroom:
+      value_template: "{{ (state_attr('sensor.meek_livingroom_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_dressoir:
+      value_template: "{{ (state_attr('sensor.meek_dressoir_wifi_info', 'WiFi')['IP Address']) }}"
+
+    wifi_ip_diningroom:
+      value_template: "{{ (state_attr('sensor.meek_diningroom_wifi_info', 'WiFi')['IP Address']) }}"
+
+    adaptive_lighting_color_temperature:
+      value_template: "{{ state_attr('switch.adaptive_lighting_sensor', 'color_temp_kelvin') | int(2800) }}"
+
+    adaptive_lighting_color_mired_temperature:
+      value_template: "{{ state_attr('switch.adaptive_lighting_sensor', 'color_temp_mired') | int(2800) }}"
+
+    last_alexa:
+      value_template: "{{ (states.media_player | selectattr('attributes.last_called','eq',True) | map(attribute='entity_id') | first) }}"
+
+    climate_inside_temperature:
+      value_template: "{{ state_attr('climate.entryway','current_temperature') | float }}"
+
+    dayofyear:
+      value_template: "{{ now().strftime('%j') }}"
+
+    weekofyear:
+      value_template: "{{ now().strftime('%U') }}"
+
+    github_milight_hub_version:
+      value_template: "{{ state_attr('sensor.github_milight_hub', 'latest_release_tag') }}"
+
+    github_espeasy_version:
+      value_template: "{{ state_attr('sensor.github_espeasy', 'latest_release_tag') }}"
+
+    ###########################################################################################
+    # MILIGHT INFORMATION
+    ###########################################################################################
+    milight_arduino_version:
+      value_template: "{{ state_attr('sensor.milight_about', 'arduino_version') }}"
+
+    milight_dropped_packets:
+      value_template: "{{ (state_attr('sensor.milight_about', 'queue_stats')['dropped_packets']) | int }}"
+
+    milight_firmware:
+      value_template: "{{ state_attr('sensor.milight_about', 'firmware') }}"
+
+    milight_free_heap:
+      value_template: "{{ state_attr('sensor.milight_about', 'free_heap') }}"
+
+    milight_ip:
+      value_template: "{{ state_attr('sensor.milight_about', 'ip_address') }}"
+
+    milight_length:
+      value_template: "{{ (state_attr('sensor.milight_about', 'queue_stats')['length']) | int }}"
+
+    milight_reset_reason:
+      value_template: "{{ state_attr('sensor.milight_about', 'reset_reason') }}"
+
+    milight_variant:
+      value_template: "{{ state_attr('sensor.milight_about', 'variant') }}"
+
+    milight_version:
+      value_template: "{{ state_attr('sensor.milight_about', 'version') }}"
+
+    ###########################################################################################
+    # MVPS INFORMATION SSH / WWW / VMAIL
+    ###########################################################################################
+    ssh_login_date:
+      value_template: "{{ (state_attr('sensor.mvps_ssh_information', 'ssh')['date']) }}"
+
+    ssh_login_ip:
+      value_template: "{{ (state_attr('sensor.mvps_ssh_information', 'ssh')['ip']) }}"
+
+    ssh_login_time:
+      value_template: "{{ (state_attr('sensor.mvps_ssh_information', 'ssh')['time']) }}"
+
+    ssh_login_user:
+      value_template: "{{ (state_attr('sensor.mvps_ssh_information', 'ssh')['user']) }}"
+
+    www_oudenes_size:
+      value_template: "{{ (state_attr('sensor.www_backup_information', 'www')['oudenes']) }}"
+      unit_of_measurement: "MB"
+
+    www_hairdelicious_size:
+      value_template: "{{ (state_attr('sensor.www_backup_information', 'www')['hairdelicious']) }}"
+      unit_of_measurement: "MB"
+
+    www_backup_time:
+      value_template: "{{ (state_attr('sensor.www_backup_information', 'www')['time']) }}"
+
+    www_backup_date:
+      value_template: "{{ (state_attr('sensor.www_backup_information', 'www')['date']) }}"
+
+    www_asia_size:
+      value_template: "{{ (state_attr('sensor.www_backup_information', 'www')['asia']) }}"
+      unit_of_measurement: "MB"
+
+    vmail_backup_time:
+      value_template: "{{ (state_attr('sensor.vmail_backup_information', 'vmailbackup')['time']) }}"
+
+    vmail_backup_size:
+      value_template: "{{ (state_attr('sensor.vmail_backup_information', 'vmailbackup')['size']) }}"
+      unit_of_measurement: "MB"
+
+    vmail_backup_date:
+      value_template: "{{ (state_attr('sensor.vmail_backup_information', 'vmailbackup')['date']) }}"
+
+    ###########################################################################################
+    # NEST PROTECT
+    ###########################################################################################
+    nest_protect_bedroom_status_homekit:
+      friendly_name: "Nest Protect Bedroom Homekit"
+      value_template: "{{ 'off' if is_state('sensor.bedroom_nest_protect_color_status', 'green') else 'on' }}"
+
+    nest_protect_livingroom_status_homekit:
+      friendly_name: "Nest Protect Livingroom Homekit"
+      value_template: "{{ 'off' if is_state('sensor.living_room_nest_protect_color_status', 'green') else 'on' }}"
+
+    nest_protect_diningroom_status_homekit:
+      friendly_name: "Nest Protect diningroom Homekit"
+      value_template: "{{ 'off' if is_state('sensor.dining_room_nest_protect_color_status', 'green') else 'on' }}"
+
+    nextsunrise:
+      friendly_name: "Next Sun Rise"
+      value_template: "{{ (as_timestamp(state_attr('sun.sun','next_rising')) | timestamp_custom('%-H:%M')) }}"
+      icon_template: mdi:weather-sunset-up
+
+    nextsunset:
+      friendly_name: "Next Sun Set"
+      value_template: "{{ (as_timestamp(state_attr('sun.sun','next_setting')) | timestamp_custom('%-H:%M')) }}"
+      icon_template: mdi:weather-sunset-down
+
+    period_of_day:
+      friendly_name: "Period of the Day"
+      value_template: >-
+        {% if (as_timestamp(state_attr('sun.sun','next_dusk'))) - (as_timestamp(state_attr('sun.sun','next_setting'))) < 0 %}
+          Dusk
+        {% elif (as_timestamp(state_attr('sun.sun','next_rising'))) - (as_timestamp(state_attr('sun.sun','next_dawn'))) < 0 %}
+          Dawn
+        {% elif (state_attr('sun.sun','elevation')) < 0 %}
+          NightTime
+        {% else %}
+          DayTime
+        {% endif %}
+      icon_template: "{{ 'mdi:weather-sunny' if is_state('sun.sun', 'above_horizon') else 'mdi:weather-night' }}"
+
+    scene_active:
+      friendly_name: "Scene "
+      icon_template: mdi:arrow-decision-auto
+      value_template: >-
+        {% set str = "" %}
+        {% if is_state('switch.scene_daytime','on') %} {% set str = str + ":Daytime" %} {% endif %}
+        {% if is_state('switch.scene_dinner','on') %} {% set str = str + ":Dinner" %} {% endif %}
+        {% if is_state('switch.scene_evening','on') %} {% set str = str + ":Evening" %} {% endif %}
+        {% if is_state('switch.scene_goodnight','on') %} {% set str = str + ":Goodnight" %} {% endif %}
+        {% if is_state('switch.scene_appletv','on') %} {% set str = str + ":AppleTV" %} {% endif %}
+        {% if is_state('switch.scene_tv','on') %} {% set str = str + ":TV" %} {% endif %}
+        {% if is_state('switch.scene_kodi','on') %} {% set str = str + ":Kodi" %} {% endif %}
+        {% if is_state('switch.scene_sleeping','on') %} {% set str = str + ":Sleeping" %} {% endif %}
+        {% if is_state('switch.scene_romantic','on') %} {% set str = str + ":Sexy" %} {% endif %}
+        {% if is_state('switch.scene_disco','on') %} {% set str = str + ":Disco" %} {% endif %}
+        {% if is_state('switch.scene_cooking','on') %} {% set str = str + ":Cooking" %} {% endif %}
+        {% if is_state('switch.scene_guests','on') %} {% set str = str + ":Guests" %} {% endif %}
+        {% if is_state('switch.kay_learning','on') %} {% set str = str + ":Kay Learning" %} {% endif %}
+        {% set arr = str[1:].split(":") %}
+        {%- if str | length == 0 %}
+            No Scenes active.
+        {%- elif arr | count == 1 %}
+            {{arr[0]}} is on.
+        {% else %}
+            {% for switch in arr -%}
+                {%- if loop.first %}{% elif loop.last %}, {% else %}, {% endif -%}
+                {{switch}}
+            {%- endfor %} are on.
+        {% endif -%}
+
+    switch_active:
+      friendly_name: "Switch "
+      icon_template: mdi:ceiling-light
+      value_template: >-
+        {% set str = "" %}
+        {% if is_state('switch.wall','on') %} {% set str = str + ":Wall" %} {% endif %}
+        {% if is_state('switch.window','on') %} {% set str = str + ":Window" %} {% endif %}
+        {% if is_state('switch.meek_livingroom','on') %} {% set str = str + ":Livingroom" %} {% endif %}
+        {% if is_state('switch.kitchen','on')%} {% set str = str + ":Kitchen" %} {% endif %}
+        {% if is_state('switch.sink','on') %} {% set str = str + ":Sink" %} {% endif %}
+        {% if is_state('switch.diningroom','on') %} {% set str = str + ":Diningroom" %} {% endif %}
+        {% if is_state('switch.dressoir','on') %} {% set str = str + ":Dressoir" %} {% endif %}
+        {% if is_state('switch.hallway','on') %} {% set str = str + ":Hallway" %} {% endif %}
+        {% if is_state('switch.balcony','on') %} {% set str = str + ":Balcony" %} {% endif %}
+        {% if is_state('switch.bedroom','on') %} {% set str = str + ":Bedroom" %} {% endif %}
+        {% if is_state('switch.bathroom','on') %} {% set str = str + ":Bathroom" %} {% endif %}
+        {% if is_state('switch.toilet','on') %} {% set str = str + ":Toilet" %} {% endif %}
+        {% if is_state('switch.cooking','on') %} {% set str = str + ":Cooking" %} {% endif %}
+        {% if is_state('switch.newkaku_014e5906_a','on') %} {% set str = str + ":Testing" %} {% endif %}
+        {% set arr = str[1:].split(":") %}
+        {%- if str | length == 0 %}
+            All switches off.
+        {%- elif arr | count == 1 %}
+            {{arr[0]}} is on.
+        {% else %}
+            {% for switch in arr -%}
+                {%- if loop.first %}{% elif loop.last %}, {% else %}, {% endif -%}
+                {{switch}}
+            {%- endfor %} are on.
+        {% endif -%}
+
+    other_active:
+      friendly_name: "Other "
+      icon_template: mdi:nintendo-switch
+      value_template: >-
+        {% set str = "" %}
+        {% if is_state('switch.dnc','on') %} {% set str = str + ":DNC" %} {% endif %}
+        {% if is_state('switch.lux_low','on') %} {% set str = str + ":Lux Low" %} {% endif %}
+        {% if is_state('switch.vacation','on') %} {% set str = str + ":Emu. Holiday" %} {% endif %}
+        {% if is_state('group.adaptive_lighting','on') %} {% set str = str + ":Cir. Light" %} {% endif %}
+        {% if is_state('group.zwave_switches','on') %} {% set str = str + ":ZWave Switches" %} {% endif %}
+        {% if is_state('switch.toilet_fan','on') %} {% set str = str + ":Toilet Fan" %} {% endif %}
+        {% set arr = str[1:].split(":") %}
+        {%- if str | length == 0 %}
+            Everything is off.
+        {%- elif arr | count == 1 %}
+            {{arr[0]}} is on.
+        {% else %}
+            {% for switch in arr -%}
+                {%- if loop.first %}{% elif loop.last %}, {% else %}, {% endif -%}
+                {{switch}}
+            {%- endfor %} are on.
+        {% endif -%}
+
+    waqi_time:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'time') }}"
+      friendly_name: "Time last update"
+      icon_template: mdi:update
+
+    waqi_dominentpol:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'dominentpol') }}"
+      friendly_name: "Dominentpol"
+      icon_template: mdi:crosshairs
+
+    waqi_co:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'co') }}"
+      friendly_name: "CO"
+      icon_template: mdi:crosshairs
+
+    waqi_nitrogen_dioxide:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'nitrogen_dioxide') }}"
+      friendly_name: "Nitrogen dioxide"
+      icon_template: mdi:crosshairs
+
+    waqi_ozone:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'ozone') }}"
+      friendly_name: "Ozone"
+      icon_template: mdi:crosshairs
+
+    waqi_pm_10:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'pm_10') }}"
+      friendly_name: "PM 10"
+      icon_template: mdi:crosshairs
+
+    waqi_pm_2_5:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'pm_2_5') }}"
+      friendly_name: "PM 2.5"
+      icon_template: mdi:crosshairs
+
+    waqi_sulfur_dioxide:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'sulfur_dioxide') }}"
+      friendly_name: "Sulfur dioxide"
+      icon_template: mdi:crosshairs
+
+    waqi_w:
+      value_template: "{{ state_attr('sensor.waqi_vondelpark_amsterdam', 'w') }}"
+      friendly_name: "W"
+      icon_template: mdi:crosshairs
+
+###########################################################################################
+# SENSOR MQTT
+# https://www.home-assistant.io/integrations/sensor.mqtt/
+###########################################################################################
+
+###########################################################################################
+# DSMR READER INFO
+###########################################################################################
+- platform: mqtt
+  name: "DSMR Boot Time"
+  state_topic: "Servers/dsmr/systemstatus"
+  value_template: "{{ value_json.boottime }}"
+  icon: mdi:clock
+
+- platform: mqtt
+  name: "DSMR CPU Temperature"
+  state_topic: "Servers/dsmr/systemstatus"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.cputemp | round(0) }}"
+
+- platform: mqtt
+  name: "DSMR CPU Usage"
+  state_topic: "Servers/dsmr/systemstatus"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.cpuusage | round (0) }}"
+  icon: mdi:cpu-64-bit
+
+- platform: mqtt
+  name: "DSMR Disk Size"
+  state_topic: "Servers/dsmr/systemstatus"
+  value_template: "{{ value_json.disktotal }}"
+  icon: mdi:harddisk
+
+- platform: mqtt
+  name: "DSMR Disk Usage"
+  state_topic: "Servers/dsmr/systemstatus"
+  value_template: "{{ value_json.diskusage | round(0) }}"
+  unit_of_measurement: "%"
+  icon: mdi:harddisk
+
+- platform: mqtt
+  name: "DSMR Ext IP"
+  state_topic: "Servers/dsmr/external_ip"
+  value_template: "{{ value }}"
+
+- platform: mqtt
+  name: "DSMR Last Update"
+  state_topic: "Servers/dsmr/systemstatus"
+  value_template: "{{ value_json.datetimedatacollected }}"
+  icon: mdi:update
+
+- platform: mqtt
+  name: "DSMR Memory Used"
+  state_topic: "Servers/dsmr/systemstatus"
+  value_template: "{{ value_json.virtualmem | round(0) }}"
+  unit_of_measurement: "%"
+  icon: mdi:memory
+
+- platform: mqtt
+  name: "DSMR Power Supply"
+  state_topic: "Servers/dsmr/systemstatus"
+  unit_of_measurement: "V"
+  value_template: "{{ value_json.volt | round(3) }}"
+  icon: mdi:power-plug
+
+###########################################################################################
+# ITHO
+###########################################################################################
+- platform: mqtt
+  name: "ITHO Speed"
+  state_topic: "Servers/itho/fan/state"
+  icon: mdi:fan
+  value_template: >-
+    {% if value|float == 0 %}
+      Standby
+    {% elif value|float  == 1 %}
+      Low
+    {% elif value|float  == 2 %}
+      Medium
+    {% elif value|float  == 3 %}
+      High
+    {% elif value|float  == 4 %}
+      Full
+    {% else %}
+      High(Timer)
+    {% endif %}
+
+- platform: mqtt
+  name: "ITHO Tijd"
+  icon: mdi:remote
+  state_topic: "Servers/itho/fan/timer"
+  value_template: "{{ value }}"
+  unit_of_measurement: "s"
+
+- platform: mqtt
+  name: "ITHO Remote"
+  state_topic: "Servers/itho/fan/lastidindex"
+  icon: mdi:fan
+  value_template: >-
+    {% if value|float  == 1 %}
+      Kitchen
+    {% elif value|float  == 2 %}
+      Bathroom
+    {% else %}
+      none
+    {% endif %}
+
+- platform: mqtt
+  name: "ITHO Tijd"
+  icon: mdi:av-timer
+  state_topic: "Servers/itho/fan/timer"
+  value_template: "{{ value }}"
+  unit_of_measurement: "s"
+
+###########################################################################################
+# LAST MESSAGE
+###########################################################################################
+- platform: mqtt
+  name: "Twitter Last Message"
+  state_topic: "homeassistant/ha_other/twitter_last_message/state"
+  json_attributes_topic: "homeassistant/ha_other/twitter_last_message/attributes"
+
+- platform: mqtt
+  name: "Alexa Last Message"
+  state_topic: "homeassistant/ha_other/alexa_last_message/state"
+  json_attributes_topic: "homeassistant/ha_other/alexa_last_message/attributes"
+
+###########################################################################################
+# WASHING, DRYER, DISHWASHER MACHINE DATA
+###########################################################################################
+- platform: mqtt
+  name: "Dishwasher machine data"
+  state_topic: "homeassistant/ha_other/dishwasher_machine_data/state"
+  json_attributes_topic: "homeassistant/ha_other/dishwasher_machine_data/attributes"
+
+- platform: mqtt
+  name: "Washing machine data"
+  state_topic: "homeassistant/ha_other/washing_machine_data/state"
+  json_attributes_topic: "homeassistant/ha_other/washing_machine_data/attributes"
+
+- platform: mqtt
+  name: "Dryer machine data"
+  state_topic: "homeassistant/ha_other/dryer_machine_data/state"
+  json_attributes_topic: "homeassistant/ha_other/dryer_machine_data/attributes"
+
+###########################################################################################
+# NEXTCLOUD SYSTEM INFO
+###########################################################################################
+- platform: mqtt
+  name: "Nextcloud Boot Time"
+  state_topic: "Servers/nextcloud/systemstatus"
+  value_template: "{{ value_json.boottime }}"
+  icon: mdi:clock
+
+- platform: mqtt
+  name: "Nextcloud CPU Temperature"
+  state_topic: "Servers/nextcloud/systemstatus"
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.cputemp | round(0) }}"
+
+- platform: mqtt
+  name: "Nextcloud CPU Usage"
+  state_topic: "Servers/nextcloud/systemstatus"
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.cpuusage | round (0) }}"
+  icon: mdi:cpu-64-bit
+
+- platform: mqtt
+  name: "Nextcloud Disk Size"
+  state_topic: "Servers/nextcloud/systemstatus"
+  value_template: "{{ value_json.disktotal }}"
+  icon: mdi:harddisk
+
+- platform: mqtt
+  name: "Nextcloud Disk Usage"
+  state_topic: "Servers/nextcloud/systemstatus"
+  value_template: "{{ value_json.diskusage | round(0) }}"
+  unit_of_measurement: "%"
+  icon: mdi:harddisk
+
+- platform: mqtt
+  name: "Nextcloud VPN Ext IP"
+  state_topic: "Servers/nextcloud/external_ip"
+  value_template: "{{ value }}"
+  icon: mdi:lan
+
+- platform: mqtt
+  name: "Nextcloud Last Update"
+  state_topic: "Servers/nextcloud/systemstatus"
+  value_template: "{{ value_json.datetimedatacollected }}"
+  icon: mdi:update
+
+- platform: mqtt
+  name: "Nextcloud Memory Used"
+  state_topic: "Servers/nextcloud/systemstatus"
+  value_template: "{{ value_json.virtualmem | round(0) }}"
+  unit_of_measurement: "%"
+  icon: mdi:memory
+
+- platform: mqtt
+  name: "Nextcloud Power Supply"
+  state_topic: "Servers/nextcloud/systemstatus"
+  unit_of_measurement: "V"
+  value_template: "{{ value_json.volt | round(3) }}"
+  icon: mdi:power-plug
+
+###########################################################################################
+# SENSOR COMMAND_LINE
+# https://www.home-assistant.io/integrations/sensor.command_line/
+###########################################################################################
+- platform: command_line
+  name: "Birthday"
+  command: "cat /config/package/json/calendar.json"
+  scan_interval: 21600
+  value_template: >-
+    {% set today = now().month  ~ '/' ~ now().day  %}
+    {% set birthday =  value_json.json_calendars.birthday[ today ] %}
+      {% if birthday | trim == "" %}
+        {% set birthday =  "Nothing" %}
+        {% endif %}
+    {{ birthday }}
+
+- platform: command_line
+  name: "Holiday"
+  command: "cat /config/package/json/calendar.json"
+  scan_interval: 21600
+  value_template: >-
+    {% set today = now().month  ~ '/' ~ now().day  %}
+    {% set holiday =  value_json.json_calendars.holiday[ today ] %}
+      {% if holiday | trim == "" %}
+        {% set holiday =  "Nothing" %}
+        {% endif %}
+    {{ holiday }}
+
+- platform: command_line
+  name: "Events"
+  command: "cat /config/package/json/calendar.json"
+  scan_interval: 21600
+  value_template: >-
+    {% set today = now().month  ~ '/' ~ now().day  %}
+    {% set events =  value_json.json_calendars.events[ today ] %}
+      {% if events | trim == "" %}
+        {% set events =  "Nothing" %}
+        {% endif %}
+    {{ events }}
+
+- platform: command_line
+  name: "HA CPU Temperature"
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"
+  value_template: "{{ value | multiply(0.001) | round(1) }}"
+
+- platform: command_line
+  name: "HA GPU Temperature"
+  command: "/opt/vc/bin/vcgencmd measure_temp"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | replace("temp=", "") | replace("''C", "") }}'
+
+###########################################################################################
+# SENSOR P2000
+# https://github.com/cyberjunky/home-assistant-p2000
+###########################################################################################
+- platform: p2000
+  name: "Amsterdam Ambulance"
+  regios: 13
+  disciplines: 2
+  scan_interval: 60
+  icon: mdi:ambulance
+
+- platform: p2000
+  name: "Amsterdam Brandweer"
+  regios: 13
+  disciplines: 1
+  scan_interval: 120
+  icon: mdi:fire-truck
+
+- platform: p2000
+  name: "Amsterdam Politie"
+  regios: 13
+  disciplines: 3
+  scan_interval: 120
+  icon: mdi:taxi
+
+- platform: p2000
+  name: "Buitenveldert Ambulance"
+  regios: 13
+  disciplines: 2
+  radius: 1500
+  scan_interval: 60
+  latitude: 52.3316
+  longitude: 4.8735
+  icon: mdi:ambulance
+
+- platform: p2000
+  name: "Buitenveldert Brandweer"
+  regios: 13
+  disciplines: 1
+  radius: 1500
+  scan_interval: 120
+  latitude: 52.3316
+  longitude: 4.8735
+  icon: mdi:fire-truck
+
+- platform: p2000
+  name: "Buitenveldert Politie"
+  regios: 13
+  disciplines: 3
+  radius: 1500
+  scan_interval: 120
+  latitude: 52.3316
+  longitude: 4.8735
+  icon: mdi:taxi
+
+###########################################################################################
+# SENSOR REST
+# https://www.home-assistant.io/integrations/rest/
+###########################################################################################
+
+###########################################################################################
+# SENSOR REST
+# Does Addons have some updates
+###########################################################################################
+- platform: rest
+  resource: !secret supervisor_addon_1
+  name: "Version Update Adguard"
+  value_template: "{{ state_attr('sensor.version_update_adguard','version') != state_attr('sensor.version_update_adguard','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_2
+  name: "Version Update Bitwarden"
+  value_template: "{{ state_attr('sensor.version_update_bitwarden','version') != state_attr('sensor.version_update_bitwarden','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_3
+  name: "Version Update Core Checker"
+  value_template: "{{ state_attr('sensor.version_update_core_checker','version') != state_attr('sensor.version_update_core_checker','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_4
+  name: "Version Update Grafana"
+  value_template: "{{ state_attr('sensor.version_update_grafana','version') != state_attr('sensor.version_update_grafana','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_5
+  name: "Version Update Google Backup"
+  value_template: "{{ state_attr('sensor.version_update_google_backup','version') != state_attr('sensor.version_update_google_backup','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_6
+  name: "Version Update InfluxDB"
+  value_template: "{{ state_attr('sensor.version_update_influxdb','version') != state_attr('sensor.version_update_influxdb','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_7
+  name: "Version Update Letscrypt"
+  value_template: "{{ state_attr('sensor.version_update_letscrypt','version') != state_attr('sensor.version_update_letscrypt','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_8
+  name: "Version Update Mailserver"
+  value_template: "{{ state_attr('sensor.version_update_mailserver','version') != state_attr('sensor.version_update_mailserver','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_9
+  name: "Version Update MariaDB"
+  value_template: "{{ state_attr('sensor.version_update_mariadb','version') != state_attr('sensor.version_update_mariadb','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_10
+  name: "Version Update Mosquitto"
+  value_template: "{{ state_attr('sensor.version_update_mosquitto','version') != state_attr('sensor.version_update_mosquitto','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_11
+  name: "Version Update Nextcloud Backup"
+  value_template: "{{ state_attr('sensor.version_update_nextcloud_backup','version') != state_attr('sensor.version_update_nextcloud_backup','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_12
+  name: "Version Update Portainer"
+  value_template: "{{ state_attr('sensor.version_update_portainer','version') != state_attr('sensor.version_update_portainer','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_13
+  name: "Version Update Signal Messenger"
+  value_template: "{{ state_attr('sensor.version_update_signal_messenger','version') != state_attr('sensor.version_update_signal_messenger','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_14
+  name: "Version Update TooGoodToGo"
+  value_template: "{{ state_attr('sensor.version_update_toogoodtogo','version') != state_attr('sensor.version_update_toogoodtogo','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_15
+  name: "Version Update VSCode"
+  value_template: "{{ state_attr('sensor.version_update_vscode','version') != state_attr('sensor.version_update_vscode','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_16
+  name: "Version Update WireGuard"
+  value_template: "{{ state_attr('sensor.version_update_wireguard','version') != state_attr('sensor.version_update_wireguard','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_17
+  name: "Version Update Zwave2MQTT"
+  value_template: "{{ state_attr('sensor.version_update_zwave2mqtt','version') != state_attr('sensor.version_update_zwave2mqtt','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+- platform: rest
+  resource: !secret supervisor_addon_18
+  name: "Version Update phpMyAdmin"
+  value_template: "{{ state_attr('sensor.version_update_phpmyadmin','version') != state_attr('sensor.version_update_phpmyadmin','version_latest')  }}"
+  scan_interval: 60
+  headers:
+    Authorization: !secret longlifetoken
+    Content-Type: application/json
+  json_attributes_path: "$.data"
+  json_attributes:
+    - version
+    - version_latest
+
+###########################################################################################
+# SENSOR REST
+# Other
+###########################################################################################
+- platform: rest
+  resource: http://192.168.100.70/about
+  scan_interval: 900
+  name: "Milight About"
+  json_attributes:
+    - firmware
+    - version
+    - ip_address
+    - reset_reason
+    - variant
+    - free_heap
+    - arduino_version
+    - queue_stats
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  scan_interval: 86400
+  resource: https://api.ipify.org/
+  name: "External IP"
+  value_template: "{{ value }}"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.70/transitions
+  scan_interval: 900
+  name: "Milight Transitions"
+  json_attributes:
+    - transitions
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.119/json
+  scan_interval: 900
+  name: "Meek Hallway Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.112/json
+  scan_interval: 900
+  name: "Meek Kitchen Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.115/json
+  scan_interval: 900
+  name: "Meek Bedroom Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.114/json
+  scan_interval: 900
+  name: "Meek Bathroom Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.113/json
+  scan_interval: 900
+  name: "Meek Toilet Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.117/json
+  scan_interval: 900
+  name: "Meek Livingroom Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.116/json
+  scan_interval: 900
+  name: "Meek Dressoir Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: http://192.168.100.118/json
+  scan_interval: 900
+  name: "Meek Diningroom Wifi Info"
+  json_attributes:
+    - WiFi
+  value_template: "OK"
+  timeout: 60
+
+- platform: rest
+  resource: !secret mvpsjsonvmail
+  method: GET
+  verify_ssl: false
+  scan_interval: 21600
+  name: "VMail Backup information"
+  json_attributes:
+    - vmailbackup
+  value_template: "OK"
+  timeout: 30
+
+- platform: rest
+  resource: !secret mvpsjsonssh
+  method: GET
+  verify_ssl: false
+  scan_interval: 300
+  name: "MVPS SSH Information"
+  json_attributes:
+    - ssh
+  value_template: "OK"
+  timeout: 30
+
+- platform: rest
+  resource: !secret mvpsjsonwww
+  method: GET
+  verify_ssl: false
+  scan_interval: 21600
+  name: "WWW Backup information"
+  json_attributes:
+    - www
+  value_template: "OK"
+  timeout: 30
+
+###########################################################################################
+# SENSOR WORlDCLOCK
+# https://www.home-assistant.io/integrations/worldclock/
+###########################################################################################
+- platform: worldclock
+  time_zone: Asia/Hong_Kong
+  name: "Time Hong Kong"
+
+- platform: worldclock
+  time_zone: Asia/Seoul
+  name: "Time Seoul"
+
+- platform: worldclock
+  time_zone: America/New_York
+  name: "Time New York"
+
+- platform: worldclock
+  time_zone: Asia/Singapore
+  name: "Time Singapore"
+
+- platform: worldclock
+  time_zone: Australia/Sydney
+  name: "Time Sydney"
+
+###########################################################################################
+# SENSOR BUIENRADAR
+# https://www.home-assistant.io/integrations/sensor.buienradar/
+###########################################################################################
+- platform: buienradar
+  timeframe: 60
+  name: "buienradar"
+  monitored_conditions:
+    - condition
+    - conditionexact
+    - humidity
+    - temperature
+    - windspeed
+    - winddirection
+    - pressure
+    - visibility
+    - precipitation
+    - precipitation_forecast_average
+    - precipitation_forecast_total
+    - rainlasthour
+    - temperature_1d
+    - temperature_2d
+    - rainchance_1d
+    - rainchance_2d
+    - sunchance_1d
+    - sunchance_2d
+    - rain_1d
+    - rain_2d
+    - minrain_1d
+    - maxrain_1d
+    - winddirection_1d
+    - winddirection_2d
+    - windspeed_1d
+    - windspeed_2d
+    - condition_1d
+    - condition_2d
+    - conditionexact_1d
+    - conditionexact_2d

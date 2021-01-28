@@ -1,0 +1,33 @@
+#   _____ _____ _____ __    _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  _  |     |_   _|     |     |   | |   __|
+#  |     |   __|   __|  |__|   __| | | |  |  |  |     |   --| | | |-   -|  |  | | | |__   |
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |__|__|_____| |_| |_____|_____|_|___|_____|
+###########################################################################################
+# APPLE WATCH BATTERY LEVEL REPORT
+###########################################################################################
+- alias: "Apple Watch: Battery Level Report"
+  mode: parallel
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: battery level report
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "Battery Level"
+        message: >
+          Living room: {{ states('sensor.zwave2mqtt_nodeid_91_battery_level') }} %
+
+          Bedroom: {{ states('sensor.zwave2mqtt_nodeid_106_battery_level') }} %
+
+          Bathroom: {{ states('sensor.zwave2mqtt_nodeid_88_battery_level') }} %
+
+          Hallway: {{ states('sensor.zwave2mqtt_nodeid_90_battery_level') }} %
+
+          Kitchen: {{ states('sensor.zwave2mqtt_nodeid_106_battery_level') }} %
+
+          Diningroom: {{ states('sensor.zwave2mqtt_nodeid_108_battery_level') }} %
+
+          Toilet: {{ states('sensor.zwave2mqtt_nodeid_87_battery_level') }} %

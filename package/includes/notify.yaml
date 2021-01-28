@@ -1,0 +1,44 @@
+#
+#   _____     _   _ ___
+#  |   | |___| |_|_|  _|_ _
+#  | | | | . |  _| |  _| | |
+#  |_|___|___|_| |_|_| |_  |
+#                      |___|
+###########################################################################################
+# PUSHOVER
+# https://www.home-assistant.io/integrations/pushover/
+###########################################################################################
+---
+- platform: pushover
+  name: "Pushover"
+  api_key: !secret notify_apikey
+  user_key: !secret notify_userkey
+
+###########################################################################################
+# TWITTER
+# https://www.home-assistant.io/integrations/twitter/
+###########################################################################################
+- platform: twitter
+  name: "Twitter"
+  consumer_key: !secret twitter_consumer_key
+  consumer_secret: !secret twitter_consumer_secret
+  access_token: !secret twitter_access_token
+  access_token_secret: !secret twitter_access_token_secret
+
+###########################################################################################
+# SIGNAL
+# https://www.home-assistant.io/integrations/signal_messenger/
+###########################################################################################
+- platform: signal_messenger
+  name: "Signal to Sister"
+  url: "http://127.0.0.1:8080"
+  number: !secret signal_from
+  recipients:
+    - !secret signal_to_sister
+
+- platform: signal_messenger
+  name: "Signal to NS"
+  url: "http://127.0.0.1:8080"
+  number: !secret signal_from
+  recipients:
+    - !secret signal_to_ns

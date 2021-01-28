@@ -1,0 +1,46 @@
+#   ____  _____ _____ _____    ____  _____ _____ _____ _____ _____ _____ _____ _____ _____
+#  |    \|     |     | __  |  |    \|     |   | |     |   | |   __| __  |     |     |     |
+#  |  |  |  |  |  |  |    -|  |  |  |-   -| | | |-   -| | | |  |  |    -|  |  |  |  | | | |
+#  |____/|_____|_____|__|__|  |____/|_____|_|___|_____|_|___|_____|__|__|_____|_____|_|_|_|
+###########################################################################################
+# CONTROL DININGROOM LIGHTS BASED ON DINIGROOM SENSOR
+###########################################################################################
+- alias: "Door Sensor - Diningroom door open Diningroom light off"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_104_contact # Sensor Diningroom Door
+
+  variables:
+    season: sensor.season
+    kay_learning: switch.kay_learning
+    door_sensor_diningroom: binary_sensor.zwave2mqtt_nodeid_104_contact
+
+  condition:
+    - condition: state
+      entity_id:
+        - switch.scene_daytime
+        - switch.scene_goodnight
+        - switch.dressoir
+        - switch.full_manual_mode
+      state: "off"
+
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dressoir_all
+        brightness_pct: >-
+          {% if is_state(door_sensor_diningroom, 'on') and (is_state(season, 'autumn') or is_state(season, 'winter')) %} 100
+          {% elif is_state(door_sensor_diningroom, 'on') and (is_state(season, 'spring') or is_state(season, 'summer')) %} 20
+          {% else %} 100
+          {% endif %}
+
+    - service: homeassistant.turn_on
+      data:
+        entity_id: light.newkaku_01401eb6_a
+        brightness_pct: >-
+          {% if is_state(door_sensor_diningroom, 'on') and (is_state(season, 'spring') or is_state(season, 'summer')) %} 0
+          {% elif is_state(door_sensor_diningroom, 'off') and (is_state(season, 'spring') or is_state(season, 'summer')) %} 50
+          {% elif is_state(kay_learning, 'on') %} 100
+          {% else %} 50
+          {% endif %}

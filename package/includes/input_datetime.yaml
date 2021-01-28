@@ -1,0 +1,40 @@
+#
+#   _____ _____ _____ _____ _____       ____  _____ _____ _____ _____ _____ _____ _____
+#  |     |   | |  _  |  |  |_   _|     |    \|  _  |_   _|   __|_   _|     |     |   __|
+#  |-   -| | | |   __|  |  | | |       |  |  |     | | | |   __| | | |-   -| | | |   __|
+#  |_____|_|___|__|  |_____| |_|  _____|____/|__|__| |_| |_____| |_| |_____|_|_|_|_____|
+#                                |_____|
+###########################################################################################
+# INPUT_DATETIME
+# https://www.home-assistant.io/integrations/input_datetime/
+###########################################################################################
+---
+washing_machine_on:
+  name: "Washing machine last started"
+  has_date: true
+  has_time: true
+
+washing_machine_off:
+  name: "Washing machine last done"
+  has_date: true
+  has_time: true
+
+dishwasher_on:
+  name: "Dishwasher last started"
+  has_date: true
+  has_time: true
+
+dishwasher_off:
+  name: "Dishwasher last done"
+  has_date: true
+  has_time: true
+
+dryer_machine_on:
+  name: "Dryer last started"
+  has_date: true
+  has_time: true
+
+dryer_machine_off:
+  name: "Dryer last done"
+  has_date: true
+  has_time: true

@@ -1,0 +1,27 @@
+#   _____ _____ _____ _____ _____ _____ _____ _____    _____ _____ _____ __    __       _____ _____
+#  | __  |  _  |_   _|  |  | __  |     |     |     |  |   __|_   _|     |  |  |  |     |     |   | |
+#  | __ -|     | | | |     |    -|  |  |  |  | | | |  |__   | | | |-   -|  |__|  |__   |  |  | | | |
+#  |_____|__|__| |_| |__|__|__|__|_____|_____|_|_|_|  |_____| |_| |_____|_____|_____|  |_____|_|___|
+###########################################################################################
+# BATHROOM CONTROL LIGHTS BASED ON SENSOR IS OFF 5MIN
+###########################################################################################
+- alias: "Control - Light - Bathroom Lights Are On"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_88_contact
+      to: "off"
+      for: "00:02:00"
+
+  condition: "{{ is_state('switch.bathroom', 'on') }}"
+
+  action:
+    - service: switch.turn_off
+      entity_id: switch.bathroom
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "Nobody in bathroom for 3 minutes. Nobody switched off the lights. Turned off bathroom switch and light"
+        title: "HA System"
+        data:
+          push:
+            thread-id: "Control System"

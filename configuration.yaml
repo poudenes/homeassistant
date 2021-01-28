@@ -1,0 +1,63 @@
+#   _____         ___ _                 _   _
+#  |     |___ ___|  _|_|___ _ _ ___ ___| |_|_|___ ___
+#  |   --| . |   |  _| | . | | |  _| .'|  _| | . |   |
+#  |_____|___|_|_|_| |_|_  |___|_| |__,|_| |_|___|_|_|
+#                      |___|
+# http://patorjk.com/software/taag/#p=display&c=bash&f=Rectangles&t=Type%20Here
+# font: rectangles
+###################################################
+#  HA Main Configuration File
+###################################################
+api:
+#breaking_changes:
+config:
+discovery:
+map:
+mobile_app:
+person:
+shopping_list:
+ssdp:
+sun:
+system_health:
+updater:
+zeroconf:
+
+alexa: !include package/includes/alexa.yaml
+asuswrt: !include package/includes/asus.yaml
+automation: !include_dir_merge_list package/automation/
+binary_sensor: !include package/includes/binary_sensors.yaml
+browser_mod: !include package/includes/browser_mod.yaml
+calendar: !include package/includes/calendar.yaml
+device_tracker: !include package/includes/device_tracker.yaml
+fan: !include package/includes/fan.yaml
+frontend: !include package/includes/frontend.yaml
+group: !include package/includes/group.yaml
+history: !include package/includes/history.yaml
+homeassistant: !include package/includes/homeassistant.yaml
+homekit: !include package/includes/homekit.yaml
+http: !include package/includes/http.yaml
+influxdb: !include package/includes/influxdb.yaml
+input_boolean: !include package/includes/input_boolean.yaml
+input_datetime: !include package/includes/input_datetime.yaml
+input_number: !include package/includes/input_number.yaml
+input_select: !include package/includes/input_select.yaml
+input_text: !include package/includes/input_text.yaml
+ios: !include package/includes/ios.yaml
+light: !include package/includes/light.yaml
+logbook: !include package/includes/logbook.yaml
+logger: !include package/includes/logger.yaml
+#media_player: !include package/includes/mediaplayer.yaml
+mqtt: !include package/includes/mqtt.yaml
+nest: !include package/includes/nest.yaml
+notify: !include package/includes/notify.yaml
+panel_iframe: !include package/includes/panel_iframe.yaml
+recorder: !include package/includes/recorder.yaml
+rflink: !include package/includes/rflink.yaml
+sensor: !include package/includes//sensors.yaml
+script: !include_dir_merge_named package/scripts/
+shell_command: !include package/includes/shell_commands.yaml
+spotify: !include package/includes/spotify.yaml
+switch: !include package/includes/switches.yaml
+tts: !include package/includes/tts.yaml
+utility_meter: !include package/includes/utility_meter.yaml
+weather: !include package/includes/weather.yaml

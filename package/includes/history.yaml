@@ -1,0 +1,74 @@
+#
+#   _____ _     _
+#  |  |  |_|___| |_ ___ ___ _ _
+#  |     | |_ -|  _| . |  _| | |
+#  |__|__|_|___|_| |___|_| |_  |
+#                          |___|
+###########################################################################################
+# HISTORY
+# https://www.home-assistant.io/integrations/history/
+###########################################################################################
+---
+include:
+  entities:
+# Device Trackers
+    - device_tracker.kay_iphone_geofency
+    - device_tracker.cenkay_xr # ICLOUD3
+    - device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f
+
+    - device_tracker.peter_iphone_geofency
+    - device_tracker.peter_iphone # ICLOUD3
+    - device_tracker.1717fe36_3c70_4599_963c_b70b6ee95eba
+    - device_tracker.peter_iphone_ios_app
+    - sensor.peter_iphone_ios_app_geocoded_location
+
+# Light and Adaptive Lighting Sensor
+    - switch.adaptive_lighting_sensor
+
+    - light.bathroom_all
+    - light.bedroom_all
+    - light.hallway_all
+    - light.balcony_all
+    - light.toilet_all
+    - light.livingroom_all
+    - light.kitchen_all
+    - light.sink_all
+
+# DSMR Current Watt delived now
+    - sensor.dsmr_reading_electricity_currently_delivered
+
+# Zwave Motion sensors
+    - binary_sensor.zwave2mqtt_nodeid_87_contact
+    - binary_sensor.zwave2mqtt_nodeid_88_contact
+    - binary_sensor.zwave2mqtt_nodeid_90_contact
+    - binary_sensor.zwave2mqtt_nodeid_91_contact
+    - binary_sensor.zwave2mqtt_nodeid_106_contact
+    - binary_sensor.zwave2mqtt_nodeid_107_contact
+    - binary_sensor.zwave2mqtt_nodeid_108_contact
+    - binary_sensor.neo_diningroomdoor_custom_sensor
+    - binary_sensor.neo_bedroomdoor_custom_sensor
+    - sensor.fibaro_frontdoor_custom_sensor
+
+# Zwave Watt and KwH
+    - sensor.zwave2mqtt_nodeid_73_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_73_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_74_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_74_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_75_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_75_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_77_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_77_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_78_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_78_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_79_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_79_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_80_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_80_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_81_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_81_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_116_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_116_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_109_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_109_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_110_electricity_w_meter
+    - sensor.zwave2mqtt_nodeid_110_electricity_kwh_meter

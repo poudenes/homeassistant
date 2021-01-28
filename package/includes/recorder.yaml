@@ -1,0 +1,65 @@
+#
+#   _____                   _
+#  | __  |___ ___ ___ ___ _| |___ ___
+#  |    -| -_|  _| . |  _| . | -_|  _|
+#  |__|__|___|___|___|_| |___|___|_|
+#
+###########################################################################################
+# RECORDER
+# https://www.home-assistant.io/integrations/recorder/
+###########################################################################################
+---
+db_url: !secret mariadb
+purge_keep_days: 3
+auto_purge: true
+commit_interval: 60
+include:
+  domains:
+    - sensor
+    - binary_sensor
+    - switch
+    - automation
+    - light
+    - media_player
+    - updater
+  entities:
+    - device_tracker.kay_iphone_geofency
+    - device_tracker.cenkay_xr
+    - device_tracker.e7b5aad4_fc4c_4ee8_98fd_2337da788a0f
+    - device_tracker.peter_iphone_geofency
+    - device_tracker.peter_iphone
+    - device_tracker.1717fe36_3c70_4599_963c_b70b6ee95eba
+    - device_tracker.peter_iphone_ios_app
+    - sensor.zwave2mqtt_nodeid_73_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_74_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_75_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_77_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_78_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_79_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_80_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_81_electricity_kwh_meter
+    - sensor.zwave2mqtt_nodeid_116_electricity_kwh_meter
+    - switch.scene_appletv
+    - switch.adaptive_lighting_sensor
+    - switch.scene_cooking
+    - switch.scene_disco
+    - switch.scene_evening
+    - switch.scene_goodnight
+    - switch.scene_guests
+    - switch.scene_kodi
+    - switch.scene_tv
+    - switch.scene_daytime
+    - switch.scene_romantic
+    - switch.scene_sleeping
+    
+# Washing, drying, dishwasher machine database
+    - sensor.dishwasher_machine_data
+    - sensor.dryer_machine_data
+    - sensor.washing_machine_data
+    - binary_sensor.dishwasher_machine
+    - binary_sensor.dryer_machine
+    - binary_sensor.washing_machine
+
+exclude:
+  entities:
+    - sensor.icloud3_event_log

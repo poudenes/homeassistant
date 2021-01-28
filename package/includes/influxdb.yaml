@@ -1,0 +1,26 @@
+#   _____ _____ _____ __    _____ __ __ ____  _____
+#  |     |   | |   __|  |  |  |  |  |  |    \| __  |
+#  |-   -| | | |   __|  |__|  |  |-   -|  |  | __ -|
+#  |_____|_|___|__|  |_____|_____|__|__|____/|_____|
+###################################################
+# INFLUXDB
+# https://www.home-assistant.io/integrations/influxdb/
+###################################################
+---
+username: !secret influxdb_user
+password: !secret influxdb_password
+database: !secret influxdb_database
+max_retries: 5
+default_measurement: state
+
+include:
+  domains:
+    - switch
+    - light
+    - sensor
+    - binary_sensor
+    - device_tracker
+
+exclude:
+  entities:
+    - sensor.icloud3_event_log

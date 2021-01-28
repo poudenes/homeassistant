@@ -1,0 +1,151 @@
+#   _____ _____ _____ __    _____ _____ _____    __    _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ __
+#  |  _  |  _  |  _  |  |  |   __|_   _|  |  |  |  |  |     |   __|  |  |_   _|  |     |     |   | |_   _| __  |     |  |
+#  |     |   __|   __|  |__|   __| | | |  |  |  |  |__|-   -|  |  |     | | |    |   --|  |  | | | | | | |    -|  |  |  |__
+#  |__|__|__|  |__|  |_____|_____| |_|  \___/   |_____|_____|_____|__|__| |_|    |_____|_____|_|___| |_| |__|__|_____|_____|
+###########################################################################################
+# APPLETV CONTROL LIGHTS RUN SCRIPT BASTED ON STATUS
+###########################################################################################
+- alias: "Control - Light - AppleTV"
+  trigger:
+    - platform: state
+      entity_id: media_player.woonkamer
+
+  variables:
+    door_sensor_diningroom: binary_sensor.neo_diningroomdoor_custom_sensor
+    motion_toilet: binary_sensor.zwave2mqtt_nodeid_87_contact
+    appletv: media_player.woonkamer
+    cooking: switch.cooking
+
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+
+    - condition: state
+      entity_id: 
+        - switch.scene_goodnight
+        - switch.full_manual_mode
+      state: "off"
+
+    - condition: state
+      entity_id: switch.scene_appletv
+      state: "on"
+
+    - condition: template
+      value_template: "{{ trigger.from_state is none or trigger.to_state is not none and trigger.to_state.state != trigger.from_state.state }}"
+
+  action:
+    - choose:
+###########################################################################################
+# Apple TV is on play modus
+###########################################################################################
+        - conditions:
+            - condition: state
+              entity_id: media_player.woonkamer
+              state: "playing"
+          sequence:
+            - wait_template: "{{ not is_state(appletv, 'playing') }}"
+              timeout: "00:00:10"
+              continue_on_timeout: true
+
+            - service: light.turn_on
+              data:
+                entity_id: light.wall_all
+                brightness_pct: 80
+
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.nanoleaf
+                  - light.window_all
+                  - light.balcony_all
+                brightness_pct: 40
+
+            - service: light.turn_off
+              entity_id:
+                - light.newkaku_011fad02_c
+                - light.newkaku_01401eb6_a
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_all
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 25 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.kitchen_all
+                  - light.sink_all
+                brightness_pct: "{{ 100 if is_state(cooking, 'on') else 0 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.toilet_all
+                brightness_pct: "{{ 100 if is_state(motion_toilet, 'on') else 0 }}"
+
+###########################################################################################
+# Apple TV is on paused modus
+###########################################################################################
+        - conditions:
+            - condition: state
+              entity_id: media_player.woonkamer
+              state: "paused"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.wall_all
+                  - light.window_all
+                  - light.kitchen_all
+                  - light.sink_all
+                  - light.toilet_all
+                  - light.balcony_all
+                brightness_pct: 100
+
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.nanoleaf
+                  - light.newkaku_01401eb6_a
+                brightness_pct: 50
+
+            - service: light.turn_on
+              data:
+                entity_id: light.dressoir_all
+                brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+###########################################################################################
+# Apple TV is on idle modus
+###########################################################################################
+      default:
+        - service: light.turn_on
+          data:
+            entity_id:
+              - light.wall_all
+              - light.window_all
+              - light.balcony_all
+            brightness_pct: 100
+
+        - service: light.turn_on
+          data:
+            entity_id:
+              - light.nanoleaf
+              - light.newkaku_01401eb6_a
+            brightness_pct: 50
+
+        - service: light.turn_on
+          data:
+            entity_id: light.dressoir_all
+            brightness_pct: "{{ 0 if is_state(door_sensor_diningroom, 'on') else 100 }}"
+
+        - service: light.turn_on
+          data:
+            entity_id:
+              - light.kitchen_all
+              - light.sink_all
+            brightness_pct: "{{ 100 if is_state(cooking, 'on') else 0 }}"
+
+        - service: light.turn_on
+          data:
+            entity_id: light.toilet_all
+            brightness_pct: "{{ 100 if is_state(motion_toilet, 'on') else 0 }}"

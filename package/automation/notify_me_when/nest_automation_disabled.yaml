@@ -1,0 +1,20 @@
+#   _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____ _____ _____ _____
+#  |   | |   __|   __|_   _|  |  _  |  |  |_   _|     |     |  _  |_   _|     |     |   | |
+#  | | | |   __|__   | | |    |     |  |  | | | |  |  | | | |     | | | |-   -|  |  | | | |
+#  |_|___|_____|_____| |_|    |__|__|_____| |_| |_____|_|_|_|__|__| |_| |_____|_____|_|___|
+###########################################################################################
+# NEST ENABLE/DISABLE CONTROL NEST NOTIFY
+###########################################################################################
+- alias: "Notification - Disable Nest Control"
+  trigger:
+    - platform: state
+      entity_id: switch.dnc
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        message: "{{ 'Automation Nest Control is disabled' if is_state('switch.dnc', 'on') else 'Automation Nest Control is enable' }}"
+        title: "HA Scene System"
+        data:
+          push:
+            thread-id: "Notify System"

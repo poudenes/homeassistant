@@ -1,0 +1,168 @@
+#   _____ _____ _____ _____ _____ _____    _____ _____ _____ _____ _____ _____ _____
+#  |     |     |_   _|     |     |   | |  |  |  |     |_   _|     |  |  |   __|   | |
+#  | | | |  |  | | | |-   -|  |  | | | |  |    -|-   -| | | |   --|     |   __| | | |
+#  |_|_|_|_____| |_| |_____|_____|_|___|  |__|__|_____| |_| |_____|__|__|_____|_|___|
+###########################################################################################
+# CONTROL LIGHT KITCHEN WHEN GOODNIGHT SCENE IS NOT ACTIVE
+###########################################################################################
+- alias: "Motion Detection - Kitchen On Off"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zwave2mqtt_nodeid_107_contact
+
+    - platform: state
+      entity_id: sun.sun
+
+  variables:
+    goodnight: switch.scene_goodnight
+    motion_kitchen: binary_sensor.zwave2mqtt_nodeid_107_contact
+    adaptive: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+  condition:
+    - condition: state
+      entity_id:
+        - switch.scene_goodnight
+        - switch.scene_cooking
+        - switch.sink
+        - switch.kitchen
+      state: "off"
+
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/ha_motion/kitchen"
+        payload: "{{ 1 if is_state(motion_kitchen, 'on') else 0 }}"
+
+    - choose:
+        ###########################################################################################
+        # CHRISTMAS
+        ###########################################################################################
+        - conditions:
+            - condition: state
+              entity_id: sensor.holiday
+              state: "Christmas"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.kitchen_all
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_all
+                color_name: "red"
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_2
+                color_name: "green"
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+        ###########################################################################################
+        # HALLOWEEN
+        ###########################################################################################
+        - conditions:
+            - condition: state
+              entity_id: sensor.holiday
+              state: "Halloween"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.kitchen_all
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_all
+                color_name: "orange"
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+        ###########################################################################################
+        # KINGSDAY
+        ###########################################################################################
+        - conditions:
+            - condition: state
+              entity_id: sensor.holiday
+              state: "Kingsday"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.kitchen_all
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_1
+                color_name: "red"
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_2
+                color_temp: 153
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_3
+                color_name: "blue"
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+        ###########################################################################################
+        # BITHRDAY
+        ###########################################################################################
+        - conditions:
+            - condition: state
+              entity_id: sensor.holiday
+              state: "Birthday"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.kitchen_all
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+                kelvin: "{{ adaptive }}"
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_1
+                effect: 0
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+            - delay: 00:00:01
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_2
+                effect: 0
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+            - delay: 00:00:01
+
+            - service: light.turn_on
+              data:
+                entity_id: light.sink_3
+                effect: 0
+                brightness_pct: "{{ 100 if is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') else 0 }}"
+
+      ###########################################################################################
+      # DEFAULT
+      ###########################################################################################
+      default:
+        - service: light.turn_on
+          data:
+            entity_id:
+              - light.kitchen_all
+              - light.sink_all
+            brightness_pct: >-
+              {% if is_state(motion_kitchen, 'on') and is_state(goodnight, 'on') %} 20
+              {% elif is_state(motion_kitchen, 'on') and is_state(goodnight, 'off') %} 100
+              {% else %}0
+              {% endif %}
+            kelvin: "{{ adaptive }}"
