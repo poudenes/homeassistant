@@ -1,0 +1,57 @@
+#  ██████╗ ███████╗███████╗████████╗ █████╗ ██████╗ ████████╗    ███████╗███████╗██████╗ ██╗   ██╗██╗ ██████╗███████╗███████╗    ██╗  ██╗ █████╗
+#  ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝██╔════╝    ██║  ██║██╔══██╗
+#  ██████╔╝█████╗  ███████╗   ██║   ███████║██████╔╝   ██║       ███████╗█████╗  ██████╔╝██║   ██║██║██║     █████╗  ███████╗    ███████║███████║
+#  ██╔══██╗██╔══╝  ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║██║     ██╔══╝  ╚════██║    ██╔══██║██╔══██║
+#  ██║  ██║███████╗███████║   ██║   ██║  ██║██║  ██║   ██║       ███████║███████╗██║  ██║ ╚████╔╝ ██║╚██████╗███████╗███████║    ██║  ██║██║  ██║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝  ╚═╝
+###########################################################################################
+# SYSTEM ENABLE RANDOM DOORS OPEN AUTOMATION AFTER HA START OTHERWISE VALUES ARE INCORRECT
+###########################################################################################
+- id: "0fc166ca-751e-48eb-b6a8-05343ed31eab"
+  alias: "System - After HA Restart start services"
+  trigger:
+    - platform: homeassistant
+      event: start
+
+  condition: []
+
+  variables:
+    zwave_switch: >-
+      {% if is_state('sensor.dishwasher_switch_node_status', 'alive') %} 
+        online
+      {% else %} 
+        ⚠️ offline ⚠️
+      {% endif %}
+    zwave_motion: >-
+      {% if is_state('sensor.diningroom_node_status', 'asleep') %} 
+        online
+      {% else %} 
+        ⚠️ offline ⚠️
+      {% endif %}
+
+  action:
+    - service: button.press
+      target:
+        entity_id: button.galaxy_tab_a_load_start_url
+
+    - service: automation.turn_on
+      entity_id: automation.control_light_lux_control
+
+    - service: switch.turn_on
+      target:  
+        entity_id: switch.fan_low
+
+    - service: button.press
+      data: {}
+      target:
+        entity_id: button.galaxy_tab_a_load_start_url
+
+    - service: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          HA has been restarted.
+          Zwave: {{ states('sensor.count_zwave_devices') }}.
+          All services are up and running again.
+        thread_id: "ha_notification"
+        url: "NONE"

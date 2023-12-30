@@ -1,0 +1,34 @@
+#  ███╗   ██╗ ██████╗ ████████╗██╗███████╗██╗   ██╗
+#  ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝╚██╗ ██╔╝
+#  ██╔██╗ ██║██║   ██║   ██║   ██║█████╗   ╚████╔╝ 
+#  ██║╚██╗██║██║   ██║   ██║   ██║██╔══╝    ╚██╔╝  
+#  ██║ ╚████║╚██████╔╝   ██║   ██║██║        ██║   
+#  ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝   
+###########################################################################################
+---
+###########################################################################################
+# TWITTER
+# https://www.home-assistant.io/integrations/twitter/
+###########################################################################################
+- platform: twitter
+  name: "Twitter"
+  consumer_key: !secret twitter_consumer_key
+  consumer_secret: !secret twitter_consumer_secret
+  access_token: !secret twitter_access_token
+  access_token_secret: !secret twitter_access_token_secret
+
+# - platform: manish
+#   name: "HA Whatsapp to Kay"
+#   target: !secret meta_whatsapp_target_kay
+#   token: !secret meta_whatsapp_token
+#   phone_number_id: !secret meta_whatsapp_number
+#   template: ha_template
+#   language: en_US
+
+- platform: manish
+  name: "HA Whatsapp to Peter"
+  target: !secret meta_whatsapp_target_peter
+  token: !secret meta_whatsapp_token
+  phone_number_id: !secret meta_whatsapp_number
+  template: ha_template
+  language: en_US

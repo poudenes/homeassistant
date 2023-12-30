@@ -1,0 +1,150 @@
+#   ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ █████╗ ███╗   ██╗██████╗         ██╗     ██╗███╗   ██╗███████╗
+#  ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔══██╗████╗  ██║██╔══██╗        ██║     ██║████╗  ██║██╔════╝
+#  ██║     ██║   ██║██╔████╔██║██╔████╔██║███████║██╔██╗ ██║██║  ██║        ██║     ██║██╔██╗ ██║█████╗  
+#  ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══██║██║╚██╗██║██║  ██║        ██║     ██║██║╚██╗██║██╔══╝  
+#  ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║██████╔╝███████╗███████╗██║██║ ╚████║███████╗
+#   ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
+###########################################################################################
+# https://www.home-assistant.io/integrations/command_line/
+###########################################################################################
+---
+#################################################################
+# MVPS Cronjobs manual actions
+#################################################################
+# - switch:
+#     name: "MVPS - Rspamd Learning"
+#     unique_id: "669c8d8f-28e1-428d-8455-ed59ac6c4557"
+#     command_on: !secret mvps_rspamd_learn
+
+# - switch:
+#     name: "MVPS - Clean logfiles"
+#     unique_id: "2ca8e66f-3400-48c3-824d-198955fa1ade"
+#     command_on: !secret mvps_clearlog
+
+# - switch:
+#     name: "MVPS - Backup Vmail manual"
+#     unique_id: "5d34d161-69f6-43d2-a09a-8a2e74be1ad0"
+#     command_on: !secret mvps_backup_vmail
+
+# - switch:
+#     name: "MVPS - Backup ISPconfig Full manual"
+#     unique_id: "b8ead392-4f9b-4c33-b9de-ec928462a962"
+#     command_on: !secret mvps_backup_ispconfig
+
+# - switch:
+#     name: "MVPS - Backup WWW Full manual"
+#     unique_id: "442b50fe-77fc-4591-aa74-597b4054774f"
+#     command_on: !secret mvps_backup_full
+
+# - switch:
+#     name: "MVPS - Backup dB manual"
+#     unique_id: "154c03eb-abb8-4b86-941f-d6d3f0495c76"
+#     command_on: !secret mvps_backup_db
+
+# - switch:
+#     name: "MVPS - Update blacklist manual"
+#     unique_id: "aaaa3567-fb1f-4448-9c7a-2534a4edd37d"
+#     command_on: !secret mvps_update_blacklist
+
+# - switch:
+#     name: "MVPS - Update IPSet-abuseipdb manual"
+#     unique_id: "00e0b018-742c-40b3-8718-4d0563f1b2fd"
+#     command_on: !secret mvps_ipset_abuseipdb
+
+# - switch:
+#     name: "MVPS - Update OS manual"
+#     unique_id: "042f20e2-8605-4f59-9d37-4f0b869b399c"
+#     command_on: !secret mvps_apt_update
+
+#################################################################
+# HA Backup Manager
+#################################################################
+- sensor:
+    name: "HA Backup Manager Addon List"
+    unique_id: "7b2d1bd7-13cc-438a-9d72-569a51ccfb6d"
+    command: 'curl http://supervisor/addons -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)"  | jq -rc ''.data.addons[] | select (.installed != false) | .slug'' | jq --raw-input . | jq --slurp  | jq -r ''{"List":.}'''
+    value_template: "{{ value_json|length }}"
+    json_attributes:
+      - List
+    scan_interval: 1800
+
+#################################################################
+# Sensor for Name
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Name"
+    unique_id: "8483db19-5342-4517-996f-af15ff3f99b6"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.name | default}}"
+    scan_interval: 10
+
+#################################################################
+# Dimension
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Dimension"
+    unique_id: "28f653de-0540-40dd-8699-fc92f44cb3eb"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.size | default}}"
+    unit_of_measurement: MB
+    scan_interval: 10
+
+#################################################################
+# Date
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Date"
+    unique_id: "b7a7716c-b0d0-4e29-a7b3-ad63d363edee"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{ value_json.date | as_timestamp | timestamp_custom('%Y-%m-%d') }}"
+    scan_interval: 10
+
+#################################################################
+# Type
+#################################################################
+- sensor:
+    name: "HA Backup Last Backup Type"
+    unique_id: "c7e4b267-02f7-4b43-a1c9-cf7f66f800ad"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.type | default}}"
+    scan_interval: 10
+
+#################################################################
+# Protected
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Protected"
+    unique_id: "837df50c-33ac-4587-a7fd-23799b2eee9a"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.protected | default}}"
+    scan_interval: 10
+
+#################################################################
+# File Name
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Slug"
+    unique_id: "2f5ffd4f-9895-423f-bab9-e5b227431897"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.slug | default}}"
+    scan_interval: 10
+
+#################################################################
+# Number of backups
+#################################################################
+- sensor:
+    name: "HA Backup Retained Backups"
+    unique_id: "8e7cecb7-149d-4822-a1d9-f31296961496"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq --raw-output ".data.backups[].slug" | wc -w'
+    scan_interval: 10
+
+#################################################################
+# Dimension of backups archive
+#################################################################
+- sensor:
+    name: "HA Backup Manager Archive Dimension"
+    unique_id: "56281793-d4ea-4321-b2bc-930fe37cfc76"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq --raw-output ''.data.backups[].size'' | awk ''{s+=$1} END {print s}'''
+    value_template: "{{ value | multiply(0.0009765625) | round(2) }}"
+    unit_of_measurement: "GB"
+    scan_interval: 10

@@ -1,0 +1,82 @@
+#  ███████╗ ██████╗ ███╗   ██╗███████╗███████╗
+#  ╚══███╔╝██╔═══██╗████╗  ██║██╔════╝██╔════╝
+#    ███╔╝ ██║   ██║██╔██╗ ██║█████╗  ███████╗
+#   ███╔╝  ██║   ██║██║╚██╗██║██╔══╝  ╚════██║
+#  ███████╗╚██████╔╝██║ ╚████║███████╗███████║
+#  ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# https://www.home-assistant.io/integrations/zone/
+###########################################################################################
+- name: "Home" # Manual set home to radius of 200 meter
+  latitude: !secret latitude_asingaborg
+  longitude: !secret longitude_asingaborg
+  radius: 150
+  icon: mdi:account-multiple
+
+- name: "Gelderlandplein"
+  latitude: !secret lat_gelderlandplein
+  longitude: !secret lon_gelderlandplein
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "Ter Gooi"
+  latitude: !secret lat_tergooi
+  longitude: !secret lon_tergooi
+  radius: 350
+  icon: mdi:account-multiple
+
+- name: "Amsterdam Zuid"
+  latitude: !secret lat_asdz
+  longitude: !secret lon_asdz
+  radius: 210
+  icon: mdi:account-multiple
+
+- name: "Haarlem Station"
+  latitude: !secret lat_hlm
+  longitude: !secret lon_hlm
+  radius: 100
+  icon: mdi:account-multiple
+
+- name: "Amsterdam Amstel"
+  latitude: !secret lat_asa
+  longitude: !secret lon_asa
+  radius: 170
+  icon: mdi:account-multiple
+
+- name: "Fitness"
+  latitude: !secret lat_fitness
+  longitude: !secret lon_fitness
+  radius: 36
+  icon: mdi:account-multiple
+
+- name: "Rustplaats HH"
+  latitude: !secret lat_hh
+  longitude: !secret lon_hh
+  radius: 80
+  icon: mdi:account-multiple
+
+- name: "Amstelveen Stadshart"
+  latitude: !secret lat_stadshart
+  longitude: !secret lon_stadshart
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "Amsterdam Centraal"
+  latitude: !secret lat_asd
+  longitude: !secret lon_asd
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "Schiphol"
+  latitude: !secret lat_schiphol
+  longitude: !secret lon_schiphol
+  radius: 700
+  icon: mdi:account-multiple
+
+- name: "Amsterdam Bijlmer"
+  latitude: !secret lat_asb
+  longitude: !secret lon_asb
+  radius: 150
+  icon: mdi:account-multiple

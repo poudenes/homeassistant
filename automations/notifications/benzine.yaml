@@ -1,0 +1,28 @@
+#  ███████╗██╗   ██╗██████╗  ██████╗  █████╗ ███████╗              ██████╗ ██████╗ ██╗ ██████╗███████╗███████╗
+#  ██╔════╝██║   ██║██╔══██╗██╔═══██╗██╔══██╗██╔════╝              ██╔══██╗██╔══██╗██║██╔════╝██╔════╝██╔════╝
+#  █████╗  ██║   ██║██████╔╝██║   ██║╚██████║███████╗    █████╗    ██████╔╝██████╔╝██║██║     █████╗  ███████╗
+#  ██╔══╝  ██║   ██║██╔══██╗██║   ██║ ╚═══██║╚════██║    ╚════╝    ██╔═══╝ ██╔══██╗██║██║     ██╔══╝  ╚════██║
+#  ███████╗╚██████╔╝██║  ██║╚██████╔╝ █████╔╝███████║              ██║     ██║  ██║██║╚██████╗███████╗███████║
+#  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝              ╚═╝     ╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝
+###########################################################################################
+# NOTIFY ME WHERE GAS IS CHEAP
+###########################################################################################
+- id: "5042aebb-16e5-439d-b087-0f67bc213b3a"
+  alias: "Notification - Euro95 prices"
+  trigger:
+    - platform: time_pattern
+      hours: "/3"
+
+  condition:
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "dgp/gas_stations"
+        payload_template: '{"fuel_type":"euro95","radius":5,"identifier":"work","latitude":{{ state_attr("zone.ter_gooi", "latitude") }},"longitude":{{ state_attr("zone.ter_gooi", "longitude") }}, "friendly_name_template":"[brand] ([station_street])","to_publish":5}'
+
+    - service: mqtt.publish
+      data:
+        topic: "dgp/gas_stations"
+        payload_template: '{"fuel_type":"euro95","radius":5,"identifier":"home","latitude":{{ state_attr("zone.home", "latitude") }},"longitude":{{ state_attr("zone.home", "longitude") }}, "friendly_name_template":"[brand] ([station_street])","to_publish":5}'

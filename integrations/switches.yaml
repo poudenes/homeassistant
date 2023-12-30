@@ -1,0 +1,225 @@
+#  ███████╗██╗    ██╗██╗████████╗ ██████╗██╗  ██╗███████╗███████╗
+#  ██╔════╝██║    ██║██║╚══██╔══╝██╔════╝██║  ██║██╔════╝██╔════╝
+#  ███████╗██║ █╗ ██║██║   ██║   ██║     ███████║█████╗  ███████╗
+#  ╚════██║██║███╗██║██║   ██║   ██║     ██╔══██║██╔══╝  ╚════██║
+#  ███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║███████╗███████║
+#  ╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# RFLINK SWITCH
+# https://www.home-assistant.io/integrations/switch.rflink/
+###########################################################################################
+- platform: rflink
+  devices:
+    newkaku_014e5906_a: {}
+
+###########################################################################################
+# GROUP
+###########################################################################################
+- platform: group
+  name: "helpers_switches"
+  entities:
+    - switch.seeling_light_switch
+    - switch.sink_light_switch
+    - switch.bedroom_light_switch
+    - switch.bathroom_light_switch
+    - switch.hallway_light_switch
+    - switch.cooking_light_switch
+    - switch.dressoir_light_switch
+    - switch.diningtable_light_switch
+    - switch.wall_light_switch
+    - switch.window_light_switch
+    - switch.balcony_light_switch
+    - switch.toilet_light_switch
+    - switch.newkaku_014e5906_a
+
+- platform: group
+  name: "helpers_zwave_wallswitches"
+  entities:
+    - switch.xmas_tree_wall
+    - switch.imac_wall
+    - switch.toog_wall
+    - switch.kay_wall
+    - switch.peter_wall
+    - switch.balcony_wall
+    - switch.bedroom_wall
+    - switch.xmas_1_wall
+
+###########################################################################################
+# LOGITECH HARMONY
+# https://www.home-assistant.io/integrations/switch.template/
+###########################################################################################
+- platform: template
+  switches:
+    ###########################################################################################
+    # TEMPLATE SCENES FOR ALEXA TO CONTROL SCENES INPUT_SELECT.HELPERS_SCENES
+    ###########################################################################################
+    helpers_appletv:
+      friendly_name: "Scene AppleTV"
+      unique_id: "2bcdc44b-8d10-4933-b94b-6de61adb63dc"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene appletv"
+      turn_off:
+        service: script.none
+
+    helpers_chromecast:
+      friendly_name: "Scene Chromecast"
+      unique_id: "562b18c0-1dc2-498c-922a-e4e1eac50912"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene chromecast')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene chromecast"
+      turn_off:
+        service: script.none
+
+    helpers_daytime:
+      friendly_name: "Scene Daytime"
+      unique_id: "4c60b38d-a9ea-46cf-b4ec-9818f1d54552"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene daytime')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene daytime"
+      turn_off:
+        service: script.none
+
+    helpers_dinner:
+      friendly_name: "Scene Dinner"
+      unique_id: "1d18381a-4392-4494-9dff-eb23fb385b81"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene dinner')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene dinner"
+      turn_off:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "None"
+
+    helpers_evening:
+      friendly_name: "Scene Evening"
+      unique_id: "760c0565-0b5f-4587-a28a-b3e50706a18d"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene evening')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene evening"
+      turn_off:
+        service: script.none
+
+    helpers_goodnight:
+      friendly_name: "Scene Goodnight"
+      unique_id: "9eed7e61-62be-4946-8555-3f1de05bca09"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene goodnight')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene goodnight"
+      turn_off:
+        service: script.none
+
+    helpers_kodi:
+      friendly_name: "Scene Kodi"
+      unique_id: "cbe7a004-0259-4e93-a6e1-e4b0df9e4c89"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene kodi')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene kodi"
+      turn_off:
+        service: script.none
+
+    helpers_nintendo:
+      friendly_name: "Scene Nintendo"
+      unique_id: "82b8a3a1-4448-4d2f-b279-68fc75038ab7"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene nintendo')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene nintendo"
+      turn_off:
+        service: script.none
+
+    helpers_tv:
+      friendly_name: "Scene TV"
+      unique_id: "2a738e92-bf64-46a2-9919-bc8303e6d027"
+      value_template: "{{ is_state('input_select.helpers_scenes', 'scene tv')}}"
+      turn_on:
+        service: input_select.select_option
+        target:
+          entity_id: input_select.helpers_scenes
+        data:
+          option: "scene tv"
+      turn_off:
+        service: script.none
+
+###########################################################################################
+# MOMENTARY SWITCH
+# https://github.com/twrecked/hass-momentary/blob/master/README.md
+#
+# 11-11-2023: Run beta version. Everything in config ecosystem
+#
+###########################################################################################
+# - platform: momentary
+#   name: "Peter Early Up"
+#   mode: "on"
+#   cancellable: true
+#   toggle_for: 18000
+
+# - platform: momentary
+#   name: "Early Sleep"
+#   mode: "on"
+#   cancellable: true
+#   toggle_for: 18000
+
+# - platform: momentary
+#   name: "Guests"
+#   mode: "on"
+#   cancellable: true
+#   toggle_for: 32400
+
+# - platform: momentary
+#   name: "For testing"
+#   mode: "on"
+#   cancellable: true
+#   toggle_for: 5
+
+# - platform: momentary
+#   name: "Scene Morning"
+#   mode: "on"
+#   cancellable: true
+#   toggle_for: 14400
+
+###########################################################################################
+# HUE EFFECTS TEST
+###########################################################################################
+# - platform: rest
+#   resource: https://192.168.100.19/api/5gotg3yk7iCPKyui7tVFaliTk6DLsG9m5WkyFgFT/sensors/35/state
+#   name: "HUE Labs rainbow"
+#   body_on: '{"status": 1}'
+#   body_off: '{"status": 0}'
+#   method: put
+#   verify_ssl: false

@@ -1,0 +1,37 @@
+#  ██╗      ██████╗  ██████╗  ██████╗ ███████╗██████╗ 
+#  ██║     ██╔═══██╗██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+#  ██║     ██║   ██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+#  ██║     ██║   ██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+#  ███████╗╚██████╔╝╚██████╔╝╚██████╔╝███████╗██║  ██║
+#  ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# LOGGER
+# https://www.home-assistant.io/integrations/logger/
+# critical < fatal < error < warning < info < debug < notset
+###########################################################################################
+default: warning
+logs:
+  aiohttp.server: fatal
+  aioharmony.hubconnector_xmpp: fatal
+  custom_components.icloud3.device_tracker: fatal
+  homeassistant.core: fatal
+  homeassistant.components: error
+  homeassistant.components.alexa.state_report: fatal
+  homeassistant.components.fully_kiosk: fatal
+  homeassistant.components.github: fatal
+  homeassistant.components.influxdb: fatal
+  homeassistant.components.mqtt: fatal
+  homeassistant.components.nanoleaf.light: fatal
+  homeassistant.components.rdw: fatal
+  homeassistant.components.recorder.purge: fatal
+  homeassistant.components.sabnzbd: fatal
+  homeassistant.components.websocket_api.http.connection: fatal
+  homeassistant.helpers.template: fatal
+  pynanoleaf.pynanoleaf: fatal
+  pychromecast.socket_client: fatal
+  homeassistant.components.co2signal: fatal
+
+  icloud3: fatal
+  # pyhap.characteristic: debug

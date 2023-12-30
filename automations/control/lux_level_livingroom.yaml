@@ -1,0 +1,84 @@
+#  ██╗     ██╗   ██╗██╗  ██╗    ██╗     ███████╗██╗   ██╗███████╗██╗          ██████╗ ██████╗ ███╗   ██╗████████╗██████╗  ██████╗ ██╗
+#  ██║     ██║   ██║╚██╗██╔╝    ██║     ██╔════╝██║   ██║██╔════╝██║         ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██║
+#  ██║     ██║   ██║ ╚███╔╝     ██║     █████╗  ██║   ██║█████╗  ██║         ██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║██║
+#  ██║     ██║   ██║ ██╔██╗     ██║     ██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║         ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║██║
+#  ███████╗╚██████╔╝██╔╝ ██╗    ███████╗███████╗ ╚████╔╝ ███████╗███████╗    ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╔╝███████╗
+#  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝    ╚══════╝╚══════╝  ╚═══╝  ╚══════╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+###########################################################################################
+# LIVINGROOM AND DINGROOM CONTROL LIGHTS BASED ON LUX LEVEL ON STATUS
+###########################################################################################
+- id: "ba77f88e-1d90-47c9-9aaa-35d81b0837c7"
+  alias: "Control - Light - Lux Control"
+  initial_state: false
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.livingroom_detection
+        - binary_sensor.diningroom_detection
+
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "23:00:00"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+    - "{{ is_state('select.logitech_harmony_activities', 'power_off') }}"
+    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+    - "{{ is_state('switch.momentary_guests', 'off') }}"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+    - "{{ states('input_select.helpers_scenes') not in ['scene goodnight', 'scene appletv', 'scene tv','scene dinner'] }}"
+
+  action:
+    - if:
+        - "{{ states('sensor.livingroom_lux')|int < 200 and states('sensor.livingroom_lux')|int >= 0}}"
+        - "{{ is_state('input_boolean.function_lux_low', 'off') }}"
+
+      then:
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.function_lux_low
+
+        - wait_template: "{{ is_state('input_boolean.function_lux_low', 'on') }}"
+
+        - service: light.turn_on
+          target:
+            entity_id: light.livingroom_all
+          data:
+            brightness_pct: 100
+            kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+        - service: light.turn_on
+          target:
+            entity_id: light.dressoir_all
+          data:
+            brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
+            kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+        - continue_on_error: true
+          service: script.engine_say
+          data:
+            media_player: media_player.livingroom
+            notify: notify.alexa_media_livingroom
+            call_lux_evening_on: 1
+
+    - if:
+        - "{{ states('sensor.livingroom_lux')|int > 700 }}"
+        - "{{ is_state('input_boolean.function_lux_low', 'on') }}"
+
+      then:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.function_lux_low
+
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.livingroom_all
+              - light.dressoir_all
+
+        - continue_on_error: true
+          service: script.engine_say
+          data:
+            media_player: media_player.livingroom
+            notify: notify.alexa_media_livingroom
+            call_lux_evening_off: 1

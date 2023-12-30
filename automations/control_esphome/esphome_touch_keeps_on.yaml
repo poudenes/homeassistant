@@ -1,0 +1,58 @@
+#  ██████╗ ███████╗███████╗███████╗████████╗    ███████╗███████╗██████╗ ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗
+#  ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗██║  ██║██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║
+#  ██████╔╝█████╗  ███████╗█████╗     ██║       █████╗  ███████╗██████╔╝███████║██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║██║   ██║██║     ███████║
+#  ██╔══██╗██╔══╝  ╚════██║██╔══╝     ██║       ██╔══╝  ╚════██║██╔═══╝ ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║██║   ██║██║     ██╔══██║
+#  ██║  ██║███████╗███████║███████╗   ██║       ███████╗███████║██║     ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝       ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝
+###########################################################################################
+# Reset ESPHome Touch by turn off and on the power of it.
+###########################################################################################
+- id: "91c10b70-3ae3-4999-b28a-cfdf7e9e143a"
+  alias: "System - Reset touch of keep on"
+
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.esphome_bedroom_touch_1
+        - binary_sensor.esphome_hallway_touch_1
+        - binary_sensor.esphome_toilet_touch_1
+        - binary_sensor.esphome_diningroom_touch_1
+        - binary_sensor.esphome_livingroom_touch_1
+        - binary_sensor.esphome_livingroom_touch_2
+        - binary_sensor.esphome_dressoir_touch_1
+        - binary_sensor.esphome_dressoir_touch_2
+        - binary_sensor.esphome_kitchen_touch_1
+        - binary_sensor.esphome_kitchen_touch_2
+        - binary_sensor.esphome_kitchen_touch_3
+      to: "on"
+      for: "00:00:15"
+
+  variables:
+    name: "{{ trigger.entity_id[22:-8] }}"
+
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.esphome_{{ name }}_touch_1_power
+
+    - delay: "00:00:02"
+
+    - service: switch.turn_on
+      target:
+        entity_id: switch.esphome_{{ name }}_touch_1_power
+
+    - service: persistent_notification.create
+      data:
+        title: "HA - Notification"
+        message: |
+          The {{ name }} touch was on for 15 seconds. 
+          Did a reset on the {{ name }} touch power switch.
+        notification_id: "esp_touch_keeps_on"
+
+    - service: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          The {{ name }} touch was on for 15 seconds. 
+          Did a reset on the {{ name }} touch power switch.
+        notification_id: "esp_touch_keeps_on"
