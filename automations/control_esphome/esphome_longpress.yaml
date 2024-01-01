@@ -8,7 +8,7 @@
 # ESPHOME BATHROOM LONGPRESS
 ###########################################################################################
 - id: "bb68c1cb-4e0e-4ee3-80c4-39aad00d3a61"
-  alias: "ESPHome - Bathroom longpress"
+  alias: "ESPHome - Longpress"
   mode: restart
   trigger:
     - platform: state
