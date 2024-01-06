@@ -20,7 +20,7 @@
     - service: mqtt.publish
       data:
         topic: "dgp/gas_stations"
-        payload_template: '{"fuel_type":"euro95","radius":5,"identifier":"work","latitude":{{ state_attr("zone.ter_gooi", "latitude") }},"longitude":{{ state_attr("zone.ter_gooi", "longitude") }}, "friendly_name_template":"[brand] ([station_street])","to_publish":5}'
+        payload_template: '{"fuel_type":"euro95","radius":5,"identifier":"work","latitude":{{ state_attr("zone.umc_utrecht", "latitude") }},"longitude":{{ state_attr("zone.umc_utrecht", "longitude") }}, "friendly_name_template":"[brand] ([station_street])","to_publish":5}'
 
     - service: mqtt.publish
       data:
