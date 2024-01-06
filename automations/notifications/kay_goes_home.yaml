@@ -16,6 +16,11 @@
         - sensor.cenkay_iphone_badge
       from: "Ter Gooi"
 
+    - platform: state
+      entity_id:
+        - sensor.cenkay_iphone_badge
+      from: "UMC Utrecht"
+
   condition: []
 
   action:
@@ -24,4 +29,4 @@
         title: "Kay goes home"
         thread_id: "HA - kay goes home"
         message: |
-          Kay is driving home from Ter Gooi
+          Kay is driving home from work.
