@@ -27,7 +27,7 @@ flash_briefings:
 
 smart_home:
 #  endpoint: https://api.eu.amazonalexa.com/v3/events
-  endpoint: https://api.amazonalexa.com/v3/events# Needed for Alexa Skill build witg amazon_nl@ account
+  endpoint: https://api.amazonalexa.com/v3/events # Needed for Alexa Skill build witg amazon_nl@ account
   client_id: !secret alexa_smart_home_id
   client_secret: !secret alexa_smart_home_secret
   filter:
@@ -60,15 +60,15 @@ smart_home:
       - input_boolean.function_tvonly
 
       # Nest Protect
-      - binary_sensor.bedroom_nest_protect_co_status
-      - binary_sensor.bedroom_nest_protect_heat_status
-      - binary_sensor.bedroom_nest_protect_smoke_status
-      - binary_sensor.dining_room_nest_protect_co_status
-      - binary_sensor.dining_room_nest_protect_heat_status
-      - binary_sensor.dining_room_nest_protect_smoke_status
-      - binary_sensor.living_room_nest_protect_co_status
-      - binary_sensor.living_room_nest_protect_heat_status
-      - binary_sensor.living_room_nest_protect_smoke_status
+      - binary_sensor.nest_protect_bedroom_smoke_status
+      - binary_sensor.nest_protect_bedroom_co_status
+      - binary_sensor.nest_protect_bedroom_heat_status
+      - binary_sensor.nest_protect_entryway_smoke_status
+      - binary_sensor.nest_protect_entryway_co_status
+      - binary_sensor.nest_protect_entryway_heat_status
+      - binary_sensor.nest_protect_living_room_smoke_status
+      - binary_sensor.nest_protect_living_room_co_status
+      - binary_sensor.nest_protect_living_room_heat_status
 
       # Lights
       - light.hallway_all

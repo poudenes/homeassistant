@@ -125,12 +125,15 @@ include:
     - sensor.fan_timer
 
     # NEST Protect Smoke detectors
-    - binary_sensor.bedroom_nest_protect_co_status
-    - binary_sensor.bedroom_nest_protect_smoke_status
-    - binary_sensor.dining_room_nest_protect_co_status
-    - binary_sensor.dining_room_nest_protect_smoke_status
-    - binary_sensor.living_room_nest_protect_co_status
-    - binary_sensor.living_room_nest_protect_smoke_status
+    - binary_sensor.nest_protect_bedroom_smoke_status
+    - binary_sensor.nest_protect_bedroom_co_status
+    - binary_sensor.nest_protect_bedroom_heat_status
+    - binary_sensor.nest_protect_entryway_smoke_status
+    - binary_sensor.nest_protect_entryway_co_status
+    - binary_sensor.nest_protect_entryway_heat_status
+    - binary_sensor.nest_protect_living_room_smoke_status
+    - binary_sensor.nest_protect_living_room_co_status
+    - binary_sensor.nest_protect_living_room_heat_status
 
     # Motion Sensors
     - binary_sensor.bathroom_detection

@@ -21,18 +21,15 @@
   filter:
     include_entities:
       - climate.entryway
-      - binary_sensor.bedroom_nest_protect_co_status
-      - binary_sensor.bedroom_nest_protect_heat_status
-      - binary_sensor.bedroom_nest_protect_smoke_status
-      - binary_sensor.bedroom_nest_protect_online
-      - binary_sensor.dining_room_nest_protect_co_status
-      - binary_sensor.dining_room_nest_protect_heat_status
-      - binary_sensor.dining_room_nest_protect_smoke_status
-      - binary_sensor.dining_room_nest_protect_online
-      - binary_sensor.living_room_nest_protect_co_status
-      - binary_sensor.living_room_nest_protect_heat_status
-      - binary_sensor.living_room_nest_protect_smoke_status
-      - binary_sensor.living_room_nest_protect_online
+      - binary_sensor.nest_protect_bedroom_smoke_status
+      - binary_sensor.nest_protect_bedroom_co_status
+      - binary_sensor.nest_protect_bedroom_heat_status
+      - binary_sensor.nest_protect_entryway_smoke_status
+      - binary_sensor.nest_protect_entryway_co_status
+      - binary_sensor.nest_protect_entryway_heat_status
+      - binary_sensor.nest_protect_living_room_smoke_status
+      - binary_sensor.nest_protect_living_room_co_status
+      - binary_sensor.nest_protect_living_room_heat_status
 
   entity_config:
     binary_sensor.bedroom_nest_protect_co_status:
@@ -41,24 +38,18 @@
       name: "Heat bedroom"
     binary_sensor.bedroom_nest_protect_smoke_status:
       name: "Smoke bedroom"
-    binary_sensor.bedroom_nest_protect_online:
-      name: "Online bedroom"
     binary_sensor.dining_room_nest_protect_co_status:
       name: "CO hallway"
     binary_sensor.dining_room_nest_protect_heat_status:
       name: "Heat hallweay"
     binary_sensor.dining_room_nest_protect_smoke_status:
       name: "Smoke hallway"
-    binary_sensor.dining_room_nest_protect_online:
-      name: "Online hallway"
     binary_sensor.living_room_nest_protect_co_status:
       name: "CO livingroom"
     binary_sensor.living_room_nest_protect_heat_status:
       name: "Heat livingroom"
     binary_sensor.living_room_nest_protect_smoke_status:
       name: "Smoke livingroom"
-    binary_sensor.living_room_nest_protect_online:
-      name: "Online livingroom"
 
 ###########################################################################################
 # MOTION SENSORS
