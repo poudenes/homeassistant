@@ -29,6 +29,7 @@ button:
 switch:
   - platform: safe_mode
     name: "${friendly} - safe mode"
+    id: "${friendly}_safe_mode"
     
 sensor:
   - platform: wifi_signal
