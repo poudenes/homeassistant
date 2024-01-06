@@ -11,7 +11,7 @@
 # https://www.home-assistant.io/docs/authentication/providers/
 # https://www.home-assistant.io/docs/configuration/customizing-devices/
 ###########################################################################################
-legacy_templates: false
+# legacy_templates: false
 customize: !include_dir_merge_named /config/customize/
 customize_glob: !include /config/integrations/customize_global.yaml
 allowlist_external_dirs:
