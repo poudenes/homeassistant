@@ -27,6 +27,12 @@
   radius: 350
   icon: mdi:account-multiple
 
+- name: "UMC Utrecht"
+  latitude: !secret lat_umc_utrecht
+  longitude: !secret lon_umc_utrecht
+  radius: 650
+  icon: mdi:account-multiple
+
 - name: "Amsterdam Zuid"
   latitude: !secret lat_asdz
   longitude: !secret lon_asdz
