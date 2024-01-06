@@ -30,67 +30,31 @@
 
   variables:
     name: "{{ trigger.entity_id[22:-8] }}"
+    entity: >-
+      {% if name == 'diningroom' %}  switch.diningroom_touch_1_power
+      {% elif name == 'bathroom' %}  switch.bathroom_touch_1_power
+      {% elif name == 'bedroom' %}  switch.bedroom_touch_1_power
+      {% elif name == 'diningtable' %} switch.diningtable_touch_1_power
+      {% elif name == 'diningroom' %} switch.diningroom_touch_1_power
+      {% elif name == 'hallway' %} switch.hallway_touch_1_power
+      {% elif name == 'seeling' %} switch.kitchen_touch_1_power
+      {% elif name == 'sink' %} switch.kitchen_touch_1_power
+      {% elif name == 'cooking' %} switch.kitchen_touch_1_power
+      {% elif name == 'toilet' %} switch.toilet_touch_1_power
+      {% elif name == 'wall' %} switch.livingroom_touch_1_power
+      {% elif name == 'window' %} switch.livingroom_touch_1_power
+      {% endif %}
 
   action:
     - service: switch.turn_off
       target:
-        entity_id: >-
-          {% if is_state('binary_sensor.balcony_touch', 'on') %} 
-            switch.diningroom_touch_1_power
-          {% elif is_state('binary_sensor.bathroom_touch', 'on') %} 
-            switch.bathroom_touch_1_power
-          {% elif is_state('binary_sensor.bedroom_touch', 'on') %} 
-            switch.bedroom_touch_1_power
-          {% elif is_state('binary_sensor.cooking_touch', 'on') %}
-            switch.kitchen_touch_1_power
-          {% elif is_state('binary_sensor.diningtable_touch', 'on') %}
-            switch.diningtable_touch_1_power
-          {% elif is_state('binary_sensor.dressoir_touch', 'on') %}
-            switch.diningroom_touch_1_power
-          {% elif is_state('binary_sensor.hallway_touch', 'on') %}
-            switch.hallway_touch_1_power
-          {% elif is_state('binary_sensor.seeling_touch', 'on') %}
-            switch.kitchen_touch_1_power
-          {% elif is_state('binary_sensor.sink_touch', 'on') %}
-            switch.kitchen_touch_1_power
-          {% elif is_state('binary_sensor.toilet_touch', 'on') %}
-            switch.toilet_touch_1_power
-          {% elif is_state('binary_sensor.wall_touch', 'on') %}
-            switch.livingroom_touch_1_power
-          {% elif is_state('binary_sensor.window_touch', 'on') %}
-            switch.livingroom_touch_1_power
-          {% endif %}
+        entity_id: "{{ entity }}"
 
     - delay: "00:00:02"
 
     - service: switch.turn_on
       target:
-        entity_id: >-
-          {% if is_state('binary_sensor.balcony_touch', 'on') %} 
-            switch.diningroom_touch_1_power
-          {% elif is_state('binary_sensor.bathroom_touch', 'on') %} 
-            switch.bathroom_touch_1_power
-          {% elif is_state('binary_sensor.bedroom_touch', 'on') %} 
-            switch.bedroom_touch_1_power
-          {% elif is_state('binary_sensor.cooking_touch', 'on') %}
-            switch.kitchen_touch_1_power
-          {% elif is_state('binary_sensor.diningtable_touch', 'on') %}
-            switch.diningtable_touch_1_power
-          {% elif is_state('binary_sensor.dressoir_touch', 'on') %}
-            switch.diningroom_touch_1_power
-          {% elif is_state('binary_sensor.hallway_touch', 'on') %}
-            switch.hallway_touch_1_power
-          {% elif is_state('binary_sensor.seeling_touch', 'on') %}
-            switch.kitchen_touch_1_power
-          {% elif is_state('binary_sensor.sink_touch', 'on') %}
-            switch.kitchen_touch_1_power
-          {% elif is_state('binary_sensor.toilet_touch', 'on') %}
-            switch.toilet_touch_1_power
-          {% elif is_state('binary_sensor.wall_touch', 'on') %}
-            switch.livingroom_touch_1_power
-          {% elif is_state('binary_sensor.window_touch', 'on') %}
-            switch.livingroom_touch_1_power
-          {% endif %}
+        entity_id: "{{ entity }}"
 
     - service: persistent_notification.create
       data:
