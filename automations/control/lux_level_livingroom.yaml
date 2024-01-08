@@ -17,6 +17,9 @@
         - binary_sensor.livingroom_detection
         - binary_sensor.diningroom_detection
 
+    - platform: time_pattern
+      minutes: "/10"
+
   condition:
     - condition: time
       after: "07:00:00"
