@@ -233,7 +233,6 @@ smart_home:
     switch.xmas_1_wall:
       name: "Christmas window"
 
-
     switch.seeling_light_switch:
       name: "Kitchen switch"
       display_categories: SWITCH
@@ -328,3 +327,13 @@ smart_home:
       name: "Motion Diningroom"
       description: "Motion sensor in the diningroom"
       display_categories: MOTION_SENSOR
+
+      # - binary_sensor.nest_protect_bedroom_smoke_status
+      # - binary_sensor.nest_protect_bedroom_co_status
+      # - binary_sensor.nest_protect_bedroom_heat_status
+      # - binary_sensor.nest_protect_entryway_smoke_status
+      # - binary_sensor.nest_protect_entryway_co_status
+      # - binary_sensor.nest_protect_entryway_heat_status
+      # - binary_sensor.nest_protect_living_room_smoke_status
+      # - binary_sensor.nest_protect_living_room_co_status
+      # - binary_sensor.nest_protect_living_room_heat_status
