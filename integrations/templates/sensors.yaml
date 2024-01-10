@@ -1,4 +1,30 @@
 ---
+- sensor:
+    - name: "Waze - To"
+      state: >-
+        {%- if is_state("input_select.helpers_to_waze", "Home")  -%}
+          Asingaborg 127, Amsterdam, Netherlands
+        {%- elif is_state("input_select.helpers_to_waze", "UMC Utrecht")  -%}
+          Bolognalaan, 3512 Utrecht, Netherlands
+        {%- elif is_state("input_select.helpers_to_waze", "Ter Gooi")  -%}
+          Laan van Tergooi 2, Hilversum, Netherlands
+        {%- else -%}
+          Unknown
+        {%- endif %}
+
+- sensor:
+    - name: "Waze - From"
+      state: >-
+        {%- if is_state("input_select.helpers_from_waze", "Home")  -%}
+          Asingaborg 127, Amsterdam, Netherlands
+        {%- elif is_state("input_select.helpers_from_waze", "UMC Utrecht")  -%}
+          Bolognalaan, Utrecht, Netherlands
+        {%- elif is_state("input_select.helpers_from_waze", "Ter Gooi")  -%}
+          Laan van Tergooi 2, Hilversum, Netherlands
+        {%- else -%}
+          Unknown
+        {%- endif %}
+
 #########################################################################################
 # HA Backup Manager
 #########################################################################################

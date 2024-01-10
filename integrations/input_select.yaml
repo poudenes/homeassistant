@@ -9,6 +9,22 @@
 # INPUT_SELECT
 # https://www.home-assistant.io/integrations/input_select/
 ###########################################################################################
+helpers_from_waze:
+  name: "Waze - From:"
+  icon: mdi:nintendo-switch
+  options:
+    - "Home"
+    - "UMC Utrecht"
+    - "Ter Gooi"
+
+helpers_to_waze:
+  name: "Waze - To:"
+  icon: mdi:nintendo-switch
+  options:
+    - "Home"
+    - "UMC Utrecht"
+    - "Ter Gooi"
+
 helpers_eurovision:
   name: "Eurovision Country"
   icon: mdi:nintendo-switch
