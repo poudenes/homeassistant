@@ -79,22 +79,6 @@
             brightness_pct: "{{ 0 if is_state('switch.momentary_peter_early_up', 'on') else 100 }}"
             kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-    # ###########################################################################################
-    # # Guest sleepover part
-    # ###########################################################################################
-    # - service: "{{ 'switch.turn_on' if is_state('switch.momentary_guests', 'on') else 'switch.turn_off' }}"
-    #   target:
-    #     entity_id:
-    #       - switch.window_light_switch
-    #       - switch.wall_light_switch
-
-    # - service: "{{ 'script.none' if is_state('switch.momentary_guests', 'on') else 'light.turn_off' }}"
-    #   target:
-    #     entity_id: light.livingroom_all
-    # ###########################################################################################
-    # # END - Guest sleepover part
-    ###########################################################################################
-
     - service: light.turn_off
       target:
         entity_id:
