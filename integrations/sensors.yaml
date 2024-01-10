@@ -6,6 +6,16 @@
 #  ╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
 ###########################################################################################
 ---
+
+
+- platform: average
+  name: "Bathroom Average Humidity"
+  duration:
+    days: 1
+  entities:
+    - sensor.bathroom_humidity
+
+
 ###########################################################################################
 # HAVE I BEEN PWNED
 ###########################################################################################
@@ -15,7 +25,6 @@
     - !secret haveibeenpwned_2
     - !secret haveibeenpwned_3
     - !secret haveibeenpwned_4
-    - !secret haveibeenpwned_5
   api_key: !secret haveibeenpwned_api
 
 ###########################################################################################
@@ -77,47 +86,6 @@
 ###########################################################################################
 - platform: rflink
   automatic_add: true
-
-###########################################################################################
-# SENSOR SYSTEM MONITOR
-# https://www.home-assistant.io/integrations/systemmonitor/
-###########################################################################################
-# - platform: systemmonitor
-#   resources:
-#     - type: last_boot
-#     - type: processor_temperature
-#     - type: processor_use
-#     - type: memory_use_percent
-#     - type: memory_use
-#     - type: memory_free
-#     - type: swap_use_percent
-#     - type: swap_use
-#     - type: swap_free
-#     # - type: disk_use_percent
-#       # arg: /
-#     # - type: disk_use
-#       # arg: /
-#     # - type: disk_free
-#       # arg: /
-#     - type: load_1m
-#     - type: load_5m
-#     - type: load_15m
-#     - type: network_in
-#       arg: wlp1s0
-#     - type: network_out
-#       arg: wlp1s0
-#     - type: throughput_network_in
-#       arg: wlp1s0
-#     - type: throughput_network_out
-#       arg: wlp1s0
-#     - type: packets_in
-#       arg: wlp1s0
-#     - type: packets_out
-#       arg: wlp1s0
-#     - type: ipv4_address
-#       arg: wlp1s0
-#     - type: ipv6_address
-#       arg: wlp1s0
 
 ###########################################################################################
 # SENSOR TIME_DATE

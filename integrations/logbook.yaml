@@ -26,6 +26,8 @@ include:
     - scene
 
   entities:
+    - sensor.bathroom_average_humidity
+    
     # Oral-B Sensors
     - sensor.oral_b_io_series_8n_battery
     - sensor.oral_b_io_series_8n_mode

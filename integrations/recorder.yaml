@@ -31,6 +31,8 @@ include:
     - scene
 
   entities:
+    - sensor.bathroom_average_humidity
+    
     # Oral-B Sensors
     - sensor.oral_b_io_series_8n_battery
     - sensor.oral_b_io_series_8n_mode
@@ -94,21 +96,6 @@ include:
     - switch.momentary_guests
     - switch.momentary_peter_early_up
     - switch.newkaku_014e5906_a
-
-    # Apple Health Export
-    # - hae.haexport_active_energy
-    # - hae.haexport_apple_exercise_time
-    # - hae.haexport_apple_stand_hour
-    # - hae.haexport_apple_stand_time
-    # - hae.haexport_basal_energy_burned
-    # - hae.haexport_blood_oxygen_saturation
-    # - hae.haexport_heart_rate
-    # - hae.haexport_heart_rate_variability
-    # - hae.haexport_resting_heart_rate
-    # - hae.haexport_step_count
-    # - hae.haexport_walking_heart_rate_average
-    # - hae.haexport_walking_running_distance
-    # - hae.haexport_walking_speed
 
     # Roborock Vacuum
     - sensor.roborock_s8_current_room
@@ -195,18 +182,6 @@ include:
     - light.toilet_all
     - light.wall_all
     - light.window_all
-
-    # EURO95 lowest prices
-    # - sensor.gas_station_euro95_work_lowest_price_1
-    # - sensor.gas_station_euro95_work_lowest_price_2
-    # - sensor.gas_station_euro95_work_lowest_price_3
-    # - sensor.gas_station_euro95_work_lowest_price_4
-    # - sensor.gas_station_euro95_work_lowest_price_5
-    # - sensor.gas_station_euro95_home_lowest_price_1
-    # - sensor.gas_station_euro95_home_lowest_price_2
-    # - sensor.gas_station_euro95_home_lowest_price_3
-    # - sensor.gas_station_euro95_home_lowest_price_4
-    # - sensor.gas_station_euro95_home_lowest_price_5
 
     # Zwave kWh and Watt sensors
     - sensor.balcony_kwh
@@ -320,13 +295,6 @@ include:
     - sensor.times_dishwasher_machine_has_been_on_last_14_days
     - sensor.times_dryer_machine_has_been_on_last_14_days
     - sensor.times_washing_machine_has_been_on_last_14_days
-
-    # Logitech integration switches for activities
-    # - switch.logitech_harmony_appletv
-    # - switch.logitech_harmony_airplay
-    # - switch.logitech_harmony_nintendo
-    # - switch.logitech_harmony_tv
-    # - switch.logitech_harmony_cromecast
 
     # ESPHome Modules switches for lights
     - switch.balcony_light_switch
