@@ -110,7 +110,6 @@
   filter:
     include_entities:
       - light.hallway_all
-      - light.livingroom_all
       - light.wall_all
       - light.window_all
       - light.tv_sync
@@ -159,15 +158,7 @@
       - input_boolean.function_kay_learning
       - input_boolean.function_dnc
       - switch.momentary_peter_early_up
-      - input_select.helpers_scenes
       - input_boolean.function_tvonly
-
-      # Logitech Activities
-      # - switch.logitech_harmony_appletv
-      # - switch.logitech_harmony_airplay
-      # - switch.logitech_harmony_nintendo
-      # - switch.logitech_harmony_tv
-      # - switch.logitech_harmony_cromecast
 
       # Meek switches
       - switch.seeling_light_switch
@@ -176,6 +167,7 @@
       - switch.toilet_light_switch
       - switch.bedroom_light_switch
       - switch.bathroom_light_switch
+      - switch.bedroom_light_switch
       - switch.dressoir_light_switch
       - switch.diningtable_light_switch
       - switch.wall_light_switch
@@ -320,13 +312,13 @@
 ###########################################################################################
 # ALARM SYSTEM
 ###########################################################################################
-- port: 21112
-  name: "Alarm System"
-  mode: bridge
-  filter:
-    include_domains:
-      - alarm_control_panel
+#- port: 21112
+#  name: "Alarm System"
+#  mode: bridge
+#  filter:
+#    include_domains:
+#      - alarm_control_panel
 
-  entity_config:
-    alarm_control_panel.house:
-      code: !secret alarm_code
+#  entity_config:
+#    alarm_control_panel.house:
+#      code: !secret alarm_code

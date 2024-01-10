@@ -28,8 +28,8 @@ helpers_post_twitter_random:
 helpers_radio_play:
   name: "Radio play"
 
-helpers_alarm_panel: # For pull down the alarm panel
-  name: "Alarm Panel"
+# helpers_alarm_panel: # For pull down the alarm panel
+#   name: "Alarm Panel"
 
 helpers_tracker_kay: # For pull down menus in Dashbaord
   name: "Tracker Kay"
