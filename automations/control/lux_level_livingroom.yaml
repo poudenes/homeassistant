@@ -35,6 +35,7 @@
     - if:
         - "{{ states('sensor.livingroom_lux')|int < 200 and states('sensor.livingroom_lux')|int >= 0}}"
         - "{{ is_state('input_boolean.function_lux_low', 'off') }}"
+        - "{{(now() - states.binary_sensor.livingroom_detection.last_updated).seconds < 90 or (now() - states.binary_sensor.diningroom_detection.last_updated).seconds < 90}}"
 
       then:
         - service: input_boolean.turn_on
