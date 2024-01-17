@@ -47,6 +47,7 @@ include:
     # Crypto info
     - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_xrp_usd
+    - sensor.cryptoinfo_wax_usd_1
     
     - sensor.gas_station_euro95_home_lowest_price_1
     - sensor.gas_station_euro95_home_lowest_price_2

@@ -42,6 +42,17 @@
     - property: "24h_volume"
       unit_of_measurement: "$"
 
+- platform: cryptoinfo_advanced
+  id: "WAX USD"
+  cryptocurrency_name: "wax"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 1
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
 ###########################################################################################
 # MOLD INDICATOR
 ###########################################################################################

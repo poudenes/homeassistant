@@ -14,6 +14,7 @@
 default: error
 logs:
   icloud3: fatal
+  homeassistant.components.websocket_api.http.connection: fatal
   # aiohttp.server: fatal
   # aioharmony.hubconnector_xmpp: fatal
   # custom_components.icloud3.device_tracker: fatal
@@ -34,5 +35,6 @@ logs:
   # homeassistant.components.rdw: fatal
   # homeassistant.components.recorder.purge: fatal
   # homeassistant.components.sabnzbd: fatal
-  homeassistant.components.websocket_api.http.connection: fatal
   # homeassistant.components.co2signal: fatal
+
+  # homeassistant: error
