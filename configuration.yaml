@@ -1,4 +1,4 @@
-#   ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ██╗   ██╗██████╗  █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+#  ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ██╗   ██╗██████╗  █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
 #  ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ ██║   ██║██╔══██╗██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
 #  ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗██║   ██║██████╔╝███████║   ██║   ██║██║   ██║██╔██╗ ██║
 #  ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║██║   ██║██╔══██╗██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
@@ -47,6 +47,7 @@ alexa: !include integrations/alexa.yaml
 automation: !include_dir_merge_list automations/
 command_line: !include integrations/command_line.yaml
 fan: !include integrations/fan.yaml
+feedreader: !include integrations/feedreader.yaml
 group: !include integrations/group.yaml
 homeassistant: !include integrations/homeassistant.yaml
 homekit: !include integrations/homekit_miltiple.yaml
@@ -81,9 +82,9 @@ zone: !include integrations/zone.yaml
 ###########################################################################################
 # https://www.home-assistant.io/integrations/feedreader
 ###########################################################################################
-feedreader:
-  urls:
-    - https://www.arodie.com/latest/rss
-  scan_interval:
-    minutes: 15
-  max_entries: 10
+# feedreader:
+#   urls:
+#     - https://www.arodie.com/latest/rss
+#   scan_interval:
+#     minutes: 15
+#   max_entries: 10
