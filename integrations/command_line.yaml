@@ -5,56 +5,10 @@
 #  ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║██████╔╝███████╗███████╗██║██║ ╚████║███████╗
 #   ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
 ###########################################################################################
+---
+###########################################################################################
 # https://www.home-assistant.io/integrations/command_line/
 ###########################################################################################
----
-#################################################################
-# MVPS Cronjobs manual actions
-#################################################################
-# - switch:
-#     name: "MVPS - Rspamd Learning"
-#     unique_id: "669c8d8f-28e1-428d-8455-ed59ac6c4557"
-#     command_on: !secret mvps_rspamd_learn
-
-# - switch:
-#     name: "MVPS - Clean logfiles"
-#     unique_id: "2ca8e66f-3400-48c3-824d-198955fa1ade"
-#     command_on: !secret mvps_clearlog
-
-# - switch:
-#     name: "MVPS - Backup Vmail manual"
-#     unique_id: "5d34d161-69f6-43d2-a09a-8a2e74be1ad0"
-#     command_on: !secret mvps_backup_vmail
-
-# - switch:
-#     name: "MVPS - Backup ISPconfig Full manual"
-#     unique_id: "b8ead392-4f9b-4c33-b9de-ec928462a962"
-#     command_on: !secret mvps_backup_ispconfig
-
-# - switch:
-#     name: "MVPS - Backup WWW Full manual"
-#     unique_id: "442b50fe-77fc-4591-aa74-597b4054774f"
-#     command_on: !secret mvps_backup_full
-
-# - switch:
-#     name: "MVPS - Backup dB manual"
-#     unique_id: "154c03eb-abb8-4b86-941f-d6d3f0495c76"
-#     command_on: !secret mvps_backup_db
-
-# - switch:
-#     name: "MVPS - Update blacklist manual"
-#     unique_id: "aaaa3567-fb1f-4448-9c7a-2534a4edd37d"
-#     command_on: !secret mvps_update_blacklist
-
-# - switch:
-#     name: "MVPS - Update IPSet-abuseipdb manual"
-#     unique_id: "00e0b018-742c-40b3-8718-4d0563f1b2fd"
-#     command_on: !secret mvps_ipset_abuseipdb
-
-# - switch:
-#     name: "MVPS - Update OS manual"
-#     unique_id: "042f20e2-8605-4f59-9d37-4f0b869b399c"
-#     command_on: !secret mvps_apt_update
 
 #################################################################
 # HA Backup Manager
