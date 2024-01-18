@@ -46,10 +46,6 @@
           target:
             entity_id: switch.sync_box_power
 
-        - service: light.turn_off
-          target:
-            entity_id: light.tv_sync
-
         - continue_on_error: true
           service: script.engine_say
           data:
@@ -63,6 +59,10 @@
           data:
             option: "scene evening"
 
+        - service: light.turn_off
+          target:
+            entity_id: light.tv_sync
+            
         - service: light.turn_on
           target:
             entity_id: light.nanoleaf
