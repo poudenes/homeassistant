@@ -26,6 +26,46 @@ include:
     - scene
 
   entities:
+    # HAE
+    - hae.homeassistant_active_energy
+    - hae.homeassistant_apple_stand_hour
+    - hae.homeassistant_apple_stand_time
+    - hae.homeassistant_atrial_fibrillation_burden
+    - hae.homeassistant_basal_energy_burned
+    - hae.homeassistant_blood_oxygen_saturation
+    - hae.homeassistant_body_fat_percentage
+    - hae.homeassistant_body_mass_index
+    - hae.homeassistant_cardio_recovery
+    - hae.homeassistant_environmental_audio_exposure
+    - hae.homeassistant_headphone_audio_exposure
+    - hae.homeassistant_heart_rate
+    - hae.homeassistant_heart_rate_variability
+    - hae.homeassistant_height
+    - hae.homeassistant_lean_body_mass
+    - hae.homeassistant_mindful_minutes
+    - hae.homeassistant_physical_effort
+    - hae.homeassistant_respiratory_rate
+    - hae.homeassistant_resting_heart_rate
+    - hae.homeassistant_running_ground_contact_time
+    - hae.homeassistant_running_power
+    - hae.homeassistant_running_speed
+    - hae.homeassistant_running_stride_length
+    - hae.homeassistant_running_vertical_oscillation
+    - hae.homeassistant_six_minute_walking_test_distance
+    - hae.homeassistant_sleep_analysis
+    - hae.homeassistant_stair_speed_down
+    - hae.homeassistant_stair_speed_up
+    - hae.homeassistant_step_count
+    - hae.homeassistant_uv_exposure
+    - hae.homeassistant_vo2_max
+    - hae.homeassistant_walking_asymmetry_percentage
+    - hae.homeassistant_walking_double_support_percentage
+    - hae.homeassistant_walking_heart_rate_average
+    - hae.homeassistant_walking_running_distance
+    - hae.homeassistant_walking_speed
+    - hae.homeassistant_walking_step_length
+    - hae.homeassistant_weight_body_mass
+    
     - sensor.bathroom_average_humidity
     
     # Oral-B Sensors
