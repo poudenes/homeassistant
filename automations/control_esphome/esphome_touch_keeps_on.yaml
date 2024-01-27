@@ -31,9 +31,9 @@
   variables:
     name: "{{ trigger.entity_id[22:-8] }}"
     entity: >-
-      {% if name == 'diningroom' %}  switch.diningroom_touch_1_power
-      {% elif name == 'bathroom' %}  switch.bathroom_touch_1_power
-      {% elif name == 'bedroom' %}  switch.bedroom_touch_1_power
+      {% if name == 'diningroom' %} switch.diningroom_touch_1_power
+      {% elif name == 'bathroom' %} switch.bathroom_touch_1_power
+      {% elif name == 'bedroom' %} switch.bedroom_touch_1_power
       {% elif name == 'diningtable' %} switch.diningtable_touch_1_power
       {% elif name == 'diningroom' %} switch.diningroom_touch_1_power
       {% elif name == 'hallway' %} switch.hallway_touch_1_power
