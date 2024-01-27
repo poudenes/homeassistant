@@ -21,6 +21,7 @@ logger:
 ota:
   safe_mode: true
   password: !secret password
+  reboot_timeout: 0s
 
 button:
   - platform: factory_reset
