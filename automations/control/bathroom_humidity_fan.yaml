@@ -26,7 +26,7 @@
 
     - condition: time
       after: "05:30:00"
-      before: "23:00:00"
+      before: "22:00:00"
 
   action:
     - parallel:
@@ -46,7 +46,7 @@
               AVG: {{ avg }} / HUM: {{ hum }}
             thread_id: "ha_system"
         
-    - delay: "00:05:00"
+#    - delay: "00:05:00"
 
     - wait_template: "{{ (avg + 5 | int()) >= states('sensor.bathroom_humidity')|round(0) and states('sensor.fan_remote', 'Home Assistant') }}"
 
