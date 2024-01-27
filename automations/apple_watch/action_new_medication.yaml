@@ -1,0 +1,199 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# NOTIFY WHEN YOU HAVE TAKE YOUR MEDICINE PETER
+###########################################################################################
+- id: "0eff0f01-0fe0-4694-a7e5-2893d702fc16"
+  alias: "Notification - Take medication (TEST)"
+  trigger:
+    # - platform: state
+    #   entity_id: switch.momentary_for_testing
+    #   to: "on"
+
+    - platform: time
+      at: "20:20:00"
+
+  condition: []
+
+  action:
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Medication:
+          Take your medication!
+        data:
+          actions:
+            - action: "Took medicine"
+              title: "I took my medicine"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+
+            - action: "Medicine snooze"
+              title: "Remind me later again"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+          push:
+            thread_id: "ha_apple_watch"
+            sound:
+              name: "default"
+              critical: 1
+              volume: 1.0
+
+    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+      target:
+        entity_id: light.dressoir_2
+      data:
+        xy_color: [0.70, 0.30] # Red
+        brightness_pct: 100
+
+###########################################################################################
+# SNOOZE TAKE MEDICATION
+###########################################################################################
+- id: "21f11fc1-45eb-4448-9b7c-44d3ee0ffa11"
+  alias: "Apple Watch - Remind me again take medicine (TEST)"
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: "Medicine snooze"
+
+  condition: []
+
+  action:
+    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+      target:
+        entity_id: light.dressoir_2
+      data:
+        kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+    - service: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+      target:
+        entity_id: light.dressoir_2
+
+    - delay: "00:05:00"
+
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Medication:
+          Take your medication!
+        data:
+          actions:
+            - action: "Took medicine"
+              title: "I take my medicine"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+
+            - action: "Medicine snooze"
+              title: "Remind me later again"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+          push:
+            thread_id: "ha_apple_watch"
+            sound:
+              name: "default"
+              critical: 1
+              volume: 1.0
+
+    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+      target:
+        entity_id: light.dressoir_2
+      data:
+        xy_color: [0.70, 0.30] # Red
+        brightness_pct: 100
+
+###########################################################################################
+# I TOOK MY MEDICINE
+###########################################################################################
+- id: "2c33a1ec-ec31-46c8-ab73-87d1252e52b6"
+  alias: "Apple Watch: I took my medicine (TEST)"
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: "Took medicine"
+
+  condition: []
+
+  action:
+    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+      target:
+        entity_id: light.dressoir_2
+      data:
+        kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+    - service: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+      target:
+        entity_id: light.dressoir_2
+
+
+    # NEW ADDED FEATURE. HOW MANY PILLS DID I TAKE
+    - service: notify.mobile_app_peter_iphone
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Medication:
+          How many pills did you take?
+        data:
+          actions:
+            - action: "one"
+              title: "One"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+            - action: "two"
+              title: "Two"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+          push:
+            thread_id: "ha_apple_watch"
+
+    - wait_for_trigger:
+        - platform: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
+
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        pills: >
+          {{
+            {
+            'one': 1,
+            'two': 2,
+            }
+            [wait.trigger.event.data.actionName] }}
+        new_value: "{{ states('input_text.medication_stock') | int () - pills }}"
+
+    - service: input_text.set_value
+      data:
+        value: "{{ new_value }}"
+      target:
+        entity_id: input_text.medication_stock
+
+    - service: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Medication:
+          Well done, now you can sleep this night
+        thread_id: "ha_apple_watch"
