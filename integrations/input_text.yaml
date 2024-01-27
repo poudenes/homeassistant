@@ -17,6 +17,10 @@ alexa_actionable_notification:
   initial: '{"text": "This is a test of the alexa actionable notifications skill. Did it work?", "event": "actionable.skill.test"}'
 
 # Other
+medication_stock:
+  name: "Amount of medication"
+  max: 200
+
 engine_ha_app:
   name: "HA enginge message"
   max: 255

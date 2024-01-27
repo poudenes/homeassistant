@@ -22,7 +22,7 @@ helpers_low_battery_report_threshold:
   step: 1
   unit_of_measurement: "%"
 
-#################################################################
+  #################################################################
 # HA Backup Manager
 #################################################################
 ha_backup_manager_timeout: # Selector to choose the wait duration for backup check.
