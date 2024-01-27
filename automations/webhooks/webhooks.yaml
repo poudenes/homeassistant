@@ -12,35 +12,53 @@
 
   trigger:
     - platform: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
       webhook_id: "ukstatus"
       local_only: true
       id: "ukstatus"
 
     - platform: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
       webhook_id: "wud"
       local_only: true
       id: "wud"
 
     - platform: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
       webhook_id: "nas"
       local_only: true
       id: "nas"
 
     - platform: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
       webhook_id: "radarr"
       local_only: true
       id: "radarr"
 
     - platform: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
       webhook_id: "sonarr"
       local_only: true
       id: "sonarr"
 
     - platform: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
       webhook_id: "firefly"
       local_only: true
       id: "firefly"
-      
+
   condition: []
 
   action:
