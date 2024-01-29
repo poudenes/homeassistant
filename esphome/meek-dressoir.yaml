@@ -20,55 +20,7 @@ substitutions:
 #########################################################
 packages:
   wifi: !include defaults/wifi.yaml
-  device_base: !include defaults/for_all_devices.yaml
-
-esphome:
-  name: ${devicename}
-  on_boot:
-    priority: 600
-    then:
-      - switch.turn_on: touch_power
-
-esp8266:
-  board: esp01_1m
-  restore_from_flash: true
-
-wifi:
-  on_disconnect:
-    - light.turn_on:
-        id: neopixel
-        red: 0
-        green: 0
-        blue: 1
-
-    - light.turn_on:
-        id: neopixel
-        effect: strobe
-
-  on_connect:
-    - light.turn_on:
-        id: neopixel
-        red: 1
-        green: 1
-        blue: 1
-
-    - light.turn_on:
-        id: neopixel
-        effect: strobe
-
-    - delay: 5s
-
-    - light.turn_on:
-        id: neopixel
-        effect: none
-
-    - delay: 5s
-
-    - light.turn_on:
-        id: neopixel
-        red: 1
-        green: 0
-        blue: 0
+  device_base: !include defaults/for_all_meek_switches.yaml
 
 light:
   - platform: neopixelbus

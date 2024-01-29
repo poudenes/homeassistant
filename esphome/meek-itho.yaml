@@ -9,9 +9,9 @@ substitutions:
 #########################################################
 # Everything below can be copy/paste without problem
 #########################################################
-packages:
-  wifi: !include defaults/wifi.yaml
-  device_base: !include defaults/for_all_devices.yaml
+# packages:
+#   wifi: !include defaults/wifi.yaml
+#   device_base: !include defaults/for_all_devices.yaml
 
 esphome:
   name: ${devicename}
@@ -32,6 +32,59 @@ esphome:
           Idlist[2]={"ID3","ID3"};
           Mydeviceid="Home Assistant";
           id(swfan_low).turn_on(); //This ensures fan is at low-speed at boot
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  reboot_timeout: 0s
+  fast_connect: true
+  manual_ip:
+    static_ip: ${ip}
+    gateway: 192.168.100.1
+    subnet: 255.255.255.0
+    dns1: 192.168.100.1
+  ap:
+    ssid: ${devicename}
+    password: !secret password
+    channel: 4
+
+api:
+  encryption:
+    key: !secret api_key
+  reboot_timeout: 15min
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+captive_portal:
+
+web_server:
+  port: 80
+  
+preferences:
+  flash_write_interval: 1min
+  
+logger:
+  level: INFO
+  
+ota:
+  safe_mode: true
+  password: !secret password
+  reboot_timeout: 0s
+
+button:
+  - platform: factory_reset
+    name: "${friendly} - Reset"
+
+sensor:
+  - platform: wifi_signal
+    name: "${friendly} - Wifi Signal"
+    update_interval: 5min
+
+  - platform: uptime
+    name: "${friendly} - Uptime"
+    update_interval: 5min
 
 switch:
   - platform: custom
@@ -106,7 +159,29 @@ switch:
     switches:
       name: "Fan Pair"
 
+  - platform: safe_mode
+    name: "${friendly} - safe mode"
+    id: "${friendly}_safe_mode"
+
 text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly} - IP"
+      icon: mdi:lan
+    ssid:
+      name: "${friendly} - SSID"
+      icon: mdi:lan
+    bssid:
+      name: "${friendly} - BSSID"
+      icon: mdi:lan
+    mac_address:
+      name: "${friendly} - MAC"
+      icon: mdi:lan
+
+  - platform: version
+    name: "${friendly} - Version"
+    hide_timestamp: true
+
   - platform: custom
     lambda: |-
       auto fanrecv = new FanRecv();

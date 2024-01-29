@@ -13,7 +13,7 @@ substitutions:
 #########################################################
 packages:
   wifi: !include defaults/wifi.yaml
-  device_base: !include defaults/for_all_devices.yaml
+  # device_base: !include defaults/for_all_devices.yaml
 
 esphome:
   name: ${devicename}
@@ -27,6 +27,68 @@ esphome:
 esp8266:
   board: esp01_1m
   restore_from_flash: true
+
+api:
+  encryption:
+    key: !secret api_key
+  reboot_timeout: 15min
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+captive_portal:
+
+web_server:
+  port: 80
+  
+preferences:
+  flash_write_interval: 1min
+  
+logger:
+  level: INFO
+  
+ota:
+  safe_mode: true
+  password: !secret password
+  reboot_timeout: 0s
+
+button:
+  - platform: factory_reset
+    name: "${friendly} - Reset"
+
+switch:
+  - platform: safe_mode
+    name: "${friendly} - safe mode"
+    id: "${friendly}_safe_mode"
+    
+sensor:
+  - platform: wifi_signal
+    name: "${friendly} - Wifi Signal"
+    update_interval: 5min
+
+  - platform: uptime
+    name: "${friendly} - Uptime"
+    update_interval: 5min
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly} - IP"
+      icon: mdi:lan
+    ssid:
+      name: "${friendly} - SSID"
+      icon: mdi:lan
+    bssid:
+      name: "${friendly} - BSSID"
+      icon: mdi:lan
+    mac_address:
+      name: "${friendly} - MAC"
+      icon: mdi:lan
+
+  - platform: version
+    name: "${friendly} - Version"
+    hide_timestamp: true
 
 light:
   - platform: neopixelbus

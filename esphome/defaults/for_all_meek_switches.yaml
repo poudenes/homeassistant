@@ -1,7 +1,58 @@
+esphome:
+  name: ${devicename}
+  on_boot:
+    priority: 600
+    then:
+      - switch.turn_off: touch_power
+      - delay: 2s
+      - switch.turn_on: touch_power
+      - light.turn_on:
+          id: neopixel
+          red: 1
+          green: 1
+          blue: 1
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+
 api:
   encryption:
     key: !secret api_key
   reboot_timeout: 15min
+
+  on_client_connected:
+    - light.turn_on:
+        id: neopixel
+        red: 1
+        green: 1
+        blue: 1
+
+    - light.turn_on:
+        id: neopixel
+        effect: strobe
+
+    - delay: 5s
+
+    - light.turn_on:
+        id: neopixel
+        effect: none
+
+    - light.turn_on:
+        id: neopixel
+        red: 1
+        green: 0
+        blue: 0
+        brightness: 100%
+
+    - delay: 5s
+
+    - homeassistant.service:
+        service: persistent_notification.create
+        data:
+          title: "HA - Notification"
+          message: "Meek ${friendly} connected again"
+          notification_id: "ESP device Meek ${friendly}"
 
 time:
   - platform: homeassistant
@@ -11,13 +62,13 @@ captive_portal:
 
 web_server:
   port: 80
-  
+
 preferences:
   flash_write_interval: 1min
-  
+
 logger:
   level: INFO
-  
+
 ota:
   safe_mode: true
   password: !secret password
@@ -31,7 +82,7 @@ switch:
   - platform: safe_mode
     name: "${friendly} - safe mode"
     id: "${friendly}_safe_mode"
-    
+
 sensor:
   - platform: wifi_signal
     name: "${friendly} - Wifi Signal"
