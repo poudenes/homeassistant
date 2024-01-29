@@ -50,7 +50,6 @@ light:
           update_interval: 100ms
           lambda:
             static int state = 0;
-
             if (initial_run){
               state = 0;
               it.all() = ESPColor(0,255,0);
@@ -91,7 +90,6 @@ light:
           update_interval: 100ms
           lambda:
             static int state = 0;
-
             if (initial_run){
               state = 0;
               it.all() = ESPColor(0,255,0);
@@ -132,7 +130,6 @@ light:
           update_interval: 100ms
           lambda:
             static int state = 0;
-
             if (initial_run){
               state = 0;
               it.all() = ESPColor(0,255,0);
@@ -173,7 +170,6 @@ light:
           update_interval: 100ms
           lambda:
             static int state = 0;
-
             if (initial_run){
               state = 0;
               it.all() = ESPColor(0,255,0);
