@@ -8,7 +8,7 @@
 # PETER / KAY LEAVE / ARRIVE HOME
 ###########################################################################################
 - id: "633c8ed7-8fb9-4385-9154-3857798c6e36"
-  alias: "System - Left home"
+  alias: "Notification - Left/Arrive home"
   trigger:
     - platform: state
       entity_id:
