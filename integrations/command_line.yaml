@@ -11,6 +11,45 @@
 ###########################################################################################
 
 #################################################################
+# Allestorningen.nl
+#################################################################
+- sensor:
+    name: "Alle storingen - ODIDO"
+    unique_id: c7328e83-8cd9-4d83-a4c9-b11aff82e2a1"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh odido"
+
+- sensor:
+    name: "Alle storingen - Apple iCloud"
+    unique_id: "c2f6d522-70a8-4376-8bc8-eb7eecede4e6"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh icloud"
+
+- sensor:
+    name: "Alle storingen - iDeal"
+    unique_id: "5cfff882-8228-4c74-a99a-590898a74159"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh ideal"
+
+- sensor:
+    name: "Alle storingen - Rabobank"
+    unique_id: "ed8801da-6862-4f89-a34a-e066e5309739"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh rabobank"
+
+- sensor:
+    name: "Alle storingen - Instagram"
+    unique_id: "587cb498-83f6-43fa-90c2-14b86bb1331e"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh instagram"
+
+- sensor:
+    name: "Alle storingen - TikTok"
+    unique_id: "363b7424-399f-4235-8426-c5ccc4c39f3c"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh tiktok"
+
+#################################################################
 # HA Backup Manager
 #################################################################
 - sensor:
