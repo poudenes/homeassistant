@@ -7,8 +7,8 @@
 ###########################################################################################
 # NOTIFY WHEN YOU HAVE TAKE YOUR MEDICINE PETER
 ###########################################################################################
-- id: "0eff0f01-0fe0-4694-a7e5-2893d702fc16"
-  alias: "Notification - Take medication (TEST)"
+- id: "719cf06d-9053-4ed4-81bf-c5d75c05f52f"
+  alias: "Notification - Take medication"
   trigger:
     # - platform: state
     #   entity_id: switch.momentary_for_testing
@@ -50,7 +50,7 @@
 
     - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.dressoir_2
+        entity_id: light.hallway_1
       data:
         xy_color: [0.70, 0.30] # Red
         brightness_pct: 100
@@ -71,13 +71,13 @@
   action:
     - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.dressoir_2
+        entity_id: light.hallway_1
       data:
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
     - service: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.dressoir_2
+        entity_id: light.hallway_1
 
     - delay: "00:05:00"
 
@@ -111,7 +111,7 @@
 
     - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.dressoir_2
+        entity_id: light.hallway_1
       data:
         xy_color: [0.70, 0.30] # Red
         brightness_pct: 100
@@ -132,13 +132,13 @@
   action:
     - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.dressoir_2
+        entity_id: light.hallway_1
       data:
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
     - service: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.dressoir_2
+        entity_id: light.hallway_1
 
 
     # NEW ADDED FEATURE. HOW MANY PILLS DID I TAKE
