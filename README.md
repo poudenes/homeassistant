@@ -3,9 +3,10 @@
 
 This is my Home Assistant Github. Here i store my whole configuration files in case my system crash...
 
-I have a nice apartment in Amsterdam and love automation. So i started first with Domoticz. A great open source platform to learn how to automate my house. Now i'm using Home Assistant. More powerful.
+I have a nice apartment in Amsterdam and love automation. So i started first with Domoticz. 
+A great open source platform to learn how to automate my house. Now i'm using Home Assistant. More powerful.
 
-To edit my configuration i use Studio Code Server Add-On. 
+To edit my configuration i use VCS Add-On or when on vacation a tiny small iOS SSH application :D 
 Can fetch, pull, push all my changes to Github. on HA Server i pull the new data back.
 
 **My Security:**
@@ -14,7 +15,7 @@ Cloudflare will proxied them via the tunnel to HA.
 No Ports are open on my router anymore, and no subdomains are pointing to my IP addrress.
 
 **My hardware:**
-- 1 RPi4 8GB with Home Assistant OS
+- 1 Dell 3050 4GB Memory 128GB SSD with Home Assistant OS
 
 - 8 Meek ESP Wifi Wall Switches - https://www.meek-ha.com
 
@@ -46,7 +47,7 @@ No Ports are open on my router anymore, and no subdomains are pointing to my IP 
 - ITHO Fan - https://www.ithodaalderop.nl/
 - Homekit - http://www.apple.com
 
-- ASUS GT-RX 11000 - https://www.asus.com/us/Networking/ROG-Rapture-GT-AX11000/
+- ASUS GT-RX 11000 (AsusMERLIN firmware) - https://www.asus.com/us/Networking/ROG-Rapture-GT-AX11000/
 
 - Samsung Smart Thing Dryer
 - Samsung Smart Thing Wasing machine
