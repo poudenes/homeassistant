@@ -52,6 +52,7 @@ storage.*
 
 
 # FOLDERS
+Backup/
 addons_config/
 archive_backup/
 blueprints/
