@@ -45,7 +45,7 @@ system_log:
 zeroconf:
 
 alexa: !include integrations/alexa.yaml
-automation: !include_dir_merge_list automations/
+automation: !include_dir_merge_list automation/
 command_line: !include integrations/command_line.yaml
 fan: !include integrations/fan.yaml
 feedreader: !include integrations/feedreader.yaml
