@@ -11,7 +11,7 @@
   alias: "Notification - Euro95 prices"
   trigger:
     - platform: time_pattern
-      hours: "/3"
+      hours: "/12"
 
   condition:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"

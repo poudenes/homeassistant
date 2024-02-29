@@ -64,13 +64,13 @@
                       - light.nanoleaf
                   data:
                     brightness_pct: 5
-                    transition: 3
+                    transition: 2
 
                 - service: light.turn_on
                   target:
                     entity_id: light.wall_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: 40
 
                 - delay: "00:00:03"
@@ -79,7 +79,7 @@
                   target:
                     entity_id: light.window_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: 5
 
                 - delay: "00:00:03"
@@ -88,14 +88,14 @@
                   target:
                     entity_id: light.dressoir_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 15 }}"
 
                 - service: light.turn_on
                   target:
                     entity_id: light.balcony_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: 5
 
         ###########################################################################################
@@ -121,7 +121,7 @@
     
             - service: hue.activate_scene
               data:
-                transition: 5
+                transition: 2
                 brightness: 255
               target:
                 entity_id: >-
@@ -145,7 +145,7 @@
                     entity_id: light.nanoleaf
                   data:
                     brightness_pct: 50
-                    transition: 1
+                    transition: 2
 
 
                 - service: light.turn_on
@@ -154,21 +154,21 @@
                       - light.livingroom_all
                       - light.balcony_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: 100
 
                 - service: light.turn_on
                   target:
                     entity_id: light.dressoir_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
 
                 - service: light.turn_on
                   target:
                     entity_id: light.balcony_all
                   data:
-                    transition: 3
+                    transition: 2
                     brightness_pct: 100
 
         ###########################################################################################

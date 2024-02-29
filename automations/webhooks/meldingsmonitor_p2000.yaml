@@ -1,0 +1,15 @@
+- id: 26a33ab7-2f8e-4d83-be46-1b3d9319d636
+  trigger:
+    - platform: webhook
+      allowed_methods:
+        - POST
+      local_only: false
+      webhook_id: "meldingsmonitor"
+  condition: []
+  action:
+    - service: input_text.set_value
+      target:
+        entity_id: input_text.meldingsmonitor_p2000
+      data_template:
+        value: "{{ trigger.json.melding }}"
+  mode: single

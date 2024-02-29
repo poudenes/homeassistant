@@ -40,3 +40,9 @@
     - service: switch.turn_on
       target:
         entity_id: switch.fan_low
+
+    - service: climate.set_temperature
+      target:
+        entity_id: climate.entryway
+      data:
+        temperature: 9

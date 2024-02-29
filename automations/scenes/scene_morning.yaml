@@ -57,7 +57,7 @@
                     event_id: alexa_custom_skill_heating_system
                     event_response_type: ResponseYes
 
-              timeout: "00:00:15"
+              timeout: "00:00:30"
               continue_on_timeout: false
               
             - service: climate.set_temperature

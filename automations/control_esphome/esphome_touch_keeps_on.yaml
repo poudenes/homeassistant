@@ -29,9 +29,9 @@
       for: "00:00:15"
 
   variables:
-    name: "{{ trigger.entity_id[22:-8] }}"
+    name: "{{ trigger.entity_id[14:-6] }}"
     entity: >-
-      {% if name == 'diningroom' %} switch.diningroom_touch_1_power
+      {% if name == 'balcony' %} switch.diningroom_touch_1_power
       {% elif name == 'bathroom' %} switch.bathroom_touch_1_power
       {% elif name == 'bedroom' %} switch.bedroom_touch_1_power
       {% elif name == 'diningtable' %} switch.diningtable_touch_1_power
@@ -50,7 +50,7 @@
       target:
         entity_id: "{{ entity }}"
 
-    - delay: "00:00:02"
+    - delay: "00:00:10"
 
     - service: switch.turn_on
       target:

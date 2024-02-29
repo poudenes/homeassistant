@@ -27,7 +27,7 @@
       data:
         brightness_pct: >-
           {% if is_state('binary_sensor.diningroom_door_contact', 'on') %}
-            {{ 100 if states('season') in ['autumn', 'winter'] else 20 }}
+            {{ 100 if states('season') in ['spring', 'summer'] else 20 }}
           {% else %} 
             100
           {% endif %}
