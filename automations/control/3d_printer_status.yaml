@@ -1,0 +1,39 @@
+#  ██████╗ ██████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗██████╗ 
+#  ╚════██╗██╔══██╗    ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝██╔══██╗
+#   █████╔╝██║  ██║    ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  ██████╔╝
+#   ╚═══██╗██║  ██║    ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝  ██╔══██╗
+#  ██████╔╝██████╔╝    ██║     ██║  ██║██║██║ ╚████║   ██║   ███████╗██║  ██║
+#  ╚═════╝ ╚═════╝     ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# CONTROL IGHT BASED ON PROGRESS 3D PRINTER
+###########################################################################################
+- id: "8d356dee-b98d-4a5c-9691-7dd30cabf341"
+  alias: "Control - Light - 3D PRinter"
+  initial_state: true
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.ender_3_progress
+
+  condition:
+    - "{{ states('sensor.ender_3_progress') > '80' }}"
+
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.dressoir_2
+      data:
+        color_name: >-
+          {% if states('sensor.ender_3_progress') > '97' %} 
+            green
+          {% elif states('sensor.ender_3_progress') > '94' %} 
+            blue
+          {% elif states('sensor.ender_3_progress') > '89' %} 
+            orange
+          {% elif states('sensor.ender_3_progress') > '84' %}
+            red
+          {% else %}
+            yellow
+          {% endif %}
+        brightness_pct: 100
