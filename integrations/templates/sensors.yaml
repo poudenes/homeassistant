@@ -311,3 +311,17 @@
         {% else %}
           {{ value }}
         {% endif %}
+
+- sensor:
+    - name: "Neo plug 3D Printer"
+      unique_id: "9dece29b-04db-4877-aac0-2ac95669c0174"
+      unit_of_measurement: kWh
+      device_class: energy
+      state: >-
+        {% set value = states('sensor.3d_printer_kwh') | float(0) %}
+        {% set const = 21474836.47 %}
+        {% if value < 0 %}
+          {{ (value + const) | round(2) }}
+        {% else %}
+          {{ value }}
+        {% endif %}
