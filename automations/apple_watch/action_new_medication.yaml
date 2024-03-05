@@ -11,7 +11,6 @@
   alias: "Notification - Take medication"
   trigger:
     - platform: time
-#      at: "20:20:00"
       at: "20:20:00"
 
   condition: []
