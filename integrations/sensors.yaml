@@ -77,9 +77,10 @@
 ###########################################################################################
 - platform: statistics
   name: "Master Bathroom Humidity Average Linear 24h"
+  unique_id: "14036730-f69a-43e4-8870-65957b2fabaf"
   entity_id: sensor.bathroom_humidity
   state_characteristic: average_linear
-  sampling_size: 24
+  sampling_size: 50
 
 ###########################################################################################
 # SENSOR RFLINK

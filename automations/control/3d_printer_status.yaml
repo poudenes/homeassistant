@@ -17,7 +17,8 @@
         - sensor.ender_3_progress
 
   condition:
-    - "{{ states('sensor.ender_3_progress') > '80' }}"
+    - "{{ states('sensor.ender_3_progress') > '90' }}"
+    - "{{ is_state('input_select.helpers_scenes', 'scene daytime') }}"
 
   action:
     - service: light.turn_on
@@ -25,15 +26,13 @@
         entity_id: light.dressoir_2
       data:
         color_name: >-
-          {% if states('sensor.ender_3_progress') > '97' %} 
+          {% if states('sensor.ender_3_progress') > '96' %} 
             green
           {% elif states('sensor.ender_3_progress') > '94' %} 
-            blue
-          {% elif states('sensor.ender_3_progress') > '89' %} 
-            orange
-          {% elif states('sensor.ender_3_progress') > '84' %}
-            red
-          {% else %}
             yellow
+          {% elif states('sensor.ender_3_progress') > '92' %} 
+            orange
+          {% elif states('sensor.ender_3_progress') > '90' %}
+            red
           {% endif %}
         brightness_pct: 100
