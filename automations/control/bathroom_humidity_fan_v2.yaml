@@ -57,12 +57,12 @@
       then:
         - parallel:
             - service: switch.turn_on
-              target:  
-                entity_id: switch.fan_standby
+              target:
+                entity_id: switch.fan_timer_10min
                 
             - service: script.mobile_notify_no_actionable
               data:
                 title: "HA - System"
                 message: |
-                  Turn off fan.
+                  Fan timer started 10minutes. Then it's turning off.
                 thread_id: "ha_system"
