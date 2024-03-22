@@ -15,6 +15,7 @@
     - !secret haveibeenpwned_2
     - !secret haveibeenpwned_3
     - !secret haveibeenpwned_4
+    - !secret haveibeenpwned_5
   api_key: !secret haveibeenpwned_api
 
 ###########################################################################################
@@ -173,3 +174,52 @@
   type: time
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
+
+###########################################################################################
+# Sensor to collect all data from klipper
+# https://github.com/Arksine/moonraker/blob/master/docs/printer_objects.md
+###########################################################################################
+# - platform: rest
+#   name: "Ender 3 Klipper"
+#   resource: "http://192.168.100.78:7125/printer/objects/query?heater_bed&extruder&print_stats&toolhead&display_status&virtual_sdcard&idle_timeout&fan&gcode_move&%20webhooks"
+#   json_attributes_path: "$.result.status"
+#   json_attributes:
+#     - webhooks
+#     - gcode_move
+#     - toolhead
+#     - extruder
+#     - heater_bed
+#     - fan
+#     - idle_timeout
+#     - virtual_sdcard
+#     - print_stats
+#     - display_status
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Ender 3 Klipper status"
+#   resource: "http://192.168.100.78:7125/machine/update/status"
+#   json_attributes_path: "$.result.version_info"
+#   json_attributes:
+#     - moonraker
+#     - klipper
+#     - mainsail
+#     - mainsail-config
+#     - timelapse
+#     - channel
+#     - moonraker-obico
+#     - mobileraker
+#     - fluidd-config
+#     - fluidd
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Ender 3 Klipper History"
+#   resource: "  http://192.168.100.78:7125/server/history/totals"
+#   json_attributes_path: "$.result"
+#   json_attributes:
+#     - job_totals
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
