@@ -80,13 +80,3 @@ timer: !include integrations/timer.yaml
 trakt_tv: !include integrations/trakt.yaml
 utility_meter: !include integrations/utility_meter.yaml
 zone: !include integrations/zone.yaml
-
-###########################################################################################
-# https://www.home-assistant.io/integrations/feedreader
-###########################################################################################
-# feedreader:
-#   urls:
-#     - https://www.arodie.com/latest/rss
-#   scan_interval:
-#     minutes: 15
-#   max_entries: 10
