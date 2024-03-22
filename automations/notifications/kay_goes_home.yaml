@@ -11,10 +11,10 @@
   alias: "Notification - Kay drives home"
   mode: queued
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.cenkay_iphone_badge
-      from: "Ter Gooi"
+    # - platform: state
+    #   entity_id:
+    #     - sensor.cenkay_iphone_badge
+    #   from: "Ter Gooi"
 
     - platform: state
       entity_id:
