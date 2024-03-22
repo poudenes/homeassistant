@@ -62,7 +62,7 @@
 # I TOOK MY MEDICINE
 ###########################################################################################
 - id: "2c33a1ec-ec31-46c8-ab73-87d1252e52b6"
-  alias: "Apple Watch: I took my medicine (TEST)"
+  alias: "Apple Watch: I took my medicine"
   trigger:
     - platform: event
       event_type: ios.notification_action_fired
@@ -113,7 +113,7 @@
 # SNOOZE TAKE MEDICATION
 ###########################################################################################
 - id: "21f11fc1-45eb-4448-9b7c-44d3ee0ffa11"
-  alias: "Apple Watch - Remind me again take medicine (TEST)"
+  alias: "Apple Watch - Remind me again take medicine"
   trigger:
     - platform: event
       event_type: ios.notification_action_fired
