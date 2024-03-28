@@ -1,0 +1,52 @@
+#  ██████╗ ██████╗     ██████╗ ██████╗ ██╗███╗   ██╗████████╗███████╗██████╗ 
+#  ╚════██╗██╔══██╗    ██╔══██╗██╔══██╗██║████╗  ██║╚══██╔══╝██╔════╝██╔══██╗
+#   █████╔╝██║  ██║    ██████╔╝██████╔╝██║██╔██╗ ██║   ██║   █████╗  ██████╔╝
+#   ╚═══██╗██║  ██║    ██╔═══╝ ██╔══██╗██║██║╚██╗██║   ██║   ██╔══╝  ██╔══██╗
+#  ██████╔╝██████╔╝    ██║     ██║  ██║██║██║ ╚████║   ██║   ███████╗██║  ██║
+#  ╚═════╝ ╚═════╝     ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# TURN OFF Z-WAVE SWITCH BECAUSE OF RISING TEMPERATURE
+###########################################################################################
+- id: "52157612-9765-4ad4-84f3-0c74d7a997ad"
+  alias: "Control - Zwave Switch - 3D Printer"
+  initial_state: true
+
+  mode: restart
+
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ender_3_bed_temperature
+      above: 65
+      variables:
+        trigger_message: "bed temperature"
+        temperature: "{{ states('sensor.ender_3_bed_temperature') }}"
+
+    - platform: numeric_state
+      entity_id: sensor.ender_3_extruder_temperature
+      above: 215
+      variables:
+        trigger_message: "extruder temperature"
+        temperature: "{{ states('sensor.ender_3_extruder_temperature') }}"
+
+  condition: []
+
+  action:
+    - service: switch.turn_off
+      entity_id: switch.3d_printer_wall
+      
+    - service: script.engine_say
+      data:
+        media_player: media_player.livingroom
+        notify: notify.alexa_media_livingroom
+        message: "3D Printer {{ trigger_message }} is {{ temperature }}. Turned off the switch"
+
+    - service: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          The {{ trigger_message }} is {{ temperature }}. 
+          Turned off the the switch.
+        thread_id: "ha_3d_printer"
+        soundname: "default"
+        critical: 1
+        volume: 1.0
