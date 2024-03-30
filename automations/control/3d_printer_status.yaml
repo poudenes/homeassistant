@@ -9,7 +9,6 @@
 ###########################################################################################
 - id: "8d356dee-b98d-4a5c-9691-7dd30cabf341"
   alias: "Control - Light - 3D PRinter"
-  initial_state: true
   mode: restart
   trigger:
     - platform: state
