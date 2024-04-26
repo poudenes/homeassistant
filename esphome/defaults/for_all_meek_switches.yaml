@@ -52,7 +52,7 @@ api:
         data:
           title: "HA - Notification"
           message: "Meek ${friendly} connected again"
-          notification_id: "ESP device Meek ${friendly}"
+          notification_id: "Meek ${friendly}"
 
 time:
   - platform: homeassistant

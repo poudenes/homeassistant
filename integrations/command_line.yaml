@@ -29,8 +29,8 @@
 # Allestorningen.nl
 #################################################################
 - sensor:
-    name: "Alle storingen - ODIDO"
-    unique_id: "c7328e83-8cd9-4d83-a4c9-b11aff82e2a1"
+    name: "Alle storingen - ODIDO TV Internet"
+    unique_id: "1ca6ccb6-4f95-486d-aa4b-9ad8158da7bb"
     scan_interval: 3600
     command: "/bin/bash /config/other/downdetector.sh odido"
 

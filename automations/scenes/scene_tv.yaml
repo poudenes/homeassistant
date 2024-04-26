@@ -62,13 +62,20 @@
                 Kay
               {% endif %}
 
+        # - service: input_select.select_option
+        #   target:
+        #     entity_id:
+        #       - input_select.helpers_yamaha_dsp_movie
+        #   data:
+        #     option: DspMovie
+
         - service: input_select.select_option
           target:
             entity_id:
-              - input_select.helpers_yamaha_dsp_movie
+              - input_select.helpers_yamaha_dsp_movie #helpers_yamaha_dsp_sur_decoder
           data:
-            option: DspMovie
-
+            option: MovieStandard # ExtedSur.PLIIXMovie
+            
         - service: hue.activate_scene
           data:
             transition: 2

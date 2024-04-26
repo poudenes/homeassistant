@@ -13,19 +13,20 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.ender_3_bed_temperature
-      above: 65
+      above: 75
       variables:
         trigger_message: "bed temperature"
         temperature: "{{ states('sensor.ender_3_bed_temperature') }}"
 
     - platform: numeric_state
       entity_id: sensor.ender_3_extruder_temperature
-      above: 215
+      above: 260
       variables:
         trigger_message: "extruder temperature"
         temperature: "{{ states('sensor.ender_3_extruder_temperature') }}"
 
-  condition: []
+  condition:
+    - "{{ is_state('input_boolean.helpers_peter_home_homekit', 'off') }}"
 
   action:
     - service: switch.turn_off

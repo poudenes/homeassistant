@@ -67,9 +67,9 @@ engine_speech_processing:
   sequence:
     - service: "{{ notify }}"
       data:
-        data:
-          type: announce
-          method: all
+        # data:
+        #   type: announce
+        #   method: all
         title: "{{ title }}"
         message: "{{ briefing }}"
         target: "{{ media_player }}"

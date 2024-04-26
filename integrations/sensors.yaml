@@ -180,25 +180,27 @@
 # https://github.com/Arksine/moonraker/blob/master/docs/printer_objects.md
 ###########################################################################################
 # - platform: rest
-#   name: "Ender 3 Klipper"
-#   resource: "http://192.168.100.78:7125/printer/objects/query?heater_bed&extruder&print_stats&toolhead&display_status&virtual_sdcard&idle_timeout&fan&gcode_move&%20webhooks"
+#   name: "Mainsail printer objects"
+#   resource: "http://192.168.100.78:7125/printer/objects/query?webhooks&gcode_move&toolhead&configfile&heater_bed&fan&idle_timeout&virtual_sdcard&print_stats&display_status&bed_mesh"
 #   json_attributes_path: "$.result.status"
 #   json_attributes:
 #     - webhooks
 #     - gcode_move
 #     - toolhead
-#     - extruder
+#     - configfile
 #     - heater_bed
+#     - extruder
 #     - fan
 #     - idle_timeout
 #     - virtual_sdcard
 #     - print_stats
 #     - display_status
+#     - bed_mesh
 #   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
 #   force_update: true
 
 # - platform: rest
-#   name: "Ender 3 Klipper status"
+#   name: "Mainsail machine update status"
 #   resource: "http://192.168.100.78:7125/machine/update/status"
 #   json_attributes_path: "$.result.version_info"
 #   json_attributes:
@@ -216,10 +218,71 @@
 #   force_update: true
 
 # - platform: rest
-#   name: "Ender 3 Klipper History"
-#   resource: "  http://192.168.100.78:7125/server/history/totals"
+#   name: "Mainsail machine system_info"
+#   resource: "http://192.168.100.78:7125/machine/system_info"
+#   json_attributes_path: "$.result.system_info"
+#   json_attributes:
+#     - available_services
+#     - cpu_info
+#     - distribution
+#     - instance_ids
+#     - network
+#     - python
+#     - service_state
+#     - virtualization
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+  
+# - platform: rest
+#   name: "Mainsail server history totals"
+#   resource: "http://192.168.100.78:7125/server/history/totals"
 #   json_attributes_path: "$.result"
 #   json_attributes:
 #     - job_totals
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Mainsail access api_key"
+#   resource: "http://192.168.100.78:7125/access/api_key"
+# #  json_attributes_path: "$.result"
+#   json_attributes:
+#     - result
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Mainsail access oneshot_token"
+#   resource: "http://192.168.100.78:7125/access/oneshot_token"
+# #  json_attributes_path: "$.result"
+#   json_attributes:
+#     - result
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Mainsail printer gcode help"
+#   resource: "http://192.168.100.78:7125/printer/gcode/help"
+#   # json_attributes_path: "$.result"
+#   json_attributes:
+#     - result
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Mainsail printer query_endstops status"
+#   resource: "http://192.168.100.78:7125/printer/query_endstops/status"
+# #  json_attributes_path: "$.result"
+#   json_attributes:
+#     - result
+#   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
+#   force_update: true
+
+# - platform: rest
+#   name: "Mainsail printer info"
+#   resource: "http://192.168.100.78:7125/printer/info"
+# #  json_attributes_path: "$.result"
+#   json_attributes:
+#     - result
 #   value_template: "{{ 'OK' if ('result' in value_json) else 'offline' }}"
 #   force_update: true
