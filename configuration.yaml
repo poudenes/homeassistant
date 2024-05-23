@@ -76,6 +76,6 @@ shell_command: !include integrations/shell_commands.yaml
 switch: !include integrations/switches.yaml
 template: !include_dir_merge_list integrations/templates
 timer: !include integrations/timer.yaml
-trakt_tv: !include integrations/trakt.yaml
+# trakt_tv: !include integrations/trakt.yaml
 utility_meter: !include integrations/utility_meter.yaml
 zone: !include integrations/zone.yaml

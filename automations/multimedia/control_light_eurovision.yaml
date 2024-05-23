@@ -1394,6 +1394,78 @@
                   ]
 
         ###########################################################################################
+        # Luxembourg
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Luxembourg') }}"
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - service: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - service: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                brightness_pct: 100
+                rgb_color:
+                  - 58
+                  - 136
+                  - 254
+
+            - service: light.turn_on
+              target:
+                entity_id:
+                  - light.balcony_all
+              data:
+                brightness_pct: 100
+                rgb_color:
+                  - 58
+                  - 136
+                  - 254
+
+            - service: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 0, "g": 60, "b": 100 },
+                    { "number": 13, "r": 0, "g": 60, "b": 100 },
+                    { "number": 14, "r": 0, "g": 60,"b": 100 },
+                    { "number": 15, "r": 0, "g": 60, "b": 100 },
+                    { "number": 16, "r": 0, "g": 60, "b": 100 },
+                    { "number": 17, "r": 0, "g": 60, "b": 100 },
+                    { "number": 18, "r": 0, "g": 60, "b": 100 },
+                  ]
+
+
+
+        ###########################################################################################
         # Netherlands
         ###########################################################################################
         - conditions:
@@ -2138,22 +2210,62 @@
               data:
                 panels:
                   [
-                    { "number": 1, "r": 80, "g": 0, "b": 80 },
-                    { "number": 2, "r": 100, "g": 100, "b": 0 },
-                    { "number": 3, "r": 100, "g": 100, "b": 0 },
-                    { "number": 4, "r": 0, "g": 0, "b": 100 },
-                    { "number": 5, "r": 0, "g": 0, "b": 100 },
-                    { "number": 6, "r": 0, "g": 0, "b": 55 },
-                    { "number": 7, "r": 0, "g": 0, "b": 55 },
-                    { "number": 8, "r": 100, "g": 100, "b": 0 },
-                    { "number": 9, "r": 100, "g": 100, "b": 0 },
-                    { "number": 10, "r": 0, "g": 0, "b": 100 },
-                    { "number": 11, "r": 80, "g": 0, "b": 80 },
-                    { "number": 12, "r": 100, "g": 100, "b": 0 },
-                    { "number": 13, "r": 100, "g": 100, "b": 0 },
-                    { "number": 14, "r": 100, "g": 100, "b": 0 },
-                    { "number": 15, "r": 0, "g": 0, "b": 100 },
-                    { "number": 16, "r": 0, "g": 0, "b": 100 },
-                    { "number": 17, "r": 80, "g": 0, "b": 80 },
-                    { "number": 18, "r": 80, "g": 0, "b": 80 },
+                    { "number": 1, "r": 155, "g": 0, "b": 155 },
+
+                    { "number": 2, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 3, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 4, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 5, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 6, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 7, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 8, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 9, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 10, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 11, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 12, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 13, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 14, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 15, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 16, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 17, "r": 155, "g": 0, "b": 155 },
+                    { "number": 18, "r": 155, "g": 0, "b": 155 },
                   ]
+
+            # - service: rest_command.nanoleaf
+            #   data:
+            #     panels:
+            #       [
+            #         { "number": 1, "r": 80, "g": 0, "b": 80 },
+            #         { "number": 2, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 3, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 4, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 5, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 6, "r": 0, "g": 0, "b": 55 },
+            #         { "number": 7, "r": 0, "g": 0, "b": 55 },
+            #         { "number": 8, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 9, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 10, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 11, "r": 80, "g": 0, "b": 80 },
+            #         { "number": 12, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 13, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 14, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 15, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 16, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 17, "r": 80, "g": 0, "b": 80 },
+            #         { "number": 18, "r": 80, "g": 0, "b": 80 },
+            #       ]

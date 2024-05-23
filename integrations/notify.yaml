@@ -25,10 +25,10 @@
 #   template: ha_template
 #   language: en_US
 
-- platform: manish
-  name: "HA Whatsapp to Peter"
-  target: !secret meta_whatsapp_target_peter
-  token: !secret meta_whatsapp_token
-  phone_number_id: !secret meta_whatsapp_number
-  template: ha_template
-  language: en_US
+# - platform: manish
+#   name: "HA Whatsapp to Peter"
+#   target: !secret meta_whatsapp_target_peter
+#   token: !secret meta_whatsapp_token
+#   phone_number_id: !secret meta_whatsapp_number
+#   template: ha_template
+#   language: en_US

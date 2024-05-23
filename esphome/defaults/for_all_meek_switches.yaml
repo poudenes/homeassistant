@@ -85,12 +85,39 @@ switch:
 
 sensor:
   - platform: wifi_signal
+    id: "wifi_db_signal"
     name: "${friendly} - Wifi Signal"
     update_interval: 5min
 
   - platform: uptime
     name: "${friendly} - Uptime"
     update_interval: 5min
+    
+  # - platform: template
+  #   name: "${friendly} WiFi Percentage"
+  #   id: wifi_percentage
+  #   entity_category: diagnostic
+  #   state_class: measurement
+  #   update_interval: 10s
+  #   unit_of_measurement: "%"
+  #   accuracy_decimals: 0
+  #   icon: mdi:wifi
+  #   lambda: >
+  #     auto signal = id(wifi_db_signal).state;
+  #     float perc = 0;
+  #     if (signal < -92.0) 
+  #       perc = 100.0; 
+  #     else if (signal > -21.0) 
+  #       perc = 1.0; 
+  #     else 
+  #       perc = round(( -0.0154 * signal * signal )-( 0.3794 * signal ) + 98.182 );
+
+  #     if(perc <= 0)
+  #       return 0.0;
+  #     else if(perc >= 100)
+  #       return 100.0;
+  #     else
+  #       return perc;
 
 text_sensor:
   - platform: wifi_info

@@ -24,3 +24,4 @@ nanoleaf:
     "loop": false, "palette": [], "colorType": "HSB"}
     }
   content_type: 'application/json'
+

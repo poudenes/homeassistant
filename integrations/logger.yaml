@@ -17,6 +17,9 @@ logs:
   homeassistant.components.websocket_api.http.connection: fatal
   custom_components.moonraker: fatal
   custom_components.cryptoinfo_advanced.const.const: fatal
+
+  custom_components.fireflyiii_integration.integrations.fireflyiii: error
+  
   # aiohttp.server: fatal
   # aioharmony.hubconnector_xmpp: fatal
   # custom_components.icloud3.device_tracker: fatal
