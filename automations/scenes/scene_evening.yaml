@@ -27,7 +27,6 @@
         - binary_sensor.group_family_manual
         - input_select.helpers_scenes
         - input_select.helpers_sunrise_sunset
-        - input_select.select_option
 
   condition:
     - condition: time

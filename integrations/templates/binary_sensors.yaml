@@ -23,17 +23,31 @@
         entity_id: "{{ integration_entities('asusrouter') | select('is_state', 'not_home') | list }}"
         
 ##########################################################################################
+# FOR CRITICAL TEMPERATURE RISING 3D PRINTER
+##########################################################################################
+- binary_sensor:
+    - name: "3D Printer bed temp rising"
+      unique_id: "4548ba6b-a249-485c-9913-664728ec0982"
+      state: >-
+        {% set value = (states('sensor.ender_3_bed_temperature') | int(default=0) | round(1) - states('sensor.ender_3_bed_target') | int(default=0) | round(1) ) > 5 %}
+        {{ value }}
+
+- binary_sensor:
+    - name: "3D Printer extruder temp rising"
+      unique_id: "1072442e-a309-40ae-a960-81c8c29a86b8"
+      state: >-
+        {% set value = (states('sensor.ender_3_extruder_temperature') | int(default=0) | round(1) - states('sensor.ender_3_extruder_target') | int(default=0) | round(1) ) > 5 %}
+        {{ value }}
+
+##########################################################################################
 # FOR AUTOMATION OF BATHROOM FAN
 ##########################################################################################
 - binary_sensor:
     - name: "Fan hum lower then avg"
-      unique_id: 438dadb7-2688-4329-86c7-02c57f8864dc
+      unique_id: "438dadb7-2688-4329-86c7-02c57f8864dc"
       state: >-
         {% set value = (states('sensor.bathroom_humidity') | int(default=0) | round(1) - states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) | round(1) ) > states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) %}
         {{ value }}
-# {% set value = (states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) | round(1) - states('sensor.bathroom_humidity') | int(default=0) | round(1) ) > states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) %}
-# {{ value }}
-
       attributes:
         hum: "{{ states('sensor.bathroom_humidity') | int(default=0) }}"
         avg: "{{ states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) }}"
@@ -48,9 +62,6 @@
       state: >-
         {% set value = (states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) | round(1) - states('sensor.bathroom_humidity') | int(default=0) | round(1) ) > states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) %}
         {{ value }}
-# {% set calculation = states('sensor.bathroom_humidity')|int(default=0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(default=0) > states('input_select.helpers_master_bath_humidity_threshold')|int(default=0) %}
-# {{ calculation }}
-                
       attributes:
         hum: "{{ states('sensor.bathroom_humidity') | int(default=0) }}"
         avg: "{{ states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) }}"

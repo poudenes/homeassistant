@@ -19,6 +19,7 @@ logs:
   custom_components.cryptoinfo_advanced.const.const: fatal
 
   custom_components.fireflyiii_integration.integrations.fireflyiii: error
+  custom_components.nest_protect: fatal
   
   # aiohttp.server: fatal
   # aioharmony.hubconnector_xmpp: fatal

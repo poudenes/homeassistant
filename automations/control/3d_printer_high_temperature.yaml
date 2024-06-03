@@ -11,22 +11,22 @@
   alias: "Control - Zwave Switch - 3D Printer"
   mode: restart
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.ender_3_bed_temperature
-      above: 75
+    - platform: state
+      entity_id: binary_sensor.3d_printer_bed_temp_rising
+      to: on
       variables:
         trigger_message: "bed temperature"
         temperature: "{{ states('sensor.ender_3_bed_temperature') }}"
 
-    - platform: numeric_state
-      entity_id: sensor.ender_3_extruder_temperature
-      above: 260
+    - platform: state
+      entity_id: binary_sensor.3d_printer_extruder_temp_rising
+      to: on
       variables:
         trigger_message: "extruder temperature"
         temperature: "{{ states('sensor.ender_3_extruder_temperature') }}"
 
-  condition:
-    - "{{ is_state('input_boolean.helpers_peter_home_homekit', 'off') }}"
+  # condition:
+  #   - "{{ is_state('input_boolean.helpers_peter_home_homekit', 'off') }}"
 
   action:
     - service: switch.turn_off

@@ -11,7 +11,7 @@
   alias: "Notification - CPU High temperature"
   trigger:
     - platform: numeric_state
-      entity_id: sensor.processor_temperature
+      entity_id: sensor.system_monitor_processor_temperature
       above: 65
 
   condition: []
@@ -22,5 +22,5 @@
         title: "HA - System"
         message: |
           HA CPU warning!
-          Temperature of {{ state_attr('sensor.processor_temperature','friendly_name') }} RPi is {{ trigger.to_state.state }} °C!
+          Temperature of {{ state_attr('sensor.system_monitor_processor_temperature','friendly_name') }} RPi is {{ trigger.to_state.state }} °C!
         thread_id: "ha_system"

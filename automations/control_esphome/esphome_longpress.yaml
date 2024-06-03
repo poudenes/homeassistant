@@ -7,74 +7,74 @@
 ###########################################################################################
 # ESPHOME BATHROOM LONGPRESS
 ###########################################################################################
-- id: "bb68c1cb-4e0e-4ee3-80c4-39aad00d3a61"
-  alias: "ESPHome - Longpress"
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id:
-        - switch.balcony_light_switch_longpress
-        - switch.bathroom_light_switch_longpress
-        - switch.bedroom_light_switch_longpress
-        - switch.dressoir_light_switch_longpress
-        - switch.hallway_light_switch_longpress
-        # - switch.seeling_light_switch_longpress # NOT DONE YET
-        # - switch.sink_light_switch_longpress # NOT DONE YET
-        # - switch.toilet_light_switch_longpress # NOT DONE YET
-        - switch.wall_light_switch_longpress
-        - switch.window_light_switch_longpress
+# - id: "bb68c1cb-4e0e-4ee3-80c4-39aad00d3a61"
+#   alias: "ESPHome - Longpress"
+#   mode: restart
+#   trigger:
+#     - platform: state
+#       entity_id:
+#         - switch.balcony_light_switch_longpress
+#         - switch.bathroom_light_switch_longpress
+#         - switch.bedroom_light_switch_longpress
+#         - switch.dressoir_light_switch_longpress
+#         - switch.hallway_light_switch_longpress
+#         # - switch.seeling_light_switch_longpress # NOT DONE YET
+#         # - switch.sink_light_switch_longpress # NOT DONE YET
+#         # - switch.toilet_light_switch_longpress # NOT DONE YET
+#         - switch.wall_light_switch_longpress
+#         - switch.window_light_switch_longpress
 
-  condition:
-    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
-    - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+#   condition:
+#     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+#     - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
 
-  variables:
-    from_state: "{{ trigger.from_state.state }}"
-    to_state: "{{ trigger.to_state.state }}"
-    name: "{{ trigger.entity_id[7:-10] }}"
+#   variables:
+#     from_state: "{{ trigger.from_state.state }}"
+#     to_state: "{{ trigger.to_state.state }}"
+#     name: "{{ trigger.entity_id[7:-10] }}"
 
-  action:
-    - if:
-        - "{{ (to_state == 'on') }}"
-      then:
-        - parallel:
-            - service: hue.hue_activate_scene
-              data:
-                scene_name: rainbow
-                group_name: scenes {{ name }}
+#   action:
+#     - if:
+#         - "{{ (to_state == 'on') }}"
+#       then:
+#         - parallel:
+#             - service: hue.hue_activate_scene
+#               data:
+#                 scene_name: rainbow
+#                 group_name: scenes {{ name }}
 
-            - service: light.turn_on
-              target:
-                entity_id: light.{{ name }}_neopixel
-              data:
-                effect: random twinkle
+#             - service: light.turn_on
+#               target:
+#                 entity_id: light.{{ name }}_neopixel
+#               data:
+#                 effect: random twinkle
 
-      else:
-        - service: light.turn_on
-          target:
-            entity_id: light.{{ name }}_neopixel
-          data:
-            effect: none
+#       else:
+#         - service: light.turn_on
+#           target:
+#             entity_id: light.{{ name }}_neopixel
+#           data:
+#             effect: none
 
-        - parallel:
-            - service: light.turn_on
-              target:
-                entity_id: light.{{ name }}_neopixel
-              data:
-                xy_color: >-
-                  {% if is_state('input_select.helpers_scenes', 'scene appletv') %} 
-                    [0.44,0.52]
-                  {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
-                    [0.74,0.52]
-                  {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
-                    [0.14,0.19]
-                  {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
-                    [0.22,0.08]
-                  {% else %}
-                    [0.70,0.30]
-                  {% endif %}
-                brightness_pct: "{{ 20 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+#         - parallel:
+#             - service: light.turn_on
+#               target:
+#                 entity_id: light.{{ name }}_neopixel
+#               data:
+#                 xy_color: >-
+#                   {% if is_state('input_select.helpers_scenes', 'scene appletv') %} 
+#                     [0.44,0.52]
+#                   {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
+#                     [0.74,0.52]
+#                   {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
+#                     [0.14,0.19]
+#                   {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
+#                     [0.22,0.08]
+#                   {% else %}
+#                     [0.70,0.30]
+#                   {% endif %}
+#                 brightness_pct: "{{ 20 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
 
-            - service: light.turn_off
-              target:
-                entity_id: light.{{ name }}_all
+#             - service: light.turn_off
+#               target:
+#                 entity_id: light.{{ name }}_all

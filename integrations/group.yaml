@@ -42,15 +42,15 @@ helpers_function_switches:
 helpers_esphome_updates:
   name: "ESPhome updates"
   entities:
-    - update.meek_toilet_firmware
-    - update.meek_livingroom_firmware
-    - update.meek_kitchen_firmware
-    - update.meek_hallway_firmware
-    - update.meek_dressoir_firmware
-    - update.meek_doorbell_firmware
-    - update.meek_diningroom_firmware
-    - update.meek_bedroom_firmware
-    - update.meek_bathroom_firmware
+    - update.meek_toilet_block_internet_firmware
+    - update.meek_livingroom_block_internet_firmware
+    - update.meek_kitchen_block_internet_firmware
+    - update.meek_hallway_block_internet_firmware
+    - update.meek_dressoir_block_internet_firmware
+    - update.meek_doorbell_block_internet_firmware
+    - update.meek_diningtable_block_internet_firmware
+    - update.meek_bedroom_block_internet_firmware
+    - update.meek_bathroom_block_internet_firmware
 
 ###########################################################################################
 # HELPERS_SCENE_SWITCHES: the one you not turn off will be reject by automation. Example:
@@ -99,10 +99,11 @@ home_assistant_backup_pack:
     - sensor.ha_backup_manager_retained_backups
     - sensor.ha_backup_manager_archive_dimension
     - sensor.ha_backup_manager_addon_list
-    - sensor.ha_backup_manager_folders
+#    - sensor.ha_backup_manager_folders
     - sensor.ha_backup_manager_selected_folders
-    - shell_command.ha_backup_manager_remove_old
-    - automation.ha_backup_manager
+#    - shell_command.ha_backup_manager_remove_old
+    - input_boolean.ha_backup_manager_remove_old_backup
+    - automation.home_assistant_backup_system_2
 
 home_assistant_backup_selected_folders:
   name: "Home Assistant Backup Selected Folders"
