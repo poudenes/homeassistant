@@ -67,11 +67,13 @@ preferences:
   flash_write_interval: 1min
 
 logger:
-  level: INFO
+  level: WARN
 
 ota:
-  safe_mode: true
-  password: !secret password
+  - platform: esphome
+    password: !secret password
+
+safe_mode:
   reboot_timeout: 0s
 
 button:
@@ -92,7 +94,7 @@ sensor:
   - platform: uptime
     name: "${friendly} - Uptime"
     update_interval: 5min
-    
+
   - platform: template
     name: "${friendly} WiFi Percentage"
     id: wifi_percentage

@@ -13,14 +13,14 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.3d_printer_bed_temp_rising
-      to: on
+      to: "on"
       variables:
         trigger_message: "bed temperature"
         temperature: "{{ states('sensor.ender_3_bed_temperature') }}"
 
     - platform: state
       entity_id: binary_sensor.3d_printer_extruder_temp_rising
-      to: on
+      to: "on"
       variables:
         trigger_message: "extruder temperature"
         temperature: "{{ states('sensor.ender_3_extruder_temperature') }}"
@@ -29,14 +29,14 @@
   #   - "{{ is_state('input_boolean.helpers_peter_home_homekit', 'off') }}"
 
   action:
-    - service: switch.turn_off
-      entity_id: switch.3d_printer_wall
+#    - service: switch.turn_off
+#      entity_id: switch.3d_printer_wall
       
-    - service: script.engine_say
-      data:
-        media_player: media_player.livingroom
-        notify: notify.alexa_media_livingroom
-        message: "3D Printer {{ trigger_message }} is {{ temperature }}. Turned off the switch"
+#    - service: script.engine_say
+#      data:
+#        media_player: media_player.livingroom
+#        notify: notify.alexa_media_livingroom
+#        message: "3D Printer {{ trigger_message }} is {{ temperature }}. Turned off the switch"
 
     - service: script.mobile_notify_no_actionable
       data:

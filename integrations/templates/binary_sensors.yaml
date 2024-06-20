@@ -29,15 +29,13 @@
     - name: "3D Printer bed temp rising"
       unique_id: "4548ba6b-a249-485c-9913-664728ec0982"
       state: >-
-        {% set value = (states('sensor.ender_3_bed_temperature') | int(default=0) | round(1) - states('sensor.ender_3_bed_target') | int(default=0) | round(1) ) > 5 %}
-        {{ value }}
+        {{ (states('sensor.ender_3_bed_temperature')|int(0) - max(40, states('sensor.ender_3_bed_target')|int(0))) > 5 }}
 
 - binary_sensor:
     - name: "3D Printer extruder temp rising"
       unique_id: "1072442e-a309-40ae-a960-81c8c29a86b8"
       state: >-
-        {% set value = (states('sensor.ender_3_extruder_temperature') | int(default=0) | round(1) - states('sensor.ender_3_extruder_target') | int(default=0) | round(1) ) > 5 %}
-        {{ value }}
+        {{ (states('sensor.ender_3_extruder_temperature')|int(0) - max(40, states('sensor.ender_3_extruder_target')|int(0))) > 5 }}
 
 ##########################################################################################
 # FOR AUTOMATION OF BATHROOM FAN
@@ -46,29 +44,25 @@
     - name: "Fan hum lower then avg"
       unique_id: "438dadb7-2688-4329-86c7-02c57f8864dc"
       state: >-
-        {% set value = (states('sensor.bathroom_humidity') | int(default=0) | round(1) - states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) | round(1) ) > states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) %}
-        {{ value }}
+        {{ (states('sensor.bathroom_humidity') | int(0) - states('sensor.master_bathroom_humidity_average_linear_24h') | int(0) > states('input_select.helpers_master_bath_humidity_threshold') | int(0)) }}
       attributes:
         hum: "{{ states('sensor.bathroom_humidity') | int(default=0) }}"
         avg: "{{ states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) }}"
         input: "{{ states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) }}"
         hum_avg: >-
-          {% set calculation2 = states('sensor.bathroom_humidity')|int(default=0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(default=0) %}
-          {{ calculation2 }}
+          {{ states('sensor.bathroom_humidity')|int(0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(0) }}
 
 - binary_sensor:
     - name: "Hum fan calculate difference"
       unique_id: "0fcf93c7-dc39-485c-b1e4-6114dc8f4e21"
       state: >-
-        {% set value = (states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) | round(1) - states('sensor.bathroom_humidity') | int(default=0) | round(1) ) > states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) %}
-        {{ value }}
+        "{{ (states('sensor.master_bathroom_humidity_average_linear_24h') | int(0) - states('sensor.bathroom_humidity') | int(0) > states('input_select.helpers_master_bath_humidity_threshold') | int(0)) }}"
       attributes:
         hum: "{{ states('sensor.bathroom_humidity') | int(default=0) }}"
         avg: "{{ states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) }}"
         input: "{{ states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) }}"
         hum_avg: >-
-          {% set calculation2 = states('sensor.bathroom_humidity')|int(default=0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(default=0) %}
-          {{ calculation2 }}
+          {{ states('sensor.bathroom_humidity')|int(0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(0) }}
           
 - binary_sensor:
     - name: "Group Family Manual"

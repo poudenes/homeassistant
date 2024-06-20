@@ -32,7 +32,7 @@ include:
 
   entities:
     - sensor.bathroom_average_humidity
-    
+
     # Oral-B Sensors
     - sensor.oral_b_io_series_8n_battery
     - sensor.oral_b_io_series_8n_mode
@@ -293,6 +293,7 @@ include:
     - sensor.neo_plug_toog
     - sensor.neo_plug_washer
     - sensor.neo_plug_xmas_1
+    - sensor.neo_plug_3d_printer
 
     # Sensors monitor times of using machines
     - sensor.times_dishwasher_machine_has_been_on_last_14_days

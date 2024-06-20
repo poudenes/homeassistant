@@ -100,8 +100,6 @@
         {% else %}
           removed
         {% endif %}
-
-        mopForbiddenEnable: 1
       
 ###########################################################################################
 # Count how many Zwave devices are dead and alive
