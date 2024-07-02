@@ -33,6 +33,14 @@ api:
     key: !secret api_key
   reboot_timeout: 15min
 
+  on_client_connected:
+    - homeassistant.service:
+        service: persistent_notification.create
+        data:
+          title: "HA - Notification"
+          message: "Meek ${friendly} connected again"
+          notification_id: "Meek ${friendly}"
+
 time:
   - platform: homeassistant
     id: homeassistant_time

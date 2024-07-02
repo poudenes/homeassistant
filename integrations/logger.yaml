@@ -20,6 +20,8 @@ logs:
 
   custom_components.fireflyiii_integration.integrations.fireflyiii: fatal
   custom_components.nest_protect: fatal
+
+  frontend.js.latest.202406101: fatal
   
   # aiohttp.server: fatal
   # aioharmony.hubconnector_xmpp: fatal

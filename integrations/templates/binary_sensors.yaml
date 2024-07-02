@@ -23,21 +23,6 @@
         entity_id: "{{ integration_entities('asusrouter') | select('is_state', 'not_home') | list }}"
         
 ##########################################################################################
-# FOR CRITICAL TEMPERATURE RISING 3D PRINTER
-##########################################################################################
-- binary_sensor:
-    - name: "3D Printer bed temp rising"
-      unique_id: "4548ba6b-a249-485c-9913-664728ec0982"
-      state: >-
-        {{ (states('sensor.ender_3_bed_temperature')|int(0) - max(40, states('sensor.ender_3_bed_target')|int(0))) > 5 }}
-
-- binary_sensor:
-    - name: "3D Printer extruder temp rising"
-      unique_id: "1072442e-a309-40ae-a960-81c8c29a86b8"
-      state: >-
-        {{ (states('sensor.ender_3_extruder_temperature')|int(0) - max(40, states('sensor.ender_3_extruder_target')|int(0))) > 5 }}
-
-##########################################################################################
 # FOR AUTOMATION OF BATHROOM FAN
 ##########################################################################################
 - binary_sensor:
