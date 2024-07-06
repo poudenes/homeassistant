@@ -48,7 +48,6 @@ automation: !include_dir_merge_list automations/
 command_line: !include integrations/command_line.yaml
 calendar: !include integrations/calendar.yaml
 fan: !include integrations/fan.yaml
-feedreader: !include integrations/feedreader.yaml
 group: !include integrations/group.yaml
 homeassistant: !include integrations/homeassistant.yaml
 homekit: !include integrations/homekit_miltiple.yaml
