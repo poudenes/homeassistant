@@ -42,8 +42,17 @@ smart_home:
       - script.alexa_clean_toilet
       - script.alexa_clean_all
       - script.alexa_return_base
+
       - script.alexa_turn_on_appletv
+      - script.alexa_turn_on_appletv_pause
+      - script.alexa_turn_on_appletv_play
+      - script.alexa_turn_on_appletv_stop
+
       - script.alexa_turn_on_tv
+      - script.alexa_turn_on_tv_pause
+      - script.alexa_turn_on_tv_play
+      
+      - script.alexa_turn_on_yamaha_mute
       - script.alexa_turn_on_airplay
       - script.alexa_turn_on_nintendo
       - script.alexa_turn_on_morning
