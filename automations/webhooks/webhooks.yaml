@@ -77,17 +77,6 @@
 
       - conditions:
           - condition: trigger
-            id: "wud"
-        sequence:
-          - service: "script.mobile_notify_no_actionable"
-            data:
-              title: "HA - System"
-              message: |
-                {{ trigger.json.msg }}
-              thread_id: "ha_system"
-
-      - conditions:
-          - condition: trigger
             id: "nas"
         sequence:
           - service: "script.mobile_notify_no_actionable"
