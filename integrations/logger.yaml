@@ -22,6 +22,8 @@ logs:
   custom_components.nest_protect: fatal
 
   frontend.js.latest.202406101: fatal
+  frontend.js.latest.202407030: fatal
+  frontend.js.latest.202407050: fatal
   
   # aiohttp.server: fatal
   # aioharmony.hubconnector_xmpp: fatal

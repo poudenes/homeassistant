@@ -1,0 +1,15 @@
+---
+sensor.tgtg_ah_to_go_zuidplein:
+  friendly_name: "AH to Go Zuidplein"
+sensor.tgtg_hema_gelderlandplein:
+  friendly_name: "Hema GPlein"
+sensor.tgtg_jumbo_kastelenstraat:
+  friendly_name: "Jumbo Kastelenstr"
+sensor.tgtg_jongejans_gelderlandplein:
+  friendly_name: "Jongejans GPlein"
+sensor.tgtg_symphony_bar:
+  friendly_name: "Symohony Bar"
+sensor.tgtg_veggiebox_aveen_veggiebox:
+  friendly_name: "Veggie Box Fruit"
+sensor.tgtg_veggiebox_aveen_fruitbox:
+  friendly_name: "Veggiebox Veggie"

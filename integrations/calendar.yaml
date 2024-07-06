@@ -12,5 +12,5 @@
   password: !secret icloud_app_specific_password_caldav
   url: https://caldav.icloud.com
   calendars:
-    - "Funko"
+    - "Funko Pops"
     - "Peter Oudenes"
