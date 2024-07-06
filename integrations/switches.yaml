@@ -137,19 +137,6 @@
       turn_off:
         service: script.none
 
-    helpers_kodi:
-      friendly_name: "Scene Kodi"
-      unique_id: "cbe7a004-0259-4e93-a6e1-e4b0df9e4c89"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene kodi')}}"
-      turn_on:
-        service: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene kodi"
-      turn_off:
-        service: script.none
-
     helpers_nintendo:
       friendly_name: "Scene Nintendo"
       unique_id: "82b8a3a1-4448-4d2f-b279-68fc75038ab7"

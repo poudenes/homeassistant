@@ -161,7 +161,6 @@ include:
     - switch.helpers_daytime
     - switch.helpers_evening
     - switch.helpers_goodnight
-    - switch.helpers_kodi
     - switch.helpers_tv
     - switch.helpers_nintendo
     - switch.helpers_chromecast
@@ -238,7 +237,6 @@ include:
     # History time watch movie/serie/tv
     - sensor.history_apple_tv
     - sensor.history_cromecast
-    - sensor.history_kodi
     - sensor.history_nintendo
     - sensor.history_tv
 

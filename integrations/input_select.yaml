@@ -89,7 +89,6 @@ helpers_scenes_test:
     - "scene dinner"
     - "scene evening"
     - "scene goodnight"
-    - "scene kodi"
     - "scene nintendo"
     - "scene tv"
     - "None"
@@ -104,7 +103,6 @@ helpers_scenes:
     - "scene dinner"
     - "scene evening"
     - "scene goodnight"
-    - "scene kodi"
     - "scene nintendo"
     - "scene tv"
     - "None"
@@ -163,24 +161,6 @@ helpers_appletv_commands:
     - Back
     - Home
   initial: Home
-
-helpers_kodi_commands:
-  name: "kodi commands"
-  options:
-    - Power Off
-    - Power On
-    - Power Toggle
-    - Enter
-    - Mute
-    - Stop
-    - Play
-    - Pauze
-    - Back
-    - OK
-    - DVD Menu
-    - Subtitle
-    - My Videos
-    - Guide
 
 helpers_lg_input:
   name: "LG Input"

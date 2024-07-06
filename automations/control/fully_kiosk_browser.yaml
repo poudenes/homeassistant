@@ -28,7 +28,7 @@
         value: >-
           {% if is_state('group.family', 'off') %} 
             28
-          {% elif states('input_select.helpers_scenes') in ['scene appletv', 'scene nintendo', 'scene kodi'] %}
+          {% elif states('input_select.helpers_scenes') in ['scene appletv', 'scene nintendo'] %}
             28
           {% elif is_state('input_select.helpers_scenes', 'scene goodnight') %} 
             13

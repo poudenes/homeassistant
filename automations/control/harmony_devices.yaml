@@ -76,25 +76,6 @@
         device: 41536434
 
 ###########################################################################################
-# KODI
-###########################################################################################
-- id: "6b259998-6681-4362-b4c1-f5efdc43d736"
-  alias: "Harmony Hub - Commands - KODI"
-  trigger:
-    - platform: state
-      entity_id: input_select.helpers_kodi_commands
-
-  condition: []
-
-  action:
-    - service: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: "{{ states('input_select.helpers_kodi_commands') }}"
-        device: 58234324
-
-###########################################################################################
 # TV
 ###########################################################################################
 - id: "5c12bf0d-b2f0-4e69-b213-6fcd998f03e7"

@@ -171,14 +171,6 @@
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: "History Kodi"
-  entity_id: select.logitech_harmony_activities
-  state: "Kodi"
-  type: time
-  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
-  end: "{{ now() }}"
-
-- platform: history_stats
   name: "History Nintendo"
   entity_id: select.logitech_harmony_activities
   state: "Nintendo"
