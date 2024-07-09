@@ -30,7 +30,6 @@ history: # !include integrations/history.yaml
 homeassistant_alerts:
 media_source:
 mobile_app:
-# momentary:
 my:
 person:
 powercalc:
