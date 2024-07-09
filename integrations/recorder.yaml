@@ -31,7 +31,51 @@ include:
     - scene
 
   entities:
-    - sensor.bathroom_average_humidity
+    # BambuLabs
+    - binary_sensor.bambulab_a1_mini_firmware_update
+    - binary_sensor.bambulab_a1_mini_hms_errors
+    - binary_sensor.bambulab_a1_mini_online
+    - binary_sensor.bambulab_a1_mini_recording_timelapse
+    - button.bambulab_a1_mini_pause_printing
+    - button.bambulab_a1_mini_resume_printing
+    - button.bambulab_a1_mini_stop_printing
+    - button.bambulab_a1_mini_force_refresh_data
+    - fan.bambulab_a1_mini_aux_fan
+    - fan.abambulab_a1_mini_cooling_fan
+    - fan.bambulab_a1_mini_cooling_fan
+    - image.bambulab_a1_mini_camera
+    - light.bambulab_a1_mini_chamber_light
+    - switch.bambulab_a1_mini_manual_refresh_mode
+    - select.bambulab_a1_mini_printing_speed
+    - sensor.bambulab_a1_mini_aux_fan_speed
+    - sensor.bambulab_a1_mini_cooling_fan_speed
+    - sensor.bambulab_a1_mini_heatbreak_fan_speed
+    - sensor.bambulab_a1_mini_print_progress
+    - sensor.bambulab_a1_mini_target_bed_temperature
+    - sensor.bambulab_a1_mini_bed_temperature
+    - sensor.bambulab_a1_mini_nozzle_target_temperature
+    - sensor.bambulab_a1_mini_nozzle_temperature
+    - sensor.bambulab_a1_mini_total_usage
+    - sensor.bambulab_a1_mini_wi_fi_signal
+    - sensor.bambulab_a1_mini_ams_lite_tray_1
+    - sensor.bambulab_a1_mini_ams_lite_tray_2
+    - sensor.bambulab_a1_mini_ams_lite_tray_3
+    - sensor.bambulab_a1_mini_ams_lite_tray_4
+    - sensor.bambulab_a1_mini_start_time
+    - sensor.bambulab_a1_mini_end_time
+    - sensor.bambulab_a1_mini_remaining_time
+    - sensor.bambulab_a1_mini_active_tray
+    - sensor.bambulab_a1_mini_active_tray_index
+    - sensor.bambulab_a1_mini_current_layer
+    - sensor.bambulab_a1_mini_current_stage
+    - sensor.bambulab_a1_mini_gcode_filename
+    - sensor.bambulab_a1_mini_nozzle_size
+    - sensor.bambulab_a1_mini_nozzle_type
+    - sensor.bambulab_a1_mini_print_status
+    - sensor.bambulab_a1_mini_print_type
+    - sensor.bambulab_a1_mini_speed_profile
+    - sensor.bambulab_a1_mini_task_name
+    - sensor.bambulab_a1_mini_total_layer_count
 
     # Oral-B Sensors
     - sensor.oral_b_io_series_8n_battery
@@ -111,6 +155,7 @@ include:
     - sensor.fan_remote
     - sensor.fan_speed
     - sensor.fan_timer
+    - sensor.bathroom_average_humidity
 
     # NEST Protect Smoke detectors
     - binary_sensor.nest_protect_bedroom_smoke_status
