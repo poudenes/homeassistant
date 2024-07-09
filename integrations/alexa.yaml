@@ -32,35 +32,33 @@ smart_home:
   client_secret: !secret alexa_smart_home_secret
   filter:
     include_entities:
-      - light.livingroom_1
-      # For all routines in Alexa App
-      - script.alexa_clean_bedroom
-      - script.alexa_clean_hallway
-      - script.alexa_clean_kithcen
-      - script.alexa_clean_diningroom
-      - script.alexa_clean_livingroom
-      - script.alexa_clean_toilet
-      - script.alexa_clean_all
-      - script.alexa_return_base
+      # Routines for Harmony
+      - script.alexa_pause_harmony
+      - script.alexa_play_harmony
+      - script.alexa_stop_harmony
+      
+      - script.alexa_yamaha_mute
+      - script.alexa_yamaha_down_vol
+      - script.alexa_yamaha_up_vol
 
       - script.alexa_turn_on_appletv
-      - script.alexa_turn_on_appletv_pause
-      - script.alexa_turn_on_appletv_play
-      - script.alexa_turn_on_appletv_stop
-
       - script.alexa_turn_on_tv
-      - script.alexa_turn_on_tv_pause
-      - script.alexa_turn_on_tv_play
-      
-      - script.alexa_turn_on_yamaha_mute
       - script.alexa_turn_on_airplay
       - script.alexa_turn_on_nintendo
       - script.alexa_turn_on_morning
       - script.alexa_turn_on_sleeping
       - script.alexa_turn_on_goodnight
       - script.alexa_turn_off_harmony
-      - script.alexa_turn_on_peter_early_sleep
-      - script.alexa_turn_on_early_sleep
+
+      # Routines for Roborock
+      - script.alexa_return_base
+      - script.alexa_clean_all
+      - script.alexa_clean_bedroom
+      - script.alexa_clean_hallway
+      - script.alexa_clean_kithcen
+      - script.alexa_clean_diningroom
+      - script.alexa_clean_livingroom
+      - script.alexa_clean_toilet
 
       # Other
       - fan.mechanical_ventilation
@@ -336,13 +334,3 @@ smart_home:
       name: "Motion Diningroom"
       description: "Motion sensor in the diningroom"
       display_categories: MOTION_SENSOR
-
-      # - binary_sensor.nest_protect_bedroom_smoke_status
-      # - binary_sensor.nest_protect_bedroom_co_status
-      # - binary_sensor.nest_protect_bedroom_heat_status
-      # - binary_sensor.nest_protect_entryway_smoke_status
-      # - binary_sensor.nest_protect_entryway_co_status
-      # - binary_sensor.nest_protect_entryway_heat_status
-      # - binary_sensor.nest_protect_living_room_smoke_status
-      # - binary_sensor.nest_protect_living_room_co_status
-      # - binary_sensor.nest_protect_living_room_heat_status
