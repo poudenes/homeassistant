@@ -47,6 +47,8 @@ No Ports are open on my router anymore, and no subdomains are pointing to my IP 
 - ITHO Fan - https://www.ithodaalderop.nl/
 - Homekit - http://www.apple.com
 
+- Bambulabs A1 Mini + AMS Lite - [https://www.bambulabs.com](https://eu.store.bambulab.com/nl-nl/collections/3d-printer/products/a1-mini)
+
 - ASUS GT-RX 11000 (AsusMERLIN firmware) - https://www.asus.com/us/Networking/ROG-Rapture-GT-AX11000/
 
 - Samsung Smart Thing Dryer
