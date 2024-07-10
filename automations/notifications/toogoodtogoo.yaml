@@ -4,7 +4,53 @@
 #     ██║   ██║   ██║██║   ██║██║   ██║██║   ██║██║   ██║██║  ██║   ██║   ██║   ██║██║   ██║██║   ██║
 #     ██║   ╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝   ██║   ╚██████╔╝╚██████╔╝╚██████╔╝
 #     ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝    ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝
-# ##########################################################################################
+##########################################################################################
+# NOTIFY ME WHEN BOXES ARE IN STOCK AT TOGOODTOGO SYMPHONY BAR
+##########################################################################################
+- id: "9e38b878-a1a3-42b2-99b4-a52b453c74e4"
+  alias: "Notification - TgTg - Symphony Bar"
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: sensor.tgtg_symphony_bar
+      from: false
+      to: true
+      attribute: stock_available
+
+  condition:
+    - "{{ is_state('input_boolean.function_vacation', 'off') }}"
+
+  variables:
+    stock: "{{ states(trigger.to_state.entity_id) }}"
+    name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
+    picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
+    url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
+
+  action:
+    - service: script.mobile_notify_no_actionable
+      data:
+        title: "TgTg - Symphony Bar"
+        thread_id: "HA - TgTg - Symphony Bar"
+        message: |
+          {% set entityID = trigger.to_state.entity_id %}
+          {% set names = state_attr(entityID,'friendly_name').split('-') %}
+          {% set namesLength = names | length %}
+          {% if namesLength > 2 %}
+            {% set outName = names[1] + '-' + names[2] %}
+          {% else %}
+            {% set outName = names[1] %}
+          {% endif %}
+          {{ name }}:
+          {{ states(entityID) }} x{{ outName }} €{{ state_attr(entityID,'price') }}
+        img: "{{ picture }}"
+        buttontitle: "Open TgTg - Symphony Bar"
+        uri: uri
+        url: "{{ url }}"
+        soundname: default
+        critical: 1
+        volume: 1.0
+
+##########################################################################################
 # NOTIFY ME WHEN BOXES ARE IN STOCK AT TOGOODTOGO
 ##########################################################################################
 - id: "5c0a56db-5721-4f6e-93a1-5de3c8f5fd97"
@@ -17,7 +63,6 @@
         - sensor.tgtg_hema_gelderlandplein
         - sensor.tgtg_jumbo_kastelenstraat
         - sensor.tgtg_jongejans_gelderlandplein
-        - sensor.tgtg_symphony_bar
         - sensor.tgtg_veggiebox_aveen_veggiebox
         - sensor.tgtg_veggiebox_aveen_fruitbox
       from: false
