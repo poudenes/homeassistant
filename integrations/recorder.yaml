@@ -375,3 +375,5 @@ include:
 exclude:
   domains:
     - sensor
+  entities:
+    - sensor.icloud3_event_log
