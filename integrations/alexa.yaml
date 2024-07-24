@@ -37,9 +37,9 @@ smart_home:
       - script.alexa_play_harmony
       - script.alexa_stop_harmony
       
-      - script.alexa_yamaha_mute
-      - script.alexa_yamaha_down_vol
-      - script.alexa_yamaha_up_vol
+      - script.alexa_receiver_mute
+      - script.alexa_receiver_down_vol
+      - script.alexa_receiver_up_vol
 
       - script.alexa_turn_on_appletv
       - script.alexa_turn_on_tv

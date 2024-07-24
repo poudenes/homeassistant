@@ -20,8 +20,8 @@ alexa_turn_off_harmony:
 ###########################################################################################
 # ALEXA ROUTINE YAMAHA
 ###########################################################################################
-alexa_yamaha_mute:
-  alias: "Routine Yamaha Mute"
+alexa_receiver_mute:
+  alias: "Routine Receiver Mute"
   icon: mdi:script
   sequence:
     - service: remote.send_command
@@ -31,8 +31,8 @@ alexa_yamaha_mute:
         command: Mute
         device: Yamaha
 
-alexa_yamaha_up_vol:
-  alias: "Routine Yamaha Vol Up"
+alexa_receiver_up_vol:
+  alias: "Routine Receiver Vol Up"
   icon: mdi:script
   sequence:
     - service: remote.send_command
@@ -44,8 +44,8 @@ alexa_yamaha_up_vol:
         num_repeats: 5
         delay_secs: 0.5
 
-alexa_yamaha_down_vol:
-  alias: "Routine Yamaha Vol Down"
+alexa_receiver_down_vol:
+  alias: "Routine Receiver Vol Down"
   icon: mdi:script
   sequence:
     - service: remote.send_command
