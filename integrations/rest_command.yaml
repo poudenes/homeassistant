@@ -32,3 +32,4 @@ scene_check:
     Authorization: !secret ha_scene_to_ha_nas
   payload: '{{ payload }}'
   content_type: 'application/json'
+
