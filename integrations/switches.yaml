@@ -10,9 +10,6 @@
 # RFLINK SWITCH
 # https://www.home-assistant.io/integrations/switch.rflink/
 ###########################################################################################
-- platform: rflink
-  devices:
-    newkaku_014e5906_a: {}
 
 ###########################################################################################
 # GROUP
@@ -52,6 +49,25 @@
 ###########################################################################################
 - platform: template
   switches:
+    helpers_puredirectdts:
+      friendly_name: "DTS Pure Direct"
+      unique_id: "61dd7a8b-8c11-4c76-9470-f3985f944826"
+      #value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
+      turn_on:
+        service: remote.send_command
+        target:
+          entity_id: remote.logitech_harmony
+        data:
+          command: "PureDirectOn"
+          device: 41633063
+      turn_off:
+        service: remote.send_command
+        target:
+          entity_id: remote.logitech_harmony
+        data:
+          command: "PureDirectOff"
+          device: 41633063
+
     ###########################################################################################
     # TEMPLATE SCENES FOR ALEXA TO CONTROL SCENES INPUT_SELECT.HELPERS_SCENES
     ###########################################################################################

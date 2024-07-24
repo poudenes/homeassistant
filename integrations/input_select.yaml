@@ -223,6 +223,8 @@ helpers_yamaha_dsp_modus:
 helpers_yamaha_dsp_music:
   name: "Yamaha Music DSP"
   options:
+    - PureDirectOn
+    - PureDirectOff
     - 2ChStereo
     - 7ChStereo
     - CellarClub
