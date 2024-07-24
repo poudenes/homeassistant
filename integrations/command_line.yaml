@@ -25,6 +25,12 @@
     scan_interval: 3600
     command: "curl icanhazip.com"
 
+- sensor:
+    name: "ifcfg.me over VPN Routing"
+    unique_id: "f1e8ffc0-de6b-45a0-aede-33ecebf3b573"
+    scan_interval: 3600
+    command: "curl ifcfg.me"
+
 #################################################################
 # Allestorningen.nl
 #################################################################
