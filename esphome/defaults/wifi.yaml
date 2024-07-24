@@ -24,29 +24,3 @@ wifi:
     - light.turn_on:
         id: neopixel
         effect: strobe
-
-  # on_connect:
-  #   - light.turn_on:
-  #       id: neopixel
-  #       red: 1
-  #       green: 1
-  #       blue: 1
-
-  #   - light.turn_on:
-  #       id: neopixel
-  #       effect: strobe
-
-  #   - delay: 5s
-
-  #   - light.turn_on:
-  #       id: neopixel
-  #       effect: none
-
-  #   - delay: 5s
-
-  #   - light.turn_on:
-  #       id: neopixel
-  #       red: 1
-  #       green: 0
-  #       blue: 0
-  #       brightness: 100%
