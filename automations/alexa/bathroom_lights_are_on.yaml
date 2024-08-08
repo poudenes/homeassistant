@@ -19,7 +19,7 @@
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
   action:
-    - service: script.activate_alexa_actionable_notification
+    - action: script.activate_alexa_actionable_notification
       data_template:
         text: "The bathroom switch is still on. Do you want me to turn it off?"
         event_id: "alexa_custom_skill_bathtoom_light"
@@ -34,7 +34,7 @@
 
       timeout: "00:00:15"
       continue_on_timeout: false
-      
-    - service: switch.turn_off
+
+    - action: switch.turn_off
       target:
         entity_id: switch.bathroom_light_switch

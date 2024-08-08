@@ -16,13 +16,13 @@
 activate_alexa_actionable_notification:
   alias: "Alexa - Actionable Notification"
   sequence:
-    - service: input_text.set_value
+    - action: input_text.set_value
       target:
         entity_id: input_text.alexa_actionable_notification
       data:
         value: '{"text": "{{ text }}", "event": "{{ event_id }}"}'
 
-    - service: media_player.play_media
+    - action: media_player.play_media
       target:
         entity_id: "{{ alexa_device }}"
       data:

@@ -20,6 +20,6 @@
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
 
   action:
-    - service: "{{ 'input_boolean.turn_on' if is_state('sensor.fan_remote', 'kitchen') and is_state('sensor.fan_speed', 'high') else 'input_boolean.turn_off' }}"
+    - action: "{{ 'input_boolean.turn_on' if is_state('sensor.fan_remote', 'kitchen') and is_state('sensor.fan_speed', 'high') else 'input_boolean.turn_off' }}"
       target:
         entity_id: input_boolean.function_cooking

@@ -20,11 +20,11 @@
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
   action:
-    - service: switch.turn_off
+    - action: switch.turn_off
       target:
         entity_id: switch.bedroom_light_switch
 
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Notification"
         message: |

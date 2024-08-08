@@ -33,11 +33,11 @@
 
           then:
             - parallel:
-                - service: hue.activate_scene
+                - action: hue.activate_scene
                   target:
                     entity_id: scene.scenes_toilet_rainbow
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.toilet_neopixel
                   data:
@@ -49,11 +49,11 @@
 
           then:
             - parallel:
-                - service: light.turn_off
+                - action: light.turn_off
                   target:
                     entity_id: light.toilet_all
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.toilet_neopixel
                   data:
@@ -82,13 +82,13 @@
 
           then:
             - parallel:
-                - service: hue.activate_scene
+                - action: hue.activate_scene
                   data:
                     brightness: 30
                   target:
                     entity_id: scene.scenes_toilet_night_light
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.toilet_neopixel
                   data:
@@ -99,11 +99,11 @@
 
           then:
             - parallel:
-                - service: light.turn_off
+                - action: light.turn_off
                   target:
                     entity_id: light.toilet_all
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.toilet_neopixel
                   data:

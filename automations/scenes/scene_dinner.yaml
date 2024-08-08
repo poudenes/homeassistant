@@ -26,14 +26,14 @@
         notify: notify.alexa_media_livingroom
         call_scene_dinner: 1
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.nanoleaf
       data:
         brightness_pct: 30
         effect: Kay
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id:
           - light.dressoir_all
@@ -42,13 +42,13 @@
         brightness_pct: 100
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-    - service: hue.activate_scene
+    - action: hue.activate_scene
       data:
         transition: 2
       target:
         entity_id: scene.scenes_balcony_rainbow
 
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Scenes"
         message: |

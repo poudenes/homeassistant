@@ -18,7 +18,7 @@ mobile_notify_no_actionable:
   mode: parallel
 
   sequence:
-    - service: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_peter_iphone
       data:
         message: "{{ 'Message not set' if message is not defined else message }}"
         title: "{{ 'Title not set' if title is not defined else title }}"
@@ -36,7 +36,7 @@ mobile_notify_no_actionable:
               title: "{{ 'none' if buttontitle is not defined else buttontitle }}" #"{{ buttontitle }}"
               uri: "{{ 'none' if url is not defined else url }}" #"{{ url }}"
 
-    - service: input_text.set_value
+    - action: input_text.set_value
       target:
         entity_id: input_text.engine_ha_app
       data:

@@ -16,24 +16,23 @@
   condition: []
 
   action:
-
     - if: "{{ is_state('input_boolean.function_disco', 'on') }}"
       then:
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.nanoleaf
           data:
             brightness_pct: 30
             effect: "Northern Lights"
 
-        - service: hue.activate_scene
+        - action: hue.activate_scene
           data:
             transition: 1
           target:
             entity_id: scene.scenes_disco
-            
+
       else:
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id:
               - light.dressoir_all
@@ -43,6 +42,6 @@
             brightness_pct: 100
             kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-        - service: light.turn_off
+        - action: light.turn_off
           target:
             entity_id: light.hallway_all

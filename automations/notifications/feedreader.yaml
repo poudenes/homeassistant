@@ -1,4 +1,4 @@
-#  ███████╗███████╗███████╗██████╗ ██████╗ ███████╗ █████╗ ██████╗ ███████╗██████╗ 
+#  ███████╗███████╗███████╗██████╗ ██████╗ ███████╗ █████╗ ██████╗ ███████╗██████╗
 #  ██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗
 #  █████╗  █████╗  █████╗  ██║  ██║██████╔╝█████╗  ███████║██║  ██║█████╗  ██████╔╝
 #  ██╔══╝  ██╔══╝  ██╔══╝  ██║  ██║██╔══██╗██╔══╝  ██╔══██║██║  ██║██╔══╝  ██╔══██╗
@@ -18,13 +18,13 @@
   condition: []
 
   action:
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "New Feedreader info"
         message: "New post - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
         notification_id: "{{ trigger.event.data.title }}"
 
-    # - service: persistent_notification.create
+    # - action: persistent_notification.create
     #   data:
     #     title: "HA - Alarm"
     #     message: |

@@ -15,7 +15,7 @@
       entity_id: input_select.helpers_eurovision
 
   action:
-    - service: light.turn_off
+    - action: light.turn_off
       target:
         entity_id: light.balcony_all
 
@@ -27,7 +27,7 @@
             - "{{ is_state('input_select.helpers_eurovision', 'Off') }}"
 
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_all
@@ -36,7 +36,7 @@
                 kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
                 brightness_pct: 100
 
-            - service: light.turn_off
+            - action: light.turn_off
               target:
                 entity_id:
                   - light.livingroom_all
@@ -50,7 +50,7 @@
             - "{{ is_state('input_select.helpers_eurovision', 'Pride') }}"
 
           sequence:
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -81,7 +81,7 @@
             - "{{ is_state('input_select.helpers_eurovision', 'Albania') }}"
 
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_all
@@ -90,7 +90,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -121,7 +121,7 @@
             - "{{ is_state('input_select.helpers_eurovision', 'Australia') }}"
 
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -130,7 +130,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -139,7 +139,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -147,7 +147,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -177,7 +177,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Armenia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -186,7 +186,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -195,7 +195,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -203,7 +203,7 @@
                 color_name: orange
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -233,7 +233,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Austria') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -242,7 +242,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -251,7 +251,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -259,7 +259,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -289,7 +289,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Azerbaijan') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -298,7 +298,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -307,7 +307,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -315,7 +315,7 @@
                 color_name: green
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -345,7 +345,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Belgium') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -354,7 +354,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -363,7 +363,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -371,7 +371,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -401,7 +401,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Croatia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -410,7 +410,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -419,7 +419,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -427,7 +427,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -457,7 +457,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Cyprus') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -466,7 +466,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -475,7 +475,7 @@
                 color_name: orange
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -483,7 +483,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -513,7 +513,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Czech Republic') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -522,7 +522,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -531,7 +531,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -539,7 +539,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -569,7 +569,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Denmark') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -578,7 +578,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -587,7 +587,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -595,7 +595,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -625,7 +625,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Estonia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -634,7 +634,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -643,7 +643,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -651,7 +651,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -681,7 +681,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Finland') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -690,7 +690,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -699,7 +699,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -707,7 +707,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -737,7 +737,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'France') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -746,7 +746,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -755,7 +755,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -763,7 +763,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -793,7 +793,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Georgia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -802,7 +802,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -811,7 +811,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -819,7 +819,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -849,7 +849,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Germany') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -858,7 +858,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -867,7 +867,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -875,7 +875,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -905,7 +905,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Greece') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -914,7 +914,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -923,7 +923,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -931,7 +931,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -961,7 +961,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Iceland') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -970,7 +970,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -979,7 +979,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -987,7 +987,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1017,7 +1017,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Ireland') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1026,7 +1026,7 @@
                 color_name: green
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1035,7 +1035,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1043,7 +1043,7 @@
                 color_name: orange
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1073,7 +1073,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Israel') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1082,7 +1082,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1091,7 +1091,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1099,7 +1099,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1129,7 +1129,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Italy') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1138,7 +1138,7 @@
                 color_name: green
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1147,7 +1147,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1155,7 +1155,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1185,7 +1185,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Latvia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1194,7 +1194,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1203,7 +1203,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1211,7 +1211,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1241,7 +1241,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Lithuania') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1250,7 +1250,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1259,7 +1259,7 @@
                 color_name: green
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1267,7 +1267,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1297,7 +1297,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Malta') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_all
@@ -1305,7 +1305,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1313,7 +1313,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1343,7 +1343,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Moldova') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1352,7 +1352,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1361,7 +1361,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1369,7 +1369,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1399,7 +1399,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Luxembourg') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1408,7 +1408,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1417,7 +1417,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1428,7 +1428,7 @@
                   - 136
                   - 254
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.balcony_all
@@ -1439,7 +1439,7 @@
                   - 136
                   - 254
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1471,7 +1471,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Netherlands') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1480,7 +1480,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1489,7 +1489,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1497,7 +1497,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.balcony_all
@@ -1505,7 +1505,7 @@
                 color_name: orange
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1535,7 +1535,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Norway') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1544,7 +1544,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1553,7 +1553,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1561,7 +1561,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1591,7 +1591,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Poland') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1600,7 +1600,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1609,7 +1609,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1617,7 +1617,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1647,14 +1647,14 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Portugal') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.livingroom_all
               data:
                 color_name: green
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1662,7 +1662,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1692,7 +1692,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Romania') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1701,7 +1701,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1710,7 +1710,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1718,7 +1718,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1748,7 +1748,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'San Marino') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1757,7 +1757,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1766,7 +1766,7 @@
                 color_name: light blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1774,7 +1774,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1804,7 +1804,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Serbia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1813,7 +1813,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1822,7 +1822,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1830,7 +1830,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1860,7 +1860,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Slovenia') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1869,7 +1869,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1878,7 +1878,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1886,7 +1886,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1916,7 +1916,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Spain') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1925,7 +1925,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1934,7 +1934,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1942,7 +1942,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -1972,7 +1972,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Sweden') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -1981,7 +1981,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -1990,7 +1990,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -1998,7 +1998,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -2028,7 +2028,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Switzerland') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -2037,7 +2037,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -2046,7 +2046,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -2054,7 +2054,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -2084,7 +2084,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'Ukraine') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -2093,7 +2093,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -2102,7 +2102,7 @@
                 color_name: yellow
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -2110,7 +2110,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -2140,7 +2140,7 @@
         - conditions:
             - "{{ is_state('input_select.helpers_eurovision', 'United Kingdom') }}"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_2
@@ -2149,7 +2149,7 @@
                 color_name: blue
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_1
@@ -2158,7 +2158,7 @@
                 color_name: red
                 brightness_pct: 100
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.dressoir_all
@@ -2166,7 +2166,7 @@
                 color_name: white
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -2197,7 +2197,7 @@
             - "{{ is_state('input_select.helpers_eurovision', 'Eurovision') }}"
 
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id:
                   - light.livingroom_all
@@ -2206,7 +2206,7 @@
                 kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
                 brightness_pct: 100
 
-            - service: rest_command.nanoleaf
+            - action: rest_command.nanoleaf
               data:
                 panels:
                   [
@@ -2246,7 +2246,7 @@
                     { "number": 18, "r": 155, "g": 0, "b": 155 },
                   ]
 
-            # - service: rest_command.nanoleaf
+            # - action: rest_command.nanoleaf
             #   data:
             #     panels:
             #       [

@@ -27,7 +27,7 @@
     url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
 
   action:
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "TgTg - Symphony Bar"
         thread_id: "HA - TgTg - Symphony Bar"
@@ -79,7 +79,7 @@
     url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
 
   action:
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "TooGoodToGo"
         thread_id: "HA - TooGoodToGo"

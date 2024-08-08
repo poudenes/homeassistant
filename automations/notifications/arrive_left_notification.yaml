@@ -20,7 +20,7 @@
   action:
     - if: "{{ trigger.to_state.state == 'off' }}"
       then:
-        - service: script.mobile_notify_no_actionable
+        - action: script.mobile_notify_no_actionable
           data:
             title: "HA - Person"
             message: |
@@ -29,7 +29,7 @@
             thread_id: "ha_persons"
 
       else:
-        - service: script.mobile_notify_no_actionable
+        - action: script.mobile_notify_no_actionable
           data:
             title: "HA - Person"
             message: |

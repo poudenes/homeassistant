@@ -28,25 +28,24 @@
     - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
 
   action:
-    - service: >-
-          {% if is_state('switch.momentary_mvps_update_blacklist_manual', 'on') %} 
-            shell_command.mvps_update_blacklist
-          {% elif is_state('switch.momentary_mvps_backup_db_manual', 'on') %} 
-            shell_command.mvps_backup_db
-          {% elif is_state('switch.momentary_mvps_backup_ispconfig_full_manual', 'on') %} 
-            shell_command.mvps_backup_ispconfig
-          {% elif is_state('switch.momentary_mvps_backup_vmail_manual', 'on') %} 
-            shell_command.mvps_backup_vmail
-          {% elif is_state('switch.momentary_mvps_backup_www_full_manual', 'on') %} 
-            shell_command.mvps_backup_full
-          {% elif is_state('switch.momentary_mvps_clean_logfiles', 'on') %}
-            shell_command.mvps_clearlog
-          {% elif is_state('switch.momentary_mvps_rspamd_learning', 'on') %}
-            shell_command.mvps_rspamd_learn
-          {% elif is_state('switch.momentary_mvps_update_ipset_abuseipdb_manual', 'on') %}
-            shell_command.mvps_ipset_abuseipdb
-          {% elif is_state('switch.momentary_mvps_update_os_manual', 'on') %}
-            shell_command.mvps_apt_update
-          {% endif %}
+    - action: >-
+        {% if is_state('switch.momentary_mvps_update_blacklist_manual', 'on') %} 
+          shell_command.mvps_update_blacklist
+        {% elif is_state('switch.momentary_mvps_backup_db_manual', 'on') %} 
+          shell_command.mvps_backup_db
+        {% elif is_state('switch.momentary_mvps_backup_ispconfig_full_manual', 'on') %} 
+          shell_command.mvps_backup_ispconfig
+        {% elif is_state('switch.momentary_mvps_backup_vmail_manual', 'on') %} 
+          shell_command.mvps_backup_vmail
+        {% elif is_state('switch.momentary_mvps_backup_www_full_manual', 'on') %} 
+          shell_command.mvps_backup_full
+        {% elif is_state('switch.momentary_mvps_clean_logfiles', 'on') %}
+          shell_command.mvps_clearlog
+        {% elif is_state('switch.momentary_mvps_rspamd_learning', 'on') %}
+          shell_command.mvps_rspamd_learn
+        {% elif is_state('switch.momentary_mvps_update_ipset_abuseipdb_manual', 'on') %}
+          shell_command.mvps_ipset_abuseipdb
+        {% elif is_state('switch.momentary_mvps_update_os_manual', 'on') %}
+          shell_command.mvps_apt_update
+        {% endif %}
       data: {}
-

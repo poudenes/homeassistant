@@ -17,7 +17,7 @@
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
   action:
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id:
           - light.seeling_all

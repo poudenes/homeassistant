@@ -25,11 +25,11 @@
     name: "{{ trigger.entity_id[14:] }}"
 
   action:
-    - service: input_datetime.set_datetime
+    - action: input_datetime.set_datetime
       data:
         entity_id: "input_datetime.helpers_{{ name }}_{{ to_state }}"
         timestamp: "{{ now().timestamp() }}"
-        
+
 ###########################################################################################
 # START SCRIPT
 ###########################################################################################
@@ -47,7 +47,7 @@
   condition: []
 
   action:
-    - service: script.utility_notification
+    - action: script.utility_notification
       data:
         name: >-
           {% if is_state('binary_sensor.dishwasher_machine', 'on') %} 

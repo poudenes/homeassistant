@@ -31,14 +31,14 @@
 
       then:
         - parallel:
-            - service: hue.activate_scene
+            - action: hue.activate_scene
               data:
                 transition: 1
                 brightness: "{{ 75 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
               target:
                 entity_id: scene.scenes_livingroom_night_light
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.livingroom_neopixel_all
               data:
@@ -50,11 +50,11 @@
 
       then:
         - parallel:
-            - service: light.turn_off
+            - action: light.turn_off
               target:
                 entity_id: light.livingroom_all
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.livingroom_neopixel_all
               data:

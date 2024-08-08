@@ -19,7 +19,7 @@
   condition: []
 
   action:
-    - service: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_peter_iphone
       data:
         title: "Action Control"
         message: "What action you want control?"
@@ -51,6 +51,6 @@
             }
             [wait.trigger.event.data.actionName] }}
 
-    - service: switch.turn_on
+    - action: switch.turn_on
       target:
         entity_id: "{{ action }}"

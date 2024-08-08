@@ -18,7 +18,7 @@
   condition: []
 
   action:
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Work"
         message: |
@@ -47,7 +47,7 @@
   condition: []
 
   action:
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Work"
         message: Go home.

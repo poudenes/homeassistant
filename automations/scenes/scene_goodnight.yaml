@@ -26,14 +26,14 @@
             notify: notify.alexa_media_livingroom
             call_scene_goodnight: 1
 
-        - service: input_boolean.turn_off
+        - action: input_boolean.turn_off
           target:
             entity_id: group.helpers_function_switches
 
         ###########################################################################################
         # When scene started on daylight
         ###########################################################################################
-        - service: "{{ 'switch.turn_on' if is_state('input_select.helpers_sunrise_sunset', 'above_horizon') else 'script.none' }}"
+        - action: "{{ 'switch.turn_on' if is_state('input_select.helpers_sunrise_sunset', 'above_horizon') else 'script.none' }}"
           target:
             entity_id: switch.momentary_early_sleep
 
@@ -41,24 +41,24 @@
         ###########################################################################################
         # END  When scene started on daylight
         ###########################################################################################
-        
+
         ###########################################################################################
         # Guest sleepover part
         ###########################################################################################
-        - service: "{{ 'switch.turn_on' if is_state('switch.momentary_guests', 'on') else 'switch.turn_off' }}"
+        - action: "{{ 'switch.turn_on' if is_state('switch.momentary_guests', 'on') else 'switch.turn_off' }}"
           target:
             entity_id:
               - switch.window_light_switch
               - switch.wall_light_switch
 
-        - service: "{{ 'script.none' if is_state('switch.momentary_guests', 'on') else 'light.turn_off' }}"
+        - action: "{{ 'script.none' if is_state('switch.momentary_guests', 'on') else 'light.turn_off' }}"
           target:
             entity_id: light.livingroom_all
         ###########################################################################################
         # END - Guest sleepover part
         ###########################################################################################
 
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.bedroom_all
           data:
@@ -72,14 +72,14 @@
               {% endif %}
             kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.bathroom_all
           data:
             brightness_pct: "{{ 0 if is_state('switch.momentary_peter_early_up', 'on') else 100 }}"
             kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-    - service: light.turn_off
+    - action: light.turn_off
       target:
         entity_id:
           - light.dressoir_all
@@ -88,27 +88,27 @@
           - light.balcony_all
           - light.cooking_all
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.diningtable_all
       data:
         brightness_pct: "{{ 98 if is_state('input_boolean.function_kay_learning', 'on') else 0 }}"
 
-    - service: "{{ 'script.none' if is_state('switch.momentary_peter_early_up', 'on') else 'remote.turn_off' }}"
+    - action: "{{ 'script.none' if is_state('switch.momentary_peter_early_up', 'on') else 'remote.turn_off' }}"
       target:
         entity_id: remote.logitech_harmony
 
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.function_full_manual_mode
 
-    - service: switch.turn_off
+    - action: switch.turn_off
       target:
         entity_id: >
           {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
             | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
 
-    - service: rest_command.scene_check
+    - action: rest_command.scene_check
       data:
         payload: >
           {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
@@ -120,7 +120,7 @@
               timeout: "00:10:00"
               continue_on_timeout: true
 
-            - service: light.turn_off
+            - action: light.turn_off
               target:
                 entity_id:
                   - light.seeling_all
@@ -131,7 +131,7 @@
               timeout: "00:10:00"
               continue_on_timeout: true
 
-            - service: homeassistant.turn_off
+            - action: homeassistant.turn_off
               target:
                 entity_id:
                   - light.toilet_all

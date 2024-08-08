@@ -29,7 +29,7 @@
 
   action:
     - parallel:
-        - service: input_select.select_option
+        - action: input_select.select_option
           target:
             entity_id: input_select.helpers_scenes
           data:
@@ -42,7 +42,7 @@
             notify: notify.alexa_media_livingroom
             call_scene_appletv: 1
 
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.nanoleaf
           data:
@@ -62,14 +62,14 @@
                 Kay
               {% endif %}
 
-        - service: input_select.select_option
+        - action: input_select.select_option
           target:
             entity_id:
               - input_select.helpers_yamaha_dsp_movie #helpers_yamaha_dsp_sur_decoder
           data:
             option: 7ChStereo
 
-        - service: hue.activate_scene
+        - action: hue.activate_scene
           data:
             transition: 2
           target:
@@ -88,19 +88,19 @@
                 scene.scenes_appletv
               {% endif %}
 
-        - service: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
+        - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
           target:
             entity_id: >
               {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
                 | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.window_all
       data:
         brightness_pct: "{{ 20 if is_state('media_player.woonkamer', 'playing') else 100 }}"
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.dressoir_all
       data:
@@ -113,7 +113,7 @@
             100
           {% endif %}
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.balcony_all
       data:

@@ -31,7 +31,6 @@
             | rejectattr("entity_id", "search", "peter_iphone")
             | map(attribute="entity_id") | list }}
     - condition: "{{ batt_device_list | length > 0 }}"
-
     - repeat:
         for_each: "{{ batt_device_list }}"
         sequence:
@@ -39,7 +38,7 @@
               {% set entity = expand(repeat.item)[0] %}
               {{ entity.state | int != 100 and entity.state | int <= 29 }}
 
-          - service: persistent_notification.create
+          - action: persistent_notification.create
             data:
               title: "HA - Notification"
               message: >

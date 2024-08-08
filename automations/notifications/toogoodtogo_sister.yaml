@@ -48,6 +48,6 @@
 #     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
 
 #   action:
-#     - service: notify.mobile_app_martine
+#     - action: notify.mobile_app_martine
 #       data:
 #         message: "{{ name }}, # {{ stock }}, €: {{ price }}"

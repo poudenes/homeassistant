@@ -21,7 +21,7 @@
     ###########################################################################################
     - if: "{{ is_state('sensor.holidays', 'Christmas') }}"
       then:
-        - service: "{{ 'switch.turn_on' if is_state('binary_sensor.group_family_manual', 'on') else 'switch.turn_off' }}"
+        - action: "{{ 'switch.turn_on' if is_state('binary_sensor.group_family_manual', 'on') else 'switch.turn_off' }}"
           target:
             entity_id: >
               {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
@@ -31,7 +31,7 @@
       # Default
       ###########################################################################################
       else:
-        - service: "{{ 'switch.turn_on' if is_state('binary_sensor.group_family_manual', 'on') else 'switch.turn_off' }}"
+        - action: "{{ 'switch.turn_on' if is_state('binary_sensor.group_family_manual', 'on') else 'switch.turn_off' }}"
           target:
             entity_id: >
               {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')

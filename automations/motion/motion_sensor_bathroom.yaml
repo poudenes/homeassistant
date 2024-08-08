@@ -23,14 +23,14 @@
 
       then:
         - parallel:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.bathroom_all
               data:
                 brightness_pct: 100
                 kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.bathroom_neopixel
               data:
@@ -42,11 +42,11 @@
 
       then:
         - parallel:
-            - service: light.turn_off
+            - action: light.turn_off
               target:
                 entity_id: light.bathroom_all
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.bathroom_neopixel
               data:

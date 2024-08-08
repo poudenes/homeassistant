@@ -20,13 +20,13 @@
 
   action:
     - parallel:
-        - service: script.engine_say
+        - action: script.engine_say
           data:
             media_player: media_player.livingroom
             notify: notify.alexa_media_livingroom
             message: The {{ trigger_message }} is finished.
 
-        - service: script.mobile_notify_no_actionable
+        - action: script.mobile_notify_no_actionable
           data:
             title: "HA - Notification"
             message: |

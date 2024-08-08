@@ -24,7 +24,7 @@ stream_radio:
           Livingroom: media_player.livingroom
           Kitchen: media_player.galaxy_tab_a
 
-    - service: media_player.play_media
+    - action: media_player.play_media
       target:
         entity_id: "{{ entity_id }}"
       data:
@@ -38,7 +38,7 @@ stream_radio_stop:
   alias: "Stop Radio"
   icon: mdi:stop
   sequence:
-    - service: media_player.media_stop
+    - action: media_player.media_stop
       target:
         entity_id: >-
           {% if is_state('input_select.helpers_radio_selector', 'Livingroom') %} media_player.livingroom

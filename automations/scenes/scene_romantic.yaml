@@ -17,14 +17,14 @@
   condition: []
 
   action:
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.nanoleaf
       data:
         brightness_pct: 30
         effect: "Romantic"
 
-    - service: hue.activate_scene
+    - action: hue.activate_scene
       data:
         transition: 2
       target:

@@ -22,14 +22,14 @@
   condition: []
 
   action:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
         command: "{{ trigger.to_state.state }}"
         device: 41633063
-        
-    - service: input_text.set_value
+
+    - action: input_text.set_value
       target:
         entity_id: input_text.yamaha_dps_modus
       data:
@@ -49,7 +49,7 @@
   condition: []
 
   action:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -68,7 +68,7 @@
   condition: []
 
   action:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -87,7 +87,7 @@
   condition: []
 
   action:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:

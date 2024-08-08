@@ -39,16 +39,16 @@
 #               "{{ now().date() == (states('sensor.peugeot_208_ascription_date') | as_datetime | as_local - timedelta(days=21)).date() | float(false) }}
 
 #         sequence:
-#           - service: script.mobile_notify_no_actionable
+#           - action: script.mobile_notify_no_actionable
 #             data:
 #               title: "HA - Notification"
 #               message: |
 #                 APK Vervaldatum:
-#                 De APK keuring van Martina verloopt op {{ states('sensor.toyota_ago_apk_expiration') }}. 
+#                 De APK keuring van Martina verloopt op {{ states('sensor.toyota_ago_apk_expiration') }}.
 #                 Plan een APK keuring bij de garage.
 #               thread_id: "ha_notification"
 
-#           - service: notify.mobile_app_martine
+#           - action: notify.mobile_app_martine
 #             data:
 #               message: "Je APK verloopt op {{ states('sensor.toyota_ago_apk_expiration') }}"
 
@@ -57,16 +57,16 @@
 #             id: "insured"
 
 #         sequence:
-#           - service: script.mobile_notify_no_actionable
+#           - action: script.mobile_notify_no_actionable
 #             data:
 #               title: "HA - Notification"
 #               message: |
 #                 RDW Verzekering:
-#                 De auto van Martina is niet verzekerd! 
+#                 De auto van Martina is niet verzekerd!
 #                 Sluit een autoverzekering af voordat je ermee de weg op gaat.
 #               thread_id: "ha_notification"
 
-#           - service: notify.mobile_app_martine
+#           - action: notify.mobile_app_martine
 #             data:
 #               message: "Je auto is niet verzekerd... bekijk dit na"
 
@@ -75,15 +75,15 @@
 #             id: "recall"
 
 #         sequence:
-#           - service: script.mobile_notify_no_actionable
+#           - action: script.mobile_notify_no_actionable
 #             data:
 #               title: "HA - Notification"
 #               message: |
 #                 RDW Terugroepactie:
-#                 Er is een terugroepactie uitgevaardigd voor de auto van Martina. 
+#                 Er is een terugroepactie uitgevaardigd voor de auto van Martina.
 #                 Maak een afspraak bij de garage om het probleem te verhelpen.
 #               thread_id: "ha_notification"
 
-#           - service: notify.mobile_app_martine
+#           - action: notify.mobile_app_martine
 #             data:
 #               message: "Je auto is door Toyota terug geroepen!"

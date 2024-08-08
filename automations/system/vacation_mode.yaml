@@ -21,11 +21,11 @@
 
   action:
     - parallel:
-        - service: input_boolean.turn_on
+        - action: input_boolean.turn_on
           target:
             entity_id: input_boolean.function_vacation
 
-        - service: script.mobile_notify_no_actionable
+        - action: script.mobile_notify_no_actionable
           data:
             title: "HA - Scenes"
             message: |
@@ -49,13 +49,13 @@
 
   action:
     - parallel:
-        - service: input_boolean.turn_off
+        - action: input_boolean.turn_off
           target:
             entity_id:
               - input_boolean.function_vacation
               - input_boolean.function_holiday_emulation
 
-        - service: script.mobile_notify_no_actionable
+        - action: script.mobile_notify_no_actionable
           data:
             title: "HA - Scenes"
             message: |

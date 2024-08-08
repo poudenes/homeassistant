@@ -62,59 +62,59 @@
   condition: []
 
   action:
-  - choose:
-      - conditions:
-          - condition: trigger
-            id: "ukstatus"
-        sequence:
-          - service: "script.mobile_notify_no_actionable"
-            data:
-              title: "HA - System"
-              message: |
-                Webhook UptimeKuma:
-                {{ trigger.json.msg }}
-              thread_id: "ha_system"
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: "ukstatus"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                title: "HA - System"
+                message: |
+                  Webhook UptimeKuma:
+                  {{ trigger.json.msg }}
+                thread_id: "ha_system"
 
-      - conditions:
-          - condition: trigger
-            id: "nas"
-        sequence:
-          - service: "script.mobile_notify_no_actionable"
-            data:
-              title: "HA - System"
-              message: |
-                {{ trigger.json.description }}
-              thread_id: "ha_system"
+        - conditions:
+            - condition: trigger
+              id: "nas"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                title: "HA - System"
+                message: |
+                  {{ trigger.json.description }}
+                thread_id: "ha_system"
 
-      - conditions:
-          - condition: trigger
-            id: "radarr"
-        sequence:
-          - service: "script.mobile_notify_no_actionable"
-            data:
-              message: |
-                {{ trigger.json.movie.title }} is downloaded.
-              title: Give me your properties !
-              thread_id: "ha_webhook_radarr"
+        - conditions:
+            - condition: trigger
+              id: "radarr"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                message: |
+                  {{ trigger.json.movie.title }} is downloaded.
+                title: Give me your properties !
+                thread_id: "ha_webhook_radarr"
 
-      - conditions:
-          - condition: trigger
-            id: "sonarr"
-        sequence:
-          - service: "script.mobile_notify_no_actionable"
-            data:
-              message: |
-                {{ trigger.json.msg }}
-              title: Give me your properties !
-              thread_id: "ha_webhook_sonarr"
+        - conditions:
+            - condition: trigger
+              id: "sonarr"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                message: |
+                  {{ trigger.json.msg }}
+                title: Give me your properties !
+                thread_id: "ha_webhook_sonarr"
 
-      - conditions:
-          - condition: trigger
-            id: "firefly"
-        sequence:
-          - service: "script.mobile_notify_no_actionable"
-            data:
-              message: |
-                {{ trigger.json.messages }}
-              title: Firefly
-              thread_id: "ha_webhook_firefly"
+        - conditions:
+            - condition: trigger
+              id: "firefly"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                message: |
+                  {{ trigger.json.messages }}
+                title: Firefly
+                thread_id: "ha_webhook_firefly"

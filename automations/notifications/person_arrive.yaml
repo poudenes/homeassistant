@@ -21,7 +21,7 @@
   condition: []
 
   action:
-    - service: group.set
+    - action: group.set
       data:
         object_id: "arriving"
         add_entities: "{{ trigger.to_state.entity_id }}"
@@ -80,7 +80,7 @@
           {%- endmacro -%}
           {{greeting_sentence(person, is_are)}}
 
-    - service: group.set
+    - action: group.set
       data:
         object_id: "arriving"
         entities: []

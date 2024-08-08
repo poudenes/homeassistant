@@ -28,7 +28,7 @@
     - "{{ states('input_select.helpers_scenes') not in ['scene nintendo', 'scene goodnight','scene dinner'] }}"
 
   action:
-    - service: input_select.select_option
+    - action: input_select.select_option
       target:
         entity_id: input_select.helpers_scenes
       data:
@@ -41,21 +41,21 @@
         notify: notify.alexa_media_livingroom
         call_scene_nintendo: 1
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.nanoleaf
       data:
         brightness_pct: 30
         effect: "Nintendo"
 
-    - service: input_select.select_option
+    - action: input_select.select_option
       target:
         entity_id:
           - input_select.helpers_yamaha_dsp_sur_decoder
       data:
         option: ExtedSur.PLIIXMovie
 
-    - service: hue.activate_scene
+    - action: hue.activate_scene
       data:
         transition: 2
       target:

@@ -14,7 +14,7 @@
     - platform: state
       entity_id: input_boolean.function_wakeup
 
-  condition: 
+  condition:
     - condition: time
       after: "04:00:00"
       before: "10:00:00"
@@ -25,7 +25,7 @@
     - if:
         - "{{ (trigger.to_state.state == 'on') }}"
       then:
-        - service: hue.activate_scene
+        - action: hue.activate_scene
           data:
             transition: 60
             brightness: 127
@@ -33,8 +33,8 @@
             entity_id: scene.scenes_wake_up
 
       else:
-        - service: light.turn_off
-          target: 
-            entity_id: 
+        - action: light.turn_off
+          target:
+            entity_id:
               - light.dressoir_all
               - light.livingroom_all

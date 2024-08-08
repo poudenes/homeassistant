@@ -13,14 +13,14 @@
   trigger:
     - platform: state
       entity_id: media_player.woonkamer
-      to: 
+      to:
         - "playing"
       for: "00:00:05"
       id: appletv_playing
 
     - platform: state
       entity_id: media_player.woonkamer
-      to: 
+      to:
         - "paused"
         - "standby"
         - "idle"
@@ -46,7 +46,7 @@
             - "{{ is_state('input_select.helpers_scenes', 'scene appletv') }}"
 
           sequence:
-            - service: huesyncbox.set_sync_state
+            - action: huesyncbox.set_sync_state
               data:
                 sync: true
                 brightness: 70
@@ -58,7 +58,7 @@
                 device_id: ca734212663336331243ffd0104937dc
 
             - parallel:
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id:
                       - light.nanoleaf
@@ -66,7 +66,7 @@
                     brightness_pct: 5
                     transition: 2
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.wall_all
                   data:
@@ -75,7 +75,7 @@
 
                 - delay: "00:00:03"
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.window_all
                   data:
@@ -84,14 +84,14 @@
 
                 - delay: "00:00:03"
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.dressoir_all
                   data:
                     transition: 2
                     brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 15 }}"
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.balcony_all
                   data:
@@ -106,7 +106,7 @@
             - "{{ is_state('input_select.helpers_scenes', 'scene appletv') }}"
 
           sequence:
-            - service: huesyncbox.set_sync_state
+            - action: huesyncbox.set_sync_state
               data:
                 sync: false
                 brightness: 70
@@ -118,8 +118,8 @@
                 device_id: ca734212663336331243ffd0104937dc
 
             - delay: "00:00:01"
-    
-            - service: hue.activate_scene
+
+            - action: hue.activate_scene
               data:
                 transition: 2
                 brightness: 255
@@ -138,17 +138,16 @@
                   {% else %} 
                     scene.scenes_appletv
                   {% endif %}
-                  
+
             - parallel:
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.nanoleaf
                   data:
                     brightness_pct: 50
                     transition: 2
 
-
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id:
                       - light.livingroom_all
@@ -157,14 +156,14 @@
                     transition: 2
                     brightness_pct: 100
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.dressoir_all
                   data:
                     transition: 2
                     brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
 
-                - service: light.turn_on
+                - action: light.turn_on
                   target:
                     entity_id: light.balcony_all
                   data:
@@ -178,7 +177,7 @@
             - "{{ states('input_select.helpers_scenes') in ['scene tv', 'scene nintendo'] }}"
 
           sequence:
-            - service: huesyncbox.set_sync_state
+            - action: huesyncbox.set_sync_state
               data:
                 sync: true
                 brightness: 70

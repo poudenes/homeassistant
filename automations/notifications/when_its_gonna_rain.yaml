@@ -18,7 +18,7 @@
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   action:
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         message: "It will gonna rain from now on."
         title: "Rain will come"

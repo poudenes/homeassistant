@@ -37,13 +37,13 @@
   condition: []
 
   action:
-    - service: script.engine_say
+    - action: script.engine_say
       data:
         media_player: media_player.livingroom
         notify: notify.alexa_media_livingroom
         message: "Cooking timer one is finished!. Check your {{ cooking_text }}"
 
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Notification"
         message: |

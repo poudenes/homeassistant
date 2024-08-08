@@ -46,17 +46,17 @@
       {% endif %}
 
   action:
-    - service: switch.turn_off
+    - action: switch.turn_off
       target:
         entity_id: "{{ entity }}"
 
     - delay: "00:00:10"
 
-    - service: switch.turn_on
+    - action: switch.turn_on
       target:
         entity_id: "{{ entity }}"
 
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Notification"
         message: |
@@ -64,7 +64,7 @@
           Did a reset on the {{ name }} touch power switch.
         notification_id: "esp_touch_keeps_on"
 
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Notification"
         message: |

@@ -17,7 +17,7 @@
   condition: []
 
   action:
-    - service: zwave_js.refresh_value
+    - action: zwave_js.refresh_value
       target:
         entity_id:
           - sensor.bedroom_battery_level

@@ -11,7 +11,7 @@
 tweet_engine:
   alias: "Twitter - Tweet Engine"
   sequence:
-    - service: notify.twitter
+    - action: notify.twitter
       data:
         message: >-
           {{ tweet }}
@@ -22,7 +22,7 @@ tweet_engine:
 tweet_engine_image:
   alias: "Twitter - Tweet Engine with image"
   sequence:
-    - service: notify.twitter
+    - action: notify.twitter
       data:
         message: >-
           {{ tweet }}
@@ -30,7 +30,7 @@ tweet_engine_image:
           media: >-
             {{ image }}
 
-    - service: input_text.set_value
+    - action: input_text.set_value
       target:
         entity_id: input_text.twitter_last_message
       data:
@@ -43,7 +43,7 @@ tweet_engine_image:
 tweet_random_post:
   alias: "Twitter - Tweet Engine Random Post"
   sequence:
-    - service: script.tweet_engine_image
+    - action: script.tweet_engine_image
       data:
         tweet: >-
           {%- macro tweet(topic) -%}

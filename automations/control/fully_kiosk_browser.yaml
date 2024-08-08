@@ -21,7 +21,7 @@
   action:
     - delay: "00:00:05"
 
-    - service: number.set_value
+    - action: number.set_value
       target:
         entity_id: number.galaxy_tab_a_screen_brightness
       data:

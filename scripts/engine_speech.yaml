@@ -12,7 +12,7 @@ engine_notify_speech:
   description: "Engine to collect the message from other scripts"
   mode: parallel
   sequence:
-    - service: script.engine_say
+    - action: script.engine_say
       data:
         media_player: "{{ media_player }}"
         message: >-
@@ -30,7 +30,7 @@ engine_say:
   description: "Engine to collect messages from the scripts but also add aditional briefing parts to it"
   mode: parallel
   sequence:
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       target:
         entity_id: "{{ media_player }}"
       data:
@@ -45,7 +45,7 @@ engine_say:
 
     - delay: "00:00:01"
 
-    - service: script.engine_speech_processing
+    - action: script.engine_speech_processing
       data:
         media_player: "{{ media_player }}"
         notify: "{{ notify }}"
@@ -65,7 +65,7 @@ engine_speech_processing:
   description: "Engine that collect all messages and briefing and send it to Alexa"
   mode: parallel
   sequence:
-    - service: "{{ notify }}"
+    - action: "{{ notify }}"
       data:
         # data:
         #   type: announce
@@ -74,7 +74,7 @@ engine_speech_processing:
         message: "{{ briefing }}"
         target: "{{ media_player }}"
 
-    - service: input_text.set_value
+    - action: input_text.set_value
       target:
         entity_id: input_text.alexa_last_message
       data:

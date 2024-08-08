@@ -19,7 +19,7 @@
   condition: []
 
   action:
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.bedroom_all
       data:
@@ -28,7 +28,7 @@
 
     - delay: "00:00:01"
 
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.bedroom_all
       data:
@@ -38,13 +38,13 @@
     - choose:
         - conditions: "{{ states('sensor.bathroom_temperature')|int < 17 }}"
           sequence:
-            - service: media_player.volume_set
+            - action: media_player.volume_set
               target:
                 entity_id: media_player.bedroom
               data:
                 volume_level: 0.20
 
-            - service: script.activate_alexa_actionable_notification
+            - action: script.activate_alexa_actionable_notification
               data_template:
                 text: "<amazon:effect name='whispered'> The bathroom is below 15 degrees. Do you want turn on the heating system? </amazon:effect>"
                 event_id: "alexa_custom_skill_heating_system"
@@ -59,8 +59,8 @@
 
               timeout: "00:00:30"
               continue_on_timeout: false
-              
-            - service: climate.set_temperature
+
+            - action: climate.set_temperature
               target:
                 entity_id: climate.entryway
               data:

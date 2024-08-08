@@ -16,7 +16,7 @@
   condition: []
 
   action:
-    - service: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_peter_iphone
       data:
         title: "HA - Apple Watch"
         message: |
@@ -51,7 +51,7 @@
               critical: 1
               volume: 1.0
 
-    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_1
       data:
@@ -81,13 +81,13 @@
   condition: []
 
   action:
-    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_1
       data:
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-    - service: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_1
 
@@ -95,13 +95,13 @@
         old_value: "{{ states('input_text.medication_stock') | int () }}"
         new_value: "{{ states('input_text.medication_stock') | int () - amount_pills }}"
 
-    - service: input_text.set_value
+    - action: input_text.set_value
       data:
         value: "{{ new_value }}"
       target:
         entity_id: input_text.medication_stock
 
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Apple Watch"
         message: |
@@ -123,19 +123,19 @@
   condition: []
 
   action:
-    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_1
       data:
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-    - service: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_1
 
     - delay: "00:05:00"
 
-    - service: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_peter_iphone
       data:
         title: "HA - Apple Watch"
         message: |
@@ -170,11 +170,9 @@
               critical: 1
               volume: 1.0
 
-    - service: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_1
       data:
         xy_color: [0.70, 0.30] # Red
         brightness_pct: 100
-
-

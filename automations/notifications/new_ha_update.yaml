@@ -16,7 +16,7 @@
   condition: []
 
   action:
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Update"
         message: |
@@ -25,7 +25,7 @@
           Date: {{now().strftime('%d-%m-%Y') }}
         thread_id: "system_notification"
 
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         message: "There is a new Home Assistant OS!"
         title: "HA update"

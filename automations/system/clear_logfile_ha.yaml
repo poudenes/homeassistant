@@ -18,4 +18,4 @@
   condition: []
 
   action:
-    - service: shell_command.clear_logs
+    - action: shell_command.clear_logs

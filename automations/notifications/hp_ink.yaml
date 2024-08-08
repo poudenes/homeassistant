@@ -38,7 +38,7 @@
         - condition: template
           value_template: "{{ 0 < (states(ink_current) | float) < (min_ink_level | float ) }}"
 
-        - service: persistent_notification.create
+        - action: persistent_notification.create
           data:
             message: |
               Printer ink {{ state_attr(ink_current,'friendly_name') }}: 

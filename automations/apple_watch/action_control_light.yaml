@@ -19,7 +19,7 @@
   condition: []
 
   action:
-    - service: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_peter_iphone
       data:
         title: "Light Control"
         message: "What light you want control?"
@@ -68,7 +68,7 @@
             }
             [wait.trigger.event.data.actionName] }}
 
-    - service: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_peter_iphone
       data:
         title: "Light Control"
         message: "What status will you give the light"

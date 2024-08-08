@@ -19,11 +19,11 @@
     - "{{ is_state('switch.bathroom_light_switch', 'on') }}"
 
   action:
-    - service: switch.turn_off
+    - action: switch.turn_off
       target:
         entity_id: switch.bathroom_light_switch
 
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Notification"
         message: |

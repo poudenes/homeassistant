@@ -18,11 +18,11 @@
 
     - platform: state
       entity_id: sun.sun
-      to: 
+      to:
         - "below_horizon"
         - "above_horizon"
 
-  condition: 
+  condition:
     - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
 
   action:
@@ -33,13 +33,13 @@
 
           sequence:
             - parallel:
-                - service: input_select.select_option
+                - action: input_select.select_option
                   target:
                     entity_id: input_select.helpers_sunrise_sunset
                   data:
                     option: "below_horizon"
 
-                - service: frontend.set_theme
+                - action: frontend.set_theme
                   data:
                     name: "peterdarkmode"
 
@@ -49,12 +49,12 @@
 
           sequence:
             - parallel:
-                - service: input_select.select_option
+                - action: input_select.select_option
                   target:
                     entity_id: input_select.helpers_sunrise_sunset
                   data:
                     option: "above_horizon"
 
-                - service: frontend.set_theme
+                - action: frontend.set_theme
                   data:
                     name: "peterlightmode"

@@ -23,16 +23,16 @@ vacuum_follow_path:
           - choose:
               - conditions: "{{ mode == 'individual' }}"
                 sequence:
-                  - service: "{{ service }}"
+                  - action: "{{ service }}"
                     data:
                       entity_id: "{{ entity_id }}"
                       x_coord: "{{ path[repeat.index-1][0] }}"
                       y_coord: "{{ path[repeat.index-1][1] }}"
-                      
+
           - choose:
               - conditions: "{{ mode == 'send_command' }}"
                 sequence:
-                  - service: "{{ service }}"
+                  - action: "{{ service }}"
                     data:
                       entity_id: "{{ entity_id }}"
                       command: app_goto_target

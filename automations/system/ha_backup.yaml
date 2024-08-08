@@ -114,7 +114,7 @@
                 - "ha_full_backup_manual"
 
           sequence:
-            - service: persistent_notification.create # Persistant notification fo succesfull backup
+            - action: persistent_notification.create # Persistant notification fo succesfull backup
               data:
                 message: |
                   Create Backup
@@ -123,13 +123,13 @@
                 title: "Home Assistant Backup"
                 notification_id: ha_backup_manager_persistant_notification
 
-            - service: input_text.set_value # Update backup status - Create full
+            - action: input_text.set_value # Update backup status - Create full
               data:
                 value: "Backup started at {{states('sensor.time')}}"
               target:
                 entity_id: input_text.ha_backup_manager_status
 
-            - service: hassio.backup_full # Ececute full backup
+            - action: hassio.backup_full # Ececute full backup
               data:
                 compressed: true
                 name: "Backup {{ now().strftime('%Y-%m-%d') }}"
@@ -144,13 +144,13 @@
                 - "ha_partial_backup_manual"
 
           sequence:
-            - service: input_text.set_value # Update backup status - Create partial
+            - action: input_text.set_value # Update backup status - Create partial
               data:
                 value: "Partial backup started at {{states('sensor.time')}}"
               target:
                 entity_id: input_text.ha_backup_manager_status
 
-            - service: hassio.backup_partial # Execute partial backup
+            - action: hassio.backup_partial # Execute partial backup
               data:
                 name: Backup Partial {{ now().strftime('%Y-%m-%d') }}
                 compressed: true
@@ -190,14 +190,14 @@
         ###########################################################################################
         - if: "{{ wait.remaining != 0 }}"
           then:
-            - service: input_text.set_value # Set backup status to succesfull
+            - action: input_text.set_value # Set backup status to succesfull
               data_template:
                 entity_id: input_text.ha_backup_manager_status
                 value: >-
                   Last Backup {{ now().timestamp() | timestamp_custom('%Y-%m-%d')}}
                   at {{states('sensor.time')}}
 
-            - service: persistent_notification.create # Persistant notification fo succesfull backup
+            - action: persistent_notification.create # Persistant notification fo succesfull backup
               data:
                 message: |
                   Backup completed
@@ -214,18 +214,18 @@
                   value_template: |
                     {{ states('input_boolean.ha_backup_manager_remove_old_backup') == 'on' }}
               then:
-                - service: shell_command.ha_backup_manager_remove_old # Execute the shell command delate
+                - action: shell_command.ha_backup_manager_remove_old # Execute the shell command delate
 
           ###########################################################################################
           # Test backup created
           ###########################################################################################
           else:
-            - service: input_text.set_value # Set backup status to failed
+            - action: input_text.set_value # Set backup status to failed
               data_template:
                 entity_id: input_text.ha_backup_manager_status
                 value: "Backup Failled!"
 
-            - service: persistent_notification.create # Persistant notification to backp failed
+            - action: persistent_notification.create # Persistant notification to backp failed
               data:
                 message: |
                   Backup creation failed!
@@ -241,4 +241,4 @@
           id:
             - "ha_manual_bk_delete" # if manual backup delate triggered
       then:
-        - service: shell_command.ha_backup_manager_remove_old # Execute the shell command delate
+        - action: shell_command.ha_backup_manager_remove_old # Execute the shell command delate

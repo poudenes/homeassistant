@@ -25,7 +25,7 @@
     name: "{{ trigger.entity_id[14:-13] | title }}"
 
   action:
-    - service: script.mobile_notify_no_actionable
+    - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Alarm"
         message: |

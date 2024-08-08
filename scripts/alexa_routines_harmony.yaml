@@ -11,7 +11,7 @@ alexa_turn_off_harmony:
   alias: "Routine Off Harmony"
   icon: mdi:start
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       data:
         option: power_off
       target:
@@ -24,7 +24,7 @@ alexa_receiver_mute:
   alias: "Routine Receiver Mute"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -35,7 +35,7 @@ alexa_receiver_up_vol:
   alias: "Routine Receiver Vol Up"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -48,7 +48,7 @@ alexa_receiver_down_vol:
   alias: "Routine Receiver Vol Down"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -64,14 +64,14 @@ alexa_pause_harmony:
   alias: "Routine Pause Harmony"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
         command: Pause
         device: Apple TV
 
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -82,14 +82,14 @@ alexa_play_harmony:
   alias: "Routine Play Harmony"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
         command: Play
         device: Apple TV
-        
-    - service: remote.send_command
+
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -100,14 +100,14 @@ alexa_stop_harmony:
   alias: "Routine Stop Harmony"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
         command: Back
         device: Apple TV
-        
-    - service: remote.send_command
+
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -121,7 +121,7 @@ alexa_turn_on_appletv:
   alias: "Routine AppleTV"
   icon: mdi:script
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       data:
         option: AppleTV
       target:
@@ -131,7 +131,7 @@ alexa_turn_on_appletv_pause:
   alias: "Routine AppleTV - Pause"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -142,7 +142,7 @@ alexa_turn_on_appletv_play:
   alias: "Routine AppleTV - Play"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -153,7 +153,7 @@ alexa_turn_on_appletv_stop:
   alias: "Routine AppleTV - Stop"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -167,9 +167,9 @@ alexa_turn_on_tv:
   alias: "Routine TV"
   icon: mdi:script
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       data:
-        option:  TV
+        option: TV
       target:
         entity_id: select.logitech_harmony_activities
 
@@ -177,7 +177,7 @@ alexa_turn_on_tv_pause:
   alias: "Routine TV - Pause"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -188,7 +188,7 @@ alexa_turn_on_tv_play:
   alias: "Routine TV - Play"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -199,7 +199,7 @@ alexa_turn_on_tv_stop:
   alias: "Routine TV - Stop"
   icon: mdi:script
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       target:
         entity_id: remote.logitech_harmony
       data:
@@ -213,7 +213,7 @@ alexa_turn_on_airplay:
   alias: "Routine AirPlay"
   icon: mdi:script
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       data:
         option: AirPlay
       target:
@@ -223,7 +223,7 @@ alexa_turn_on_nintendo:
   alias: "Routine Nintendo"
   icon: mdi:start
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       data:
         option: Nintendo
       target:
@@ -233,7 +233,7 @@ alexa_turn_on_chromecast:
   alias: "Routine Chromecast"
   icon: mdi:script
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       data:
         option: Cromecast
       target:

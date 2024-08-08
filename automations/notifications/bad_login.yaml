@@ -16,7 +16,7 @@
   condition: []
 
   action:
-    - service: persistent_notification.create
+    - action: persistent_notification.create
       data:
         title: "HA - Alarm"
         message: |

@@ -55,7 +55,7 @@ helpers_esphome_updates:
 ###########################################################################################
 # HELPERS_SCENE_SWITCHES: the one you not turn off will be reject by automation. Example:
 ###########################################################################################
-# - service: input_boolean.turn_off
+# - action: input_boolean.turn_off
 #   target:
 #     entity_id: >
 #       {{ state_attr('group.helpers_scene_switches', 'entity_id')
@@ -99,9 +99,9 @@ home_assistant_backup_pack:
     - sensor.ha_backup_manager_retained_backups
     - sensor.ha_backup_manager_archive_dimension
     - sensor.ha_backup_manager_addon_list
-#    - sensor.ha_backup_manager_folders
+    #    - sensor.ha_backup_manager_folders
     - sensor.ha_backup_manager_selected_folders
-#    - shell_command.ha_backup_manager_remove_old
+    #    - shell_command.ha_backup_manager_remove_old
     - input_boolean.ha_backup_manager_remove_old_backup
     - automation.home_assistant_backup_system_2
 

@@ -39,7 +39,7 @@ utility_notification:
         price: "{{ (0.30 * total_kwh) | round(2) }}"
         message: "The {{ friendly_name }} is done after {{ minutes }} minutes and it used {{ total_kwh_rounded }} kWh (Cost: €{{ price }}). (Date: {{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }}). (Time:{{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }})."
 
-    - service: input_text.set_value
+    - action: input_text.set_value
       target:
         entity_id: "input_text.{{ name }}_data"
       data:
