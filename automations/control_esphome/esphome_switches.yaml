@@ -35,7 +35,7 @@
         - "{{ (trigger.to_state.state == 'on') }}"
       then:
         - parallel:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.{{ trigger.entity_id[7:-13] }}_all
               data:
@@ -43,7 +43,7 @@
                 kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
                 effect: "none"
 
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.{{ trigger.entity_id[7:-13] }}_neopixel
               data:
@@ -52,7 +52,7 @@
 
       else:
         - parallel:
-            - service: light.turn_on
+            - action: light.turn_on
               target:
                 entity_id: light.{{ trigger.entity_id[7:-13] }}_neopixel
               data:
@@ -71,6 +71,6 @@
                 brightness_pct: "{{ 20 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
                 effect: "none"
 
-            - service: light.turn_off
+            - action: light.turn_off
               target:
                 entity_id: light.{{ trigger.entity_id[7:-13] }}_all

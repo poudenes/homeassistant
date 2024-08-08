@@ -23,33 +23,10 @@ logs:
 
   frontend.js.latest.202407050: fatal
 
-  # roborock.cloud_api: fatal
-
-  # alexapy.alexaapi: fatal
-  # custom_components.alexa_media: fatal
-
-  # custom_components.bambu_lab.pybambu: fatal
-  
-  # aiohttp.server: fatal
-  # aioharmony.hubconnector_xmpp: fatal
-  # custom_components.icloud3.device_tracker: fatal
-  # pynanoleaf.pynanoleaf: fatal
-  # pychromecast.socket_client: fatal
-
-  # homeassistant.helpers.template: fatal
-  # homeassistant.helpers.entity: error
-
-  # homeassistant.core: fatal
-  # homeassistant.components: error
-  # homeassistant.components.alexa.state_report: fatal
-  # homeassistant.components.fully_kiosk: fatal
-  # homeassistant.components.github: fatal
-  # homeassistant.components.influxdb: fatal
-  # homeassistant.components.mqtt: fatal
-  # homeassistant.components.nanoleaf.light: fatal
-  # homeassistant.components.rdw: fatal
-  # homeassistant.components.recorder.purge: fatal
-  # homeassistant.components.sabnzbd: fatal
-  # homeassistant.components.co2signal: fatal
-
-  # homeassistant: error
+  custom_components.roborock.coordinator: fatal
+  alexapy.alexaapi: fatal
+  custom_components.alexa_media: fatal
+  homeassistant.components.fully_kiosk: fatal
+  roborock.cloud_api: fatal
+  custom_components.bambu_lab.pybambu: fatal
+  custom_components.cloudflare_tunnel_monitor.sensor: fatal

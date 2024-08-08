@@ -43,7 +43,7 @@
                     'scene daytime': [0.70,0.30],
                     'scene dinner': [0.74,0.52],
                     'scene evening': [0.70,0.30],
-                    'scene goodnight': [0.70, 0.30],
+                    'scene tv': [0.14,0.19],
                     'scene nintendo': [0.22,0.08],
-                    'scene tv': [0.14,0.19]}.get(trigger.to_state.state, [0.70,0.30]) }}
+                    'scene goodnight': [0.70, 0.30]}.get(trigger.to_state.state, [0.70,0.30]) }}
               brightness_pct: "{{ 15 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"

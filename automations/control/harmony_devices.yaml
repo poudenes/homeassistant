@@ -28,7 +28,7 @@
       data:
         command: "{{ trigger.to_state.state }}"
         device: 41633063
-
+        
     - service: input_text.set_value
       target:
         entity_id: input_text.yamaha_dps_modus
