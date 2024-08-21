@@ -32,7 +32,8 @@
     - condition: time
       after: "15:00:00"
       before: "04:00:00"
-    - "{{ is_state('select.logitech_harmony_activities', 'power_off') }}"
+    - "{{ states('select.logitech_harmony_activities') in ['power_off', 'AirPlay'] }}"
+    # - "{{ is_state('select.logitech_harmony_activities', 'power_off') }}"
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
