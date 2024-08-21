@@ -9,22 +9,6 @@
 # INPUT_SELECT
 # https://www.home-assistant.io/integrations/input_select/
 ###########################################################################################
-helpers_from_waze:
-  name: "Waze - From:"
-  icon: mdi:nintendo-switch
-  options:
-    - "Home"
-    - "UMC Utrecht"
-    - "Ter Gooi"
-
-helpers_to_waze:
-  name: "Waze - To:"
-  icon: mdi:nintendo-switch
-  options:
-    - "Home"
-    - "UMC Utrecht"
-    - "Ter Gooi"
-
 helpers_eurovision:
   name: "Eurovision Country"
   icon: mdi:nintendo-switch
@@ -78,20 +62,6 @@ helpers_sunrise_sunset:
   options:
     - "above_horizon"
     - "below_horizon"
-
-helpers_scenes_test:
-  name: "Scene Test"
-  icon: mdi:nintendo-switch
-  options:
-    - "scene appletv"
-    - "scene chromecast"
-    - "scene daytime"
-    - "scene dinner"
-    - "scene evening"
-    - "scene goodnight"
-    - "scene nintendo"
-    - "scene tv"
-    - "None"
 
 helpers_scenes:
   name: "Scenes"
@@ -237,6 +207,7 @@ helpers_yamaha_dsp_music:
 helpers_yamaha_dsp_movie:
   name: "Yamaha movie DSP"
   options:
+    - 7ChStereo
     - ActionGame
     - Adventure
     - Drama
