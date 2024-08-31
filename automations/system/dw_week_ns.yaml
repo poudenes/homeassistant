@@ -27,6 +27,7 @@
           | map('replace', '   ', ' ')
           | map('replace', '  ', ' ') 
           | map('replace', 'E 1009','E1009')
+          | map('replace', '= GVL','GVL 00:01 23:59 NRP NVT')
           | select('match', '^[a-z]{2}\s\d{2}-\d{2}') | list %}
           {%- set rest_list = m_list | select('search', ' R')|list %}
           {%- set work_list = m_list | reject('search', ' R')|list %}

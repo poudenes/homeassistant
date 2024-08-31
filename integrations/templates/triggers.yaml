@@ -9,6 +9,22 @@
 ##########################################################################################
 ---
 #########################################################################################
+# Philips Hue remote to sensor
+#########################################################################################
+- trigger:
+    - platform: event
+      event_type: hue_event
+      event_data:
+        id: remote_1_button
+  sensor:
+    - unique_id: "e14b53a5-efc6-4cd4-b030-07a7cd8916aa"
+      name: "Hue - Remote sensor"
+      state: "{{trigger.event.data.subtype}}"
+      attributes:
+        last_triggered: "{{trigger.event.time_fired}}"
+        press_type: "{{trigger.event.data.type}}"
+
+#########################################################################################
 # IMAP Triggers
 #########################################################################################
 - trigger:

@@ -26,7 +26,7 @@ nanoleaf:
   content_type: 'application/json'
 
 scene_check:
-  url: http://192.168.100.62:8123/api/states/sensor.ha_scene
+  url: http://192.168.100.62:8123/api/states/sensor.scenes_from_production_ha
   method: POST
   headers:
     Authorization: !secret ha_scene_to_ha_nas
