@@ -22,14 +22,14 @@
     - action: script.activate_alexa_actionable_notification
       data_template:
         text: "The bathroom switch is still on. Do you want me to turn it off?"
-        event_id: "alexa_custom_skill_bathtoom_light"
+        event_id: "alexa_custom_skill_bathroom_light"
         alexa_device: "media_player.livingroom"
 
     - wait_for_trigger:
         - platform: event
           event_type: alexa_actionable_notification
           event_data:
-            event_id: alexa_custom_skill_bathtoom_light
+            event_id: alexa_custom_skill_bathroom_light
             event_response_type: ResponseYes
 
       timeout: "00:00:15"
