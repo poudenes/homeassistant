@@ -33,7 +33,6 @@
       after: "15:00:00"
       before: "04:00:00"
     - "{{ states('select.logitech_harmony_activities') in ['power_off', 'AirPlay'] }}"
-    # - "{{ is_state('select.logitech_harmony_activities', 'power_off') }}"
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
@@ -69,38 +68,63 @@
           data:
             brightness_pct: 40
             effect: >-
-              {% if is_state('sensor.holidays', 'Christmas') %} 
-                Christmas
-              {% elif is_state('sensor.holidays', 'Halloween') %} 
-                Halloween
-              {% elif is_state('sensor.holidays', 'Eurovision') %} 
-                Euro 2023
-              {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
-                Kingsday
-              {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
-                Valentine
-              {% else %} 
-                Kay
-              {% endif %}
+              {% set holiday = states('sensor.holidays') %}
+              {% set holiday_effects = {
+                'Christmas': 'Christmas',
+                'Halloween': 'Halloween',
+                'Eurovision': 'Euro 2023',
+                'Kingsday': 'Kingsday',
+                'Birthday': 'Kingsday',
+                'Valentine': 'Valentine',
+                'Special Day': 'Valentine'
+              } %}
+              {{ holiday_effects[holiday] if holiday in holiday_effects else 'Kay' }}
+              
+            # effect: >-
+            #   {% if is_state('sensor.holidays', 'Christmas') %} 
+            #     Christmas
+            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
+            #     Halloween
+            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
+            #     Euro 2023
+            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+            #     Kingsday
+            #   {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
+            #     Valentine
+            #   {% else %} 
+            #     Kay
+            #   {% endif %}
 
         - action: hue.activate_scene
           data:
             transition: 2
           target:
             entity_id: >-
-              {% if is_state('sensor.holidays', 'Christmas') %} 
-                scene.scenes_evening_christmas
-              {% elif is_state('sensor.holidays', 'Halloween') %} 
-                scene.scenes_evening_halloween
-              {% elif is_state('sensor.holidays', 'Eurovision') %} 
-                scene.scenes_evening_eurovision
-              {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
-                scene.scenes_birthday
-              {% elif is_state('sensor.holidays', 'Valentine') %}
-                scene.scenes_romantic
-              {% else %} 
-                scene.scenes_evening_evening
-              {% endif %}
+              {% set holiday = states('sensor.holidays') %}
+              {% set holiday_scenes = {
+                'Christmas': 'scene.scenes_evening_christmas',
+                'Halloween': 'scene.scenes_evening_halloween',
+                'Eurovision': 'scene.scenes_evening_eurovision',
+                'Kingsday': 'scene.scenes_birthday',
+                'Birthday': 'scene.scenes_birthday',
+                'Valentine': 'scene.scenes_romantic'
+              } %}
+              {{ holiday_scenes[holiday] if holiday in holiday_scenes else 'scene.scenes_evening_evening' }}
+
+            # entity_id: >-
+            #   {% if is_state('sensor.holidays', 'Christmas') %} 
+            #     scene.scenes_evening_christmas
+            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
+            #     scene.scenes_evening_halloween
+            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
+            #     scene.scenes_evening_eurovision
+            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+            #     scene.scenes_birthday
+            #   {% elif is_state('sensor.holidays', 'Valentine') %}
+            #     scene.scenes_romantic
+            #   {% else %} 
+            #     scene.scenes_evening_evening
+            #   {% endif %}
 
         - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
           target:

@@ -17,6 +17,9 @@
 
   condition: []
 
+  variables:
+    guests_on: "{{ is_state('switch.momentary_guests', 'on') }}"
+
   action:
     - parallel:
         - continue_on_error: true

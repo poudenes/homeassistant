@@ -42,3 +42,4 @@
           - switch.helpers_switches
           - switch.bedroom_wall
           - input_boolean.function_sleeping
+          - light.bathroom_all
