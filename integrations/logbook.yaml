@@ -90,7 +90,8 @@ include:
     
     - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_xrp_usd
-    - sensor.cryptoinfo_wax_usd_1
+    - sensor.cryptoinfo_wax_usd
+    - sensor.cryptoinfo_vet_usd
     
     - sensor.speedtest_download
     - sensor.speedtest_upload

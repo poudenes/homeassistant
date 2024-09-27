@@ -91,8 +91,9 @@ include:
     # Crypto info
     - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_xrp_usd
-    - sensor.cryptoinfo_wax_usd_1
-    
+    - sensor.cryptoinfo_wax_usd
+    - sensor.cryptoinfo_vet_usd
+
     - sensor.gas_station_euro95_home_lowest_price_1
     - sensor.gas_station_euro95_home_lowest_price_2
     - sensor.gas_station_euro95_home_lowest_price_3
@@ -106,7 +107,7 @@ include:
 
     - sensor.speedtest_download
     - sensor.speedtest_upload
-    
+
     # Precense sensors and tools
     - binary_sensor.group_family_manual
     - input_boolean.helpers_kay_home_homekit
@@ -222,7 +223,7 @@ include:
     - light.kitchen_all
     - light.livingroom_all
     - light.nanoleaf
-    - light.seeling_all
+    - light.ceiling_all
     - light.sink_all
     - light.toilet_all
     - light.wall_all
@@ -351,7 +352,7 @@ include:
     - switch.diningtable_light_switch
     - switch.dressoir_light_switch
     - switch.hallway_light_switch
-    - switch.seeling_light_switch
+    - switch.ceiling_light_switch
     - switch.sink_light_switch
     - switch.toilet_light_switch
     - switch.wall_light_switch
@@ -377,3 +378,5 @@ exclude:
     - sensor
   entities:
     - sensor.icloud3_event_log
+  entity_globs:
+    - sensor.flightradar24*
