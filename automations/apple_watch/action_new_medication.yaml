@@ -13,6 +13,9 @@
     - platform: time
       at: "20:20:00"
 
+    # - platform: template
+    #   value_template: "{{ today_at(states('sensor.medication_take_time')) - timedelta(minutes = 420) }}"
+
   condition: []
 
   action:
@@ -55,7 +58,7 @@
       target:
         entity_id: light.hallway_1
       data:
-        xy_color: [0.70, 0.30] # Red
+        xy_color: [0.65, 0.30] # Red
         brightness_pct: 100
 
 ###########################################################################################
