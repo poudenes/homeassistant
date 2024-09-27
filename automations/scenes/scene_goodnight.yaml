@@ -126,7 +126,7 @@
             - action: light.turn_off
               target:
                 entity_id:
-                  - light.seeling_all
+                  - light.ceiling_all
                   - light.sink_all
 
         - sequence:
