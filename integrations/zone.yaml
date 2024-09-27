@@ -15,6 +15,18 @@
   radius: 150
   icon: mdi:account-multiple
 
+- name: "K&D Crib"
+  latitude: !secret lat_kd
+  longitude: !secret lon_kd
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "L&T Crib"
+  latitude: !secret lat_lt
+  longitude: !secret lon_lt
+  radius: 200
+  icon: mdi:account-multiple
+
 - name: "Gelderlandplein"
   latitude: !secret lat_gelderlandplein
   longitude: !secret lon_gelderlandplein
