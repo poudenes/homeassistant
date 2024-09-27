@@ -41,14 +41,23 @@ helpers_tracker_peter: # For pull down menus in Dashbaord
 helpers_tracker_icloud3_log: # For pull down menus in Dashbaord
   name: "Tracker iCloud3 log"
 
+helpers_hacs_updates:
+  name: "Pulldown HACS updates"
+  
+helpers_other_updates:
+  name: "Pulldown other updates"
+
+helpers_connected_devices:
+  name: "Pulldown connected devices"
+
 helpers_bedroom_light:
-  name: "Pulldown Bedroom lights"
+  name: "Pulldown bedroom lights"
 
 helpers_bathroom_light:
   name: "Pulldown bathroom lights"
 
-helpers_seeling_light:
-  name: "Pulldown seeling lights"
+helpers_ceiling_light:
+  name: "Pulldown ceiling lights"
 
 helpers_sink_light:
   name: "Pulldown sink lights"

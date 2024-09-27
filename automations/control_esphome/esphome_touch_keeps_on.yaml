@@ -20,7 +20,7 @@
         - binary_sensor.diningtable_touch
         - binary_sensor.dressoir_touch
         - binary_sensor.hallway_touch
-        - binary_sensor.seeling_touch
+        - binary_sensor.ceiling_touch
         - binary_sensor.sink_touch
         - binary_sensor.toilet_touch
         - binary_sensor.wall_touch
@@ -37,7 +37,7 @@
       {% elif name == 'diningtable' %} switch.diningtable_touch_1_power
       {% elif name == 'diningroom' %} switch.diningroom_touch_1_power
       {% elif name == 'hallway' %} switch.hallway_touch_1_power
-      {% elif name == 'seeling' %} switch.kitchen_touch_1_power
+      {% elif name == 'ceiling' %} switch.kitchen_touch_1_power
       {% elif name == 'sink' %} switch.kitchen_touch_1_power
       {% elif name == 'cooking' %} switch.kitchen_touch_1_power
       {% elif name == 'toilet' %} switch.toilet_touch_1_power

@@ -26,7 +26,7 @@ flash_briefings:
         {% for entity_id in state_attr('switch.helpers_switches','entity_id') if not is_state(entity_id, 'off') %} The {{ entity_id }} is on.{% endfor %}.
 
 smart_home:
-#  endpoint: https://api.eu.amazonalexa.com/v3/events
+  #  endpoint: https://api.eu.amazonalexa.com/v3/events
   endpoint: https://api.amazonalexa.com/v3/events # Needed for Alexa Skill build witg amazon_nl@ account
   client_id: !secret alexa_smart_home_id
   client_secret: !secret alexa_smart_home_secret
@@ -36,7 +36,7 @@ smart_home:
       - script.alexa_pause_harmony
       - script.alexa_play_harmony
       - script.alexa_stop_harmony
-      
+
       - script.alexa_receiver_mute
       - script.alexa_receiver_down_vol
       - script.alexa_receiver_up_vol
@@ -89,7 +89,7 @@ smart_home:
       - light.diningtable_all
       - light.kitchen_all
       - light.cooking_all
-      - light.seeling_all
+      - light.ceiling_all
       - light.sink_all
       - light.bedroom_all
       - light.toilet_all
@@ -141,7 +141,7 @@ smart_home:
       - sensor.diningroom_temperature
 
       # Wall switches
-      - switch.seeling_light_switch
+      - switch.ceiling_light_switch
       - switch.sink_light_switch
       - switch.hallway_light_switch
       - switch.toilet_light_switch
@@ -190,8 +190,8 @@ smart_home:
       name: "Kithcen"
     light.cooking_all:
       name: "Cooking"
-    light.seeling_all:
-      name: "Seeling"
+    light.ceiling_all:
+      name: "Ceiling"
     light.sink_all:
       name: "Sink"
     light.bedroom_all:
@@ -240,7 +240,7 @@ smart_home:
     switch.xmas_1_wall:
       name: "Christmas window"
 
-    switch.seeling_light_switch:
+    switch.ceiling_light_switch:
       name: "Kitchen switch"
       display_categories: SWITCH
     switch.sink_light_switch:

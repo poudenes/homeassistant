@@ -23,7 +23,7 @@
     - if:
         - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
         - "{{ is_state('switch.sink_light_switch', 'off') }}"
-        - "{{ is_state('switch.seeling_light_switch', 'off') }}"
+        - "{{ is_state('switch.ceiling_light_switch', 'off') }}"
         - "{{ is_state('switch.cooking_light_switch', 'off') }}"
 
       then:
@@ -68,7 +68,7 @@
     - if:
         - "{{ is_state('input_boolean.function_cooking', 'off') }}"
         - "{{ is_state('switch.sink_light_switch', 'off') }}"
-        - "{{ is_state('switch.seeling_light_switch', 'off') }}"
+        - "{{ is_state('switch.ceiling_light_switch', 'off') }}"
         - "{{ is_state('switch.cooking_light_switch', 'off') }}"
         - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
 
@@ -173,7 +173,7 @@
 
                     - action: light.turn_on
                       target:
-                        entity_id: light.seeling_all
+                        entity_id: light.ceiling_all
                       data:
                         brightness_pct: 98
                         color_name: red
@@ -229,11 +229,11 @@
     ###########################################################################################
     #  TESTING SWITCH IS ON BUT LIGHTS ARE OFF
     ###########################################################################################
-    - action: "{{ 'light.turn_on' if is_state('switch.seeling_light_switch', 'on') else 'script.none' }}"
+    - action: "{{ 'light.turn_on' if is_state('switch.ceiling_light_switch', 'on') else 'script.none' }}"
       data:
         effect: Green Pink
       target:
-        entity_id: light.seeling_neopixel
+        entity_id: light.ceiling_neopixel
 
     - action: "{{ 'light.turn_on' if is_state('switch.cooking_light_switch', 'on') else 'script.none' }}"
       data:

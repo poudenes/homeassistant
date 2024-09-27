@@ -16,7 +16,7 @@
         - switch.bathroom_light_switch
         - switch.bedroom_light_switch
         - switch.hallway_light_switch
-        - switch.seeling_light_switch
+        - switch.ceiling_light_switch
         - switch.cooking_light_switch
         - switch.sink_light_switch
         - switch.toilet_light_switch

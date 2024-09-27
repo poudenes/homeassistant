@@ -4,7 +4,7 @@
 substitutions:
   devicename: meek-kitchen
   friendly: Kitchen
-  friendly_switch_1: Seeling
+  friendly_switch_1: Ceiling
   friendly_switch_2: Cooking
   friendly_switch_3: Sink
   ip: 192.168.100.206

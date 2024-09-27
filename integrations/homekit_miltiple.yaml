@@ -119,7 +119,7 @@
       - light.diningtable_all
       - light.kitchen_all
       - light.cooking_all
-      - light.seeling_all
+      - light.ceiling_all
       - light.sink_all
       - light.bedroom_all
       - light.toilet_all
@@ -160,7 +160,7 @@
       - input_boolean.function_tvonly
 
       # Meek switches
-      - switch.seeling_light_switch
+      - switch.ceiling_light_switch
       - switch.sink_light_switch
       - switch.hallway_light_switch
       - switch.toilet_light_switch
@@ -192,7 +192,7 @@
       name: "Peter Early Up"
     input_boolean.function_dnc:
       name: "Function Disable Nest"
-    switch.seeling_light_switch:
+    switch.ceiling_light_switch:
       name: "Kitchen switch"
     switch.sink_light_switch:
       name: "Sink switch"
@@ -303,11 +303,9 @@
       - input_boolean.helpers_peter_home_homekit
       - input_boolean.helpers_kay_home_homekit
 
-
   entity_config:
     fan.mechanical_ventilation:
       name: "Fan"
-
 ###########################################################################################
 # ALARM SYSTEM
 ###########################################################################################
