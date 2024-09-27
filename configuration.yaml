@@ -46,6 +46,7 @@ alexa: !include integrations/alexa.yaml
 automation: !include_dir_merge_list automations/
 command_line: !include integrations/command_line.yaml
 calendar: !include integrations/calendar.yaml
+emulated_hue: !include integrations/emulated_hue.yaml
 fan: !include integrations/fan.yaml
 group: !include integrations/group.yaml
 homeassistant: !include integrations/homeassistant.yaml
