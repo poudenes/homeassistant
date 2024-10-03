@@ -10,8 +10,8 @@
 - id: "4bc27643-e155-4212-82a3-296d5289e8b0"
   alias: "Notification - Webhook trigger"
 
-  trigger:
-    - platform: "webhook"
+  triggers:
+    - trigger: "webhook"
       allowed_methods:
         - POST
         - PUT
@@ -19,7 +19,7 @@
       local_only: true
       id: "ukstatus"
 
-    - platform: "webhook"
+    - trigger: "webhook"
       allowed_methods:
         - POST
         - PUT
@@ -27,7 +27,7 @@
       local_only: true
       id: "wud"
 
-    - platform: "webhook"
+    - trigger: "webhook"
       allowed_methods:
         - POST
         - PUT
@@ -35,7 +35,7 @@
       local_only: true
       id: "nas"
 
-    - platform: "webhook"
+    - trigger: "webhook"
       allowed_methods:
         - POST
         - PUT
@@ -43,7 +43,7 @@
       local_only: true
       id: "radarr"
 
-    - platform: "webhook"
+    - trigger: "webhook"
       allowed_methods:
         - POST
         - PUT
@@ -51,7 +51,7 @@
       local_only: true
       id: "sonarr"
 
-    - platform: "webhook"
+    - trigger: "webhook"
       allowed_methods:
         - POST
         - PUT
@@ -59,9 +59,9 @@
       local_only: true
       id: "firefly"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: trigger

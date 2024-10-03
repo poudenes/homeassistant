@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "8ef7d7ad-1e1b-4bac-ba79-c8465748e8fb"
   alias: "Scene - Disco off"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_disco
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - if: "{{ is_state('input_boolean.function_disco', 'on') }}"
       then:
         - action: light.turn_on

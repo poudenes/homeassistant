@@ -10,13 +10,13 @@
 - id: "e243bf58-0ea5-4cdc-b133-4848e81e308c"
   alias: "Zwave batteries refresh update"
   mode: single
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "03:00:00"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: zwave_js.refresh_value
       target:
         entity_id:

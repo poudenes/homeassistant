@@ -12,20 +12,20 @@
 - id: "9efcd7e6-1981-47ad-97ca-a2f59a3c0545"
   alias: "System - Sunset Sunrise switch"
   mode: restart
-  trigger:
-    - platform: time_pattern
+  triggers:
+    - trigger: time_pattern
       minutes: "/1"
 
-    - platform: state
+    - trigger: state
       entity_id: sun.sun
       to:
         - "below_horizon"
         - "above_horizon"
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
 
-  action:
+  actions:
     - choose:
         - conditions:
             - "{{ is_state('sun.sun', 'below_horizon') }}"

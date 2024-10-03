@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "11cef91c-f0c8-4b68-b542-3140e0d66918"
   alias: "Scene - Guests"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: switch.momentary_guests
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: persistent_notification.create
       data:
         title: "HA - Scenes"

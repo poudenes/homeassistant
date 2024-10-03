@@ -10,13 +10,13 @@
 - id: "51f86028-23e0-4075-8dda-5e9807ad05a9"
   alias: "Notification - Vacuum clean items"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: vacuum.roborock_s8
       from: "returning"
       to: "docked"
 
-  action:
+  actions:
     - variables:
         roborock_list: >-
           {{ states.sensor | selectattr("entity_id", "search", "sensor.*_left") | map(attribute="entity_id") | list }}

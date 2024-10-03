@@ -9,11 +9,11 @@
 ###########################################################################################
 - id: "f152dde2-643e-4269-bd7e-d5a11ba58a68"
   alias: "Notification - Low printer ink"
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "14:00:00"
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
     - condition: time
@@ -28,7 +28,7 @@
         | map(attribute='entity_id') | list }}
     ink_current: ""
 
-  action:
+  actions:
     repeat:
       count: "{{ ink_ids | length }}"
 

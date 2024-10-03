@@ -10,17 +10,17 @@
 - id: "54898805-7986-46e3-8fc9-9485de89e8b1"
   alias: "Scene - Goodnight 1/2"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_select.helpers_scenes
       to: "scene goodnight"
 
-  condition: []
+  conditions: []
 
   variables:
     guests_on: "{{ is_state('switch.momentary_guests', 'on') }}"
 
-  action:
+  actions:
     - parallel:
         - continue_on_error: true
           service: script.engine_say

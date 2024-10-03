@@ -10,15 +10,15 @@
 - id: "2ae0f02a-1763-4d80-899c-76bf04e69df7"
   alias: "Apple Watch - Control actions"
   mode: parallel
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: "Set actions"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: notify.mobile_app_peter_iphone
       data:
         title: "Action Control"

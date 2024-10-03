@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "66484bdd-544a-42fb-af26-b03205267e2a"
   alias: "Notification - Update available"
-  trigger:
-    - platform: template
+  triggers:
+    - trigger: template
       value_template: "{{ (states('sensor.current_version') != states('sensor.latest_version')) }}"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Update"

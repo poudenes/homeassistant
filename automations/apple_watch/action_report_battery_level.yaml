@@ -10,15 +10,15 @@
 - id: "0babb333-0b8e-4957-b911-047fb9bca24a"
   alias: "Apple Watch - Battery Level Report"
   mode: parallel
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: "Battery level"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Apple Watch"

@@ -9,14 +9,14 @@
 ###########################################################################################
 - id: "34f22afb-939c-4b37-b511-ced7e98a7dd5"
   alias: "Scene - Romantic"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_romantic
       to: "on"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: light.turn_on
       target:
         entity_id: light.nanoleaf

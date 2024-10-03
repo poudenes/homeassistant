@@ -9,16 +9,16 @@
 ###########################################################################################
 - id: "44058c82-1994-4480-b883-47f9e00625ed"
   alias: "Scene - Sleeping"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_sleeping
       to: "on"
   mode: restart
 
-  condition:
+  conditions:
     - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
 
-  action:
+  actions:
     - action: light.turn_off
       data:
         transition: 11

@@ -10,15 +10,15 @@
 - id: "e0a31870-06db-4fe5-bc11-6c5d0a98c981"
   alias: "Notification - Vacuum Problems"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.roborock_s8_current_error
 
-  condition:
+  conditions:
     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
     - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
 
-  action:
+  actions:
     - action: camera.snapshot
       target:
         entity_id: camera.roborock_s8_map

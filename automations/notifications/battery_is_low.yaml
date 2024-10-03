@@ -9,18 +9,18 @@
 ###########################################################################################
 - id: "f152dde2-643e-4269-bd7e-d5a11ba98a68"
   alias: "Notification - Low battery nodes"
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "17:00:00"
 
-  condition: []
+  conditions: []
 
   variables:
     min_battery_level: 40
     battery_ids: ""
     battrery_current: ""
 
-  action:
+  actions:
     - variables:
         batt_device_list: >-
           {{ states.sensor | selectattr("entity_id", "search", ".*_battery_level") 

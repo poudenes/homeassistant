@@ -10,17 +10,17 @@
 - id: "09d33f06-6884-4765-b808-484322b21bce"
   alias: "Motion Detection - Bedroom on/off"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.bedroom_detection
 
-  condition:
+  conditions:
     - "{{ is_state('switch.bedroom_light_switch', 'off') }}"
     - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
 
-  action:
+  actions:
     - if:
         - "{{ is_state('binary_sensor.bedroom_detection', 'on') }}"
 

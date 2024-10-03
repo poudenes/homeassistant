@@ -9,15 +9,15 @@
 ###########################################################################################
 - id: "10ffdeff-879b-444d-ab2f-b4cb16f0e6d5"
   alias: "Notification - It will gonna rain"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: weather.accu_weather
       to: "rainy"
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
-  action:
+  actions:
     - action: persistent_notification.create
       data:
         message: "It will gonna rain from now on."

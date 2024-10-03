@@ -10,13 +10,13 @@
 - id: "a8b908f4-2301-417f-bb58-7f306d7a062a"
   alias: "Motion Detection - Kitchen on/off D/N"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.kitchen_detection
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     ###########################################################################################
     # GOODNIGHT SCENE IS ON
     ###########################################################################################

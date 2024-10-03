@@ -11,16 +11,16 @@
   alias: "Control - Light - Lux Control"
   initial_state: false
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - binary_sensor.livingroom_detection
         - binary_sensor.diningroom_detection
 
-    - platform: time_pattern
+    - trigger: time_pattern
       minutes: "/10"
 
-  condition:
+  conditions:
     - condition: time
       after: "07:00:00"
       before: "23:00:00"
@@ -31,7 +31,7 @@
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene goodnight', 'scene appletv', 'scene tv','scene dinner'] }}"
 
-  action:
+  actions:
     - if:
         - "{{ states('sensor.livingroom_lux')|int < 200 and states('sensor.livingroom_lux')|int >= 0}}"
         - "{{ is_state('input_boolean.function_lux_low', 'off') }}"

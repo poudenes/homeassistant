@@ -10,16 +10,16 @@
 - id: "a935a574-d822-4310-be52-89d0190acd7c"
   alias: "System - Database Repack (Weekly)"
   mode: single
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "02:15"
 
-  condition:
+  conditions:
     - condition: time
       weekday:
         - sun
 
-  action:
+  actions:
     - action: recorder.purge
       data:
         repack: true

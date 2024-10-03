@@ -10,25 +10,25 @@
 - id: "a87a4ad1-eba9-435e-9ad9-f9689897394a9"
   alias: "Scene - Evening"
   mode: restart
-  trigger:
-    - platform: time_pattern
+  triggers:
+    - trigger: time_pattern
       minutes: "/5"
 
-    - platform: state
+    - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
       to: "below_horizon"
 
-    - platform: state
+    - trigger: state
       entity_id: select.logitech_harmony_activities
       to: "power_off"
 
-    - platform: state
+    - trigger: state
       entity_id:
         - binary_sensor.group_family_manual
         - input_select.helpers_scenes
         - input_select.helpers_sunrise_sunset
 
-  condition:
+  conditions:
     - condition: time
       after: "15:00:00"
       before: "04:00:00"
@@ -39,7 +39,7 @@
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene evening', 'scene goodnight','scene dinner'] }}"
 
-  action:
+  actions:
     - parallel:
         - action: switch.turn_off
           target:

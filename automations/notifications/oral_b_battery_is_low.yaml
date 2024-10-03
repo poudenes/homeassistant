@@ -9,14 +9,14 @@
 ###########################################################################################
 - id: "ab49ede1-11ab-4947-be79-49e4e1c406fd"
   alias: "Notification - Oral-B battery low"
-  trigger:
-    - platform: numeric_state
+  triggers:
+    - trigger: numeric_state
       entity_id: sensor.oral_b_io_series_8n_battery
       below: 6
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - System"

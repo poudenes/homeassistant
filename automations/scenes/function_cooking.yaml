@@ -9,14 +9,14 @@
 ###########################################################################################
 - id: "2ed1ab56-f0df-48df-ac8e-c281fe31d92f"
   alias: "Scene - Cooking"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_cooking
 
-  condition:
+  conditions:
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
-  action:
+  actions:
     - action: light.turn_on
       target:
         entity_id:

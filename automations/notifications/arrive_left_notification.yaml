@@ -9,15 +9,15 @@
 ###########################################################################################
 - id: "633c8ed7-8fb9-4385-9154-3857798c6e36"
   alias: "Notification - Left/Arrive home"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - input_boolean.helpers_peter_home_homekit
         - input_boolean.helpers_kay_home_homekit
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - if: "{{ trigger.to_state.state == 'off' }}"
       then:
         - action: script.mobile_notify_no_actionable

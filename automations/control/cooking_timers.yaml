@@ -9,8 +9,8 @@
 ###########################################################################################
 - id: "4bc36062-04a8-4a51-a6f8-96d8a1396e92"
   alias: "Cooking timer is finished"
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: timer.finished
       event_data:
         entity_id: timer.helpers_cooking_one
@@ -18,7 +18,7 @@
         trigger_message: "one"
         cooking_text: "{{ states('input_text.cooking_one') }}"
 
-    - platform: event
+    - trigger: event
       event_type: timer.finished
       event_data:
         entity_id: timer.helpers_cooking_two
@@ -26,7 +26,7 @@
         trigger_message: "two"
         cooking_text: "{{ states('input_text.cooking_two') }}"
 
-    - platform: event
+    - trigger: event
       event_type: timer.finished
       event_data:
         entity_id: timer.helpers_cooking_three
@@ -34,9 +34,9 @@
         trigger_message: "three"
         cooking_text: "{{ states('input_text.cooking_three') }}"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.engine_say
       data:
         media_player: media_player.livingroom

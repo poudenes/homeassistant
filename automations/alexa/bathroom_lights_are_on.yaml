@@ -9,16 +9,16 @@
 ###########################################################################################
 - id: "1d35dbff-c77b-4e1d-bebd-d930771cb2cb"
   alias: "Alexa Custom Skills - Bathroom still on for 3 minutes"
-  trigger:
-    - platform: time_pattern
+  triggers:
+    - trigger: time_pattern
       minutes: "/5"
 
-  condition:
+  conditions:
     - "{{ is_state('switch.bathroom_light_switch', 'on') }}"
     - "{{ is_state('binary_sensor.bathroom_detection', 'off') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
-  action:
+  actions:
     - action: script.activate_alexa_actionable_notification
       data_template:
         text: "The bathroom switch is still on. Do you want me to turn it off?"

@@ -9,15 +9,15 @@
 ###########################################################################################
 - id: "80787f03-3d3c-49ea-9be9-1e2d0315ba2a"
   alias: "Notification - Feedreader Update"
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: feedreader
       event_data:
         feed_url: "https://www.arodie.com/latest/rss"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: persistent_notification.create
       data:
         title: "New Feedreader info"

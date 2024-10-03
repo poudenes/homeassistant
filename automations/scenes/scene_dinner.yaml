@@ -9,16 +9,16 @@
 ###########################################################################################
 - id: "2193737e-ac81-402e-8f02-bb61230cb7ae"
   alias: "Scene - Dinner "
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_select.helpers_scenes
       to: "scene dinner"
 
-  condition:
+  conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
-  action:
+  actions:
     - continue_on_error: true
       service: script.engine_say
       data:

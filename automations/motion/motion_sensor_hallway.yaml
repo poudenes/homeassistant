@@ -10,20 +10,20 @@
 - id: "e1cd162f-b27c-4463-968f-b74c14a283a5"
   alias: "Motion Detection - Hallway on/off"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.hallway_detection
 
   variables:
     momentary_scene_morning: "{{ 255 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
     function_wakeup: "{{ 'script.none' if is_state('input_boolean.function_wakeup', 'on') else 'light.turn_off' }}"
 
-  condition:
+  conditions:
     - "{{ is_state('switch.hallway_light_switch', 'off') }}"
     - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
     - "{{ is_state('switch.momentary_guests', 'off') }}"
 
-  action:
+  actions:
     - if:
         - "{{ is_state('binary_sensor.hallway_detection', 'on') }}"
 

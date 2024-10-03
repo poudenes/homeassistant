@@ -9,11 +9,11 @@
 ###########################################################################################
 - id: "0fc166ca-751e-48eb-b6a8-05343ed31eab"
   alias: "System - After HA Restart start services"
-  trigger:
-    - platform: homeassistant
+  triggers:
+    - trigger: homeassistant
       event: start
 
-  condition: []
+  conditions: []
 
   variables:
     zwave_switch: >-
@@ -29,7 +29,7 @@
         ⚠️ offline ⚠️
       {% endif %}
 
-  action:
+  actions:
     - action: button.press
       target:
         entity_id: button.galaxy_tab_a_load_start_url

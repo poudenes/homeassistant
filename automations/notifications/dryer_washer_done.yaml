@@ -3,22 +3,22 @@
 ###########################################################################################
 - id: 0c906145-8725-4001-b429-87d97ea7a9ac"
   alias: "Notification - Dryer-Washer done"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.wasmachine_washer_machine_state
       to: "stop"
       variables:
         trigger_message: "washing machine"
 
-    - platform: state
+    - trigger: state
       entity_id: sensor.droger_dryer_machine_state
       to: "stop"
       variables:
         trigger_message: "dryer"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - parallel:
         - action: script.engine_say
           data:

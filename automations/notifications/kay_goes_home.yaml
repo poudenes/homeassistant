@@ -10,20 +10,20 @@
 - id: "9d1ac82f-9cb3-4170-b285-f4e8bd961e6d"
   alias: "Notification - Kay drives home"
   mode: queued
-  trigger:
+  triggers:
     # - platform: state
     #   entity_id:
     #     - sensor.cenkay_iphone_badge
     #   from: "Ter Gooi"
 
-    - platform: state
+    - trigger: state
       entity_id:
         - sensor.cenkay_iphone_badge
       from: "UMC Utrecht"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "Kay goes home"

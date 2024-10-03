@@ -10,19 +10,19 @@
 - id: "298d2f65-5ecd-4090-b91d-fb4d1fb58d7f"
   alias: "Cleaning - Schedule"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.group_family_manual
       to: "off"
 
-  condition:
+  conditions:
     - condition: time
       after: "08:00:00"
       before: "21:00:00"
     - "{{ is_state('input_boolean.helpers_vacuum_done', 'off') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
 
-  action:
+  actions:
     ###########################################################################################
     # Select right cleaning modus
     ###########################################################################################

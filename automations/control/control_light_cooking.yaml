@@ -10,16 +10,16 @@
 - id: "a9f9f17d-1a04-4961-8ecb-9d2eff80430c"
   alias: "Control - Light - Cooking Scene"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - sensor.fan_remote
         - sensor.fan_speed
 
-  condition:
+  conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
 
-  action:
+  actions:
     - action: "{{ 'input_boolean.turn_on' if is_state('sensor.fan_remote', 'kitchen') and is_state('sensor.fan_speed', 'high') else 'input_boolean.turn_off' }}"
       target:
         entity_id: input_boolean.function_cooking

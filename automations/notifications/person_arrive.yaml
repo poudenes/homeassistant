@@ -10,17 +10,17 @@
 - id: "2db1a9ac-a77d-446c-ab69-240d5c31c34e"
   alias: "Notification - Greets people home"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - input_boolean.helpers_peter_home_homekit
         - input_boolean.helpers_kay_home_homekit
       from: "off"
       to: "on"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: group.set
       data:
         object_id: "arriving"

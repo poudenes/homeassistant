@@ -10,22 +10,22 @@
 - id: "13ea8c41-0328-4e66-80e3-bc966fd38875"
   alias: "Scene - Daytime (1/5)"
   mode: restart
-  trigger:
-    - platform: time_pattern
+  triggers:
+    - trigger: time_pattern
       minutes: "/5"
 
-    - platform: state
+    - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
       to: "above_horizon"
 
-  condition:
+  conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene daytime') }}"
 
-  action:
+  actions:
     - action: input_select.select_option
       target:
         entity_id: input_select.helpers_scenes

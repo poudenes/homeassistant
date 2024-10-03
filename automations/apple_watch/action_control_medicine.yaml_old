@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "a7c65cfc-cd58-4475-8df7-fafbd8f9c647"
   alias: "Notification - Take medication"
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "20:20:00"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: notify.mobile_app_peter_iphone
       data:
         title: "HA - Apple Watch"

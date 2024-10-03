@@ -10,8 +10,8 @@
 - id: "91c10b70-3ae3-4999-b28a-cfdf7e9e143a"
   alias: "System - Reset touch of keep on"
 
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - binary_sensor.balcony_touch
         - binary_sensor.bathroom_touch
@@ -45,7 +45,7 @@
       {% elif name == 'window' %} switch.livingroom_touch_1_power
       {% endif %}
 
-  action:
+  actions:
     - action: switch.turn_off
       target:
         entity_id: "{{ entity }}"

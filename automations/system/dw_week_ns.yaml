@@ -9,15 +9,15 @@
 ###########################################################################################
 - id: "1898c692-de40-4050-8a0b-a769681f8702"
   alias: "System - New DW NS into calendar"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.imap_import_dw_ns
       attribute: Message
 
-  condition:
+  conditions:
     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
 
-  action:
+  actions:
     - variables:
         # message: "{{ trigger.to_state.attributes.Message | base64_decode }}"
         # message: "{{ state_attr('sensor.imap_import_dw_ns','Message') | base64_decode }}"

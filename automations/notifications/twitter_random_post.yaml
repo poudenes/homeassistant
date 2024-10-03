@@ -9,14 +9,14 @@
 ###########################################################################################
 - id: "bc014c76-360e-4478-beb2-9a07e464e781"
   alias: "Notification - Random tweet"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.helpers_post_twitter_random
       to: "on"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.helpers_post_twitter_random

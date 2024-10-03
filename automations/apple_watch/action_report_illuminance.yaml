@@ -10,15 +10,15 @@
 - id: "963da2d8-89f1-4d01-aec5-2c87bdd35c59"
   alias: "Apple Watch - Illuminance Report"
   mode: parallel
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: "Lux level"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Apple Watch"

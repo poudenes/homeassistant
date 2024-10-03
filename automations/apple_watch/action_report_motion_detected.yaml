@@ -9,8 +9,8 @@
 ###########################################################################################
 - id: "790dfe99-1380-4920-ae4c-09b633651ee8"
   alias: "Apple Watch - Motion Detected"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - binary_sensor.diningroom_door_contact
         - binary_sensor.frondoor_door_contact
@@ -25,11 +25,11 @@
         - binary_sensor.diningroom_detection
       to: "on"
 
-  condition:
+  conditions:
     - "{{ is_state('binary_sensor.group_family_manual', 'off') }}"
     - "{{ is_state('input_boolean.function_burglar', 'off') }}"
 
-  action:
+  actions:
     - action: input_boolean.turn_on
       entity_id: input_boolean.function_burglar
 

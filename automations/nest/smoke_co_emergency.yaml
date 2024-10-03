@@ -9,8 +9,8 @@
 ###########################################################################################
 - id: "9215a995-3ecc-4366-a45c-bfa409ec7fa1"
   alias: "Control - Nest Control - Protect Emergency"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - binary_sensor.nest_protect_bedroom_smoke_status
         - binary_sensor.nest_protect_bedroom_co_status
@@ -23,9 +23,9 @@
         - binary_sensor.nest_protect_living_room_heat_status
       to: "on"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: light.turn_on
       target:
         entity_id:

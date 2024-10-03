@@ -10,18 +10,18 @@
 - id: "ce80083d-8947-4352-806a-29c6ef71cdbc"
   alias: "Scene - Wake up"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_wakeup
 
-  condition:
+  conditions:
     - condition: time
       after: "04:00:00"
       before: "10:00:00"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
 
-  action:
+  actions:
     - if:
         - "{{ (trigger.to_state.state == 'on') }}"
       then:

@@ -9,17 +9,17 @@
 ###########################################################################################
 - id: "374aa25a-986b-490f-b6fa-82ce68dace68"
   alias: "System - Vacation mode auto turn on"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.group_family_manual
       from: "on"
       to: "off"
       for: "02:00:00"
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
-  action:
+  actions:
     - parallel:
         - action: input_boolean.turn_on
           target:
@@ -38,16 +38,16 @@
 ##########################################################################################
 - id: "00615e2b-2b83-4964-b3da-a4fc5c3210a4"
   alias: "System - Vacation mode auto turn off"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.group_family_manual
       from: "off"
       to: "on"
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'on') }}"
 
-  action:
+  actions:
     - parallel:
         - action: input_boolean.turn_off
           target:

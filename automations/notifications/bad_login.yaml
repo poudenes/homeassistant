@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "a562aa53-f969-49e0-b388-3879386723cd"
   alias: "Notification - Login Failure"
-  trigger:
-    - platform: template
+  triggers:
+    - trigger: template
       value_template: "{{ (states('persistent_notification.http_login') != 'unknown') }}"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: persistent_notification.create
       data:
         title: "HA - Alarm"

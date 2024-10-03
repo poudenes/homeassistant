@@ -10,8 +10,8 @@
 - id: "5fd6c4d3-1a8f-4c20-889b-ab377a9216ce"
   alias: "ESPHome - All switches"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - switch.bathroom_light_switch
         - switch.bedroom_light_switch
@@ -26,11 +26,11 @@
         - switch.wall_light_switch
         - switch.window_light_switch
 
-  condition:
+  conditions:
     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
     - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
 
-  action:
+  actions:
     - if:
         - "{{ (trigger.to_state.state == 'on') }}"
       then:

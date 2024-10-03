@@ -10,15 +10,15 @@
 - id: "2fd57171-58d5-408b-be64-6e7075c0bc49"
   alias: "Scene - Morning"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: switch.momentary_scene_morning
       from: "off"
       to: "on"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: light.turn_on
       target:
         entity_id: light.bedroom_all

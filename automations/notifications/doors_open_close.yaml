@@ -10,21 +10,21 @@
 - id: "a7befea3-cbb9-4d40-bea6-f5ccae1e96da"
   alias: "Notification - Door open/close"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - binary_sensor.bedroom_door_contact
         - binary_sensor.diningroom_door_contact
         - binary_sensor.frondoor_door_contact
         - binary_sensor.door_livingroom_contact
 
-  condition:
+  conditions:
     - "{{ is_state('binary_sensor.group_family_manual', 'off') }}"
 
   variables:
     name: "{{ trigger.entity_id[14:-13] | title }}"
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Alarm"

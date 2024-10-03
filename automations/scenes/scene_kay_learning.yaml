@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "758b9e88-c649-4de7-af52-cd35e58a65f9"
   alias: "Scene - Kay Learning"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_kay_learning
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: light.turn_on
       target:
         entity_id: light.diningtable_all

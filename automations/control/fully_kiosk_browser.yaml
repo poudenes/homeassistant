@@ -10,15 +10,15 @@
 - id: "9b99cba8-3ea7-4d52-883c-9d28fb348099"
   alias: "Control - FKB with scenes"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - input_select.helpers_scenes
         - group.family
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - delay: "00:00:05"
 
     - action: number.set_value

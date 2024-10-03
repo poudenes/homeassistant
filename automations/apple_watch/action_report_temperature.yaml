@@ -10,15 +10,15 @@
 - id: "6d01583b-5445-4d61-95ec-739e8a7aec3a"
   alias: "Apple Watch - Temperature Report"
   mode: parallel
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: "Temperature level"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Apple Watch"

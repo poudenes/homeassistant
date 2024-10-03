@@ -10,14 +10,14 @@
 - id: "16625564-ef5e-4743-9586-29b33667bcc0"
   alias: "Notification - HASC update"
   mode: restart
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "14:00:00"
 
-  condition:
+  conditions:
     - "{{ (states('sensor.hacs')) | int > 0 | float(false) }}"
 
-  action:
+  actions:
     - action: persistent_notification.create
       data:
         message: "There are updates in HASC!"

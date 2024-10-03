@@ -9,24 +9,24 @@
 ###########################################################################################
 - id: "262daf92-02bb-48c1-938d-d31512764a17"
   alias: "Notification - RDW - Kay"
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "14:00:00"
       id: "time"
 
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.peugeot_208_liability_insured
       to: "off"
       id: "insured"
 
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.peugeot_208_pending_recall
       to: "on"
       id: "recall"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: trigger

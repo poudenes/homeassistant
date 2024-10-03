@@ -9,28 +9,28 @@
 ###########################################################################################
 - id: "8403b324-ab44-4a41-b294-495b726e5a41"
   alias: "Home Assistant - Backup system"
-  trigger:
-    - platform: state # Trigger full backup manual
+  triggers:
+    - trigger: state # Trigger full backup manual
       entity_id: input_button.ha_backup_manager_full_execute_manually
       id: "ha_full_backup_manual"
 
-    - platform: template # Trigger full backup automatic
+    - trigger: template # Trigger full backup automatic
       value_template: "{{ states('sensor.time') == (states.input_datetime.ha_backup_manager_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
       id: "ha_full_backup_automatic"
 
-    - platform: state # Trigger partial backup manual
+    - trigger: state # Trigger partial backup manual
       entity_id: input_button.ha_backup_manager_partial_execute_manually
       id: "ha_partial_backup_manual"
 
-    - platform: template # Trigger partial backup automatic
+    - trigger: template # Trigger partial backup automatic
       value_template: "{{ states('sensor.time') == (states.input_datetime.ha_backup_manager_partial_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
       id: "ha_partial_backup_automatic"
 
-    - platform: state # Trigger delate old backup
+    - trigger: state # Trigger delate old backup
       entity_id: input_button.ha_delete_backup_manually
       id: "ha_manual_bk_delete"
 
-  condition:
+  conditions:
     - condition: or
       conditions:
         ###########################################################################################
@@ -102,7 +102,7 @@
         - condition: trigger
           id: "ha_manual_bk_delete"
 
-  action:
+  actions:
     - choose:
         ###########################################################################################
         # Option 1 - Full backup triggered

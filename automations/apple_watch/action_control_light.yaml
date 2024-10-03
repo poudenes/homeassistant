@@ -10,15 +10,15 @@
 - id: "713f4c73-3792-476a-ab90-ea65d941b932"
   alias: "Apple Watch - Control lights"
   mode: parallel
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: "Set light"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: notify.mobile_app_peter_iphone
       data:
         title: "Light Control"

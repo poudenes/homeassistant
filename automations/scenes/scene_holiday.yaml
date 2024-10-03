@@ -9,15 +9,15 @@
 ###########################################################################################
 - id: "e3f5e72e-c3d5-4a32-a57d-d7deb2990270"
   alias: "Scene - Emulate Vacation"
-  trigger:
-    - platform: time_pattern
+  triggers:
+    - trigger: time_pattern
       minutes: "/5"
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'on') }}"
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
 
-  action:
+  actions:
     - choose:
         ###########################################################################################
         # WHEN THE SUN IS ABOVE HORIZON

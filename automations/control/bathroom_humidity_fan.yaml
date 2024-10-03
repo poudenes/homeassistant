@@ -10,8 +10,8 @@
 - id: f7c7ba33-5a72-4bd2-8ba1-ca9dfd1583bf
   alias: "Control - Bathroom humidity"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.fan_hum_lower_then_avg
       from: "off"
       to: "on"
@@ -20,7 +20,7 @@
     avg: "{{ state_attr('binary_sensor.fan_hum_lower_then_avg','avg')}}"
     hum: "{{ state_attr('binary_sensor.fan_hum_lower_then_avg','hum')}}"
 
-  condition:
+  conditions:
     - "{{ states('sensor.fan_speed') in ['low', 'off', 'high(t)'] }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
@@ -31,7 +31,7 @@
 #      after: "05:30:00"
 #      before: "22:30:00"
 
-  action:
+  actions:
     - parallel:
         - action: switch.turn_on
           target:

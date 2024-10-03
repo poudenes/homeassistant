@@ -10,11 +10,11 @@
 - id: "0e3c35ac-2c8c-448f-a5d3-48d59f8e8027"
   alias: "Scene - Eurovision Country"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_select.helpers_eurovision
 
-  action:
+  actions:
     - action: light.turn_off
       target:
         entity_id: light.balcony_all

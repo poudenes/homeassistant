@@ -9,14 +9,14 @@
 ###########################################################################################
 - id: "00f1ccf5-e869-457c-88c1-47d348000e8e"
   alias: "Scene - Nobody Home"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.group_family_manual
       to: "off"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: input_select.select_option
       target:
         entity_id: input_select.helpers_scenes

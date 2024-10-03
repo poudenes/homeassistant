@@ -9,8 +9,8 @@
 ###########################################################################################
 - id: "0fb819ad-808b-41a8-bb5b-59b4ce4afee1"
   alias: "Control - Neopixels by scenes"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_select.helpers_scenes
 
   variables: # NEEDED FOR THE REPEAT BELOW
@@ -28,9 +28,9 @@
       - switch.wall_light_switch
       - switch.window_light_switch
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - repeat:
         for_each: "{{ expand(switches) | selectattr('state', 'eq', 'off') | map(attribute='entity_id') | list }}"
         sequence:

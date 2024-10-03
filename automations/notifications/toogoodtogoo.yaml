@@ -10,14 +10,14 @@
 - id: "9e38b878-a1a3-42b2-99b4-a52b453c74e4"
   alias: "Notification - TgTg - Symphony Bar"
   mode: queued
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.tgtg_symphony_bar
       from: false
       to: true
       attribute: stock_available
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   variables:
@@ -26,7 +26,7 @@
     picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
     url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "TgTg - Symphony Bar"

@@ -10,16 +10,16 @@
 - id: "c54afbee-cd69-4cf3-8a55-4cac2979234f"
   alias: "Scene - Nintendo"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
       to: "below_horizon"
 
-    - platform: state
+    - trigger: state
       entity_id: select.logitech_harmony_activities
       to: "Nintendo"
 
-  condition:
+  conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
@@ -27,7 +27,7 @@
     - "{{ is_state('select.logitech_harmony_activities', 'Nintendo') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene nintendo', 'scene goodnight','scene dinner'] }}"
 
-  action:
+  actions:
     - action: input_select.select_option
       target:
         entity_id: input_select.helpers_scenes

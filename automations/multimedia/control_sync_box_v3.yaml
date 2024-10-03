@@ -10,15 +10,15 @@
 - id: "3e7b1da6-2964-4000-84cc-86235529c281"
   alias: "Control - Sync Box V3"
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: media_player.woonkamer
       to:
         - "playing"
       for: "00:00:05"
       id: appletv_playing
 
-    - platform: state
+    - trigger: state
       entity_id: media_player.woonkamer
       to:
         - "paused"
@@ -27,16 +27,16 @@
       for: "00:00:05"
       id: appletv_paused
 
-    - platform: state
+    - trigger: state
       entity_id: input_select.helpers_scenes
 
-  condition:
+  conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('input_boolean.function_disco', 'off') }}"
     - "{{ trigger.from_state is none or trigger.to_state is not none and trigger.to_state.state != trigger.from_state.state }}"
 
-  action:
+  actions:
     - choose:
         ###########################################################################################
         # When Apple TV is playing

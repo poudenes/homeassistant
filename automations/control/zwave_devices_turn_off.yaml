@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "69ae8dfe-565e-4bd9-870a-e373eac00ad9"
   alias: "Control - Turn zwave on/off"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.group_family_manual
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     ###########################################################################################
     # CHRISTMAS
     ###########################################################################################

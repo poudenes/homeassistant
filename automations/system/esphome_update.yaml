@@ -10,32 +10,32 @@
 - id: "e3c0267d-49fa-48a6-86b7-e8aa806e6d76"
   alias: "System - Automatically update ESPHome Devices"
   mode: single
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at:
         - "11:00:00"
         - "12:00:00"
 
-    - platform: state
+    - trigger: state
       entity_id: group.family
       to: "off"
 
-    - platform: state
+    - trigger: state
       entity_id: group.helpers_esphome_updates
       from: "off"
       to: "on"
       id: up-date
 
-    - platform: state
+    - trigger: state
       entity_id: group.helpers_esphome_updates
       from: "on"
       to: "off"
       id: up-to-date
 
-  condition:
+  conditions:
     - "{{ is_state('group.family', 'off') }} "
 
-  action:
+  actions:
     - choose:
         ###########################################################################################
         # When platform time is fires

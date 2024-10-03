@@ -9,13 +9,13 @@
 ###########################################################################################
 - id: "c916d192-6403-4dc6-88ec-19b8ebec885f"
   alias: "Notification - Disable nest control"
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: input_boolean.function_dnc
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: persistent_notification.create
       data:
         title: "HA - System"

@@ -10,15 +10,15 @@
 - id: "8852539e-3a59-4368-bd2d-eca1f0836280"
   alias: "Apple Watch - Control temperature"
   mode: parallel
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: "Set temperature"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: notify.mobile_app_peter_iphone
       data:
         title: "Set Temperature"
