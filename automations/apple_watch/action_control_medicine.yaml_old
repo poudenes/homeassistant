@@ -56,15 +56,15 @@
 ###########################################################################################
 - id: "352511ef-40b6-4af6-bf1b-df77f5b0bd9e"
   alias: "Apple Watch - Remind me again take medicine"
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.notification_action_fired
       event_data:
         actionName: "Medicine snooze"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
         entity_id: light.hallway_all
@@ -111,15 +111,15 @@
 ###########################################################################################
 - id: "625cadbb-351f-4f5c-b844-e987e1537443"
   alias: "Apple Watch: I took my medicine"
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.notification_action_fired
       event_data:
         actionName: "Took medicine"
 
-  condition: []
+  conditions: []
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "HA - Apple Watch"

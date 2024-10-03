@@ -26,7 +26,7 @@
         alexa_device: "media_player.livingroom"
 
     - wait_for_trigger:
-        - platform: event
+        - trigger: event
           event_type: alexa_actionable_notification
           event_data:
             event_id: alexa_custom_skill_bathroom_light

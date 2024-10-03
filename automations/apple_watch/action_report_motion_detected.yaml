@@ -74,12 +74,12 @@
         brightness_pct: 100
 
     - wait_for_trigger:
-        - platform: event
+        - trigger: event
           event_type: ios.notification_action_fired
           event_data:
             actionName: "Turn off alarm"
 
-        - platform: state
+        - trigger: state
           entity_id: input_boolean.function_burglar
           to: "off"
 

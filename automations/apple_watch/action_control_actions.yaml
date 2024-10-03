@@ -33,7 +33,7 @@
               title: "Wake Up"
 
     - wait_for_trigger:
-        - platform: event
+        - trigger: event
           event_type: ios.notification_action_fired
           event_data:
             categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL

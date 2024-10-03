@@ -34,7 +34,7 @@
       # GROUP.ARRIVING is created in create_arrive_group.yaml
       ###########################################################################################
     - continue_on_error: true
-      service: "{{ 'script.none' if is_state('input_select.helpers_scenes', 'scene goodnight') else 'script.engine_say' }}"
+      action: "{{ 'script.none' if is_state('input_select.helpers_scenes', 'scene goodnight') else 'script.engine_say' }}"
       data:
         media_player: media_player.livingroom
         notify: notify.alexa_media_livingroom

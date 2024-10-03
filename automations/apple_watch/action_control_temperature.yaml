@@ -41,7 +41,7 @@
               title: "22"
 
     - wait_for_trigger:
-        - platform: event
+        - trigger: event
           event_type: ios.notification_action_fired
           event_data:
             categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
@@ -52,7 +52,7 @@
         temperature: "{{ wait.trigger.event.data.actionName.split('T')[1] | int }}"
 
     - continue_on_error: true
-      service: climate.set_temperature
+      action: climate.set_temperature
       target:
         entity_id: climate.entryway
       data:

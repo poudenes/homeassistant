@@ -45,7 +45,7 @@
               title: "Diningroom"
 
     - wait_for_trigger:
-        - platform: event
+        - trigger: event
           event_type: ios.notification_action_fired
           event_data:
             categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
@@ -86,7 +86,7 @@
               title: "1%"
 
     - wait_for_trigger:
-        - platform: event
+        - trigger: event
           event_type: ios.notification_action_fired
           event_data:
             categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
@@ -100,19 +100,19 @@
     - choose:
         - conditions: "{{ option == 'Off' }}"
           sequence:
-            service: light.turn_off
+            action: light.turn_off
             target:
               entity_id: "{{ light }}"
 
         - conditions: "{{ option == 'On' }}"
           sequence:
-            service: light.turn_on
+            action: light.turn_on
             target:
               entity_id: "{{ light }}"
 
         - conditions: "{{ option == 'Fifty' }}"
           sequence:
-            service: light.turn_on
+            action: light.turn_on
             target:
               entity_id: "{{ light }}"
             data:
@@ -120,7 +120,7 @@
 
         - conditions: "{{ option == 'Hundred' }}"
           sequence:
-            service: light.turn_on
+            action: light.turn_on
             target:
               entity_id: "{{ light }}"
             data:
@@ -128,7 +128,7 @@
 
         - conditions: "{{ option == 'One' }}"
           sequence:
-            service: light.turn_on
+            action: light.turn_on
             target:
               entity_id: "{{ light }}"
             data:

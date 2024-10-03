@@ -59,7 +59,7 @@
             kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
         - continue_on_error: true
-          service: script.engine_say
+          action: script.engine_say
           data:
             media_player: media_player.livingroom
             notify: notify.alexa_media_livingroom
@@ -81,7 +81,7 @@
               - light.dressoir_all
 
         - continue_on_error: true
-          service: script.engine_say
+          action: script.engine_say
           data:
             media_player: media_player.livingroom
             notify: notify.alexa_media_livingroom

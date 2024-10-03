@@ -176,7 +176,7 @@
             - "ha_partial_backup_manual"
       then:
         - wait_for_trigger: # Wait for trigger
-            - platform: event
+            - trigger: event
               event_type: state_changed
               event_data:
                 entity_id: sensor.ha_backup_manager_last_backup_slug
