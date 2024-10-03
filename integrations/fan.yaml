@@ -22,15 +22,15 @@
         {{ speed.get(states('sensor.fan_speed'), 0) }}
 
       turn_on:
-        service: switch.turn_on
+        action: switch.turn_on
         data:
           entity_id: switch.fan_high
       turn_off:
-        service: switch.turn_on
+        action: switch.turn_on
         data:
           entity_id: switch.fan_standby
       set_percentage:
-        service: switch.turn_on
+        action: switch.turn_on
         data_template:
           entity_id: >
             {% set id_mapp = {0: 'switch.fan_standby', 33:'switch.fan_low', 66:'switch.fan_medium', 100:'switch.fan_high'} %}

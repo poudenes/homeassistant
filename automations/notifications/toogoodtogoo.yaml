@@ -56,8 +56,8 @@
 - id: "5c0a56db-5721-4f6e-93a1-5de3c8f5fd97"
   alias: "Notification - TooGoodToGo"
   mode: queued
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - sensor.tgtg_ah_to_go_zuidplein
         - sensor.tgtg_hema_gelderlandplein
@@ -69,7 +69,7 @@
       to: true
       attribute: stock_available
 
-  condition:
+  conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   variables:
@@ -78,7 +78,7 @@
     picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
     url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
 
-  action:
+  actions:
     - action: script.mobile_notify_no_actionable
       data:
         title: "TooGoodToGo"

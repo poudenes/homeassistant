@@ -14,8 +14,8 @@
 ###########################################################################################
 # These actions will imported into the HA iOS App.
 # So you can trigger those actions to activate automations:
-# trigger:
-#   - platform: event
+# triggers:
+#   - trigger: event
 #     event_type: ios.action_fired
 #     event_data:
 #       actionName: "ACTION_SET_LIGHT" # NAME OF THE ACTION

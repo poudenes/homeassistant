@@ -9,8 +9,8 @@
 ###########################################################################################
 # - id: "e8259323-1ece-4eb4-94be-390751f22b86"
 #   alias: "Notification - TooGoodToGo - Sister"
-#   trigger:
-#     - platform: state
+#   triggers:
+#     - trigger: state
 #       entity_id:
 #         - sensor.toogoodtogo_broodhuys_meijer_verrassingspakket
 #         - sensor.toogoodtogo_the_roastary_amstelveen_verrassingspakket_large
@@ -39,7 +39,7 @@
 #       to: true
 #       attribute: stock_available
 
-#   condition: []
+#   conditions: []
 
 #   variables:
 #     stock: "{{ states(trigger.to_state.entity_id) }}"
@@ -47,7 +47,7 @@
 #     price: "{{ state_attr(trigger.to_state.entity_id, 'price') }}"
 #     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
 
-#   action:
+#   actions:
 #     - action: notify.mobile_app_martine
 #       data:
 #         message: "{{ name }}, # {{ stock }}, €: {{ price }}"

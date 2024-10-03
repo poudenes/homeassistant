@@ -9,27 +9,27 @@
 ###########################################################################################
 # - id: "f9e511ed-e421-431c-b60a-d9c021dd3cd7"
 #   alias: "Notification - RDW - Martine"
-#   trigger:
-#     - platform: time
+#   triggers:
+#     - trigger: time
 #       at: "14:00:00"
 #       id: "time"
 
-#     - platform: state
+#     - trigger: state
 #       entity_id: binary_sensor.toyota_ago_liability_insured
 #       to: "off"
 #       id: "insured"
 
-#     - platform: state
+#     - trigger: state
 #       entity_id: binary_sensor.toyota_ago_pending_recall
 #       to: "on"
 #       id: "recall"
 
-#     - platform: time
+#     - trigger: time
 #       at: "14:00:00"
 
-#   condition: []
+#   conditions: []
 
-#   action:
+#   actions:
 #   - choose:
 #       - conditions:
 #           - condition: trigger
