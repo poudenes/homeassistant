@@ -16,6 +16,8 @@
       from: "returning"
       to: "docked"
 
+  conditions: []
+  
   actions:
     - variables:
         roborock_list: >-

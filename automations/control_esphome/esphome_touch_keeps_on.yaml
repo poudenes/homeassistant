@@ -45,6 +45,8 @@
       {% elif name == 'window' %} switch.livingroom_touch_1_power
       {% endif %}
 
+  conditions: []
+  
   actions:
     - action: switch.turn_off
       target:
