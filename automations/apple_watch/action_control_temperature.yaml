@@ -19,7 +19,7 @@
   conditions: []
 
   actions:
-    - action: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_iphone
       data:
         title: "Set Temperature"
         message: "What temperature do you want?"

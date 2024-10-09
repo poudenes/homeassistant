@@ -16,7 +16,7 @@
   conditions: []
 
   actions:
-    - action: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_iphone
       data:
         title: "HA - Apple Watch"
         message: |
@@ -71,7 +71,7 @@
 
     - delay: "00:05:00"
 
-    - action: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_iphone
       data:
         title: "HA - Apple Watch"
         message: |

@@ -21,10 +21,10 @@
     hum: "{{ state_attr('binary_sensor.fan_hum_lower_then_avg','hum')}}"
 
   conditions:
-    - "{{ states('sensor.fan_speed') in ['low', 'off', 'high(t)'] }}"
+    - "{{ states('sensor.fan_speed') not in ['high', 'high(t)'] }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
-    - "{{ states('input_select.helpers_scenes') not in ['scene goodnight'] }}"
+ #   - "{{ states('input_select.helpers_scenes') not in ['scene goodnight'] }}"
     - "{{ is_state('binary_sensor.bathroom_detection', 'on') }}"
 
 #    - condition: time

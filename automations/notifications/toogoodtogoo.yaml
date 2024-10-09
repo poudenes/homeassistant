@@ -11,20 +11,30 @@
   alias: "Notification - TgTg - Symphony Bar"
   mode: queued
   triggers:
-    - trigger: state
-      entity_id: sensor.tgtg_symphony_bar
-      from: false
-      to: true
-      attribute: stock_available
-
+    # - trigger: state
+    #   entity_id: sensor.tgtg_symphony_bar
+    #   from: false
+    #   to: true
+    #   attribute: stock_available
+    - trigger: numeric_state
+      entity_id: sensor.tgtg_symphony_s_bar_brasserie_en_restaurant_amsterdam_verrassingspakket
+      above: 0
+      
   conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   variables:
+    # stock: "{{ states(trigger.to_state.entity_id) }}"
+    # name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
+    # picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
+    # url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
+
     stock: "{{ states(trigger.to_state.entity_id) }}"
     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
-    picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
-    url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
+    url: "{{ state_attr(trigger.to_state.entity_id, 'item_url') }}"
+    price: "{{ state_attr(trigger.to_state.entity_id, 'item_price') }}"
+    pickup_start: "{{ state_attr(trigger.to_state.entity_id, 'pickup_start')[11:-4] }}"
+    pickup_end: "{{ state_attr(trigger.to_state.entity_id, 'pickup_end')[11:-4] }}"
 
   actions:
     - action: script.mobile_notify_no_actionable
@@ -32,17 +42,8 @@
         title: "TgTg - Symphony Bar"
         thread_id: "HA - TgTg - Symphony Bar"
         message: |
-          {% set entityID = trigger.to_state.entity_id %}
-          {% set names = state_attr(entityID,'friendly_name').split('-') %}
-          {% set namesLength = names | length %}
-          {% if namesLength > 2 %}
-            {% set outName = names[1] + '-' + names[2] %}
-          {% else %}
-            {% set outName = names[1] %}
-          {% endif %}
-          {{ name }}:
-          {{ states(entityID) }} x{{ outName }} €{{ state_attr(entityID,'price') }}
-        img: "{{ picture }}"
+          Price: "{{ price }}" - Name "{{ name }}"
+          Pickup between: "{{ pickup_start }}" - "{{ pickup_end }}"
         buttontitle: "Open TgTg - Symphony Bar"
         uri: uri
         url: "{{ url }}"
@@ -57,26 +58,39 @@
   alias: "Notification - TooGoodToGo"
   mode: queued
   triggers:
-    - trigger: state
+    - trigger: numeric_state
       entity_id:
+        # - sensor.tgtg_ah_to_go_zuidplein
+        # - sensor.tgtg_hema_gelderlandplein
+        # - sensor.tgtg_jumbo_kastelenstraat
+        # - sensor.tgtg_jongejans_gelderlandplein
+        # - sensor.tgtg_veggiebox_aveen_veggiebox
+        # - sensor.tgtg_veggiebox_aveen_fruitbox
         - sensor.tgtg_ah_to_go_zuidplein
-        - sensor.tgtg_hema_gelderlandplein
-        - sensor.tgtg_jumbo_kastelenstraat
-        - sensor.tgtg_jongejans_gelderlandplein
-        - sensor.tgtg_veggiebox_aveen_veggiebox
-        - sensor.tgtg_veggiebox_aveen_fruitbox
-      from: false
-      to: true
-      attribute: stock_available
+        - sensor.tgtg_hema_amsterdam_gelderlandplein_verrassingspakket
+        - sensor.tgtg_jumbo_velu_kastelenstraat_amsterdam_verrassingspakket
+        - sensor.tgtg_stadsbakker_jongejans_gelderlandplein_verrassingspakket
+        - sensor.tgtg_veggiebox_amsterdam_west_fruitbox
+        - sensor.tgtg_veggiebox_amsterdam_west_veggiebox
+      above: 0
+      # to: true
+      # attribute: stock_available
 
   conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   variables:
+    # stock: "{{ states(trigger.to_state.entity_id) }}"
+    # name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
+    # picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
+    # url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
+
     stock: "{{ states(trigger.to_state.entity_id) }}"
     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
-    picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
-    url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
+    url: "{{ state_attr(trigger.to_state.entity_id, 'item_url') }}"
+    price: "{{ state_attr(trigger.to_state.entity_id, 'item_price') }}"
+    pickup_start: "{{ state_attr(trigger.to_state.entity_id, 'pickup_start')[11:-4] }}"
+    pickup_end: "{{ state_attr(trigger.to_state.entity_id, 'pickup_end')[11:-4] }}"
 
   actions:
     - action: script.mobile_notify_no_actionable
@@ -84,20 +98,34 @@
         title: "TooGoodToGo"
         thread_id: "HA - TooGoodToGo"
         message: |
-          {% set entityID = trigger.to_state.entity_id %}
-          {% set names = state_attr(entityID,'friendly_name').split('-') %}
-          {% set namesLength = names | length %}
-          {% if namesLength > 2 %}
-            {% set outName = names[1] + '-' + names[2] %}
-          {% else %}
-            {% set outName = names[1] %}
-          {% endif %}
-          {{ name }}:
-          {{ states(entityID) }} x{{ outName }} €{{ state_attr(entityID,'price') }}
-        img: "{{ picture }}"
-        buttontitle: "Open TooGoodToGo App"
+          Price: "{{ price }}" - Name "{{ name }}"
+          Pickup between: "{{ pickup_start }}" - "{{ pickup_end }}"
+        buttontitle: "Open ToGoodToGo"
         uri: uri
         url: "{{ url }}"
         soundname: default
-        critical: 0
-        volume: 0
+        # critical: 1
+        # volume: 1.0
+
+    # - action: script.mobile_notify_no_actionable
+    #   data:
+    #     title: "TooGoodToGo"
+    #     thread_id: "HA - TooGoodToGo"
+    #     message: |
+    #       {% set entityID = trigger.to_state.entity_id %}
+    #       {% set names = state_attr(entityID,'friendly_name').split('-') %}
+    #       {% set namesLength = names | length %}
+    #       {% if namesLength > 2 %}
+    #         {% set outName = names[1] + '-' + names[2] %}
+    #       {% else %}
+    #         {% set outName = names[1] %}
+    #       {% endif %}
+    #       {{ name }}:
+    #       {{ states(entityID) }} x{{ outName }} €{{ state_attr(entityID,'price') }}
+    #     img: "{{ picture }}"
+    #     buttontitle: "Open TooGoodToGo App"
+    #     uri: uri
+    #     url: "{{ url }}"
+    #     soundname: default
+    #     critical: 0
+    #     volume: 0

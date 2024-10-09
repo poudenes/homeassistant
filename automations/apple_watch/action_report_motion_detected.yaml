@@ -33,7 +33,7 @@
     - action: input_boolean.turn_on
       entity_id: input_boolean.function_burglar
 
-    - action: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_iphone
       data:
         title: "Apple Action - Motion detected!"
         message: "{{ trigger.from_state.name }}"

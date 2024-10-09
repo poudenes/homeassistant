@@ -18,7 +18,7 @@ mobile_notify_no_actionable:
   mode: parallel
 
   sequence:
-    - action: notify.mobile_app_peter_iphone
+    - action: notify.mobile_app_iphone
       data:
         message: "{{ 'Message not set' if message is not defined else message }}"
         title: "{{ 'Title not set' if title is not defined else title }}"
