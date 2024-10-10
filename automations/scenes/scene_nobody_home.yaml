@@ -30,6 +30,8 @@
           - light.helpers_daytime_lights
           - remote.logitech_harmony
           - switch.helpers_switches
+          - light.scenes_house
+          - switch.fan_low
 
     - action: "{{ 'switch.turn_off' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
       target:

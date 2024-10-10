@@ -11,11 +11,6 @@
   alias: "Notification - TgTg - Symphony Bar"
   mode: queued
   triggers:
-    # - trigger: state
-    #   entity_id: sensor.tgtg_symphony_bar
-    #   from: false
-    #   to: true
-    #   attribute: stock_available
     - trigger: numeric_state
       entity_id: sensor.tgtg_symphony_s_bar_brasserie_en_restaurant_amsterdam_verrassingspakket
       above: 0
@@ -24,11 +19,6 @@
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   variables:
-    # stock: "{{ states(trigger.to_state.entity_id) }}"
-    # name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
-    # picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
-    # url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
-
     stock: "{{ states(trigger.to_state.entity_id) }}"
     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
     url: "{{ state_attr(trigger.to_state.entity_id, 'item_url') }}"
@@ -60,31 +50,17 @@
   triggers:
     - trigger: numeric_state
       entity_id:
-        # - sensor.tgtg_ah_to_go_zuidplein
-        # - sensor.tgtg_hema_gelderlandplein
-        # - sensor.tgtg_jumbo_kastelenstraat
-        # - sensor.tgtg_jongejans_gelderlandplein
-        # - sensor.tgtg_veggiebox_aveen_veggiebox
-        # - sensor.tgtg_veggiebox_aveen_fruitbox
-        - sensor.tgtg_ah_to_go_zuidplein
         - sensor.tgtg_hema_amsterdam_gelderlandplein_verrassingspakket
         - sensor.tgtg_jumbo_velu_kastelenstraat_amsterdam_verrassingspakket
         - sensor.tgtg_stadsbakker_jongejans_gelderlandplein_verrassingspakket
         - sensor.tgtg_veggiebox_amsterdam_west_fruitbox
         - sensor.tgtg_veggiebox_amsterdam_west_veggiebox
       above: 0
-      # to: true
-      # attribute: stock_available
 
   conditions:
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
 
   variables:
-    # stock: "{{ states(trigger.to_state.entity_id) }}"
-    # name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
-    # picture: "{{ state_attr(trigger.to_state.entity_id, 'picture') }}"
-    # url: "{{ state_attr(trigger.to_state.entity_id, 'url') }}"
-
     stock: "{{ states(trigger.to_state.entity_id) }}"
     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
     url: "{{ state_attr(trigger.to_state.entity_id, 'item_url') }}"
@@ -106,26 +82,3 @@
         soundname: default
         # critical: 1
         # volume: 1.0
-
-    # - action: script.mobile_notify_no_actionable
-    #   data:
-    #     title: "TooGoodToGo"
-    #     thread_id: "HA - TooGoodToGo"
-    #     message: |
-    #       {% set entityID = trigger.to_state.entity_id %}
-    #       {% set names = state_attr(entityID,'friendly_name').split('-') %}
-    #       {% set namesLength = names | length %}
-    #       {% if namesLength > 2 %}
-    #         {% set outName = names[1] + '-' + names[2] %}
-    #       {% else %}
-    #         {% set outName = names[1] %}
-    #       {% endif %}
-    #       {{ name }}:
-    #       {{ states(entityID) }} x{{ outName }} €{{ state_attr(entityID,'price') }}
-    #     img: "{{ picture }}"
-    #     buttontitle: "Open TooGoodToGo App"
-    #     uri: uri
-    #     url: "{{ url }}"
-    #     soundname: default
-    #     critical: 0
-    #     volume: 0

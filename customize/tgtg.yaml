@@ -1,6 +1,4 @@
 ---
-sensor.tgtg_ah_to_go_zuidplein:
-  friendly_name: "AH to Go Zuidplein"
 sensor.tgtg_hema_gelderlandplein:
   friendly_name: "Hema GPlein"
 sensor.tgtg_jumbo_kastelenstraat:
@@ -13,3 +11,16 @@ sensor.tgtg_veggiebox_aveen_veggiebox:
   friendly_name: "Veggie Box Fruit"
 sensor.tgtg_veggiebox_aveen_fruitbox:
   friendly_name: "Veggiebox Veggie"
+
+sensor.tgtg_hema_amsterdam_gelderlandplein_verrassingspakket:
+  friendly_name: "Hema GPlein"
+sensor.tgtg_jumbo_velu_kastelenstraat_amsterdam_verrassingspakket:
+  friendly_name: "Jumbo Kastelenstr"
+sensor.tgtg_stadsbakker_jongejans_gelderlandplein_verrassingspakket:
+  friendly_name: "Jongejans GPlein"
+sensor.tgtg_veggiebox_amsterdam_west_fruitbox:
+  friendly_name: "Veggie Box Fruit"
+sensor.tgtg_veggiebox_amsterdam_west_veggiebox:
+  friendly_name: "Veggiebox Veggie"
+sensor.tgtg_symphony_s_bar_brasserie_en_restaurant_amsterdam_verrassingspakket:
+  friendly_name: "Symohony Bar"
