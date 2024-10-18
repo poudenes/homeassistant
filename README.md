@@ -58,3 +58,11 @@ No Ports are open on my router anymore, and no subdomains are pointing to my IP 
 
 Everything is added in Home Assistant. I shared my configuration so you can learn from it.
 Also when you see improvements let me know... I still learning :D
+
+SOme screenshots of my config:
+
+<img width="1641" alt="Screenshot 2024-10-18 at 16 04 45" src="https://github.com/user-attachments/assets/21474b64-b6ee-4ada-8a39-231353d4de47">
+<img width="1632" alt="Screenshot 2024-10-18 at 16 04 30" src="https://github.com/user-attachments/assets/f57a676b-055a-46aa-956f-cc717f6ae1af">
+<img width="1642" alt="Screenshot 2024-10-18 at 16 04 20" src="https://github.com/user-attachments/assets/fdaffbe9-5d58-480d-b2a4-c2ce80372648">
+<img width="1645" alt="Screenshot 2024-10-18 at 16 04 00" src="https://github.com/user-attachments/assets/bd2f8097-3560-4fa6-87e5-08c2d7061577">
+
