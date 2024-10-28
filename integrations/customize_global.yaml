@@ -1,0 +1,127 @@
+#   ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗██╗███████╗███████╗     ██████╗ ██╗      ██████╗ ██████╗  █████╗ ██╗
+#  ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██║╚══███╔╝██╔════╝    ██╔════╝ ██║     ██╔═══██╗██╔══██╗██╔══██╗██║
+#  ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║██║  ███╔╝ █████╗      ██║  ███╗██║     ██║   ██║██████╔╝███████║██║
+#  ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██║ ███╔╝  ██╔══╝      ██║   ██║██║     ██║   ██║██╔══██╗██╔══██║██║
+#  ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║██║███████╗███████╗    ╚██████╔╝███████╗╚██████╔╝██████╔╝██║  ██║███████╗
+#   ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚═╝╚══════╝╚══════╝     ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# CUSTOMIZE_GLOBAL
+# https://www.home-assistant.io/docs/configuration/customizing-devices
+###########################################################################################
+
+###########################################################################################
+# DOMAIN LEVEL
+###########################################################################################
+"automation.*":
+  icon: mdi:home-assistant
+
+"script.*":
+  icon: mdi:script
+
+"fan.*":
+  templates:
+    icon: mdi:fan
+
+"group.*":
+  templates:
+    icon: mdi:group
+
+"button.":
+  templates:
+    icon_color: if (state === 'on') return 'green'; return 'red';
+#     icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"update.":
+  templates:
+    icon: mdi:radar
+    icon_color: if (state === 'on') return 'green'; return 'red';
+#     icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"switch.*":
+  templates:
+    icon_color: if (state === 'on') return 'green'; return 'red';
+#     icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"device_tracker.*":
+  templates:
+    icon: mdi:radar
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"input_boolean.*":
+  templates:
+    icon_color: if (state === 'on') return 'green'; return 'red';
+#     icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"binary_sensor.":
+  templates:
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"sensor.":
+  templates:
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+###########################################################################################
+# NEST
+###########################################################################################
+"binary_sensor.*_online":
+  device_class: "connectivity"
+  templates:
+    icon: if (state === 'on') return 'mdi:server-network'; return 'mdi:server-network-off';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+###########################################################################################
+# SPECIFIC CUSTOMIZATION
+###########################################################################################
+"sensor.version_update_*":
+  templates:
+    icon: mdi:update
+
+"sensor.*_protect_color_status":
+  templates:
+    icon: mdi:palette
+
+"sensor.*_temperature":
+  device_class: temperature
+  unit_of_measurement: "°C"
+
+###########################################################################################
+# ZWAVE CUSTOMIZATION
+###########################################################################################
+"binary_sensor.*_contact":
+  templates:
+    device_class: "door"
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"switch.*_wall":
+  templates:
+    icon: mdi:power-socket-eu
+    icon_color: if (state === 'on') return 'green'; return 'red';
+#     icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"binary_sensor.*_detection":
+  templates:
+    icon: if (state === 'on') return 'mdi:motion-sensor'; return 'mdi:motion-sensor-off';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
+
+"sensor.*_lux":
+  device_class: illuminance
+  unit_of_measurement: "Lux"
+  icon: mdi:weather-partly-cloudy
+
+"sensor.*_watt":
+  icon: mdi:flash
+
+"sensor.*_volt":
+  icon: mdi:flash
+
+"sensor.*_amp":
+  icon: mdi:flash
+
+"sensor.*_battery":
+  unit_of_measurement: "%"
+  device_class: battery
+
+"binary_sensor.*_low_battery":
+  device_class: battery

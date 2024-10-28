@@ -1,0 +1,84 @@
+#  ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
+#  ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+#     ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+#     ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+#     ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
+#     ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+##########################################################################################
+# https://www.home-assistant.io/integrations/template/
+##########################################################################################
+---
+#########################################################################################
+# Philips Hue remote to sensor
+#########################################################################################
+- trigger:
+    - platform: event
+      event_type: hue_event
+      event_data:
+        id: remote_1_button
+  sensor:
+    - unique_id: "e14b53a5-efc6-4cd4-b030-07a7cd8916aa"
+      name: "Hue - Remote sensor"
+      state: "{{trigger.event.data.subtype}}"
+      attributes:
+        last_triggered: "{{trigger.event.time_fired}}"
+        press_type: "{{trigger.event.data.type}}"
+
+#########################################################################################
+# IMAP Triggers
+#########################################################################################
+- trigger:
+    - platform: event
+      event_type: "imap_content"
+      id: "custom_event"
+      event_data:
+        sender: !secret imap_sender_2
+  sensor:
+    - name: "Imap import DW NS" 
+      state: >-
+        {% if 'DiSys' in trigger.event.data["subject"] %}
+          Nieuwe DW
+        {% endif %}
+      attributes:
+        Message: "{{ trigger.event.data['text'] }}"
+        Date: "{{ trigger.event.data['date'] }}"
+#        Server: "{{ trigger.event.data['server'] }}"
+#        Username: "{{ trigger.event.data['username'] }}"
+#        Search: "{{ trigger.event.data['search'] }}"
+#        Folder: "{{ trigger.event.data['folder'] }}"
+#        Sender: "{{ trigger.event.data['sender'] }}"
+#        Subject: "{{ trigger.event.data['subject'] }}"
+#        To: "{{ trigger.event.data['headers'].get('Delivered-To', ['n/a'])[0] }}"
+#        Return-Path: "{{ trigger.event.data['headers'].get('Return-Path',['n/a'])[0] }}"
+#        Received-first: "{{ trigger.event.data['headers'].get('Received',['n/a'])[0] }}"
+#        Received-last: "{{ trigger.event.data['headers'].get('Received',['n/a'])[-1] }}"
+
+- trigger:
+    - platform: event
+      event_type: "imap_content"
+      id: "custom_event"
+      event_data:
+        sender: !secret imap_sender_1
+  sensor:
+    - name: "Imap test"
+      state: >-
+        {% if 'Order' in trigger.event.data["subject"] %}
+          New order
+        {% elif 'Pay' in trigger.event.data["subject"] %}
+          Payed
+        {% endif %}
+        
+###########################################################################################
+# Trigger on webhook and create a sensor
+###########################################################################################        
+- trigger:
+    - platform: webhook
+      webhook_id: "postgress_backup"
+      local_only: true
+      allowed_methods:
+        - POST
+        - PUT
+      
+  sensor:
+    - name: "Webhook Postgress Template"
+      state: "{{ trigger.json }}"

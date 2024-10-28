@@ -1,0 +1,95 @@
+#   ██████╗ ██████╗ ███╗   ██╗████████╗██████╗  ██████╗ ██╗         ██████╗ ███████╗██╗   ██╗██╗ ██████╗███████╗███████╗
+#  ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██║         ██╔══██╗██╔════╝██║   ██║██║██╔════╝██╔════╝██╔════╝
+#  ██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║██║         ██║  ██║█████╗  ██║   ██║██║██║     █████╗  ███████╗
+#  ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║██║         ██║  ██║██╔══╝  ╚██╗ ██╔╝██║██║     ██╔══╝  ╚════██║
+#  ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╔╝███████╗    ██████╔╝███████╗ ╚████╔╝ ██║╚██████╗███████╗███████║
+#   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═════╝ ╚══════╝  ╚═══╝  ╚═╝ ╚═════╝╚══════╝╚══════╝
+###########################################################################################
+# YAMAHA
+###########################################################################################
+- id: "65de1629-ed2b-41bf-9821-d8a52c83804c"
+  alias: "Harmony Hub - Commands - Yamaha Receiver"
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_select.helpers_yamaha_dsp_modus
+        - input_select.helpers_yamaha_dsp_movie
+        - input_select.helpers_yamaha_dsp_music
+        - input_select.helpers_yamaha_dsp_sur_decoder
+        - input_select.helpers_yamaha_input
+        - input_select.helpers_yamaha_power_mute_info
+
+  conditions: []
+
+  actions:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: "{{ trigger.to_state.state }}"
+        device: 41633063
+
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.yamaha_dps_modus
+      data:
+        value: "modus: {{ trigger.to_state.state }} / {{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }} / {{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }}"
+
+###########################################################################################
+# LG TV
+###########################################################################################
+- id: "cc5ef3c7-c978-43bf-9a51-11def6fe19e0"
+  alias: "Harmony Hub - Commands - LG TV"
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_select.helpers_lg_power_mute
+        - input_select.helpers_lg_input
+
+  conditions: []
+
+  actions:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: "{{ trigger.to.state.state }}"
+        device: 41535866
+
+###########################################################################################
+# APPLE TV
+###########################################################################################
+- id: "d5f71cf1-d661-4b63-9e8c-98967503edb4"
+  alias: "Harmony Hub - Commands - AppleTV"
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_appletv_commands
+
+  conditions: []
+
+  actions:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: "{{ states('input_select.helpers_appletv_commands') }}"
+        device: 41536434
+
+###########################################################################################
+# TV
+###########################################################################################
+- id: "5c12bf0d-b2f0-4e69-b213-6fcd998f03e7"
+  alias: "Harmony Hub - Commands - TV"
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_tv
+
+  conditions: []
+
+  actions:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: "{{ states('input_select.helpers_tv') }}"
+        device: 75818096

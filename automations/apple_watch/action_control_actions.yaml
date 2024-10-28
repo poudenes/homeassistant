@@ -1,0 +1,56 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH SET ACTIONS
+###########################################################################################
+- id: "2ae0f02a-1763-4d80-899c-76bf04e69df7"
+  alias: "Apple Watch - Control actions"
+  mode: parallel
+  triggers:
+    - trigger: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Set actions"
+
+  conditions: []
+
+  actions:
+    - action: notify.mobile_app_peter_iphone
+      data:
+        title: "Action Control"
+        message: "What action you want control?"
+        data:
+          actions:
+            - action: "Early Sleep"
+              title: "Early Sleep"
+            - action: "Peter Early Sleep"
+              title: "Peter Early Sleep"
+            - action: "Wake Up"
+              title: "Wake Up"
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
+
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        action: >
+          {{
+            {
+            'Early Sleep': 'switch.momentary_early_sleep',
+            'Peter Early Sleep': 'switch.momentary_peter_early_up',
+            'Wake Up': 'input_boolean.function_wakeup',
+            }
+            [wait.trigger.event.data.actionName] }}
+
+    - action: switch.turn_on
+      target:
+        entity_id: "{{ action }}"

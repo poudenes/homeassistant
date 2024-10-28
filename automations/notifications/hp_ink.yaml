@@ -1,0 +1,47 @@
+#  ██╗  ██╗██████╗     ██╗███╗   ██╗██╗  ██╗████████╗    ███████╗███╗   ███╗██████╗ ████████╗██╗   ██╗
+#  ██║  ██║██╔══██╗    ██║████╗  ██║██║ ██╔╝╚══██╔══╝    ██╔════╝████╗ ████║██╔══██╗╚══██╔══╝╚██╗ ██╔╝
+#  ███████║██████╔╝    ██║██╔██╗ ██║█████╔╝    ██║       █████╗  ██╔████╔██║██████╔╝   ██║    ╚████╔╝
+#  ██╔══██║██╔═══╝     ██║██║╚██╗██║██╔═██╗    ██║       ██╔══╝  ██║╚██╔╝██║██╔═══╝    ██║     ╚██╔╝
+#  ██║  ██║██║         ██║██║ ╚████║██║  ██╗   ██║       ███████╗██║ ╚═╝ ██║██║        ██║      ██║
+#  ╚═╝  ╚═╝╚═╝         ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝       ╚══════╝╚═╝     ╚═╝╚═╝        ╚═╝      ╚═╝
+###########################################################################################
+# NOTIFY WHEN HP INK GETS EMPTY
+###########################################################################################
+- id: "f152dde2-643e-4269-bd7e-d5a11ba58a68"
+  alias: "Notification - Low printer ink"
+  triggers:
+    - trigger: time
+      at: "14:00:00"
+
+  conditions:
+    - "{{ is_state('input_boolean.function_vacation', 'off') }}"
+
+    - condition: time
+      weekday:
+        - wed
+
+  variables:
+    min_ink_level: 25
+    ink_ids: >
+      {{ states.sensor
+        | selectattr('object_id', 'search', 'hp_printer_ink')
+        | map(attribute='entity_id') | list }}
+    ink_current: ""
+
+  actions:
+    repeat:
+      count: "{{ ink_ids | length }}"
+
+      sequence:
+        - variables:
+            ink_current: "{{ ink_ids[repeat.index - 1] }}"
+        - condition: template
+          value_template: "{{ 0 < (states(ink_current) | float) < (min_ink_level | float ) }}"
+
+        - action: persistent_notification.create
+          data:
+            message: |
+              Printer ink {{ state_attr(ink_current,'friendly_name') }}: 
+              {{ states(ink_current) }}%!
+            title: "HA - System"
+            notification_id: "hp_inkt"

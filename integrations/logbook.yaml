@@ -1,0 +1,162 @@
+#  ██╗      ██████╗  ██████╗ ██████╗  ██████╗  ██████╗ ██╗  ██╗
+#  ██║     ██╔═══██╗██╔════╝ ██╔══██╗██╔═══██╗██╔═══██╗██║ ██╔╝
+#  ██║     ██║   ██║██║  ███╗██████╔╝██║   ██║██║   ██║█████╔╝
+#  ██║     ██║   ██║██║   ██║██╔══██╗██║   ██║██║   ██║██╔═██╗
+#  ███████╗╚██████╔╝╚██████╔╝██████╔╝╚██████╔╝╚██████╔╝██║  ██╗
+#  ╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# LOGBOOK
+# https://www.home-assistant.io/integrations/logbook/
+###########################################################################################
+include:
+  domains:
+    - light
+    - automation
+    - climate
+    - fan
+    - group
+    - light
+    - media_player
+    - script
+    - sun
+    - switch
+    - zone
+    - scene
+
+  entities:
+    - sensor.bathroom_average_humidity
+    
+    # 3D Printer KwH Sensor
+    - sensor.neo_plug_3d_printer
+
+    # BambuLabs
+    - binary_sensor.bambulab_a1_mini_firmware_update
+    - binary_sensor.bambulab_a1_mini_hms_errors
+    - binary_sensor.bambulab_a1_mini_online
+    - binary_sensor.bambulab_a1_mini_recording_timelapse
+    - button.bambulab_a1_mini_pause_printing
+    - button.bambulab_a1_mini_resume_printing
+    - button.bambulab_a1_mini_stop_printing
+    - button.bambulab_a1_mini_force_refresh_data
+    - fan.bambulab_a1_mini_aux_fan
+    - fan.abambulab_a1_mini_cooling_fan
+    - fan.bambulab_a1_mini_cooling_fan
+    - image.bambulab_a1_mini_camera
+    - light.bambulab_a1_mini_chamber_light
+    - switch.bambulab_a1_mini_manual_refresh_mode
+    - select.bambulab_a1_mini_printing_speed
+    - sensor.bambulab_a1_mini_aux_fan_speed
+    - sensor.bambulab_a1_mini_cooling_fan_speed
+    - sensor.bambulab_a1_mini_heatbreak_fan_speed
+    - sensor.bambulab_a1_mini_print_progress
+    - sensor.bambulab_a1_mini_target_bed_temperature
+    - sensor.bambulab_a1_mini_bed_temperature
+    - sensor.bambulab_a1_mini_nozzle_target_temperature
+    - sensor.bambulab_a1_mini_nozzle_temperature
+    - sensor.bambulab_a1_mini_total_usage
+    - sensor.bambulab_a1_mini_wi_fi_signal
+    - sensor.bambulab_a1_mini_ams_lite_tray_1
+    - sensor.bambulab_a1_mini_ams_lite_tray_2
+    - sensor.bambulab_a1_mini_ams_lite_tray_3
+    - sensor.bambulab_a1_mini_ams_lite_tray_4
+    - sensor.bambulab_a1_mini_start_time
+    - sensor.bambulab_a1_mini_end_time
+    - sensor.bambulab_a1_mini_remaining_time
+    - sensor.bambulab_a1_mini_active_tray
+    - sensor.bambulab_a1_mini_active_tray_index
+    - sensor.bambulab_a1_mini_current_layer
+    - sensor.bambulab_a1_mini_current_stage
+    - sensor.bambulab_a1_mini_gcode_filename
+    - sensor.bambulab_a1_mini_nozzle_size
+    - sensor.bambulab_a1_mini_nozzle_type
+    - sensor.bambulab_a1_mini_print_status
+    - sensor.bambulab_a1_mini_print_type
+    - sensor.bambulab_a1_mini_speed_profile
+    - sensor.bambulab_a1_mini_task_name
+    - sensor.bambulab_a1_mini_total_layer_count
+
+    # Oral-B Sensors
+    - sensor.oral_b_io_series_8n_battery
+    - sensor.oral_b_io_series_8n_mode
+    - sensor.oral_b_io_series_8n_number_of_sectors
+    - sensor.oral_b_io_series_8n_pressure
+    - sensor.oral_b_io_series_8n_sector
+    - sensor.oral_b_io_series_8n_sector_timer
+    - sensor.oral_b_io_series_8n_signal_strength
+    - sensor.oral_b_io_series_8n_time
+    - sensor.oral_b_io_series_8n_toothbrush_state
+    
+    - sensor.cryptoinfo_btc_usd
+    - sensor.cryptoinfo_xrp_usd
+    - sensor.cryptoinfo_wax_usd
+    - sensor.cryptoinfo_vet_usd
+    
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+
+    - sensor.roborock_s8_current_room
+    
+    - sensor.gas_station_euro95_lowest_price_1
+    - sensor.gas_station_euro95_lowest_price_2
+    - sensor.gas_station_euro95_lowest_price_3
+    - sensor.gas_station_3097_euro95
+    - sensor.gas_station_3161_euro95
+    - sensor.gas_station_3106_euro95
+    - sensor.gas_station_3124_euro95
+    
+    - binary_sensor.toilet_detection
+    - binary_sensor.bathroom_detection
+    - binary_sensor.hallway_detection
+    - binary_sensor.livingroom_detection
+    - binary_sensor.bedroom_detection
+    - binary_sensor.kitchen_detection
+    - binary_sensor.diningroom_detection
+    - binary_sensor.bedroom_door_contact
+    - binary_sensor.diningroom_door_contact
+    - binary_sensor.frondoor_door_contact
+    - binary_sensor.door_livingroom_contact
+
+    - binary_sensor.washing_machine
+    - binary_sensor.dryer_machine
+    - binary_sensor.dishwasher_machine
+
+    - binary_sensor.group_family_manual # MANUAL FAMILIY HOME
+
+    - sensor.cenkay_iphone_gps_accuracy
+    - sensor.peter_iphone_gps_accuracy
+    - device_tracker.cenkay_iphone_icloud3 # iCloud3 Kay
+    - device_tracker.peter_iphone_icloud3 # iCloud3 Peter
+
+    - input_text.engine_ha_app
+    - input_select.helpers_sunrise_sunset
+
+    - binary_sensor.hum_fan_calculate_difference
+    - sensor.master_bathroom_humidity_average_linear_24h
+###################################################
+#  EXCLUDE
+###################################################
+exclude:
+  entity_globs:
+    - sensor.*
+  entities:
+    - sensor.date_time
+    - sensor.date
+    
+###################################################
+#  ALL OTHER DOMAINS YOU CAN USE
+###################################################
+#    - binary_sensor
+#    - calendar
+#    - device_tracker
+#    - geo_location
+#    - input_boolean
+#    - input_number
+#    - input_select
+#    - input_text
+#    - person
+#    - remote
+#    - timer
+#    - variable
+#    - sensor

@@ -1,0 +1,76 @@
+#  ███╗   ███╗███████╗███████╗██╗  ██╗    ███████╗██╗    ██╗██╗████████╗ ██████╗██╗  ██╗███████╗███████╗
+#  ████╗ ████║██╔════╝██╔════╝██║ ██╔╝    ██╔════╝██║    ██║██║╚══██╔══╝██╔════╝██║  ██║██╔════╝██╔════╝
+#  ██╔████╔██║█████╗  █████╗  █████╔╝     ███████╗██║ █╗ ██║██║   ██║   ██║     ███████║█████╗  ███████╗
+#  ██║╚██╔╝██║██╔══╝  ██╔══╝  ██╔═██╗     ╚════██║██║███╗██║██║   ██║   ██║     ██╔══██║██╔══╝  ╚════██║
+#  ██║ ╚═╝ ██║███████╗███████╗██║  ██╗    ███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║███████╗███████║
+#  ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝    ╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝
+###########################################################################################
+# SWITCH CONTROL FOR ALL LIGHTS USNING BULBS (ESPHOME)
+###########################################################################################
+- id: "5fd6c4d3-1a8f-4c20-889b-ab377a9216ce"
+  alias: "ESPHome - All switches"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id:
+        - switch.bathroom_light_switch
+        - switch.bedroom_light_switch
+        - switch.hallway_light_switch
+        - switch.ceiling_light_switch
+        - switch.cooking_light_switch
+        - switch.sink_light_switch
+        - switch.toilet_light_switch
+        - switch.balcony_light_switch
+        - switch.diningtable_light_switch
+        - switch.dressoir_light_switch
+        - switch.wall_light_switch
+        - switch.window_light_switch
+
+  conditions:
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+    - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  actions:
+    - if:
+        - "{{ (trigger.to_state.state == 'on') }}"
+      then:
+        - parallel:
+            - action: light.turn_on
+              target:
+                entity_id: light.{{ trigger.entity_id[7:-13] }}_all
+              data:
+                brightness_pct: 98
+                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+                effect: "none"
+
+            - action: light.turn_on
+              target:
+                entity_id: light.{{ trigger.entity_id[7:-13] }}_neopixel
+              data:
+                xy_color: [0.17, 0.75]
+                brightness_pct: "{{ 20 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+
+      else:
+        - parallel:
+            - action: light.turn_on
+              target:
+                entity_id: light.{{ trigger.entity_id[7:-13] }}_neopixel
+              data:
+                xy_color: >-
+                  {% if is_state('input_select.helpers_scenes', 'scene appletv') %} 
+                    [0.44,0.52]
+                  {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
+                    [0.74,0.52]
+                  {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
+                    [0.14,0.19]
+                  {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
+                    [0.22,0.08]
+                  {% else %} 
+                    [0.70,0.30]
+                  {% endif %}
+                brightness_pct: "{{ 20 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+                effect: "none"
+
+            - action: light.turn_off
+              target:
+                entity_id: light.{{ trigger.entity_id[7:-13] }}_all

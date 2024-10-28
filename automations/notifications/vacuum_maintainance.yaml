@@ -1,0 +1,39 @@
+#  ██████╗  ██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗██╗  ██╗    ███████╗ █████╗
+#  ██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝    ██╔════╝██╔══██╗
+#  ██████╔╝██║   ██║██████╔╝██║   ██║██████╔╝██║   ██║██║     █████╔╝     ███████╗╚█████╔╝
+#  ██╔══██╗██║   ██║██╔══██╗██║   ██║██╔══██╗██║   ██║██║     ██╔═██╗     ╚════██║██╔══██╗
+#  ██║  ██║╚██████╔╝██████╔╝╚██████╔╝██║  ██║╚██████╔╝╚██████╗██║  ██╗    ███████║╚█████╔╝
+#  ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝    ╚══════╝ ╚════╝
+###########################################################################################
+# VACUUM MAINTENANCE - Notification clean brushes
+###########################################################################################
+- id: "51f86028-23e0-4075-8dda-5e9807ad05a9"
+  alias: "Notification - Vacuum clean items"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: vacuum.roborock_s8
+      from: "returning"
+      to: "docked"
+
+  conditions: []
+  
+  actions:
+    - variables:
+        roborock_list: >-
+          {{ states.sensor | selectattr("entity_id", "search", "sensor.*_left") | map(attribute="entity_id") | list }}
+
+    - repeat:
+        for_each: "{{ roborock_list }}"
+        sequence:
+          - condition: >-
+              {% set entity = expand(repeat.item)[0] %}
+              {{ entity.state | int < 7200 }}
+
+          - action: persistent_notification.create
+            data:
+              title: "HA - Notification"
+              message: >-
+                {% set entity = expand(repeat.item)[0] %}
+                {{ entity.name.split("_")[0] }} is below {{ (entity.state | int() / 3600) | round(0) }} hour.
+              notification_id: '{{ repeat.item.split(".")[1].split("_roborock")[0] }}_clean_notification'

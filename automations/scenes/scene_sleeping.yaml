@@ -1,0 +1,45 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ███████╗██╗     ███████╗███████╗██████╗ ██╗███╗   ██╗ ██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔════╝██║     ██╔════╝██╔════╝██╔══██╗██║████╗  ██║██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ███████╗██║     █████╗  █████╗  ██████╔╝██║██╔██╗ ██║██║  ███╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ╚════██║██║     ██╔══╝  ██╔══╝  ██╔═══╝ ██║██║╚██╗██║██║   ██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ███████║███████╗███████╗███████╗██║     ██║██║ ╚████║╚██████╔╝
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚══════╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝
+###########################################################################################
+# SCENE SLEEPING TRANSITION BEDROOM LIGHTS TO 0% AND THEN 6 MIN 2 LIGHTS COLOR WAVE
+###########################################################################################
+- id: "44058c82-1994-4480-b883-47f9e00625ed"
+  alias: "Scene - Sleeping"
+  triggers:
+    - trigger: state
+      entity_id: input_boolean.function_sleeping
+      to: "on"
+  mode: restart
+
+  conditions:
+    - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
+
+  actions:
+    - action: light.turn_off
+      data:
+        transition: 11
+      target:
+        entity_id: light.bedroom_all
+
+    - delay: "00:00:10"
+
+    - action: hue.activate_scene
+      data:
+        transition: 2
+      target:
+        entity_id: scene.scenes_bedroom_sleeping
+
+    - delay: "00:06:00"
+
+    - action: homeassistant.turn_off
+      target:
+        entity_id:
+          - light.bedroom_all
+          - switch.helpers_switches
+          - switch.bedroom_wall
+          - input_boolean.function_sleeping
+          - light.bathroom_all

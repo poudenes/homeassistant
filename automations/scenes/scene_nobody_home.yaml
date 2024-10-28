@@ -1,0 +1,50 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗  ██████╗ ██████╗ ██╗   ██╗    ██╗  ██╗ ██████╗ ███╗   ███╗███████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔═══██╗██╔══██╗╚██╗ ██╔╝    ██║  ██║██╔═══██╗████╗ ████║██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██████╔╝██║   ██║██║  ██║ ╚████╔╝     ███████║██║   ██║██╔████╔██║█████╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██╔══██╗██║   ██║██║  ██║  ╚██╔╝      ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝╚██████╔╝██████╔╝   ██║       ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═════╝    ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+###########################################################################################
+# SCENE NOBODY HOME TURN OFF EVERYTHING THATS NOT NEEDED WHEN WE NOT THERE
+###########################################################################################
+- id: "00f1ccf5-e869-457c-88c1-47d348000e8e"
+  alias: "Scene - Nobody Home"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.group_family_manual
+      to: "off"
+
+  conditions: []
+
+  actions:
+    - action: input_select.select_option
+      target:
+        entity_id: input_select.helpers_scenes
+      data:
+        option: "scene daytime"
+
+    - action: homeassistant.turn_off
+      target:
+        entity_id:
+          - group.helpers_function_switches
+          - light.helpers_daytime_lights
+          - remote.logitech_harmony
+          - switch.helpers_switches
+          - light.scenes_house
+          - switch.fan_low
+
+    - action: "{{ 'switch.turn_off' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
+      target:
+        entity_id: >
+          {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+            | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+
+    - action: switch.turn_on
+      target:
+        entity_id: switch.fan_low
+
+    - action: climate.set_temperature
+      target:
+        entity_id: climate.entryway
+      data:
+        temperature: 11

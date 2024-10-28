@@ -1,0 +1,33 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH ILLUMINANCE REPORT
+###########################################################################################
+- id: "963da2d8-89f1-4d01-aec5-2c87bdd35c59"
+  alias: "Apple Watch - Illuminance Report"
+  mode: parallel
+  triggers:
+    - trigger: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Lux level"
+
+  conditions: []
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Livingroom: {{ states('sensor.livingroom_lux') }} Lux,
+          Bedroom: {{ states('sensor.bedroom_lux') }} Lux,
+          Bathroom: {{ states('sensor.bathroom_lux') }} lux,
+          Hallway: {{ states('sensor.hallway_lux') }} Lux,
+          Kitchen: {{ states('sensor.kitchen_lux') }} Lux,
+          Diningroom: {{ states('sensor.diningroom_lux') }} Lux,
+          Toilet: {{ states('sensor.toilet_lux') }} Lux.
+        thread_id: "ha_apple_watch"

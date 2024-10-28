@@ -1,0 +1,32 @@
+#  ███╗   ██╗███████╗██╗    ██╗    ██╗  ██╗ █████╗     ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗
+#  ████╗  ██║██╔════╝██║    ██║    ██║  ██║██╔══██╗    ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+#  ██╔██╗ ██║█████╗  ██║ █╗ ██║    ███████║███████║    ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗
+#  ██║╚██╗██║██╔══╝  ██║███╗██║    ██╔══██║██╔══██║    ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝
+#  ██║ ╚████║███████╗╚███╔███╔╝    ██║  ██║██║  ██║    ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
+#  ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝     ╚═╝  ╚═╝╚═╝  ╚═╝     ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+###########################################################################################
+# NOTIFY WHEN NEW HOME ASSISTANRT UPDATE IS AVAILABLE
+###########################################################################################
+- id: "66484bdd-544a-42fb-af26-b03205267e2a"
+  alias: "Notification - Update available"
+  triggers:
+    - trigger: template
+      value_template: "{{ (states('sensor.current_version') != states('sensor.latest_version')) }}"
+
+  conditions: []
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Update"
+        message: |
+          There is a new HA Update:
+          HA version {{ (states('sensor.latest_version')) }} is available!. 
+          Date: {{now().strftime('%d-%m-%Y') }}
+        thread_id: "system_notification"
+
+    - action: persistent_notification.create
+      data:
+        message: "There is a new Home Assistant OS!"
+        title: "HA update"
+        notification_id: "ha_update"

@@ -1,0 +1,80 @@
+#  ███╗   ███╗ ██████╗ ███╗   ███╗███████╗███╗   ██╗████████╗ █████╗ ██████╗ ██╗   ██╗
+#  ████╗ ████║██╔═══██╗████╗ ████║██╔════╝████╗  ██║╚══██╔══╝██╔══██╗██╔══██╗╚██╗ ██╔╝
+#  ██╔████╔██║██║   ██║██╔████╔██║█████╗  ██╔██╗ ██║   ██║   ███████║██████╔╝ ╚████╔╝ 
+#  ██║╚██╔╝██║██║   ██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   ██╔══██║██╔══██╗  ╚██╔╝  
+#  ██║ ╚═╝ ██║╚██████╔╝██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ██║  ██║██║  ██║   ██║   
+#  ╚═╝     ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
+###########################################################################################
+---
+###########################################################################################
+version: 1
+switches:
+- name: "Momentary Peter Early Up"
+  mode: "on"
+  cancellable: true
+  toggle_for: 18000
+
+- name: "Momentary Early Sleep"
+  mode: "on"
+  cancellable: true
+  toggle_for: 18000
+
+- name: "Momentary Guests"
+  mode: "on"
+  cancellable: true
+  toggle_for: 32400
+
+- name: "Momentary For testing"
+  mode: "on"
+  cancellable: true
+  toggle_for: 5
+
+- name: "Momentary Scene Morning"
+  mode: "on"
+  cancellable: true
+  toggle_for: 14400
+
+- name: "Momentary MVPS Update blacklist manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Backup db manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Backup ispconfig full manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Backup vmail manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Backup www full manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Clean logfiles"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Rspamd learning"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Update ipset abuseipdb manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Update OS manual"
+  mode: "on"
+  cancellable: true
+  toggle_for: 30

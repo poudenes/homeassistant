@@ -1,0 +1,33 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗     ██████╗ ██╗   ██╗███████╗███████╗████████╗███████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔════╝ ██║   ██║██╔════╝██╔════╝╚══██╔══╝██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║  ███╗██║   ██║█████╗  ███████╗   ██║   ███████╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║   ██║██║   ██║██╔══╝  ╚════██║   ██║   ╚════██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ╚██████╔╝╚██████╔╝███████╗███████║   ██║   ███████║
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝     ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚══════╝
+###########################################################################################
+# SCENE GUESTS TURN OFF SOME AUTOMATIONS
+###########################################################################################
+- id: "11cef91c-f0c8-4b68-b542-3140e0d66918"
+  alias: "Scene - Guests"
+  triggers:
+    - trigger: state
+      entity_id: switch.momentary_guests
+
+  conditions: []
+
+  actions:
+    - action: persistent_notification.create
+      data:
+        title: "HA - Scenes"
+        message: |
+          {{ 'Scene Guests is activated' if is_state('switch.momentary_guests', 'on') else 'Scene Guests is deactivated' }}
+        notification_id: "scene_guest"
+###########################################################################################
+# Those automations make use of the guest scene:
+#
+# control_light_status_lux_level_livingroom.yaml
+# motion_sensor_diningroom.yaml
+# motion_sensor_livingroom.yaml
+# motion_sensor.hallway.yaml
+# scene_goodnight.yaml
+###########################################################################################

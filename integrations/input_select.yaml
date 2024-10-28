@@ -1,0 +1,296 @@
+#  ██╗███╗   ██╗██████╗ ██╗   ██╗████████╗     ███████╗███████╗██╗     ███████╗ ██████╗████████╗
+#  ██║████╗  ██║██╔══██╗██║   ██║╚══██╔══╝     ██╔════╝██╔════╝██║     ██╔════╝██╔════╝╚══██╔══╝
+#  ██║██╔██╗ ██║██████╔╝██║   ██║   ██║        ███████╗█████╗  ██║     █████╗  ██║        ██║
+#  ██║██║╚██╗██║██╔═══╝ ██║   ██║   ██║        ╚════██║██╔══╝  ██║     ██╔══╝  ██║        ██║
+#  ██║██║ ╚████║██║     ╚██████╔╝   ██║███████╗███████║███████╗███████╗███████╗╚██████╗   ██║
+#  ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝    ╚═╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝ ╚═════╝   ╚═╝
+---
+###########################################################################################
+# INPUT_SELECT
+# https://www.home-assistant.io/integrations/input_select/
+###########################################################################################
+helpers_eurovision:
+  name: "Eurovision Country"
+  icon: mdi:nintendo-switch
+  options:
+    - "Off"
+    - "Eurovision"
+    - "Pride"
+    - "-----"
+    # - "Albania"
+    - "Armenia"
+    - "Austria"
+    # - "Australia" UITGESCHAKELD
+    # - "Azerbaijan" UITGESCHAKELD
+    # - "Belgium"
+    - "Croatia"
+    - "Cyprus"
+    # - "Czechia"
+    # - "Denmark"
+    - "Estonia"
+    - "Finland"
+    - "France"
+    - "Georgia"
+    - "Germany"
+    - "Greece"
+    # - "Iceland" UITGESCHAKELD
+    - "Ireland"
+    - "Israel"
+    - "Italy"
+    - "Latvia"
+    - "Lithuania"
+    # - "Malta"
+    # - "Moldova" UITGESCHAKELD
+    - "Luxembourg"
+    - "Netherlands"
+    - "Norway"
+    # - "Poland" UITGESCHAKELD
+    - "Portugal"
+    # - "Romania"
+    # - "San Marino"
+    - "Serbia"
+    - "Slovenia"
+    - "Spain"
+    - "Sweden"
+    - "Switzerland"
+    - "Ukraine"
+    - "United Kingdom"
+
+helpers_sunrise_sunset:
+  name: "Select Sunrise Sunset"
+  icon: mdi:nintendo-switch
+  options:
+    - "above_horizon"
+    - "below_horizon"
+
+helpers_scenes:
+  name: "Scenes"
+  icon: mdi:nintendo-switch
+  options:
+    - "scene appletv"
+    - "scene chromecast"
+    - "scene daytime"
+    - "scene dinner"
+    - "scene evening"
+    - "scene goodnight"
+    - "scene nintendo"
+    - "scene tv"
+    - "None"
+
+helpers_master_bath_humidity_threshold:
+  name: "Fan treshold up"
+  icon: mdi:bathtub
+  options:
+    - "1"
+    - "2"
+    - "3"
+    - "4"
+    - "5"
+  initial: "2"
+
+helpers_radio_selector:
+  name: "Radio selector"
+  icon: mdi:speaker-wireless
+  options:
+    - Livingroom
+    - Bedroom
+  initial: "Livingroom"
+
+helpers_radio_station:
+  name: "Radio station"
+  icon: mdi:speaker-wireless
+  options:
+    - Radio 538
+    - Q-Music
+    - 3FM
+    - 100% NL
+    - Veronica
+    - Sky Radio
+    - Sky Radio Christmas
+    - SLAM! Hardstyle
+    - SLAM!
+  initial: "Q-Music"
+
+helpers_apple_commands:
+  name: "Apple commands"
+  options:
+    - Stop
+    - Play
+    - Pauze
+    - Menu
+    - Back
+  initial: Menu
+
+helpers_appletv_commands:
+  name: "Apple commands"
+  options:
+    - Stop
+    - Play
+    - Pauze
+    - Menu
+    - Back
+    - Home
+  initial: Home
+
+helpers_lg_input:
+  name: "LG Input"
+  options:
+    - Input
+    - inputAv1
+    - InputAv2
+    - InputComponent1
+    - InputHdmi1
+    - InputHdmi2
+    - InputHdmi3
+
+helpers_lg_power_mute:
+  name: "LG Input mute"
+  options:
+    - PowerOff
+    - PowerOn
+    - PowerToggle
+    - Mute
+
+helpers_tv:
+  name: "TV"
+  options:
+    - PowerToggle
+    - ChannelDown
+    - ChannelUp
+    - DirectionDown
+    - DirectionLeft
+    - DirectionRight
+    - DirectionUp
+    - OK
+    - Stop
+    - Play
+    - Rewind
+    - Pause
+    - Record
+    - Menu
+    - Back
+    - Teletext
+    - RecordedTV
+    - Guide
+    - Power
+
+helpers_yamaha_dsp_modus:
+  name: "Yamaha Enhancer DSP"
+  options:
+    - EnhancerAuto
+    - EnhancerOff
+    - PureDirectOff
+    - PureDirectOn
+    - Sur.DecodeOn
+    - AdaptiveDrcOff
+    - AdaptiveDrcOn
+    - AdaptiveDspOff
+    - AdaptiveDspOn
+    - ExtedSur.Auto
+    - ExtedSur.Off
+    - ExtedSur.On
+
+helpers_yamaha_dsp_music:
+  name: "Yamaha Music DSP"
+  options:
+    - PureDirectOn
+    - PureDirectOff
+    - 2ChStereo
+    - 7ChStereo
+    - CellarClub
+    - Chamber
+    - HallInMunich
+    - HallInVienna
+    - TheBottomLine
+    - TheRoxyTheatre
+
+helpers_yamaha_dsp_movie:
+  name: "Yamaha movie DSP"
+  options:
+    - 7ChStereo
+    - ActionGame
+    - Adventure
+    - Drama
+    - MonoMovie
+    - MovieStandard
+    - RoleplayingGame
+    - Sci-Fi
+    - Spectacle
+    - Sports
+    - DspMovie
+    - DspMusic
+    - DspPureDirect
+    - DspStereoEnhancer
+    - DspStraight
+
+helpers_yamaha_dsp_sur_decoder:
+  name: "Yamaha Sur. Decoder DSP"
+  options:
+    - Neo6Movie
+    - Neo6Music
+    - PLIIXGame
+    - PLIIXMovie
+    - PLIIXMusic
+    - ProLogic
+    - ExtedSur.PLIIXMovie
+    - ExtedSur.PLIIXMusic
+
+helpers_yamaha_input:
+  name: "Yamaha input"
+  options:
+    - InputAudio1
+    - InputAudio2
+    - InputAv1
+    - InputAv2
+    - InputAv3
+    - InputAv4
+    - InputAv5
+    - InputAv6
+    - InputDock
+    - InputHdmi1
+    - InputHdmi2
+    - InputHdmi3
+    - InputHdmi4
+    - InputHdmi5
+    - InputMultiCh
+    - InputPhono
+    - InputTuner
+    - InputV-Aux
+
+helpers_yamaha_power_mute_info:
+  name: "Yamaha Power/Mute info"
+  options:
+    - PowerOff
+    - PowerOn
+    - PowerToggle
+    - Mute
+    - VolumeDown
+    - VolumeUp
+    - Info
+    - Display
+
+#################################################################
+# HA Backup Manager
+#################################################################
+ha_backup_manager_day:
+  name: "Backup days"
+  options:
+    - "Every day"
+    - "Mon - Wed - Fri"
+    - "Mon and Fri"
+    - "Saturday"
+    - "Sunday"
+    - "Never"
+  icon: mdi:calendar
+
+# for partial backup
+ha_backup_manager_partial_day:
+  name: "Partial Backup days"
+  options:
+    - "Every day"
+    - "Mon - Wed - Fri"
+    - "Mon and Fri"
+    - "Saturday"
+    - "Sunday"
+    - "Never"
+  icon: mdi:calendar

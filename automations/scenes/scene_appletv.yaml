@@ -1,0 +1,145 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗     █████╗ ██████╗ ██████╗ ██╗     ███████╗    ████████╗██╗   ██╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ╚══██╔══╝██║   ██║
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ███████║██████╔╝██████╔╝██║     █████╗         ██║   ██║   ██║
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝         ██║   ╚██╗ ██╔╝
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██║  ██║██║     ██║     ███████╗███████╗       ██║    ╚████╔╝
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝       ╚═╝     ╚═══╝
+###########################################################################################
+# SCENE FOR APPLE TV WHEN SUN IS BELOW HORIZON - test
+###########################################################################################
+- id: "c54afbee-cd69-4cf3-8a55-4cbc2979234f"
+  alias: "Scene - AppleTV"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_sunrise_sunset
+      to: "below_horizon"
+
+    - trigger: state
+      entity_id: select.logitech_harmony_activities
+      to: "AppleTV"
+
+  conditions:
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+    - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
+    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+    - "{{ is_state('select.logitech_harmony_activities', 'AppleTV') }}"
+    - "{{ states('input_select.helpers_scenes') not in ['scene appletv', 'scene goodnight','scene dinner'] }}"
+
+  actions:
+    - parallel:
+        - action: input_select.select_option
+          target:
+            entity_id: input_select.helpers_scenes
+          data:
+            option: "scene appletv"
+
+        - continue_on_error: true
+          action: script.engine_say
+          data:
+            media_player: media_player.livingroom
+            notify: notify.alexa_media_livingroom
+            call_scene_appletv: 1
+
+        - action: light.turn_on
+          target:
+            entity_id: light.nanoleaf
+          data:
+            brightness_pct: "{{ 5 if is_state('media_player.woonkamer', 'playing') else 40 }}"
+            effect: >-
+              {% set holiday = states('sensor.holidays') %}
+              {% set holiday_effects = {
+                'Christmas': 'Christmas',
+                'Halloween': 'Halloween',
+                'Eurovision': 'Euro 2023',
+                'Kingsday': 'Kingsday',
+                'Birthday': 'Kingsday',
+                'Valentine': 'Valentine',
+                'Special Day': 'Valentine'
+              } %}
+              {{ holiday_effects[holiday] if holiday in holiday_effects else 'Kay' }}
+
+            # effect: >-
+            #   {% if is_state('sensor.holidays', 'Christmas') %} 
+            #     Christmas
+            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
+            #     Halloween
+            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
+            #     Euro 2023
+            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+            #     Kingsday
+            #   {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
+            #     Valentine
+            #   {% else %} 
+            #     Kay
+            #   {% endif %}
+
+        - action: input_select.select_option
+          target:
+            entity_id:
+              - input_select.helpers_yamaha_dsp_movie #helpers_yamaha_dsp_sur_decoder
+          data:
+            option: 7ChStereo
+
+        - action: hue.activate_scene
+          data:
+            transition: 2
+          target:
+            entity_id: >-
+              {% set holiday = states('sensor.holidays') %}
+              {% set holiday_scenes = {
+                'Christmas': 'scene.scenes_evening_christmas',
+                'Halloween': 'scene.scenes_evening_halloween',
+                'Eurovision': 'scene.scenes_evening_eurovision',
+                'Kingsday': 'scene.scenes_birthday',
+                'Birthday': 'scene.scenes_birthday',
+                'Valentine': 'scene.scenes_romantic'
+              } %}
+              {{ holiday_scenes[holiday] if holiday in holiday_scenes else 'scene.scenes_evening_evening' }}
+              
+            # entity_id: >-
+            #   {% if is_state('sensor.holidays', 'Christmas') %} 
+            #     scene.scenes_appletv_christmas
+            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
+            #     scene.scenes_appletv_halloween
+            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
+            #     scene.scenes_eurovision
+            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+            #     scene.scenes_birthday
+            #   {% elif is_state('sensor.holidays', 'Valentine') %}
+            #     scene.scenes_romantic
+            #   {% else %} 
+            #     scene.scenes_appletv
+            #   {% endif %}
+
+        - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
+          target:
+            entity_id: >
+              {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+                | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+
+    - action: light.turn_on
+      target:
+        entity_id: light.window_all
+      data:
+        brightness_pct: "{{ 20 if is_state('media_player.woonkamer', 'playing') else 100 }}"
+
+    - action: light.turn_on
+      target:
+        entity_id: light.dressoir_all
+      data:
+        brightness_pct: >-
+          {% if is_state('media_player.woonkamer', 'playing') %} 
+            {{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 25 }}
+          {% elif states('media_player.woonkamer') in ['standby', 'paused'] %}  
+            {{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}
+          {% else %} 
+            100
+          {% endif %}
+
+    - action: light.turn_on
+      target:
+        entity_id: light.balcony_all
+      data:
+        brightness_pct: "{{ 20 if is_state('media_player.woonkamer', 'playing') else 100 }}"

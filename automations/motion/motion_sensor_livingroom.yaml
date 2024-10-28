@@ -1,0 +1,62 @@
+#  ███╗   ███╗ ██████╗ ████████╗██╗ ██████╗ ███╗   ██╗    ██╗     ██╗██╗   ██╗██╗███╗   ██╗ ██████╗ ██████╗  ██████╗  ██████╗ ███╗   ███╗
+#  ████╗ ████║██╔═══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║    ██║     ██║██║   ██║██║████╗  ██║██╔════╝ ██╔══██╗██╔═══██╗██╔═══██╗████╗ ████║
+#  ██╔████╔██║██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ██║     ██║██║   ██║██║██╔██╗ ██║██║  ███╗██████╔╝██║   ██║██║   ██║██╔████╔██║
+#  ██║╚██╔╝██║██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██║     ██║╚██╗ ██╔╝██║██║╚██╗██║██║   ██║██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║
+#  ██║ ╚═╝ ██║╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ███████╗██║ ╚████╔╝ ██║██║ ╚████║╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║
+#  ╚═╝     ╚═╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚══════╝╚═╝  ╚═══╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝
+###########################################################################################
+# LIVINGROOM CONTROL LIGHT BASED ON SENSOR AND SCENE GOODNIGHT
+###########################################################################################
+- id: "c4c17974-0d21-4ad4-a979-209b17fdfcc5"
+  alias: "Motion Detection - Livingroom on/off"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.livingroom_detection
+
+  variables:
+    momentary_scene_morning: "{{ 255 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
+    function_wakeup: "{{ 'script.none' if is_state('input_boolean.function_wakeup', 'on') else 'light.turn_off' }}"
+
+  conditions:
+    - "{{ is_state('switch.wall_light_switch', 'off') }}"
+    - "{{ is_state('switch.window_light_switch', 'off') }}"
+    - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+    - "{{ is_state('switch.momentary_guests', 'off') }}"
+    - "{{ is_state('input_boolean.function_wakeup', 'off') }}"
+
+  actions:
+    - if:
+        - "{{ is_state('binary_sensor.livingroom_detection', 'on') }}"
+
+      then:
+        - parallel:
+            - action: hue.activate_scene
+              data:
+                transition: 1
+                brightness: "{{ 75 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
+              target:
+                entity_id: scene.scenes_livingroom_night_light
+
+            - action: light.turn_on
+              target:
+                entity_id: light.livingroom_neopixel_all
+              data:
+                xy_color: [0.28, 0.11] # Pink
+                brightness_pct: 30
+
+    - if:
+        - "{{ is_state('binary_sensor.livingroom_detection', 'off') }}"
+
+      then:
+        - parallel:
+            - action: light.turn_off
+              target:
+                entity_id: light.livingroom_all
+
+            - action: light.turn_on
+              target:
+                entity_id: light.livingroom_neopixel_all
+              data:
+                xy_color: [0.70, 0.30] # Red
+                brightness_pct: 30

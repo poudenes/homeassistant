@@ -1,0 +1,51 @@
+#  ███╗   ███╗███████╗███████╗██╗  ██╗    ███████╗██╗    ██╗██╗████████╗ ██████╗██╗  ██╗███████╗███████╗
+#  ████╗ ████║██╔════╝██╔════╝██║ ██╔╝    ██╔════╝██║    ██║██║╚══██╔══╝██╔════╝██║  ██║██╔════╝██╔════╝
+#  ██╔████╔██║█████╗  █████╗  █████╔╝     ███████╗██║ █╗ ██║██║   ██║   ██║     ███████║█████╗  ███████╗
+#  ██║╚██╔╝██║██╔══╝  ██╔══╝  ██╔═██╗     ╚════██║██║███╗██║██║   ██║   ██║     ██╔══██║██╔══╝  ╚════██║
+#  ██║ ╚═╝ ██║███████╗███████╗██║  ██╗    ███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║███████╗███████║
+#  ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝    ╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝
+###########################################################################################
+# SWITCH CONTROL FOR ALL LIGHTS USNING BULBS (ESPHOME)
+###########################################################################################
+- id: "3ef2e856-3690-429c-a620-c13111c59a89"
+  alias: "SSH - MVPS Manual actions"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id:
+        - switch.momentary_mvps_update_blacklist_manual
+        - switch.momentary_mvps_backup_db_manual
+        - switch.momentary_mvps_backup_ispconfig_full_manual
+        - switch.momentary_mvps_backup_vmail_manual
+        - switch.momentary_mvps_backup_www_full_manual
+        - switch.momentary_mvps_clean_logfiles
+        - switch.momentary_mvps_rspamd_learning
+        - switch.momentary_mvps_update_ipset_abuseipdb_manual
+        - switch.momentary_mvps_update_os_manual
+
+  conditions:
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+    - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  actions:
+    - action: >-
+        {% if is_state('switch.momentary_mvps_update_blacklist_manual', 'on') %} 
+          shell_command.mvps_update_blacklist
+        {% elif is_state('switch.momentary_mvps_backup_db_manual', 'on') %} 
+          shell_command.mvps_backup_db
+        {% elif is_state('switch.momentary_mvps_backup_ispconfig_full_manual', 'on') %} 
+          shell_command.mvps_backup_ispconfig
+        {% elif is_state('switch.momentary_mvps_backup_vmail_manual', 'on') %} 
+          shell_command.mvps_backup_vmail
+        {% elif is_state('switch.momentary_mvps_backup_www_full_manual', 'on') %} 
+          shell_command.mvps_backup_full
+        {% elif is_state('switch.momentary_mvps_clean_logfiles', 'on') %}
+          shell_command.mvps_clearlog
+        {% elif is_state('switch.momentary_mvps_rspamd_learning', 'on') %}
+          shell_command.mvps_rspamd_learn
+        {% elif is_state('switch.momentary_mvps_update_ipset_abuseipdb_manual', 'on') %}
+          shell_command.mvps_ipset_abuseipdb
+        {% elif is_state('switch.momentary_mvps_update_os_manual', 'on') %}
+          shell_command.mvps_apt_update
+        {% endif %}
+      data: {}

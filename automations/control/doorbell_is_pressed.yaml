@@ -1,0 +1,93 @@
+#  ███╗   ███╗███████╗███████╗██╗  ██╗    ██████╗  ██████╗  ██████╗ ██████╗ ██████╗ ███████╗██╗     ██╗
+#  ████╗ ████║██╔════╝██╔════╝██║ ██╔╝    ██╔══██╗██╔═══██╗██╔═══██╗██╔══██╗██╔══██╗██╔════╝██║     ██║
+#  ██╔████╔██║█████╗  █████╗  █████╔╝     ██║  ██║██║   ██║██║   ██║██████╔╝██████╔╝█████╗  ██║     ██║
+#  ██║╚██╔╝██║██╔══╝  ██╔══╝  ██╔═██╗     ██║  ██║██║   ██║██║   ██║██╔══██╗██╔══██╗██╔══╝  ██║     ██║
+#  ██║ ╚═╝ ██║███████╗███████╗██║  ██╗    ██████╔╝╚██████╔╝╚██████╔╝██║  ██║██████╔╝███████╗███████╗███████╗
+#  ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚══════╝
+###########################################################################################
+# SWITCH DOORBELL
+###########################################################################################
+- id: "081f9fcd-048b-469e-b5d1-36f51b82fb76"
+  alias: "Switch - Meek Doorbell"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.doorbell_doorbell
+      to: "on"
+
+  conditions:
+    - "{{ is_state('input_boolean.function_vacation', 'off') }}"
+    - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.doorbell_neopixel
+      data:
+        xy_color: [0.17, 0.75]
+        brightness_pct: 100
+
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          Someone pushed the doorbell downstairs.
+          Take a look who it is.
+        thread_id: "ha_doorbell"
+
+    - action: script.engine_say
+      data:
+        media_player: media_player.livingroom
+        notify: notify.alexa_media_livingroom
+        message: "Someone hit the doorbell, take a look and see who it is!"
+
+    ###########################################################################################
+    # SOMEONE IN BATHROOM
+    ###########################################################################################
+    - action: "{{ 'scene.create' if is_state('binary_sensor.bathroom_detection', 'on') else 'script.none' }}"
+      data:
+        scene_id: doorbell
+        snapshot_entities: light.bathroom_all
+
+    - action: "{{ 'light.turn_on' if is_state('binary_sensor.bathroom_detection', 'on') else 'script.none' }}"
+      data:
+        entity_id: light.bathroom_all
+        xy_color: [0.14, 0.04] # "blue"
+
+    - delay: "00:00:01"
+
+    - action: "{{ 'scene.turn_on' if is_state('binary_sensor.bathroom_detection', 'on') else 'script.none' }}"
+      target:
+        entity_id: scene.doorbell
+
+    ###########################################################################################
+    # APPLE TV
+    ###########################################################################################
+    - action: "{{ 'remote.send_command' if is_state('media_player.woonkamer', 'playing') else 'script.none' }}"
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: "Pause"
+        device: 41536434
+
+    ###########################################################################################
+    # TV
+    ###########################################################################################
+    - action: "{{ 'remote.send_command' if is_state('select.logitech_harmony_activities', 'TV') else 'script.none' }}"
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: "Pause"
+        device: 75818096
+
+    ###########################################################################################
+    # NOTIFICATION
+    ###########################################################################################
+    - delay: "00:00:15"
+
+    - action: light.turn_on
+      target:
+        entity_id: light.doorbell_neopixel
+      data:
+        xy_color: [0.70, 0.30] # Red
+        brightness_pct: 100

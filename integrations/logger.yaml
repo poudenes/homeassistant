@@ -1,0 +1,32 @@
+#  ██╗      ██████╗  ██████╗  ██████╗ ███████╗██████╗ 
+#  ██║     ██╔═══██╗██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+#  ██║     ██║   ██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+#  ██║     ██║   ██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+#  ███████╗╚██████╔╝╚██████╔╝╚██████╔╝███████╗██║  ██║
+#  ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# LOGGER
+# https://www.home-assistant.io/integrations/logger/
+# critical < fatal < error < warning < info < debug < notset
+###########################################################################################
+default: error
+logs:
+  icloud3: fatal
+  homeassistant.components.websocket_api.http.connection: fatal
+  custom_components.moonraker: fatal
+  custom_components.cryptoinfo_advanced.const.const: fatal
+
+  custom_components.fireflyiii_integration.integrations.fireflyiii: fatal
+  custom_components.nest_protect: fatal
+
+  frontend.js.latest.202407050: fatal
+
+  custom_components.roborock.coordinator: fatal
+  alexapy.alexaapi: fatal
+  custom_components.alexa_media: fatal
+  homeassistant.components.fully_kiosk: fatal
+  roborock.cloud_api: fatal
+  custom_components.bambu_lab.pybambu: fatal
+  custom_components.cloudflare_tunnel_monitor.sensor: fatal

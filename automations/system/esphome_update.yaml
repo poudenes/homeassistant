@@ -1,0 +1,111 @@
+#  ███████╗███████╗██████╗ ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ██╗   ██╗██████╗ ██████╗  █████╗ ████████╗███████╗██████╗
+#  ██╔════╝██╔════╝██╔══██╗██║  ██║██╔═══██╗████╗ ████║██╔════╝    ██║   ██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██╔══██╗
+#  █████╗  ███████╗██████╔╝███████║██║   ██║██╔████╔██║█████╗      ██║   ██║██████╔╝██║  ██║███████║   ██║   █████╗  ██████╔╝
+#  ██╔══╝  ╚════██║██╔═══╝ ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝      ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  ██╔══██╗
+#  ███████╗███████║██║     ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗    ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗██║  ██║
+#  ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝     ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# ESPHOME UPDATER
+###########################################################################################
+- id: "e3c0267d-49fa-48a6-86b7-e8aa806e6d76"
+  alias: "System - Automatically update ESPHome Devices"
+  mode: single
+  triggers:
+    - trigger: time
+      at:
+        - "11:00:00"
+        - "12:00:00"
+
+    - trigger: state
+      entity_id: group.family
+      to: "off"
+
+    - trigger: state
+      entity_id: group.helpers_esphome_updates
+      from: "off"
+      to: "on"
+      id: up-date
+
+    - trigger: state
+      entity_id: group.helpers_esphome_updates
+      from: "on"
+      to: "off"
+      id: up-to-date
+
+  conditions:
+    - "{{ is_state('group.family', 'off') }} "
+
+  actions:
+    - choose:
+        ###########################################################################################
+        # When trigger time is fires
+        ###########################################################################################
+        - conditions:
+            - condition: or
+              conditions:
+                - condition: trigger
+                  id: up-date
+                - "{{ state_attr('update.meek_toilet_firmware', 'latest_version') > state_attr('update.meek_toilet_firmware', 'installed_version') }}"
+
+          sequence:
+            - action: persistent_notification.create
+              data:
+                message: |
+                  Your ESPHome devices will now be updated.
+                  from {{ state_attr("update.meek_toilet_firmware","installed_version") }} to {{ state_attr("update.meek_toilet_firmware", "latest_version") }}.
+                title: "HA - Update"
+                notification_id: "ha_update"
+
+            - repeat:
+                for_each: >-
+                  {{ states.update | selectattr('state', 'eq', 'on') |
+                  map(attribute='entity_id') | select('in',
+                  integration_entities('esphome')) | list }}
+                sequence:
+                  - action: update.install
+                    target:
+                      entity_id: "{{ repeat.item }}"
+                  - wait_template: "{{ is_state(repeat.item, 'off') }}"
+
+          ###########################################################################################
+          # When devices are updated
+          ###########################################################################################
+        - conditions:
+            - condition: trigger
+              id: up-to-date
+
+          sequence:
+            - action: persistent_notification.create
+              data:
+                message: |
+                  Your ESPHome devices are now all.
+                  updated to {{ state_attr("update.meek_toilet_firmware","installed_version") }}.
+                title: "HA - Update"
+                notification_id: "ha_update"
+
+          ###########################################################################################
+          # Will fire when time_pattern start and group is still on
+          ###########################################################################################
+        - conditions:
+            - "{{ is_state('group.helpers_esphome_updates', 'on') }}"
+            - "{{ state_attr('update.meek_toilet_firmware', 'latest_version') < state_attr('update.meek_toilet_firmware', 'installed_version') }}"
+
+          sequence:
+            - action: persistent_notification.create
+              data:
+                message: |
+                  ESPhome devices all updated.
+                  If one or more devices didnt update well, now they are
+                title: "HA - Update"
+                notification_id: "ha_update"
+
+            - repeat:
+                for_each: >-
+                  {{ states.update | selectattr('state', 'eq', 'on') |
+                  map(attribute='entity_id') | select('in',
+                  integration_entities('esphome')) | list }}
+                sequence:
+                  - action: update.install
+                    target:
+                      entity_id: "{{ repeat.item }}"
+                  - wait_template: "{{ is_state(repeat.item, 'off') }}"

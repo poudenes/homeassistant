@@ -1,0 +1,70 @@
+#  ██████╗  █████╗ ████████╗██╗  ██╗██████╗  ██████╗  ██████╗ ███╗   ███╗    ██╗  ██╗██╗   ██╗███╗   ███╗██╗██████╗ ██╗████████╗██╗   ██╗
+#  ██╔══██╗██╔══██╗╚══██╔══╝██║  ██║██╔══██╗██╔═══██╗██╔═══██╗████╗ ████║    ██║  ██║██║   ██║████╗ ████║██║██╔══██╗██║╚══██╔══╝╚██╗ ██╔╝
+#  ██████╔╝███████║   ██║   ███████║██████╔╝██║   ██║██║   ██║██╔████╔██║    ███████║██║   ██║██╔████╔██║██║██║  ██║██║   ██║    ╚████╔╝
+#  ██╔══██╗██╔══██║   ██║   ██╔══██║██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║    ██╔══██║██║   ██║██║╚██╔╝██║██║██║  ██║██║   ██║     ╚██╔╝
+#  ██████╔╝██║  ██║   ██║   ██║  ██║██║  ██║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║    ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║██████╔╝██║   ██║      ██║
+#  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═════╝ ╚═╝   ╚═╝      ╚═╝
+###########################################################################################
+# CONTROL BATHROOM FAN WHEN HIHUMM IS HIGH
+###########################################################################################
+- id: f7c7ba33-5a72-4bd2-8ba1-ca9dfd1583bf
+  alias: "Control - Bathroom humidity"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.fan_hum_lower_then_avg
+      from: "off"
+      to: "on"
+
+  variables:
+    avg: "{{ state_attr('binary_sensor.fan_hum_lower_then_avg','avg')}}"
+    hum: "{{ state_attr('binary_sensor.fan_hum_lower_then_avg','hum')}}"
+
+  conditions:
+    - "{{ states('sensor.fan_speed') not in ['high', 'high(t)'] }}"
+    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+    - "{{ is_state('input_boolean.function_vacation', 'off') }}"
+ #   - "{{ states('input_select.helpers_scenes') not in ['scene goodnight'] }}"
+    - "{{ is_state('binary_sensor.bathroom_detection', 'on') }}"
+
+#    - condition: time
+#      after: "05:30:00"
+#      before: "22:30:00"
+
+  actions:
+    - parallel:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.fan_high
+
+        - action: switch.turn_on
+          target:
+            entity_id: switch.fan_high
+
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - System"
+            message: |
+              Turn on fan. 
+              AVG: {{ avg }} / HUM: {{ hum }}
+            thread_id: "ha_system"
+
+    - delay: "00:20:00"
+
+    - wait_template: "{{ is_state('binary_sensor.fan_hum_lower_then_avg', 'off') }}"
+
+    - if:
+        - "{{ is_state('sensor.fan_remote', 'Home Assistant') }}"
+
+      then:
+        - parallel:
+            - action: switch.turn_on
+              target:
+                entity_id: switch.fan_timer_20min
+
+            - action: script.mobile_notify_no_actionable
+              data:
+                title: "HA - System"
+                message: |
+                  Fan timer started 20 minutes. Then it's turning off.
+                thread_id: "ha_system"

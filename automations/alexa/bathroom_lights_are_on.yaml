@@ -1,0 +1,40 @@
+#   █████╗ ██╗     ███████╗██╗  ██╗ █████╗      ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗    ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+#  ██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║    ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+#  ███████║██║     █████╗   ╚███╔╝ ███████║    ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║    ███████╗█████╔╝ ██║██║     ██║     ███████╗
+#  ██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║    ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+#  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║    ███████║██║  ██╗██║███████╗███████╗███████║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝#
+###########################################################################################
+# Bathroom light on, ask to turn them off
+###########################################################################################
+- id: "1d35dbff-c77b-4e1d-bebd-d930771cb2cb"
+  alias: "Alexa Custom Skills - Bathroom still on for 3 minutes"
+  triggers:
+    - trigger: time_pattern
+      minutes: "/5"
+
+  conditions:
+    - "{{ is_state('switch.bathroom_light_switch', 'on') }}"
+    - "{{ is_state('binary_sensor.bathroom_detection', 'off') }}"
+    - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+
+  actions:
+    - action: script.activate_alexa_actionable_notification
+      data_template:
+        text: "The bathroom switch is still on. Do you want me to turn it off?"
+        event_id: "alexa_custom_skill_bathroom_light"
+        alexa_device: "media_player.livingroom"
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: alexa_actionable_notification
+          event_data:
+            event_id: alexa_custom_skill_bathroom_light
+            event_response_type: ResponseYes
+
+      timeout: "00:00:15"
+      continue_on_timeout: false
+
+    - action: switch.turn_off
+      target:
+        entity_id: switch.bathroom_light_switch

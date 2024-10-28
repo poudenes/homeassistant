@@ -1,0 +1,132 @@
+#  ██████╗ ██╗███╗   ██╗ █████╗ ██████╗ ██╗   ██╗     ███████╗███████╗███╗   ██╗███████╗ ██████╗ ██████╗ 
+#  ██╔══██╗██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝     ██╔════╝██╔════╝████╗  ██║██╔════╝██╔═══██╗██╔══██╗
+#  ██████╔╝██║██╔██╗ ██║███████║██████╔╝ ╚████╔╝      ███████╗█████╗  ██╔██╗ ██║███████╗██║   ██║██████╔╝
+#  ██╔══██╗██║██║╚██╗██║██╔══██║██╔══██╗  ╚██╔╝       ╚════██║██╔══╝  ██║╚██╗██║╚════██║██║   ██║██╔══██╗
+#  ██████╔╝██║██║ ╚████║██║  ██║██║  ██║   ██║███████╗███████║███████╗██║ ╚████║███████║╚██████╔╝██║  ██║
+#  ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
+##########################################################################################
+# https://www.home-assistant.io/integrations/template/
+##########################################################################################
+---
+##########################################################################################
+# BINARY SENSORS
+##########################################################################################
+
+##########################################################################################
+# CHECK WHAT DEVICES ARE OFFLINE ON ASUS
+##########################################################################################
+- binary_sensor:
+    - name: "Asus devices offline"
+      state: "{{ integration_entities('asusrouter') | select('is_state', 'not_home') | list | count > 0 | float(false) }}"
+      unique_id: "42a19e1a-9396-42a9-81a1-94e8ee74fa5d"
+      attributes:
+        entity_id: "{{ integration_entities('asusrouter') | select('is_state', 'not_home') | list }}"
+        
+##########################################################################################
+# FOR AUTOMATION OF BATHROOM FAN
+##########################################################################################
+- binary_sensor:
+    - name: "Fan hum lower then avg"
+      unique_id: "438dadb7-2688-4329-86c7-02c57f8864dc"
+      state: >-
+        {{ (states('sensor.bathroom_humidity') | int(0) - states('sensor.master_bathroom_humidity_average_linear_24h') | int(0) > states('input_select.helpers_master_bath_humidity_threshold') | int(0)) }}
+      attributes:
+        hum: "{{ states('sensor.bathroom_humidity') | int(default=0) }}"
+        avg: "{{ states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) }}"
+        input: "{{ states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) }}"
+        hum_avg: >-
+          {{ states('sensor.bathroom_humidity')|int(0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(0) }}
+
+- binary_sensor:
+    - name: "Hum fan calculate difference"
+      unique_id: "0fcf93c7-dc39-485c-b1e4-6114dc8f4e21"
+      state: >-
+        "{{ (states('sensor.master_bathroom_humidity_average_linear_24h') | int(0) - states('sensor.bathroom_humidity') | int(0) > states('input_select.helpers_master_bath_humidity_threshold') | int(0)) }}"
+      attributes:
+        hum: "{{ states('sensor.bathroom_humidity') | int(default=0) }}"
+        avg: "{{ states('sensor.master_bathroom_humidity_average_linear_24h') | int(default=0) }}"
+        input: "{{ states('input_select.helpers_master_bath_humidity_threshold') | int(default=0) }}"
+        hum_avg: >-
+          {{ states('sensor.bathroom_humidity')|int(0) - states('sensor.master_bathroom_humidity_average_linear_24h')|int(0) }}
+          
+- binary_sensor:
+    - name: "Group Family Manual"
+      unique_id: "3e43a954-abc1-447a-af7c-8f789ba73f2f"
+      state: "{{ is_state('input_boolean.helpers_kay_home_homekit', 'on') or is_state('input_boolean.helpers_peter_home_homekit', 'on') }}"
+      device_class: presence
+      delay_off: "00:15:00"
+
+##########################################################################################
+# WASHING, DRYER and DISKWASHER Machines
+##########################################################################################
+- binary_sensor:
+    - name: "Washing machine"
+      unique_id: "e9f8cb05-65b3-4e42-b8d8-249e47c80dc1"
+      state: "{{ states('sensor.washer_watt') | float(0) > 7 }}"
+      attributes:
+        kwh: >-
+          {% set value = states('sensor.washer_kwh') | float(0) %}
+          {% set const = 21474836.47 %}
+          {% if value < 0 %}
+            {{ (value + const) | round(2) }}
+          {% else %}
+            {{ value }}
+          {% endif %}
+      icon: >-
+        {% if is_state("binary_sensor.washing_machine", "on") %}
+          mdi:washing-machine
+        {% else %}
+          mdi:washing-machine-off
+        {% endif %}
+      availability: >
+        {% set ref = states('sensor.washer_watt') | float('unavailable')  %}
+        {{ ref is number }} 
+      delay_off: "00:10:00"
+
+- binary_sensor:
+    - name: "Dryer machine"
+      unique_id: "185cd1a5-eca9-45fa-8162-05dc1f13a082"
+      state: "{{ states('sensor.dryer_watt') | float(0) > 7 }}"
+      attributes:
+        kwh: >-
+          {% set value = states('sensor.dryer_kwh') | float(0) %}
+          {% set const = 21474836.47 %}
+          {% if value < 0 %}
+            {{ (value + const) | round(2) }}
+          {% else %}
+            {{ value }}
+          {% endif %}
+      icon: >-
+        {% if is_state('binary_sensor.dryer_machine', 'on') %}
+          mdi:tumble-dryer
+        {% else %}
+          mdi:tumble-dryer-off
+        {% endif %}
+      availability: >
+        {% set ref = states('sensor.dryer_watt') | float('unavailable')  %}
+        {{ ref is number }} 
+      delay_off: "00:10:00"
+
+- binary_sensor:
+    - name: "Dishwasher machine"
+      unique_id: "5b332d22-df74-4e91-a156-79ab8d5762af"
+      state: "{{ states('sensor.dishwasher_watt') | float(0) > 7 }}" # was 5
+      attributes:
+        kwh: >-
+          {% set value = states('sensor.dishwasher_kwh') | float(0) %}
+          {% set const = 21474836.47 %}
+          {% if value < 0 %}
+            {{ (value + const) | round(2) }}
+          {% else %}
+            {{ value }}
+          {% endif %}
+      icon: >-
+        {% if is_state("binary_sensor.dishwasher_machine", "on") %}
+          mdi:dishwasher
+        {% else %}
+          mdi:dishwasher-off
+        {% endif %}
+      availability: >
+        {% set ref = states('sensor.dishwasher_watt') | float('unavailable')  %}
+        {{ ref is number }}
+      delay_off: "00:10:00"

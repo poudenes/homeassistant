@@ -1,0 +1,33 @@
+###########################################################################################
+# Have I Been Powned
+###########################################################################################
+- id: "c2075000-ec3f-4a99-a473-cde4028dc905"
+  alias: "Notification - HIBPWNED"
+  triggers:
+    - trigger: state
+      entity_id: 
+        - !secret hibpwned_1
+        - !secret hibpwned_2
+        - !secret hibpwned_3
+        - !secret hibpwned_4
+        - !secret hibpwned_5
+      variables:
+        old_value: "{{ trigger.from_state.state }}"
+        new_value: "{{ trigger.to_state.state }}"
+        email: "{{ trigger.to_state.attributes.friendly_name[9:] }}"
+
+  conditions:
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+    - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          Email {{ email }} is powned.
+          Old value {{ old_value }}. New value {{ new_value }}.
+        thread_id: "ha_notification"
+        # soundname: "default"
+        # critical: 1
+        # volume: 1.0

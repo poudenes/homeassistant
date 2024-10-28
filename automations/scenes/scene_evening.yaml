@@ -1,0 +1,146 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ███████╗██╗   ██╗███████╗███╗   ██╗██╗███╗   ██╗ ██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔════╝██║   ██║██╔════╝████╗  ██║██║████╗  ██║██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      █████╗  ██║   ██║█████╗  ██╔██╗ ██║██║██╔██╗ ██║██║  ███╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║╚██╗██║██║██║╚██╗██║██║   ██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ███████╗ ╚████╔╝ ███████╗██║ ╚████║██║██║ ╚████║╚██████╔╝
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝
+###########################################################################################
+# SCENE EVENING WHEN SUN IS BELOW HORIZON AND NO TV OF MOVIE IS PLAYING
+###########################################################################################
+- id: "a87a4ad1-eba9-435e-9ad9-f9689897394a9"
+  alias: "Scene - Evening"
+  mode: restart
+  triggers:
+    - trigger: time_pattern
+      minutes: "/5"
+
+    - trigger: state
+      entity_id: input_select.helpers_sunrise_sunset
+      to: "below_horizon"
+
+    - trigger: state
+      entity_id: select.logitech_harmony_activities
+      to: "power_off"
+
+    - trigger: state
+      entity_id:
+        - binary_sensor.group_family_manual
+        - input_select.helpers_scenes
+        - input_select.helpers_sunrise_sunset
+
+  conditions:
+    - condition: time
+      after: "15:00:00"
+      before: "04:00:00"
+    - "{{ states('select.logitech_harmony_activities') in ['power_off', 'AirPlay'] }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+    - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
+    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+    - "{{ states('input_select.helpers_scenes') not in ['scene evening', 'scene goodnight','scene dinner'] }}"
+
+  actions:
+    - parallel:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.sync_box_power
+
+        - continue_on_error: true
+          action: script.engine_say
+          data:
+            media_player: media_player.livingroom
+            notify: notify.alexa_media_livingroom
+            call_scene_evening: 1
+
+        - action: input_select.select_option
+          target:
+            entity_id: input_select.helpers_scenes
+          data:
+            option: "scene evening"
+
+        - action: light.turn_off
+          target:
+            entity_id: light.tv_sync
+
+        - action: light.turn_on
+          target:
+            entity_id: light.nanoleaf
+          data:
+            brightness_pct: 40
+            effect: >-
+              {% set holiday = states('sensor.holidays') %}
+              {% set holiday_effects = {
+                'Christmas': 'Christmas',
+                'Halloween': 'Halloween',
+                'Eurovision': 'Euro 2023',
+                'Kingsday': 'Kingsday',
+                'Birthday': 'Kingsday',
+                'Valentine': 'Valentine',
+                'Special Day': 'Valentine'
+              } %}
+              {{ holiday_effects[holiday] if holiday in holiday_effects else 'Kay' }}
+              
+            # effect: >-
+            #   {% if is_state('sensor.holidays', 'Christmas') %} 
+            #     Christmas
+            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
+            #     Halloween
+            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
+            #     Euro 2023
+            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+            #     Kingsday
+            #   {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
+            #     Valentine
+            #   {% else %} 
+            #     Kay
+            #   {% endif %}
+
+        - action: hue.activate_scene
+          data:
+            transition: 2
+          target:
+            entity_id: >-
+              {% set holiday = states('sensor.holidays') %}
+              {% set holiday_scenes = {
+                'Christmas': 'scene.scenes_evening_christmas',
+                'Halloween': 'scene.scenes_evening_halloween',
+                'Eurovision': 'scene.scenes_evening_eurovision',
+                'Kingsday': 'scene.scenes_birthday',
+                'Birthday': 'scene.scenes_birthday',
+                'Valentine': 'scene.scenes_romantic'
+              } %}
+              {{ holiday_scenes[holiday] if holiday in holiday_scenes else 'scene.scenes_evening_evening' }}
+
+            # entity_id: >-
+            #   {% if is_state('sensor.holidays', 'Christmas') %} 
+            #     scene.scenes_evening_christmas
+            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
+            #     scene.scenes_evening_halloween
+            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
+            #     scene.scenes_evening_eurovision
+            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+            #     scene.scenes_birthday
+            #   {% elif is_state('sensor.holidays', 'Valentine') %}
+            #     scene.scenes_romantic
+            #   {% else %} 
+            #     scene.scenes_evening_evening
+            #   {% endif %}
+
+        - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
+          target:
+            entity_id: >
+              {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+                | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+
+    - action: light.turn_on
+      target:
+        entity_id: light.livingroom_all
+      data:
+        brightness_pct: 100
+        kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+    - action: light.turn_on
+      target:
+        entity_id: light.dressoir_all
+      data:
+        brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"

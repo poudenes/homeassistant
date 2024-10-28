@@ -1,0 +1,240 @@
+#   █████╗ ██╗     ███████╗██╗  ██╗ █████╗     ██████╗  ██████╗ ██╗   ██╗████████╗██╗███╗   ██╗███████╗███████╗
+#  ██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██║████╗  ██║██╔════╝██╔════╝
+#  ███████║██║     █████╗   ╚███╔╝ ███████║    ██████╔╝██║   ██║██║   ██║   ██║   ██║██╔██╗ ██║█████╗  ███████╗
+#  ██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ██╔══██╗██║   ██║██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  ╚════██║
+#  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ██║  ██║╚██████╔╝╚██████╔╝   ██║   ██║██║ ╚████║███████╗███████║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
+###########################################################################################
+# ROUTINES FOR HOMEKIT AND ALEXA
+###########################################################################################
+alexa_turn_off_harmony:
+  alias: "Routine Off Harmony"
+  icon: mdi:start
+  sequence:
+    - action: select.select_option
+      data:
+        option: power_off
+      target:
+        entity_id: select.logitech_harmony_activities
+
+###########################################################################################
+# ALEXA ROUTINE YAMAHA
+###########################################################################################
+alexa_receiver_mute:
+  alias: "Routine Receiver Mute"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Mute
+        device: Yamaha
+
+alexa_receiver_up_vol:
+  alias: "Routine Receiver Vol Up"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: VolumeUp
+        device: Yamaha
+        num_repeats: 5
+        delay_secs: 0.5
+
+alexa_receiver_down_vol:
+  alias: "Routine Receiver Vol Down"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: VolumeDown
+        device: Yamaha
+        num_repeats: 5
+        delay_secs: 0.5
+
+###########################################################################################
+# ALEXA ROUTINE PAUSE PLAY STOP UNIVERSAL FOR ALL ACTIVITIES - TEST
+###########################################################################################
+alexa_pause_harmony:
+  alias: "Routine Pause Harmony"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Pause
+        device: Apple TV
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Pause
+        device: T-mobile remote
+
+alexa_play_harmony:
+  alias: "Routine Play Harmony"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Play
+        device: Apple TV
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Play
+        device: T-mobile remote
+
+alexa_stop_harmony:
+  alias: "Routine Stop Harmony"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Back
+        device: Apple TV
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Stop
+        device: T-mobile remote
+
+###########################################################################################
+# ALEXA ROUTINE APPLETV
+###########################################################################################
+alexa_turn_on_appletv:
+  alias: "Routine AppleTV"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+alexa_turn_on_appletv_pause:
+  alias: "Routine AppleTV - Pause"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Pause
+        device: Apple TV
+
+alexa_turn_on_appletv_play:
+  alias: "Routine AppleTV - Play"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Play
+        device: Apple TV
+
+alexa_turn_on_appletv_stop:
+  alias: "Routine AppleTV - Stop"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Back
+        device: Apple TV
+
+###########################################################################################
+# ALEXA ROUTINE TV
+###########################################################################################
+alexa_turn_on_tv:
+  alias: "Routine TV"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: TV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+alexa_turn_on_tv_pause:
+  alias: "Routine TV - Pause"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Pause
+        device: T-mobile remote
+
+alexa_turn_on_tv_play:
+  alias: "Routine TV - Play"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Play
+        device: T-mobile remote
+
+alexa_turn_on_tv_stop:
+  alias: "Routine TV - Stop"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Stop
+        device: T-mobile remote
+
+###########################################################################################
+# ALEXA ROUTINE OTHER ACTIVITIES
+###########################################################################################
+alexa_turn_on_airplay:
+  alias: "Routine AirPlay"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AirPlay
+      target:
+        entity_id: select.logitech_harmony_activities
+
+alexa_turn_on_nintendo:
+  alias: "Routine Nintendo"
+  icon: mdi:start
+  sequence:
+    - action: select.select_option
+      data:
+        option: Nintendo
+      target:
+        entity_id: select.logitech_harmony_activities
+
+alexa_turn_on_chromecast:
+  alias: "Routine Chromecast"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: Cromecast
+      target:
+        entity_id: select.logitech_harmony_activities

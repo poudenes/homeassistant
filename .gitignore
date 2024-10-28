@@ -1,0 +1,77 @@
+# MOST URGENT
+secrets.yaml
+esphome/secrets.yaml
+esphome/.gitignore
+
+# HIDDEN FILES
+.bashrc
+.bash_history
+.gitconfig
+.DS_Store
+.ip_authenticated.yaml
+.shopping_list.json
+
+# FILES
+core
+google_assistant.json
+ip_bans.yaml
+icloud3-event-log.log
+known_devices.yaml
+home-assistant_*
+
+# WILDCARD FILES
+home-assistant.log*
+storage.*
+
+# EXTENSIONS
+*.conf
+*.csr
+*.crt
+*.db
+*.jpg
+*.key
+*.log
+*.pyc
+*.pem
+*.sqlite
+*.sh 
+*.txt
+*.xml
+
+# HIDDEN FOLDERS
+.cache/
+.cloud/
+.config/
+.dbus/
+.git/
+.gnupg/
+.local/
+.storage/
+.ssh/
+.vscode/
+
+
+# FOLDERS
+Backup/
+addons_config/
+archive_backup/
+blueprints/
+automations/test/
+custom_components/
+custom-cont-init.d/
+custom-services.d/
+data/
+deps/
+esphome/.esphome/
+extensions/
+glances/
+image/
+old/
+other/
+ozw_config/
+ssh/
+tts/
+workspace/
+www/
+image/
+ssh_keys/

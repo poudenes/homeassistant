@@ -1,0 +1,33 @@
+#  ██████╗ ███████╗██████╗ ██████╗  ██████╗  ██████╗ ███╗   ███╗    ██╗     ██╗ ██████╗ ██╗  ██╗████████╗███████╗     ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔═══██╗████╗ ████║    ██║     ██║██╔════╝ ██║  ██║╚══██╔══╝██╔════╝    ██╔═══██╗████╗  ██║
+#  ██████╔╝█████╗  ██║  ██║██████╔╝██║   ██║██║   ██║██╔████╔██║    ██║     ██║██║  ███╗███████║   ██║   ███████╗    ██║   ██║██╔██╗ ██║
+#  ██╔══██╗██╔══╝  ██║  ██║██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║    ██║     ██║██║   ██║██╔══██║   ██║   ╚════██║    ██║   ██║██║╚██╗██║
+#  ██████╔╝███████╗██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║    ███████╗██║╚██████╔╝██║  ██║   ██║   ███████║    ╚██████╔╝██║ ╚████║
+#  ╚═════╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝    ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝     ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# BEDROOM CONTROL LIGHTS BASED ON STATUS SENSOR OFF 5MIN
+###########################################################################################
+- id: "0d72ddde-4db2-4455-8de1-60f6884bc5c9"
+  alias: "Control - Light - Bedroom Lights Are On"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.bedroom_detection
+      to: "off"
+      for: "00:10:00"
+
+  conditions:
+    - "{{ is_state('switch.bedroom_light_switch', 'on') }}"
+    - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+
+  actions:
+    - action: switch.turn_off
+      target:
+        entity_id: switch.bedroom_light_switch
+
+    - action: persistent_notification.create
+      data:
+        title: "HA - Notification"
+        message: |
+          Nobody in bedroom for 10 minutes. 
+          Turned off bedroom switch and light.
+        notification_id: "bedroom_light_on"

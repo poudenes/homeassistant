@@ -1,0 +1,59 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH SET TEMPERATURE
+###########################################################################################
+- id: "8852539e-3a59-4368-bd2d-eca1f0836280"
+  alias: "Apple Watch - Control temperature"
+  mode: parallel
+  triggers:
+    - trigger: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Set temperature"
+
+  conditions: []
+
+  actions:
+    - action: notify.mobile_app_peter_iphone
+      data:
+        title: "Set Temperature"
+        message: "What temperature do you want?"
+        data:
+          actions:
+            - action: "T16"
+              title: "16"
+            - action: "T17"
+              title: "17"
+            - action: "T18"
+              title: "18"
+            - action: "T19"
+              title: "19"
+            - action: "T20"
+              title: "20"
+            - action: "T21"
+              title: "21"
+            - action: "T22"
+              title: "22"
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        temperature: "{{ wait.trigger.event.data.actionName.split('T')[1] | int }}"
+
+    - continue_on_error: true
+      action: climate.set_temperature
+      target:
+        entity_id: climate.entryway
+      data:
+        temperature: "{{ temperature }}"

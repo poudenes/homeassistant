@@ -1,0 +1,37 @@
+#  ██████╗  ██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗██╗  ██╗    ███████╗ █████╗
+#  ██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝    ██╔════╝██╔══██╗
+#  ██████╔╝██║   ██║██████╔╝██║   ██║██████╔╝██║   ██║██║     █████╔╝     ███████╗╚█████╔╝
+#  ██╔══██╗██║   ██║██╔══██╗██║   ██║██╔══██╗██║   ██║██║     ██╔═██╗     ╚════██║██╔══██╗
+#  ██║  ██║╚██████╔╝██████╔╝╚██████╔╝██║  ██║╚██████╔╝╚██████╗██║  ██╗    ███████║╚█████╔╝
+#  ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝    ╚══════╝ ╚════╝
+###########################################################################################
+# VACUUM IS IN PORBLEM (WHITE FLAG)
+###########################################################################################
+- id: "e0a31870-06db-4fe5-bc11-6c5d0a98c981"
+  alias: "Notification - Vacuum Problems"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: sensor.roborock_s8_current_error
+
+  conditions:
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+    - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  actions:
+    - action: camera.snapshot
+      target:
+        entity_id: camera.roborock_s8_map
+      data:
+        filename: "/config/www/snapshot/vacuum.jpg"
+
+    - delay: "00:00:10"
+
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Vacuum in trouble"
+        message: |
+          The S8 is in trouble:
+          "{{ states('sensor.roborock_s8_current_error') }}"
+        thread_id: "ha_alarm"
+        img: "/local/snapshot/vacuum.jpg"

@@ -1,0 +1,110 @@
+#  ███████╗███╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗    ████████╗██╗    ██╗██╗████████╗████████╗███████╗██████╗
+#  ██╔════╝████╗  ██║██╔════╝ ██║████╗  ██║██╔════╝    ╚══██╔══╝██║    ██║██║╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
+#  █████╗  ██╔██╗ ██║██║  ███╗██║██╔██╗ ██║█████╗         ██║   ██║ █╗ ██║██║   ██║      ██║   █████╗  ██████╔╝
+#  ██╔══╝  ██║╚██╗██║██║   ██║██║██║╚██╗██║██╔══╝         ██║   ██║███╗██║██║   ██║      ██║   ██╔══╝  ██╔══██╗
+#  ███████╗██║ ╚████║╚██████╔╝██║██║ ╚████║███████╗       ██║   ╚███╔███╔╝██║   ██║      ██║   ███████╗██║  ██║
+#  ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝       ╚═╝    ╚══╝╚══╝ ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# Tweet Engine without image
+# Took Original Script @BearStoneHA.
+###########################################################################################
+tweet_engine:
+  alias: "Twitter - Tweet Engine"
+  sequence:
+    - action: notify.twitter
+      data:
+        message: >-
+          {{ tweet }}
+
+###########################################################################################
+# Tweet Engine with image
+###########################################################################################
+tweet_engine_image:
+  alias: "Twitter - Tweet Engine with image"
+  sequence:
+    - action: notify.twitter
+      data:
+        message: >-
+          {{ tweet }}
+        data:
+          media: >-
+            {{ image }}
+
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.twitter_last_message
+      data:
+        value: "{{ tweet }} / {{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }} / {{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }}"
+
+###########################################################################################
+# Tweet random post
+# Took Original Script @BearStoneHA.
+###########################################################################################
+tweet_random_post:
+  alias: "Twitter - Tweet Engine Random Post"
+  sequence:
+    - action: script.tweet_engine_image
+      data:
+        tweet: >-
+          {%- macro tweet(topic) -%}
+            {% set tweets = {
+              "promo": [
+                "Be Sure to follow all of my Twitter Accounts! @peteroudenes",
+                "Your house can be a #smarthome too. All you need is #homeassistant, some time and some config files. I suggest starting with my GitHub repo (https://github.com/poudenes/homeassistant). #rpi4 #IoT @peteroudenes",
+                "Be sure to like my Facebook to get all post notifications (https://www.facebook.com/poudenes). #homeassistant #rpi4 #IoT @peteroudenes",
+                "I love IoT and have full automated my house with #homeassistant installed on a #rpi4. #IoT @peteroudenes",
+                "Beside my love for #homeassistant #rpi4 #IoT, there is another passion: photography. Check my page: (https://www.oudenes.photography)."
+              ],
+              "robot": [
+                "My name is Robotica. I am a #robot run by @peteroudenes #homeassistant #rpi4 #IoT",
+                "Sometimes I like to tell UDP jokes but I am not sure anyone gets them. #homeassistant #rpi4 #IoT",
+                "Hi, my name is Robotica. I control the house of @peteroudenes. Do you want a full home automation system then check: (https://www.home-assistant.io). #homeassistant #rpi4 #IoT",
+                "01001000 01100101 01101100 01101100 01101111 means Hello. One of my Robotica jokes controlled by #homeassistant. #rpi4 #IoT",
+                "I'm bored (Robotica) so i'm telling the world there are {{ states.light|selectattr('state','equalto','on')|list|length }} light on in the house. #homeassistant #rpi4 #IoT #philipshue",
+                "Home Assistant Server info: CPU Usage: {{ states('sensor.processor_use') }} %, Memory Used: {{ states('sensor.memory_use_percent') }} %, Disk Usage is {{ states('sensor.disk_use_percent') }} % amd Last Boot was {{ states('sensor.last_boot') }} ago. #homeassistant #rpi4 #IoT #systemmonitor"
+              ],
+              "weather": [
+                "I keep the average humidity of the house at {{ states('sensor.entryway_humidity') }} percent. #Nest #homeassistant #rpi4 #IoT",
+                "Outside is {{ states('sensor.sensor.accu_weather_realfeel_temperature_max_0d') }} °C. I keep the average inside temperature at {{ states('sensor.entryway_temperature') }} °C. #Weather #Nest #homeassistant #rpi4 #IoT",
+                "I know that it will be {{ states('sensor.sensor.accu_weather_condition_day_0d') }} So I will adjust the Heating/Cooling, irrigation and lighting accordingly. #Nest #homeassistant #rpi4 #IoT",
+                "Today the weather is {{ states('sensor.sensor.accu_weather_condition_day_0d') }} and tomorrow it will be {{ states('sensor.sensor.accu_weather_condition_day_1d') }}. #homeassistant #rpi4 #IoT",
+                "Its {{ states('sensor.sensor.accu_weather_condition_day_0d') }} with a temperature of {{ states('sensor.sensor.accu_weather_realfeel_temperature_max_0d') }} celsius. The windspeed is {{ states('sensor.accu_weather_wind_day_0d') }} KM/h. #homeassistant #rpi4 #IoT #automation"
+              ],
+              "internet": [
+                "I'll keep my internet save with #Adguard. Installed this as Add-On in #homeassistant. More info here https://github.com/hassio-addons/addon-adguard-home. #rpi4 #IoT",
+                "I'm using Home Assistant version {{ states('sensor.latest_version') }} running on a #RPi4 4GB. #homeassistant #IoT (https://www.home-assistant.io )"
+              ],
+              "p1meter": [
+                "The household used now {{ states('sensor.dsmr_day_consumption_electricity_merged') }} kWh electicity and {{ states('sensor.dsmr_day_consumption_gas') }} m3 gas. #dsmrreader (https://dsmr-reader.readthedocs.io/en/v3/)"
+              ]
+            } %}
+            {{ tweets[topic]|random }}
+          {%- endmacro -%}
+          {{ tweet(pick) }}
+
+        image: >-
+          {%- macro image(topic) -%}
+            {% set images = {
+              "promo": [
+                "/config/www/images/twitter/oudenes.png",
+                "/config/www/images/twitter/oudenes.png"
+              ],
+              "robot": [
+                "/config/www/images/twitter/ha.png",
+                "/config/www/images/twitter/ha.png"
+              ],
+              "weather": [
+                "/config/www/images/twitter/buienradar.png",
+                "/config/www/images/twitter/buienradar.png"
+              ],
+              "internet": [
+                "/config/www/images/twitter/www.png",
+                "/config/www/images/twitter/www.png"
+              ],
+              "p1meter": [
+                "/config/www/images/twitter/dsmr.png"
+              ]
+            } %}
+            {{ images[topic]|random }}
+          {%- endmacro -%}
+          {{ image(pick) }}

@@ -1,0 +1,336 @@
+#   █████╗ ██╗     ███████╗██╗  ██╗ █████╗     ███████╗███╗   ███╗ █████╗ ██████╗ ████████╗    ██╗  ██╗ ██████╗ ███╗   ███╗███████╗
+#  ██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔════╝████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝    ██║  ██║██╔═══██╗████╗ ████║██╔════╝
+#  ███████║██║     █████╗   ╚███╔╝ ███████║    ███████╗██╔████╔██║███████║██████╔╝   ██║       ███████║██║   ██║██╔████╔██║█████╗
+#  ██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ╚════██║██║╚██╔╝██║██╔══██║██╔══██╗   ██║       ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝
+#  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ███████║██║ ╚═╝ ██║██║  ██║██║  ██║   ██║       ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# SMART_HOME
+# https://www.home-assistant.io/integrations/alexa/
+# https://www.home-assistant.io/integrations/alexa.smart_home/#supported-platforms
+#
+# Alexa Custom Skills tutorial:
+# https://github.com/keatontaylor/alexa-actions/wiki/Alexa-Talking-to-Home-Assistant-(The-Skill)
+###########################################################################################
+flash_briefings:
+  password: !secret alexa_flash_briefing_password
+  ha_briefing:
+    - title: "Temperature"
+      text: >
+        Inside the house, it is {{ (states('sensor.entryway_temperature') | int) }} degrees.
+        Outside it is {{ (states('sensor.accu_weather_realfeel_temperature')) | int }} degrees.
+        The forcast for today is {{ (states('sensor.sensor.accu_weather_condition_day_0d')) }}, tomorrow it will be {{ (states('sensor.sensor.accu_weather_condition_day_1d')) }}.
+        There is {% set ns = namespace(res=0) %}{% for count in state_attr('switch.helpers_switches', 'entity_id') if is_state(count, 'on') %}{% set ns.res = ns.res + 1 %}{%endfor%}{{ ns.res }} Meek wall switch on.
+        {% for entity_id in state_attr('switch.helpers_switches','entity_id') if not is_state(entity_id, 'off') %} The {{ entity_id }} is on.{% endfor %}.
+
+smart_home:
+  #  endpoint: https://api.eu.amazonalexa.com/v3/events
+  endpoint: https://api.amazonalexa.com/v3/events # Needed for Alexa Skill build witg amazon_nl@ account
+  client_id: !secret alexa_smart_home_id
+  client_secret: !secret alexa_smart_home_secret
+  filter:
+    include_entities:
+      # Routines for Harmony
+      - script.alexa_pause_harmony
+      - script.alexa_play_harmony
+      - script.alexa_stop_harmony
+
+      - script.alexa_receiver_mute
+      - script.alexa_receiver_down_vol
+      - script.alexa_receiver_up_vol
+
+      - script.alexa_turn_on_appletv
+      - script.alexa_turn_on_tv
+      - script.alexa_turn_on_airplay
+      - script.alexa_turn_on_nintendo
+      - script.alexa_turn_on_morning
+      - script.alexa_turn_on_sleeping
+      - script.alexa_turn_on_goodnight
+      - script.alexa_turn_off_harmony
+
+      # Routines for Roborock
+      - script.alexa_return_base
+      - script.alexa_clean_all
+      - script.alexa_clean_bedroom
+      - script.alexa_clean_hallway
+      - script.alexa_clean_kithcen
+      - script.alexa_clean_diningroom
+      - script.alexa_clean_livingroom
+      - script.alexa_clean_toilet
+
+      # Other
+      - fan.mechanical_ventilation
+      - sensor.fan_speed
+      - input_boolean.function_briefing
+      - input_boolean.function_tvonly
+
+      # Nest Protect
+      - binary_sensor.nest_protect_bedroom_smoke_status
+      - binary_sensor.nest_protect_bedroom_co_status
+      - binary_sensor.nest_protect_bedroom_heat_status
+      - binary_sensor.nest_protect_entryway_smoke_status
+      - binary_sensor.nest_protect_entryway_co_status
+      - binary_sensor.nest_protect_entryway_heat_status
+      - binary_sensor.nest_protect_living_room_smoke_status
+      - binary_sensor.nest_protect_living_room_co_status
+      - binary_sensor.nest_protect_living_room_heat_status
+
+      # Lights
+      - light.hallway_all
+      - light.livingroom_all
+      - light.wall_all
+      - light.window_all
+      - light.tv_sync
+      - light.nanoleaf
+      - light.bathroom_all
+      - light.dressoir_all
+      - light.diningtable_all
+      - light.kitchen_all
+      - light.cooking_all
+      - light.ceiling_all
+      - light.sink_all
+      - light.bedroom_all
+      - light.toilet_all
+      - light.balcony_all
+
+      # Motion Sensors - Not seen as motion sensors
+      - binary_sensor.toilet_detection
+      - binary_sensor.bathroom_detection
+      - binary_sensor.hallway_detection
+      - binary_sensor.livingroom_detection
+      - binary_sensor.bedroom_detection
+      - binary_sensor.kitchen_detection
+      - binary_sensor.diningroom_detection
+      - binary_sensor.bedroom_door_contact
+      - binary_sensor.diningroom_door_contact
+      - binary_sensor.frondoor_door_contact
+      - binary_sensor.door_livingroom_contact
+
+      # Function
+      - input_boolean.function_romantic
+      - input_boolean.function_disco
+
+      # Scenes
+      - input_boolean.function_cooking
+      - input_boolean.function_kay_learning
+      - input_boolean.function_dnc
+      - switch.momentary_peter_early_up
+
+      - switch.helpers_dinner
+      - switch.helpers_daytime
+      - switch.helpers_evening
+      - switch.helpers_goodnight
+      - switch.helpers_chromecast
+
+      # Nest
+      - climate.entryway
+
+      # Device trackers
+      - input_boolean.helpers_peter_home_homekit
+      - input_boolean.helpers_kay_home_homekit
+
+      # Temperature sensors
+      - sensor.toilet_temperature
+      - sensor.bathroom_temperature
+      - sensor.hallway_temperature
+      - sensor.livingroom_temperature
+      - sensor.bedroom_temperature
+      - sensor.kitchen_temperature
+      - sensor.diningroom_temperature
+
+      # Wall switches
+      - switch.ceiling_light_switch
+      - switch.sink_light_switch
+      - switch.hallway_light_switch
+      - switch.toilet_light_switch
+      - switch.bedroom_light_switch
+      - switch.bathroom_light_switch
+      - switch.dressoir_light_switch
+      - switch.diningtable_light_switch
+      - switch.wall_light_switch
+      - switch.window_light_switch
+      - switch.balcony_light_switch
+      - switch.xmas_tree_wall
+      - switch.xmas_1_wall
+
+  entity_config:
+    fan.mechanical_ventilation:
+      name: "Fan"
+      description: "The fan in the bathroom"
+      display_categories: FAN
+
+    input_boolean.function_briefing:
+      name: "Briefing"
+
+    light.nanoleaf:
+      name: "Nanoleaf"
+      description: "Incredible nanoleafs"
+      display_categories: LIGHT
+    light.diningtable_all:
+      name: "Diningroom"
+      description: "The diningroom table lights"
+      display_categories: LIGHT
+    light.hallway_all:
+      name: "Hallway"
+    light.livingroom_all:
+      name: "Livingroom"
+    light.wall_all:
+      name: "Wall"
+    light.window_all:
+      name: "Window"
+    light.tv_sync:
+      name: "TV Sync"
+    light.bathroom_all:
+      name: "Bathroom"
+    light.dressoir_all:
+      name: "Dressoir"
+    light.kitchen_all:
+      name: "Kithcen"
+    light.cooking_all:
+      name: "Cooking"
+    light.ceiling_all:
+      name: "Ceiling"
+    light.sink_all:
+      name: "Sink"
+    light.bedroom_all:
+      name: "Bedroom"
+    light.toilet_all:
+      name: "Toilet"
+    light.balcony_all:
+      name: "Balcony"
+
+    input_boolean.helpers_peter_home_homekit:
+      name: "Presence Kay"
+      description: "Precense Kay"
+      display_categories: MOTION_SENSOR
+    input_boolean.helpers_kay_home_homekit:
+      name: "Presence Peter"
+      description: "Precence Peter"
+      display_categories: MOTION_SENSOR
+
+    input_boolean.function_romantic:
+      name: "Function Romantic"
+      display_categories: SWITCH
+      description: "Function for you know what"
+    input_boolean.function_disco:
+      name: "Function Disco"
+      display_categories: SWITCH
+      description: "Function when there is a party"
+    input_boolean.function_cooking:
+      name: "Scene Cooking"
+      display_categories: SWITCH
+      description: "Scene when we gonna cook"
+    input_boolean.function_kay_learning:
+      name: "Kay Learning"
+      display_categories: SWITCH
+      description: "Scene when Kay must learn"
+    switch.momentary_peter_early_up:
+      name: "Peter Early Up"
+      display_categories: SWITCH
+      description: "When Peter must ealry to his work. Some automations wont work then"
+    input_boolean.function_dnc:
+      name: "Disable Nest"
+      display_categories: SWITCH
+      description: "When we dont wanna auto control of the thermostat"
+
+    switch.xmas_tree_wall:
+      name: "Christmas Tree"
+    switch.xmas_1_wall:
+      name: "Christmas window"
+
+    switch.ceiling_light_switch:
+      name: "Kitchen switch"
+      display_categories: SWITCH
+    switch.sink_light_switch:
+      name: "Sink switch"
+      display_categories: SWITCH
+    switch.hallway_light_switch:
+      name: "Hallway switch"
+      display_categories: SWITCH
+    switch.toilet_light_switch:
+      name: "Toilet switch"
+      display_categories: SWITCH
+    switch.bedroom_light_switch:
+      name: "Bedroom switch"
+      display_categories: SWITCH
+    switch.bathroom_light_switch:
+      name: "Bathroom switch"
+      display_categories: SWITCH
+    switch.dressoir_light_switch:
+      name: "Dressoir switch"
+      display_categories: SWITCH
+    switch.diningtable_light_switch:
+      name: "Diningroom switch"
+      display_categories: SWITCH
+    switch.wall_light_switch:
+      name: "Wall switch"
+      display_categories: SWITCH
+    switch.window_light_switch:
+      name: "Window switch"
+      display_categories: SWITCH
+    switch.balcony_light_switch:
+      name: "Balcony switch"
+      display_categories: SWITCH
+    switch.momentary_scene_morning:
+      name: "Scene Morning"
+      display_categories: SWITCH
+
+    sensor.bedroom_temperature:
+      name: "Temp. Bedroom"
+      description: "Temperature in the dedroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.bathroom_temperature:
+      name: "Temp. Bathroom"
+      description: "Temperature in the bathroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.kitchen_temperature:
+      name: "Temp. Kitchen"
+      description: "Temperature in the kitchen"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.hallway_temperature:
+      name: "Temp. Hallway"
+      description: "Temperature in the hallway"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.diningroom_temperature:
+      name: "Temp. Diningroom"
+      description: "Temperature in the diningroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.livingroom_temperature:
+      name: "Temp Livingroom"
+      description: "Temperature in the livingroom"
+      display_categories: TEMPERATURE_SENSOR
+    sensor.toilet_temperature:
+      name: "Temp. Toilet"
+      description: "Temperature in the toilet"
+      display_categories: TEMPERATURE_SENSOR
+
+    binary_sensor.toilet_detection:
+      name: "Motion Toilet"
+      description: "Motion sensor in the toilet"
+      display_categories: MOTION_SENSOR
+    binary_sensor.bathroom_detection:
+      name: "Motion Bathroom"
+      description: "Motion sensor in the bathroom"
+      display_categories: MOTION_SENSOR
+    binary_sensor.hallway_detection:
+      name: "Motion Hallway"
+      description: "Motion sensor in the hallway"
+      display_categories: MOTION_SENSOR
+    binary_sensor.livingroom_detection:
+      name: "Motion Livingroom"
+      description: "Motion sensor in the livingroom"
+      display_categories: MOTION_SENSOR
+    binary_sensor.bedroom_detection:
+      name: "Motion Bedroom"
+      description: "Motion sensor in the bedroom"
+      display_categories: MOTION_SENSOR
+    binary_sensor.kitchen_detection:
+      name: "Motion Kitchen"
+      description: "Motion sensor in the kitchen"
+      display_categories: MOTION_SENSOR
+    binary_sensor.diningroom_detection:
+      name: "Motion Diningroom"
+      description: "Motion sensor in the diningroom"
+      display_categories: MOTION_SENSOR

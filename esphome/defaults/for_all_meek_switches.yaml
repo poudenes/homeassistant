@@ -1,0 +1,136 @@
+esphome:
+  name: ${devicename}
+  on_boot:
+    priority: 600
+    then:
+      - switch.turn_off: touch_power
+      - delay: 2s
+      - switch.turn_on: touch_power
+      - light.turn_on:
+          id: neopixel
+          red: 1
+          green: 1
+          blue: 1
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+
+api:
+  encryption:
+    key: !secret api_key
+  reboot_timeout: 15min
+
+  on_client_connected:
+    - light.turn_on:
+        id: neopixel
+        red: 1
+        green: 1
+        blue: 1
+
+    - light.turn_on:
+        id: neopixel
+        effect: strobe
+
+    - delay: 5s
+
+    - light.turn_on:
+        id: neopixel
+        effect: none
+
+    - light.turn_on:
+        id: neopixel
+        red: 1
+        green: 0
+        blue: 0
+        brightness: 100%
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+captive_portal:
+
+web_server:
+  port: 80
+
+preferences:
+  flash_write_interval: 1min
+
+logger:
+  level: WARN
+
+ota:
+  - platform: esphome
+    password: !secret password
+
+safe_mode:
+  reboot_timeout: 0s
+
+button:
+  - platform: factory_reset
+    name: "${friendly} - Reset"
+
+switch:
+  - platform: safe_mode
+    name: "${friendly} - safe mode"
+    id: "${friendly}_safe_mode"
+
+binary_sensor:
+  - platform: status
+    name: "${friendly} - Connection status"
+
+sensor:
+  - platform: wifi_signal
+    id: "wifi_db_signal"
+    name: "${friendly} - Wifi Signal"
+    update_interval: 5min
+
+  - platform: uptime
+    name: "${friendly} - Uptime"
+    update_interval: 5min
+
+  - platform: template
+    name: "${friendly} WiFi Percentage"
+    id: wifi_percentage
+    entity_category: diagnostic
+    state_class: measurement
+    update_interval: 10s
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    icon: mdi:wifi
+    lambda: >
+      auto signal = id(wifi_db_signal).state;
+      float perc = 0;
+      if (signal < -92.0) 
+        perc = 100.0; 
+      else if (signal > -21.0) 
+        perc = 1.0; 
+      else 
+        perc = round(( -0.0154 * signal * signal )-( 0.3794 * signal ) + 98.182 );
+
+      if(perc <= 0)
+        return 0.0;
+      else if(perc >= 100)
+        return 100.0;
+      else
+        return perc;
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly} - IP"
+      icon: mdi:lan
+    ssid:
+      name: "${friendly} - SSID"
+      icon: mdi:lan
+    bssid:
+      name: "${friendly} - BSSID"
+      icon: mdi:lan
+    mac_address:
+      name: "${friendly} - MAC"
+      icon: mdi:lan
+
+  - platform: version
+    name: "${friendly} - Version"
+    hide_timestamp: true

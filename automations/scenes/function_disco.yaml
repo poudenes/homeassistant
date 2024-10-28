@@ -1,0 +1,47 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ██████╗ ██╗███████╗ ██████╗ ██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔══██╗██║██╔════╝██╔════╝██╔═══██╗
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║  ██║██║███████╗██║     ██║   ██║
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║  ██║██║╚════██║██║     ██║   ██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██████╔╝██║███████║╚██████╗╚██████╔╝
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═════╝ ╚═╝╚══════╝ ╚═════╝ ╚═════╝
+###########################################################################################
+# SCENE DISCO TURNED OFF
+###########################################################################################
+- id: "8ef7d7ad-1e1b-4bac-ba79-c8465748e8fb"
+  alias: "Scene - Disco off"
+  triggers:
+    - trigger: state
+      entity_id: input_boolean.function_disco
+
+  conditions: []
+
+  actions:
+    - if: "{{ is_state('input_boolean.function_disco', 'on') }}"
+      then:
+        - action: light.turn_on
+          target:
+            entity_id: light.nanoleaf
+          data:
+            brightness_pct: 30
+            effect: "Northern Lights"
+
+        - action: hue.activate_scene
+          data:
+            transition: 1
+          target:
+            entity_id: scene.scenes_disco
+
+      else:
+        - action: light.turn_on
+          target:
+            entity_id:
+              - light.dressoir_all
+              - light.livingroom_all
+              - light.hallway_all
+          data:
+            brightness_pct: 100
+            kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+        - action: light.turn_off
+          target:
+            entity_id: light.hallway_all

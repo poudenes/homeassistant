@@ -1,0 +1,59 @@
+#  ██╗    ██╗ █████╗ ███████╗██╗  ██╗    ██████╗ ██████╗ ██╗   ██╗███████╗██████╗     ██████╗ ██╗███████╗██╗  ██╗
+#  ██║    ██║██╔══██╗██╔════╝██║  ██║    ██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ██╔══██╗██║██╔════╝██║  ██║
+#  ██║ █╗ ██║███████║███████╗███████║    ██║  ██║██████╔╝ ╚████╔╝ █████╗  ██████╔╝    ██║  ██║██║███████╗███████║
+#  ██║███╗██║██╔══██║╚════██║██╔══██║    ██║  ██║██╔══██╗  ╚██╔╝  ██╔══╝  ██╔══██╗    ██║  ██║██║╚════██║██╔══██║
+#  ╚███╔███╔╝██║  ██║███████║██║  ██║    ██████╔╝██║  ██║   ██║   ███████╗██║  ██║    ██████╔╝██║███████║██║  ██║
+#   ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# TO CALCULATE THE COST OF USAGE WASH, DISH, DRYER MACHINE
+###########################################################################################
+- id: "3673bc9a-f442-4e11-98fb-15fdebd50649"
+  alias: "Utilities - Washing, Dishwasher or Dryer machine start/stop"
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.dishwasher_machine
+        - binary_sensor.washing_machine
+        - binary_sensor.dryer_machine
+
+  conditions:
+    - "{{ (to_state == 'on' and from_state == 'off') or (to_state == 'off' and from_state == 'on') }}"
+
+  variables:
+    from_state: "{{ trigger.from_state.state }}"
+    to_state: "{{ trigger.to_state.state }}"
+    name: "{{ trigger.entity_id[14:] }}"
+
+  actions:
+    - action: input_datetime.set_datetime
+      data:
+        entity_id: "input_datetime.helpers_{{ name }}_{{ to_state }}"
+        timestamp: "{{ now().timestamp() }}"
+
+###########################################################################################
+# START SCRIPT
+###########################################################################################
+- id: "50299f6f-ba62-49b2-b5e9-70e5e0aed302"
+  alias: "Utilities - Washing machine notification"
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.dishwasher_machine
+        - binary_sensor.washing_machine
+        - binary_sensor.dryer_machine
+      from: "off"
+      to: "on"
+
+  conditions: []
+
+  actions:
+    - action: script.utility_notification
+      data:
+        name: >-
+          {% if is_state('binary_sensor.dishwasher_machine', 'on') %} 
+            dishwasher_machine
+          {% elif is_state('binary_sensor.washing_machine', 'on') %} 
+            washing_machine
+          {% elif is_state('binary_sensor.dryer_machine', 'on') %} 
+            dryer_machine
+          {% endif %}

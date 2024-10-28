@@ -1,0 +1,49 @@
+#   ██████╗ ██████╗ ███╗   ██╗████████╗██████╗  ██████╗ ██╗         ███████╗███████╗██████╗ ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ███╗   ██╗███████╗ ██████╗ ██████╗ ██╗██╗  ██╗███████╗██╗     ███████╗
+#  ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██║         ██╔════╝██╔════╝██╔══██╗██║  ██║██╔═══██╗████╗ ████║██╔════╝    ████╗  ██║██╔════╝██╔═══██╗██╔══██╗██║╚██╗██╔╝██╔════╝██║     ██╔════╝
+#  ██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║██║         █████╗  ███████╗██████╔╝███████║██║   ██║██╔████╔██║█████╗      ██╔██╗ ██║█████╗  ██║   ██║██████╔╝██║ ╚███╔╝ █████╗  ██║     ███████╗
+#  ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║██║         ██╔══╝  ╚════██║██╔═══╝ ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝      ██║╚██╗██║██╔══╝  ██║   ██║██╔═══╝ ██║ ██╔██╗ ██╔══╝  ██║     ╚════██║
+#  ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╔╝███████╗    ███████╗███████║██║     ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗    ██║ ╚████║███████╗╚██████╔╝██║     ██║██╔╝ ██╗███████╗███████╗███████║
+#   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+###########################################################################################
+# Control all neopixels of wall switches. When switch is on leave it otherwise update color to scene color.
+###########################################################################################
+- id: "0fb819ad-808b-41a8-bb5b-59b4ce4afee1"
+  alias: "Control - Neopixels by scenes"
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_scenes
+
+  variables: # NEEDED FOR THE REPEAT BELOW
+    switches:
+      - switch.balcony_light_switch
+      - switch.bathroom_light_switch
+      - switch.bedroom_light_switch
+      - switch.cooking_light_switch
+      - switch.diningtable_light_switch
+      - switch.dressoir_light_switch
+      - switch.hallway_light_switch
+      - switch.ceiling_light_switch
+      - switch.sink_light_switch
+      - switch.toilet_light_switch
+      - switch.wall_light_switch
+      - switch.window_light_switch
+
+  conditions: []
+
+  actions:
+    - repeat:
+        for_each: "{{ expand(switches) | selectattr('state', 'eq', 'off') | map(attribute='entity_id') | list }}"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: "light.{{ repeat.item[7:-13] }}_neopixel"
+            data:
+              xy_color: >-
+                {{ {'scene appletv': [0.44,0.52],
+                    'scene daytime': [0.70,0.30],
+                    'scene dinner': [0.74,0.52],
+                    'scene evening': [0.70,0.30],
+                    'scene tv': [0.14,0.19],
+                    'scene nintendo': [0.22,0.08],
+                    'scene goodnight': [0.70, 0.30]}.get(trigger.to_state.state, [0.70,0.30]) }}
+              brightness_pct: "{{ 15 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"

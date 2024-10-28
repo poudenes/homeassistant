@@ -1,0 +1,33 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH BATTERY LEVEL REPORT
+###########################################################################################
+- id: "0babb333-0b8e-4957-b911-047fb9bca24a"
+  alias: "Apple Watch - Battery Level Report"
+  mode: parallel
+  triggers:
+    - trigger: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Battery level"
+
+  conditions: []
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Livingroom: {{ states('sensor.livingroom_battery_level') }} %,
+          Bedroom: {{ states('sensor.bedroom_battery_level') }} %,
+          Bathroom: {{ states('sensor.bathroom_battery_level') }} %,
+          Hallway: {{ states('sensor.hallway_battery_level') }} %,
+          Kitchen: {{ states('sensor.kitchen_battery_level') }} %,
+          Diningroom: {{ states('sensor.diningroom_battery_level') }} %,
+          Toilet: {{ states('sensor.toilet_battery_level') }} %.
+        thread_id: "ha_apple_watch"

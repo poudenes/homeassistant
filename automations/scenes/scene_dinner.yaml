@@ -1,0 +1,57 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ██████╗ ██╗███╗   ██╗███╗   ██╗███████╗██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔══██╗██║████╗  ██║████╗  ██║██╔════╝██╔══██╗
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║  ██║██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║  ██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██████╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# SCENE DINNER WHEN SUN IS BELOW HORIZON AND WE HAVE DINNER
+###########################################################################################
+- id: "2193737e-ac81-402e-8f02-bb61230cb7ae"
+  alias: "Scene - Dinner "
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_scenes
+      to: "scene dinner"
+
+  conditions:
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+
+  actions:
+    - continue_on_error: true
+      action: script.engine_say
+      data:
+        media_player: media_player.livingroom
+        notify: notify.alexa_media_livingroom
+        call_scene_dinner: 1
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nanoleaf
+      data:
+        brightness_pct: 30
+        effect: Kay
+
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.dressoir_all
+          - light.livingroom_all
+      data:
+        brightness_pct: 100
+        kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+    - action: hue.activate_scene
+      data:
+        transition: 2
+      target:
+        entity_id: scene.scenes_balcony_rainbow
+
+    - action: persistent_notification.create
+      data:
+        title: "HA - Scenes"
+        message: |
+          Scene dinner is activated. 
+          All lights are on correctly.
+        notification_id: "scene_dinner"

@@ -1,0 +1,64 @@
+#  ██╗   ██╗ █████╗  ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗    ███╗   ███╗ ██████╗ ██████╗ ███████╗
+#  ██║   ██║██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║    ████╗ ████║██╔═══██╗██╔══██╗██╔════╝
+#  ██║   ██║███████║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║    ██╔████╔██║██║   ██║██║  ██║█████╗
+#  ╚██╗ ██╔╝██╔══██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║    ██║╚██╔╝██║██║   ██║██║  ██║██╔══╝
+#   ╚████╔╝ ██║  ██║╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║    ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████╗
+#    ╚═══╝  ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
+###########################################################################################
+# SYSTEM - TURN ON VACATION IF FAMILY IS GONE FOR FOUR HOURS
+###########################################################################################
+- id: "374aa25a-986b-490f-b6fa-82ce68dace68"
+  alias: "System - Vacation mode auto turn on"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.group_family_manual
+      from: "on"
+      to: "off"
+      for: "02:00:00"
+
+  conditions:
+    - "{{ is_state('input_boolean.function_vacation', 'off') }}"
+
+  actions:
+    - parallel:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.function_vacation
+
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - Scenes"
+            message: |
+              Vacation mode on.
+              System - Nobody at home for 4 hours, switching on vacation mode.
+            thread_id: "ha_scenes"
+
+###########################################################################################
+# SYSTEM - TURN OFF VACATION IF FAMILY IS BACK HOME
+##########################################################################################
+- id: "00615e2b-2b83-4964-b3da-a4fc5c3210a4"
+  alias: "System - Vacation mode auto turn off"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.group_family_manual
+      from: "off"
+      to: "on"
+
+  conditions:
+    - "{{ is_state('input_boolean.function_vacation', 'on') }}"
+
+  actions:
+    - parallel:
+        - action: input_boolean.turn_off
+          target:
+            entity_id:
+              - input_boolean.function_vacation
+              - input_boolean.function_holiday_emulation
+
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - Scenes"
+            message: |
+              Vacation mode off.
+              System - Welcome back! Switching off the vacation mode.
+            thread_id: "ha_scenes"

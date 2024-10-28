@@ -1,0 +1,173 @@
+# emulated_hue:
+host_ip: 192.168.100.24
+listen_port: 8300
+expose_by_default: true
+exposed_domains:
+  - light
+entities:
+  light.livingroom_all:
+    name: "Livingroom all"
+  light.dressoir_all:
+    name: "Dressoir all"
+  light.wall_all:
+    name: "Wall all"
+  light.window_all:
+    name: "Window all"
+
+  light.bathroom_all:
+    hidden: true
+  light.bathroom_1:
+    hidden: true
+  light.bathroom_2:
+    hidden: true
+  light.bathroom_3:
+    hidden: true
+  light.bathroom_4:
+    hidden: true
+
+  light.bedroom_all:
+    hidden: true
+  light.bedroom_1:
+    hidden: true
+  light.bedroom_2:
+    hidden: true
+  light.bedroom_3:
+    hidden: true
+  light.bedroom_4:
+    hidden: true
+  light.bedroom_5:
+    hidden: true
+  light.bedroom_6:
+    hidden: true
+
+  light.livingroom_1:
+    hidden: true
+  light.livingroom_2:
+    hidden: true
+  light.livingroom_3:
+    hidden: true
+  light.livingroom_4:
+    hidden: true
+
+  light.dressoir_1:
+    hidden: true
+  light.dressoir_2:
+    hidden: true
+  light.dressoir_3:
+    hidden: true
+
+  light.kitchen_all:
+    hidden: true
+
+  light.ceiling_all:
+    hidden: true
+  light.ceiling_1:
+    hidden: true
+  light.ceiling_2:
+    hidden: true
+  light.ceiling_3:
+    hidden: true
+
+  light.sink_all:
+    hidden: true
+  light.sink_1:
+    hidden: true
+  light.sink_2:
+    hidden: true
+  light.sink_3:
+    hidden: true
+
+  light.balcony_all:
+    hidden: true
+  light.balcony_1:
+    hidden: true
+  light.balcony_2:
+    hidden: true
+
+  light.toilet_all:
+    hidden: true
+  light.toilet_1:
+    hidden: true
+  light.toilet_2:
+    hidden: true
+  light.toilet_3:
+    hidden: true
+
+  light.hallway_all:
+    hidden: true
+  light.hallway_1:
+    hidden: true
+
+  light.bambulab_a1_mini_chamber_light:
+    hidden: true
+  light.nanoleaf:
+    hidden: true
+  light.cooking_all:
+    hidden: true
+  light.diningtable_all:
+    hidden: true
+  light.gradient_light_behind_tv:
+    hidden: true
+  light.tv_sync:
+    hidden: true
+  light.gt_ax11000_led:
+    hidden: true
+
+  light.helpers_daytime_lights:
+    hidden: true
+
+  light.bathroom_neopixel:
+    hidden: true
+  light.bedroom_neopixel:
+    hidden: true
+  light.cooking_neopixel:
+    hidden: true
+  light.balcony_neopixel:
+    hidden: true
+  light.doorbell_neopixel:
+    hidden: true
+  light.toilet_neopixel:
+    hidden: true
+  light.sink_neopixel:
+    hidden: true
+  light.wall_neopixel:
+    hidden: true
+  light.window_neopixel:
+    hidden: true
+  light.ceiling_neopixel:
+    hidden: true
+  light.kitchen_neopixel_all:
+    hidden: true
+  light.livingroom_neopixel_all:
+    hidden: true
+  light.hallway_neopixel:
+    hidden: true
+  light.diningtable_neopixel:
+    hidden: true
+  light.dressoir_neopixel:
+    hidden: true
+  light.dressoir_neopixel_all:
+    hidden: true
+
+  light.scenes:
+    hidden: true
+  light.scenes_balcony:
+    hidden: true
+  light.scenes_bathroom:
+    hidden: true
+  light.scenes_bedroom:
+    hidden: true
+  light.scenes_diningroom:
+    hidden: true
+  light.scenes_disco:
+    hidden: true
+  light.scenes_hallway:
+    hidden: true
+  light.scenes_house:
+    hidden: true
+  light.scenes_kitchen:
+    hidden: true
+  light.scenes_livingroom:
+    hidden: true
+  light.scenes_toilet:
+    hidden: true

@@ -1,0 +1,77 @@
+#  ███╗   ███╗ ██████╗ ████████╗██╗ ██████╗ ███╗   ██╗    ██████╗ ███████╗██████╗ ██████╗  ██████╗  ██████╗ ███╗   ███╗
+#  ████╗ ████║██╔═══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔═══██╗████╗ ████║
+#  ██╔████╔██║██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ██████╔╝█████╗  ██║  ██║██████╔╝██║   ██║██║   ██║██╔████╔██║
+#  ██║╚██╔╝██║██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██╔══██╗██╔══╝  ██║  ██║██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║
+#  ██║ ╚═╝ ██║╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██████╔╝███████╗██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║
+#  ╚═╝     ╚═╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═════╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝
+###########################################################################################
+# BEDROOM CONTROL LIGHTS BASED ON SENSOR AND DOOR SENSOR
+###########################################################################################
+- id: "09d33f06-6884-4765-b808-484322b21bce"
+  alias: "Motion Detection - Bedroom on/off"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.bedroom_detection
+
+  conditions:
+    - "{{ is_state('switch.bedroom_light_switch', 'off') }}"
+    - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+    - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
+
+  actions:
+    - if:
+        - "{{ is_state('binary_sensor.bedroom_detection', 'on') }}"
+
+      then:
+        - parallel:
+            - action: light.turn_on
+              target:
+                entity_id: light.bedroom_all
+              data:
+                brightness_pct: >-
+                  {% if is_state('switch.momentary_peter_early_up', 'on') %} 
+                    0
+                  {% elif is_state('binary_sensor.bedroom_door_contact', 'on') %} 
+                    {{ 100 if states('season') in ['autumn', 'winter'] else 20 }}
+                  {% else %} 
+                    100
+                  {% endif %}
+                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+            - action: light.turn_on
+              target:
+                entity_id: light.bedroom_neopixel
+              data:
+                xy_color: [0.28, 0.11] # Pink
+                brightness_pct: 100
+
+    - if:
+        - "{{ is_state('binary_sensor.bedroom_detection', 'off') }}"
+
+      then:
+        - parallel:
+            - action: light.turn_off
+              target:
+                entity_id: light.bedroom_all
+
+            - action: light.turn_on
+              target:
+                entity_id: light.bedroom_neopixel
+              data:
+                xy_color: >-
+                  {% if is_state('binary_sensor.bedroom_detection', 'on') %}
+                    [0.14,0.19]
+                  {% elif is_state('input_select.helpers_scenes', 'scene appletv') %} 
+                    [0.44,0.52]
+                  {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
+                    [0.74,0.52]
+                  {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
+                    [0.14,0.19]
+                  {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
+                    [0.22,0.08]
+                  {% else %} 
+                    [0.70,0.30]
+                  {% endif %}
+                brightness_pct: 100

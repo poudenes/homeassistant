@@ -1,0 +1,53 @@
+#  ██╗███╗   ██╗██████╗ ██╗   ██╗████████╗     ██████╗  █████╗ ████████╗███████╗████████╗██╗███╗   ███╗███████╗
+#  ██║████╗  ██║██╔══██╗██║   ██║╚══██╔══╝     ██╔══██╗██╔══██╗╚══██╔══╝██╔════╝╚══██╔══╝██║████╗ ████║██╔════╝
+#  ██║██╔██╗ ██║██████╔╝██║   ██║   ██║        ██║  ██║███████║   ██║   █████╗     ██║   ██║██╔████╔██║█████╗  
+#  ██║██║╚██╗██║██╔═══╝ ██║   ██║   ██║        ██║  ██║██╔══██║   ██║   ██╔══╝     ██║   ██║██║╚██╔╝██║██╔══╝  
+#  ██║██║ ╚████║██║     ╚██████╔╝   ██║███████╗██████╔╝██║  ██║   ██║   ███████╗   ██║   ██║██║ ╚═╝ ██║███████╗
+#  ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝    ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+---
+###########################################################################################
+# INPUT_DATETIME
+# https://www.home-assistant.io/integrations/input_datetime/
+###########################################################################################
+helpers_dishwasher_machine_off:
+  name: "Dishwasher machine last done"
+  has_date: true
+  has_time: true
+
+helpers_dishwasher_machine_on:
+  name: "Dishwasher machine last started"
+  has_date: true
+  has_time: true
+
+helpers_dryer_machine_off:
+  name: "Dryer machine last done"
+  has_date: true
+  has_time: true
+
+helpers_dryer_machine_on:
+  name: "Dryer machine last started"
+  has_date: true
+  has_time: true
+
+helpers_washing_machine_off:
+  name: "Washing machine last done"
+  has_date: true
+  has_time: true
+
+helpers_washing_machine_on:
+  name: "Washing machine last started"
+  has_date: true
+  has_time: true
+
+#################################################################
+# HA Backup Manager
+#################################################################
+ha_backup_manager_time: # for full backup
+  name: "Backup Time"
+  has_date: false
+  has_time: true
+
+ha_backup_manager_partial_time: # for partial backup
+  name: "Partial Backup Time"
+  has_date: false
+  has_time: true

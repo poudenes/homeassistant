@@ -1,0 +1,75 @@
+#  ██████╗ ███████╗███████╗███████╗████████╗    ███████╗███████╗██████╗ ██╗  ██╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗
+#  ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗██║  ██║██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║
+#  ██████╔╝█████╗  ███████╗█████╗     ██║       █████╗  ███████╗██████╔╝███████║██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║██║   ██║██║     ███████║
+#  ██╔══██╗██╔══╝  ╚════██║██╔══╝     ██║       ██╔══╝  ╚════██║██╔═══╝ ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║██║   ██║██║     ██╔══██║
+#  ██║  ██║███████╗███████║███████╗   ██║       ███████╗███████║██║     ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝       ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝
+###########################################################################################
+# Reset ESPHome Touch by turn off and on the power of it.
+###########################################################################################
+- id: "91c10b70-3ae3-4999-b28a-cfdf7e9e143a"
+  alias: "System - Reset touch of keep on"
+
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.balcony_touch
+        - binary_sensor.bathroom_touch
+        - binary_sensor.bedroom_touch
+        - binary_sensor.cooking_touch
+        - binary_sensor.diningtable_touch
+        - binary_sensor.dressoir_touch
+        - binary_sensor.hallway_touch
+        - binary_sensor.ceiling_touch
+        - binary_sensor.sink_touch
+        - binary_sensor.toilet_touch
+        - binary_sensor.wall_touch
+        - binary_sensor.window_touch
+      to: "on"
+      for: "00:00:15"
+
+  variables:
+    name: "{{ trigger.entity_id[14:-6] }}"
+    entity: >-
+      {% if name == 'balcony' %} switch.diningroom_touch_1_power
+      {% elif name == 'bathroom' %} switch.bathroom_touch_1_power
+      {% elif name == 'bedroom' %} switch.bedroom_touch_1_power
+      {% elif name == 'diningtable' %} switch.diningtable_touch_1_power
+      {% elif name == 'diningroom' %} switch.diningroom_touch_1_power
+      {% elif name == 'hallway' %} switch.hallway_touch_1_power
+      {% elif name == 'ceiling' %} switch.kitchen_touch_1_power
+      {% elif name == 'sink' %} switch.kitchen_touch_1_power
+      {% elif name == 'cooking' %} switch.kitchen_touch_1_power
+      {% elif name == 'toilet' %} switch.toilet_touch_1_power
+      {% elif name == 'wall' %} switch.livingroom_touch_1_power
+      {% elif name == 'window' %} switch.livingroom_touch_1_power
+      {% endif %}
+
+  conditions: []
+  
+  actions:
+    - action: switch.turn_off
+      target:
+        entity_id: "{{ entity }}"
+
+    - delay: "00:00:10"
+
+    - action: switch.turn_on
+      target:
+        entity_id: "{{ entity }}"
+
+    - action: persistent_notification.create
+      data:
+        title: "HA - Notification"
+        message: |
+          The {{ name }} touch was on for 15 seconds. 
+          Did a reset on the {{ name }} touch power switch.
+        notification_id: "esp_touch_keeps_on"
+
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          The {{ name }} touch was on for 15 seconds. 
+          Did a reset on the {{ name }} touch power switch.
+        notification_id: "esp_touch_keeps_on"

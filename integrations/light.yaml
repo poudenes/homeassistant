@@ -1,0 +1,39 @@
+#  ██╗     ██╗ ██████╗ ██╗  ██╗████████╗
+#  ██║     ██║██╔════╝ ██║  ██║╚══██╔══╝
+#  ██║     ██║██║  ███╗███████║   ██║
+#  ██║     ██║██║   ██║██╔══██║   ██║
+#  ███████╗██║╚██████╔╝██║  ██║   ██║
+#  ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# RFLINK LINGHT
+# https://www.home-assistant.io/integrations/light.rflink/
+###########################################################################################
+- platform: rflink
+  automatic_add: "true"
+  devices:
+    newkaku_01401eb6_a: # Dining table
+      type: dimmable
+      name: "Diningtable all"
+    newkaku_011fad02_c: # Cooking
+      type: dimmable
+      name: "Cooking all"
+
+###########################################################################################
+# GROUP
+###########################################################################################
+- platform: group
+  name: "helpers_daytime_lights"
+  entities:
+    - light.diningtable_all
+    - light.bedroom_all
+    - light.cooking_all
+    - light.livingroom_all
+    - light.dressoir_all
+    - light.ceiling_all
+    - light.sink_all
+    - light.hallway_all
+    - light.balcony_all
+    - light.nanoleaf
+    - light.tv_sync

@@ -1,0 +1,40 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ██╗    ██╗ █████╗ ██╗  ██╗███████╗██╗   ██╗██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██║    ██║██╔══██╗██║ ██╔╝██╔════╝██║   ██║██╔══██╗
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║ █╗ ██║███████║█████╔╝ █████╗  ██║   ██║██████╔╝
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║███╗██║██╔══██║██╔═██╗ ██╔══╝  ██║   ██║██╔═══╝
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ╚███╔███╔╝██║  ██║██║  ██╗███████╗╚██████╔╝██║
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝
+###########################################################################################
+# SCENE MORNING WHEN SUN IS BELOW HORIZON AND NO TV OF MOVIE IS PLAYING
+###########################################################################################
+- id: "ce80083d-8947-4352-806a-29c6ef71cdbc"
+  alias: "Scene - Wake up"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: input_boolean.function_wakeup
+
+  conditions:
+    - condition: time
+      after: "04:00:00"
+      before: "10:00:00"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+
+  actions:
+    - if:
+        - "{{ (trigger.to_state.state == 'on') }}"
+      then:
+        - action: hue.activate_scene
+          data:
+            transition: 60
+            brightness: 127
+          target:
+            entity_id: scene.scenes_wake_up
+
+      else:
+        - action: light.turn_off
+          target:
+            entity_id:
+              - light.dressoir_all
+              - light.livingroom_all

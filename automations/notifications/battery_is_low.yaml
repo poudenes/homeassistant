@@ -1,0 +1,47 @@
+#  ██╗      ██████╗ ██╗    ██╗    ██████╗  █████╗ ████████╗████████╗███████╗██████╗ ██╗   ██╗
+#  ██║     ██╔═══██╗██║    ██║    ██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗╚██╗ ██╔╝
+#  ██║     ██║   ██║██║ █╗ ██║    ██████╔╝███████║   ██║      ██║   █████╗  ██████╔╝ ╚████╔╝
+#  ██║     ██║   ██║██║███╗██║    ██╔══██╗██╔══██║   ██║      ██║   ██╔══╝  ██╔══██╗  ╚██╔╝
+#  ███████╗╚██████╔╝╚███╔███╔╝    ██████╔╝██║  ██║   ██║      ██║   ███████╗██║  ██║   ██║
+#  ╚══════╝ ╚═════╝  ╚══╝╚══╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝
+###########################################################################################
+# NOTIFY ME WHEN SOME BATTERIES ARE LOW
+###########################################################################################
+- id: "f152dde2-643e-4269-bd7e-d5a11ba98a68"
+  alias: "Notification - Low battery nodes"
+  triggers:
+    - trigger: time
+      at: "17:00:00"
+
+  conditions: []
+
+  variables:
+    min_battery_level: 40
+    battery_ids: ""
+    battrery_current: ""
+
+  actions:
+    - variables:
+        batt_device_list: >-
+          {{ states.sensor | selectattr("entity_id", "search", ".*_battery_level") 
+            | selectattr("state", "is_number")
+            | rejectattr("state", "in", ["unavailable", "unknown"])
+            | rejectattr("entity_id", "search", "martine_mobile|galaxy_tab")
+            | rejectattr("entity_id", "search", "sm_t510|ns_telefoon")
+            | rejectattr("entity_id", "search", "peter_iphone")
+            | map(attribute="entity_id") | list }}
+    - condition: "{{ batt_device_list | length > 0 }}"
+    - repeat:
+        for_each: "{{ batt_device_list }}"
+        sequence:
+          - condition: >-
+              {% set entity = expand(repeat.item)[0] %}
+              {{ entity.state | int != 100 and entity.state | int <= 29 }}
+
+          - action: persistent_notification.create
+            data:
+              title: "HA - Notification"
+              message: >
+                {% set entity = expand(repeat.item)[0] %}
+                The {{ entity.name.split(" battery level")[0] }} is at {{ entity.state }}%.
+              notification_id: '{{ repeat.item.split(".")[1].split("_battery_level")[0] }}_low_batt_notification'

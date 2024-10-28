@@ -1,0 +1,195 @@
+#  ██╗███╗   ██╗██████╗ ██╗   ██╗████████╗     ██████╗  ██████╗  ██████╗ ██╗     ███████╗ █████╗ ███╗   ██╗
+#  ██║████╗  ██║██╔══██╗██║   ██║╚══██╔══╝     ██╔══██╗██╔═══██╗██╔═══██╗██║     ██╔════╝██╔══██╗████╗  ██║
+#  ██║██╔██╗ ██║██████╔╝██║   ██║   ██║        ██████╔╝██║   ██║██║   ██║██║     █████╗  ███████║██╔██╗ ██║
+#  ██║██║╚██╗██║██╔═══╝ ██║   ██║   ██║        ██╔══██╗██║   ██║██║   ██║██║     ██╔══╝  ██╔══██║██║╚██╗██║
+#  ██║██║ ╚████║██║     ╚██████╔╝   ██║███████╗██████╔╝╚██████╔╝╚██████╔╝███████╗███████╗██║  ██║██║ ╚████║
+#  ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝    ╚═╝╚══════╝╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝
+###########################################################################################
+---
+###########################################################################################
+# INPUT_BOOLEAN
+# https://www.home-assistant.io/integrations/input_boolean/
+###########################################################################################
+
+###########################################################################################
+# HELPERS
+###########################################################################################
+helpers_vacuum_done:
+  name: "Vacuum done"
+
+helpers_kay_home_homekit:
+  name: "Kay"
+
+helpers_peter_home_homekit:
+  name: "Peter"
+
+helpers_post_twitter_random:
+  name: "Post twitter random"
+  
+helpers_radio_play:
+  name: "Radio play"
+
+# helpers_alarm_panel: # For pull down the alarm panel
+#   name: "Alarm Panel"
+
+helpers_tracker_kay: # For pull down menus in Dashbaord
+  name: "Tracker Kay"
+
+helpers_tracker_peter: # For pull down menus in Dashbaord
+  name: "Tracker Peter"
+
+helpers_tracker_icloud3_log: # For pull down menus in Dashbaord
+  name: "Tracker iCloud3 log"
+
+helpers_hacs_updates:
+  name: "Pulldown HACS updates"
+  
+helpers_other_updates:
+  name: "Pulldown other updates"
+
+helpers_connected_devices:
+  name: "Pulldown connected devices"
+
+helpers_bedroom_light:
+  name: "Pulldown bedroom lights"
+
+helpers_bathroom_light:
+  name: "Pulldown bathroom lights"
+
+helpers_ceiling_light:
+  name: "Pulldown ceiling lights"
+
+helpers_sink_light:
+  name: "Pulldown sink lights"
+
+helpers_dressoir_light:
+  name: "Pulldown dressoir lights"
+
+helpers_livingroom_light:
+  name: "Pulldown livingroom lights"
+
+helpers_toilet_light:
+  name: "Pulldown toilet lights"
+
+helpers_balcony_light:
+  name: "Pulldown balcony lights"
+
+helpers_hue_scenes:
+  name: "Pulldown HUE Scenes"
+###########################################################################################
+# FUNCTIONS
+###########################################################################################
+function_disco:
+  name: "function Disco"
+  icon: mdi:arrow-decision-auto
+
+function_cooking:
+  name: "function Cooking"
+  icon: mdi:arrow-decision-auto
+
+function_morning:
+  name: "function Morning"
+  icon: mdi:arrow-decision-auto
+
+function_holiday_emulation:
+  name: "function Holiday"
+  icon: mdi:arrow-decision-auto
+
+function_wakeup:
+  name: "function Wake up"
+  icon: mdi:arrow-decision-auto  
+
+function_romantic:
+  name: "function Romantic"
+  icon: mdi:arrow-decision-auto
+
+function_sleeping:
+  name: "function Sleeping"
+  icon: mdi:arrow-decision-auto
+
+function_lux_low:
+  name: "function Lux Low"
+  icon: mdi:nintendo-switch
+
+function_briefing:
+  name: "function Briefing"
+  icon: mdi:nintendo-switch
+
+function_burglar:
+  name: "function Burglar"
+  icon: mdi:nintendo-switch
+
+function_dnc:
+  name: "function Disable nest control"
+  icon: mdi:nintendo-switch
+
+function_full_manual_mode:
+  name: "function Full manual mode"
+  icon: mdi:nintendo-switch
+
+function_test_below_horizon:
+  name: "function Test Below Horizon"
+  icon: mdi:nintendo-switch
+
+function_kay_learning:
+  name: "function Kay Learning"
+  icon: mdi:nintendo-switch
+
+function_vacation:
+  name: "function Vacation"
+  icon: mdi:palm-tree
+
+function_tvonly:
+  name: "function TV Only"
+  icon: mdi:television-box
+
+#################################################################
+# HA Backup Manager
+#################################################################
+ha_backup_manager_remove_old_backup:
+  name: "Remove the older backups"
+  icon: mdi:file-remove
+
+ha_backup_manager_auto_full:
+  name: "Automatic Full Backup"
+  icon: mdi:cloud-upload
+
+ha_backup_manager_auto_partial:
+  name: "Automatic Partial Backup"
+  icon: mdi:cloud-upload
+
+ha_backup_manager_addon:
+  name: "Add-ons Backup"
+  icon: mdi:format-list-bulleted
+
+ha_backup_manager_folder_local_add_ons:
+  name: "Local add-ons"
+  icon: mdi:folder-arrow-up-outline
+
+ha_backup_manager_folder_media:
+  name: "Media"
+  icon: mdi:folder-arrow-up-outline
+
+ha_backup_manager_folder_ssl:
+  name: "SSL"
+  icon: mdi:folder-arrow-up-outline
+
+ha_backup_manager_folder_share:
+  name: "Share"
+  icon: mdi:folder-arrow-up-outline
+
+ha_backup_manager_settings_for_full:
+  name: "Full Backup Settings"
+  icon: mdi:cloud-upload
+
+ha_backup_manager_settings_for_partial:
+  name: "Partial Backup Settings"
+  icon: mdi:cloud-upload
+
+ha_backup_manager_settings_for_retaining:
+  name: "Retained Backup Settings"
+  icon: mdi:archive-settings
+
+ha_backup_manager_detailed_information:
+  name: "Show Detailed Backup Information"
+  icon: mdi:details

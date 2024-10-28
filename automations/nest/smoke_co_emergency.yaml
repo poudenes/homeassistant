@@ -1,0 +1,46 @@
+#  ███╗   ██╗███████╗███████╗████████╗    ██████╗ ██████╗  ██████╗ ████████╗███████╗ ██████╗████████╗    ███████╗███╗   ███╗███████╗██████╗  ██████╗ ███████╗███╗   ██╗ ██████╗██╗   ██╗
+#  ████╗  ██║██╔════╝██╔════╝╚══██╔══╝    ██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝    ██╔════╝████╗ ████║██╔════╝██╔══██╗██╔════╝ ██╔════╝████╗  ██║██╔════╝╚██╗ ██╔╝
+#  ██╔██╗ ██║█████╗  ███████╗   ██║       ██████╔╝██████╔╝██║   ██║   ██║   █████╗  ██║        ██║       █████╗  ██╔████╔██║█████╗  ██████╔╝██║  ███╗█████╗  ██╔██╗ ██║██║      ╚████╔╝
+#  ██║╚██╗██║██╔══╝  ╚════██║   ██║       ██╔═══╝ ██╔══██╗██║   ██║   ██║   ██╔══╝  ██║        ██║       ██╔══╝  ██║╚██╔╝██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ██║╚██╗██║██║       ╚██╔╝
+#  ██║ ╚████║███████╗███████║   ██║       ██║     ██║  ██║╚██████╔╝   ██║   ███████╗╚██████╗   ██║       ███████╗██║ ╚═╝ ██║███████╗██║  ██║╚██████╔╝███████╗██║ ╚████║╚██████╗   ██║
+#  ╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝ ╚═════╝   ╚═╝       ╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝   ╚═╝
+###########################################################################################
+# NEST PROTECT EMERGENCY
+###########################################################################################
+- id: "9215a995-3ecc-4366-a45c-bfa409ec7fa1"
+  alias: "Control - Nest Control - Protect Emergency"
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.nest_protect_bedroom_smoke_status
+        - binary_sensor.nest_protect_bedroom_co_status
+        - binary_sensor.nest_protect_bedroom_heat_status
+        - binary_sensor.nest_protect_entryway_smoke_status
+        - binary_sensor.nest_protect_entryway_co_status
+        - binary_sensor.nest_protect_entryway_heat_status
+        - binary_sensor.nest_protect_living_room_smoke_status
+        - binary_sensor.nest_protect_living_room_co_status
+        - binary_sensor.nest_protect_living_room_heat_status
+      to: "on"
+
+  conditions: []
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.dressoir_all
+          - light.ceiling_all
+          - light.hallway_all
+      data:
+        xy_color: [0.70, 0.30] # Red
+        brightness_pct: 100
+
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Alarm"
+        message: |
+          NEST Protect warning:
+          An emergency has been detected on {{ trigger.to_state.name }} 
+          Please investigate IMMEDIATELY.
+        thread_id: "ha_alarm"

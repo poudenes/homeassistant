@@ -1,0 +1,209 @@
+#  ███████╗███████╗███╗   ██╗███████╗ ██████╗ ██████╗ ███████╗
+#  ██╔════╝██╔════╝████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝
+#  ███████╗█████╗  ██╔██╗ ██║███████╗██║   ██║██████╔╝███████╗
+#  ╚════██║██╔══╝  ██║╚██╗██║╚════██║██║   ██║██╔══██╗╚════██║
+#  ███████║███████╗██║ ╚████║███████║╚██████╔╝██║  ██║███████║
+#  ╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# TooGoodToGo
+###########################################################################################
+- platform: tgtg
+  scan_interval: 900
+  email: !secret tgtg_email
+  access_token: !secret tgtg_access_token
+  refresh_token: !secret tgtg_refresh_token
+  user_id: !secret tgtg_user_id
+  cookie: !secret tgtg_cookie
+
+  ###########################################################################################
+# TooGoodTankstation Euro95
+###########################################################################################
+# - platform: rest
+#   name: "Tankstation Euro95"
+#   resource: "https://www.tankplanner.nl/api/v1/price/euro95/"
+#   json_attributes_path: "$.[?(@.address=='Havenstraat 12')]"
+#   json_attributes:
+#     - organization
+#     - address
+#     - town
+#     - gps
+#   value_template: >-
+#     {{ value_json | selectattr('organization', 'eq', 'Fieten Olie') | selectattr('address', 'eq', 'Havenstraat 12') | map(attribute='price') | list | first }}
+#   scan_interval: 7200
+#   unit_of_measurement: "€"
+#   icon: mdi:fuel
+#   unique_id: gas_station_euro95
+
+###########################################################################################
+# HAVE I BEEN PWNED
+###########################################################################################
+- platform: haveibeenpwned
+  email:
+    - !secret haveibeenpwned_1
+    - !secret haveibeenpwned_2
+    - !secret haveibeenpwned_3
+    - !secret haveibeenpwned_4
+    - !secret haveibeenpwned_5
+  api_key: !secret haveibeenpwned_api
+
+###########################################################################################
+# CRYPTO INFO
+###########################################################################################
+- platform: cryptoinfo_advanced
+  id: "BTC USD"
+  cryptocurrency_name: "bitcoin"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 1
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "XRP USD"
+  cryptocurrency_name: "ripple"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 1
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "WAX USD"
+  cryptocurrency_name: "wax"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 1
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "VET USD"
+  cryptocurrency_name: "vechain"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 1
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+###########################################################################################
+# MOLD INDICATOR
+###########################################################################################
+- platform: mold_indicator
+  name: "Mold indicator"
+  indoor_temp_sensor: sensor.bathroom_temperature
+  indoor_humidity_sensor: sensor.bathroom_humidity
+  outdoor_temp_sensor: sensor.accu_weather_realfeel_temperature
+  calibration_factor: 1.10
+
+###########################################################################################
+# SENSOR P2000 Lifeliners Sensor Component
+# https://github.com/cyberjunky/home-assistant-p2000lifeliners
+###########################################################################################
+- platform: p2000lifeliners
+  name: "Trauma Heli VUmc"
+  capcodes: 120901
+  
+###########################################################################################
+# STATISTICS 
+# https://www.home-assistant.io/integrations/statistics/
+###########################################################################################
+- platform: statistics
+  name: "Master Bathroom Humidity Average Linear 24h"
+  unique_id: "14036730-f69a-43e4-8870-65957b2fabaf"
+  entity_id: sensor.bathroom_humidity
+  state_characteristic: average_linear
+  sampling_size: 50
+
+###########################################################################################
+# SENSOR RFLINK
+# https://www.home-assistant.io/integrations/rflink/
+###########################################################################################
+- platform: rflink
+  automatic_add: true
+
+###########################################################################################
+# SENSOR TIME_DATE
+# https://www.home-assistant.io/integrations/time_date/
+###########################################################################################
+- platform: time_date
+  display_options:
+    - "time"
+    - "date"
+    - "date_time"
+#    - "date_time_iso"
+#    - "time_date"
+#    - "time_utc"
+#    - "beat"
+
+###########################################################################################
+# SENSOR HISTORY_STATS
+# https://www.home-assistant.io/integrations/history_stats/
+###########################################################################################
+- platform: history_stats
+  name: "Times washing machine has been on last 14 days"
+  entity_id: binary_sensor.washing_machine
+  state: "on"
+  type: count
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "Times dryer machine has been on last 14 days"
+  entity_id: binary_sensor.dryer_machine
+  state: "on"
+  type: count
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "Times dishwasher machine has been on last 14 days"
+  entity_id: binary_sensor.dishwasher_machine
+  state: "on"
+  type: count
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "History Apple TV"
+  entity_id: select.logitech_harmony_activities
+  state: "AppleTV"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "History Nintendo"
+  entity_id: select.logitech_harmony_activities
+  state: "Nintendo"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "History Cromecast"
+  entity_id: select.logitech_harmony_activities
+  state: "Cromecast"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "History TV"
+  entity_id: select.logitech_harmony_activities
+  state: "TV"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"

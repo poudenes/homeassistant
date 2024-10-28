@@ -1,0 +1,33 @@
+#  ██████╗  █████╗ ████████╗██╗  ██╗██████╗  ██████╗  ██████╗ ███╗   ███╗    ██╗     ██╗ ██████╗ ██╗  ██╗████████╗███████╗     ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗╚══██╔══╝██║  ██║██╔══██╗██╔═══██╗██╔═══██╗████╗ ████║    ██║     ██║██╔════╝ ██║  ██║╚══██╔══╝██╔════╝    ██╔═══██╗████╗  ██║
+#  ██████╔╝███████║   ██║   ███████║██████╔╝██║   ██║██║   ██║██╔████╔██║    ██║     ██║██║  ███╗███████║   ██║   ███████╗    ██║   ██║██╔██╗ ██║
+#  ██╔══██╗██╔══██║   ██║   ██╔══██║██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║    ██║     ██║██║   ██║██╔══██║   ██║   ╚════██║    ██║   ██║██║╚██╗██║
+#  ██████╔╝██║  ██║   ██║   ██║  ██║██║  ██║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║    ███████╗██║╚██████╔╝██║  ██║   ██║   ███████║    ╚██████╔╝██║ ╚████║
+#  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝    ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝     ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# BATHROOM CONTROL LIGHTS BASED ON SENSOR IS OFF 5MIN
+###########################################################################################
+- id: "27f6366e-ad36-4c26-86ef-1a25b2f6c410"
+  alias: "Control - Light - Bathroom Lights Are On"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.bathroom_detection
+      to: "off"
+      for: "00:02:00"
+
+  conditions:
+    - "{{ is_state('switch.bathroom_light_switch', 'on') }}"
+
+  actions:
+    - action: switch.turn_off
+      target:
+        entity_id: switch.bathroom_light_switch
+
+    - action: persistent_notification.create
+      data:
+        title: "HA - Notification"
+        message: |
+          Nobody in bathroom for 3 minutes. 
+          Nobody switched off the lights.
+          Turned off bathroom switch and light.
+        notification_id: "bathroom_light_on"

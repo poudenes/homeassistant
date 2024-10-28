@@ -1,0 +1,235 @@
+>-
+  {# DARK OUTSIDE #######################################################################}
+  {%- macro dark_outside() -%}
+  {{ [
+      'It is pretty dark outside. I will turn on the outside lights now.',
+      'The sun is offical down. Exterior Cameras are now motion activated.',
+      'The sun has been ushered off the stage. Activating the perimiter cameras.',
+      'It is a little past Sunset. Time to turn on the outside lights. I am on it.',
+      'I will switch on the outside lights. It is getting dark outside.',
+      'Time to turn on the front lights. I will take care of it.',
+      'Switching to night mode! ',
+      'If you have not looked outside lately the light of the day is gone.',
+      'The outside world has switched to dark mode.'
+  ]|random }}
+  {%- endmacro -%}
+
+  {# SCENE EVENING #######################################################################}
+  {%- macro scene_evening() -%}
+    {{ [
+      "The scene evening is activated.",
+      "Evening is started turned on the scene.",
+      "I activated the scene evening.",
+      "Enjoy the eveneing you little bitches.",
+      "The sun is gone, turned on scene evening."
+    ]|random }}
+  {%- endmacro -%}
+
+  {# SCENE EDINNER #######################################################################}
+  {%- macro scene_dinner() -%}
+      "The scene dinner is activated."
+  {%- endmacro -%}
+
+  {# SCENE NINTENDO #######################################################################}
+  {%- macro scene_nintendo() -%}
+    {{ [
+      "The scene Nintendo is activated.",
+      "Again fall guys? I turned on the scene for you."
+    ]|random }}
+  {%- endmacro -%}
+
+  {# SCENE SUNSET #######################################################################}
+  {%- macro scene_sunset() -%}
+    {{ [
+      "The scene Sunset is activated.",
+      "Within 20min the sun is gone, scene sunset started",
+      "Bye Bye sun, lets welcome the scene sunset"
+    ]|random }}
+  {%- endmacro -%}
+
+  {#SCENE GOODNIGHT #######################################################################}
+  {%- macro scene_goodnight() -%}
+    {{ [
+      "The scene goodnight is activated.",
+      "Sweet, Sweet dreams. Goodnight.",
+      "Have a good night, a new day will start soon.",
+      "The scene goodnight is activated."
+    ]|random }}
+  {%- endmacro -%}
+
+  {# SCENE APPLE TV #######################################################################}
+  {%- macro scene_appletv() -%}
+    {{ [
+      "The scene apple tv is activated.",
+      ""
+      "Enjoy the movie or serie, activated the scene apple tv."
+    ]|random }}
+  {%- endmacro -%}
+
+  {# SCENE TV #######################################################################}
+  {%- macro scene_tv() -%}
+    {{ [
+      "The scene tv is activated.",
+      "You watching tv so i activated the scene tv."
+    ]|random }}
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro washing_machine_done() -%}
+      "The washing machine is done."
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro dishwasher_done() -%}
+      "The  dishwasher is done."
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro dryer_done() -%}
+      "The dryer machine is done."
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro lux_evening_on() -%}
+      "The lux level is low."
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro lux_evening_off() -%}
+      "The lux level is normal again."
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro inside_weather() -%}
+    "Inside the house, it is {{ (states('sensor.entryway_temperature') | int) }} degrees."
+  {%- endmacro -%}
+
+  {########################################################################}
+  {%- macro outside_weather() -%}
+    "Outside, it is "{{ (states('sensor.accu_weather_realfeel_temperature')) | int }}" degrees. The forcast for today is "{{ (states('sensor.accu_weather_condition_day_0d')) }}" and tomorrow it will be "{{ (states('sensor.accu_weather_condition_day_1d')) }}"."
+  {%- endmacro -%}
+
+  {########################################################################}
+
+  {########################################################################}
+  {# a macro that removes all newline characters, empty spaces, and returns formatted text and replaces underscores with spaces  #}
+  {%- macro cleanup(data) -%}
+    {%- for item in data.split("\n")  if item | trim != "" -%}
+    {{ item | trim | replace("_", " ") }} {% endfor -%}
+  {%- endmacro -%}
+  {########################################################################}
+
+
+
+  {########################################################################}
+  {# Mother of all macro's #}
+  {%- macro mother_of_all_macros() -%}
+    {% if call_no_announcement != "false" %}
+      {% if now().strftime('%H')|int < 12 and now().strftime('%H')|int > 6 %}
+          Good morning.
+      {% elif now().strftime('%H')|int >= 12 and now().strftime('%H')|int < 17 %}
+          Good afternoon.
+      {% else %}
+          Good evening.
+      {% endif %}
+    {% endif %}
+    {########################################################################}
+
+
+
+    {########################################################################}
+    {{ personarriving }}
+    {{ message }}
+    {########################################################################}
+
+    {########################################################################}
+    {% if call_washing_machine_done == 1 %}
+    {{ washing_machine_done() }}
+    {%- endif -%}
+
+    {########################################################################}
+    {% if call_dishwasher_done == 1 %}
+    {{ dishwasher_done() }}
+    {%- endif -%}
+
+    {########################################################################}
+    {% if call_dryer_done == 1 %}
+    {{ dryer_done() }}
+    {%- endif -%}
+
+    {########################################################################}
+    {% if call_lux_evening_on == 1 %}
+    {{ lux_evening_on() }}
+    {%- endif -%}
+    
+    {########################################################################}
+    {% if call_lux_evening_off == 1 %}
+    {{ lux_evening_off() }}
+    {%- endif -%}
+
+    {########################################################################}
+    {% if call_testing == 1 %}
+    {{ testing() }}
+    {%- endif -%}
+
+    {########################################################################}
+    {% if call_inside_weather == 1 %}
+    {{ inside_weather() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_outside_weather == 1 and is_state('sun.sun', 'above_horizon') %}
+    {{ outside_weather() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_dark_outside == 1 %}
+    {{ dark_outside() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_evening == 1 %}
+    {{ scene_evening() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_dinner == 1 %}
+    {{ scene_dinner() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_sunset == 1 %}
+    {{ scene_sunset() }}
+    {% endif %}
+
+    {########################################################################}
+    {%- if call_scene_nintendo == 1 %}
+    {{ scene_nintendo() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_tv == 1 %}
+    {{ scene_tv()}}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_appletv == 1 %}
+    {{ scene_appletv() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_goodnight == 1 %}
+    {{ scene_goodnight() }}
+    {% endif %}
+
+    {########################################################################}
+    {# {% if value1 is not none %} #}
+    {# {{ value1() }} #}
+    {# {% endif %} #}
+    {########################################################################}
+
+    
+
+  {########################################################################}
+  {%- endmacro -%}
+  {{- cleanup(mother_of_all_macros()) -}}

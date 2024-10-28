@@ -1,0 +1,135 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH SET LIGHTS
+###########################################################################################
+- id: "713f4c73-3792-476a-ab90-ea65d941b932"
+  alias: "Apple Watch - Control lights"
+  mode: parallel
+  triggers:
+    - trigger: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Set light"
+
+  conditions: []
+
+  actions:
+    - action: notify.mobile_app_peter_iphone
+      data:
+        title: "Light Control"
+        message: "What light you want control?"
+        data:
+          actions:
+            - action: "All"
+              title: "All"
+            - action: "Bedroom"
+              title: "Bedroom"
+            - action: "Livingroom"
+              title: "Livingroom"
+            - action: "Bathroom"
+              title: "Bathroom"
+            - action: "Hall"
+              title: "Hall"
+            - action: "Toilet"
+              title: "Toilet"
+            - action: "Kitchen"
+              title: "Kitchen"
+            - action: "Balcony"
+              title: "Balcony"
+            - action: "Diningroom"
+              title: "Diningroom"
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
+
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        light: >
+          {{
+            {
+            'Bedroom': 'light.bedroom_all',
+            'Livingroom': 'light.livingroom_all',
+            'Bathroom': 'light.bathroom_all',
+            'Hall': 'light.hallway_all',
+            'Toilet': 'light.toilet_all',
+            'Kitchen': 'light.kitchen_all',
+            'Balcony': 'light.balcony_all',
+            'Diningroom': 'light.dressoir_all',
+            }
+            [wait.trigger.event.data.actionName] }}
+
+    - action: notify.mobile_app_peter_iphone
+      data:
+        title: "Light Control"
+        message: "What status will you give the light"
+        data:
+          actions:
+            - action: "Off"
+              title: "Off"
+            - action: "On"
+              title: "On"
+            - action: "Fifty"
+              title: "50%"
+            - action: "Hundred"
+              title: "100%"
+            - action: "One"
+              title: "1%"
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: ios.notification_action_fired
+          event_data:
+            categoryName: "DYNAMIC" # DYNAMIC IS ALWAYS CAPITAL
+
+      timeout: "00:00:20"
+      continue_on_timeout: false
+
+    - variables:
+        option: "{{ wait.trigger.event.data.actionName }}"
+
+    - choose:
+        - conditions: "{{ option == 'Off' }}"
+          sequence:
+            action: light.turn_off
+            target:
+              entity_id: "{{ light }}"
+
+        - conditions: "{{ option == 'On' }}"
+          sequence:
+            action: light.turn_on
+            target:
+              entity_id: "{{ light }}"
+
+        - conditions: "{{ option == 'Fifty' }}"
+          sequence:
+            action: light.turn_on
+            target:
+              entity_id: "{{ light }}"
+            data:
+              brightness_pct: 50
+
+        - conditions: "{{ option == 'Hundred' }}"
+          sequence:
+            action: light.turn_on
+            target:
+              entity_id: "{{ light }}"
+            data:
+              brightness_pct: 100
+
+        - conditions: "{{ option == 'One' }}"
+          sequence:
+            action: light.turn_on
+            target:
+              entity_id: "{{ light }}"
+            data:
+              brightness_pct: 1

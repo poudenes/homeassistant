@@ -1,0 +1,114 @@
+#   ██████╗ ██████╗  ██████╗ ██╗   ██╗██████╗ ███████╗
+#  ██╔════╝ ██╔══██╗██╔═══██╗██║   ██║██╔══██╗██╔════╝
+#  ██║  ███╗██████╔╝██║   ██║██║   ██║██████╔╝███████╗
+#  ██║   ██║██╔══██╗██║   ██║██║   ██║██╔═══╝ ╚════██║
+#  ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║     ███████║
+#   ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# BINARY_SENSORS - COVER - FAN - LIGHT - LOCK - MEDIA_PLAYER - SWITCHES. They all go into their own DOMAIN
+###########################################################################################
+
+###########################################################################################
+# GROUP
+# https://www.home-assistant.io/integrations/group/
+###########################################################################################
+arriving: #ARRIVING - CANT BE A HELPER IN HA (GROUP DOES NOT SUPPORT INPUT_BOOLEAN YET)
+  name: "Arriving"
+  entities: []
+
+family: # FAMILY GROUP - CANT BE A HELPER IN HA (GROUP DOES NOT SUPPORT INPUT_BOOLEAN YET)
+  name: "Group family"
+  entities:
+    - input_boolean.helpers_kay_home_homekit
+    - input_boolean.helpers_peter_home_homekit
+
+###########################################################################################
+# FUNCTIONS
+###########################################################################################
+helpers_function_switches:
+  name: "Helpers all functions"
+  entities:
+    - input_boolean.function_disco
+    - input_boolean.function_lux_low
+    - input_boolean.function_romantic
+    - input_boolean.function_sleeping
+    - input_boolean.function_wakeup
+
+###########################################################################################
+# GROUP FOR NEW ESPHOME UPDATE
+###########################################################################################
+helpers_esphome_updates:
+  name: "ESPhome updates"
+  entities:
+    - update.meek_toilet_block_internet_firmware
+    - update.meek_livingroom_block_internet_firmware
+    - update.meek_kitchen_block_internet_firmware
+    - update.meek_hallway_block_internet_firmware
+    - update.meek_dressoir_block_internet_firmware
+    - update.meek_doorbell_block_internet_firmware
+    - update.meek_diningtable_block_internet_firmware
+    - update.meek_bedroom_block_internet_firmware
+    - update.meek_bathroom_block_internet_firmware
+
+###########################################################################################
+# HELPERS_SCENE_SWITCHES: the one you not turn off will be reject by automation. Example:
+###########################################################################################
+# - action: input_boolean.turn_off
+#   target:
+#     entity_id: >
+#       {{ state_attr('group.helpers_scene_switches', 'entity_id')
+#         | reject('in', ['input_boolean.scene_appletv']) | list }}
+###########################################################################################
+
+#################################################################
+# HA Backup Manager
+#################################################################
+home_assistant_backup_pack:
+  name: "Home Assistant Backup Pack"
+  entities:
+    - input_boolean.ha_backup_manager_auto_full
+    - input_boolean.ha_backup_manager_auto_partial
+    - input_boolean.ha_backup_manager_remove_old_backup
+    - input_boolean.ha_backup_manager_addon
+    - input_boolean.ha_backup_manager_folder_local_add_ons
+    - input_boolean.ha_backup_manager_folder_media
+    - input_boolean.ha_backup_manager_folder_ssl
+    - input_boolean.ha_backup_manager_folder_share
+    - input_boolean.ha_backup_manager_settings_for_full
+    - input_boolean.ha_backup_manager_settings_for_partial
+    - input_boolean.ha_backup_manager_settings_for_retaining
+    - input_boolean.ha_backup_manager_detailed_information
+    - input_button.ha_backup_manager_full_execute_manually
+    - input_button.ha_delete_backup_manually
+    - input_button.ha_backup_manager_partial_execute_manually
+    - input_select.ha_backup_manager_day
+    - input_select.ha_backup_manager_partial_day
+    - input_datetime.ha_backup_manager_time
+    - input_datetime.ha_backup_manager_partial_time
+    - input_text.ha_backup_manager_status
+    - input_number.ha_backup_manager_timeout
+    - input_number.ha_backup_manager_retained_number
+    - sensor.ha_backup_manager_last_backup_name
+    - sensor.ha_backup_manager_last_backup_dimension
+    - sensor.ha_backup_manager_last_backup_date
+    - sensor.ha_backup_manager_last_backup_type
+    - sensor.ha_backup_manager_last_backup_protected
+    - sensor.ha_backup_manager_last_backup_slug
+    - sensor.ha_backup_manager_retained_backups
+    - sensor.ha_backup_manager_archive_dimension
+    - sensor.ha_backup_manager_addon_list
+    #    - sensor.ha_backup_manager_folders
+    - sensor.ha_backup_manager_selected_folders
+    #    - shell_command.ha_backup_manager_remove_old
+    - input_boolean.ha_backup_manager_remove_old_backup
+    - automation.home_assistant_backup_system_2
+
+home_assistant_backup_selected_folders:
+  name: "Home Assistant Backup Selected Folders"
+  entities:
+    - input_boolean.ha_backup_manager_folder_local_add_ons
+    - input_boolean.ha_backup_manager_folder_media
+    - input_boolean.ha_backup_manager_folder_ssl
+    - input_boolean.ha_backup_manager_folder_share

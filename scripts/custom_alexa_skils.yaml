@@ -1,0 +1,30 @@
+#   █████╗ ██╗     ███████╗██╗  ██╗ █████╗     ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+#  ██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+#  ███████║██║     █████╗   ╚███╔╝ ███████║    ███████╗█████╔╝ ██║██║     ██║     ███████╗
+#  ██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+#  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ███████║██║  ██╗██║███████╗███████╗███████║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝
+###########################################################################################
+# SCRIPT
+# https://www.home-assistant.io/docs/scripts/
+# https://github.com/keatontaylor/alexa-actions/wiki/Alexa-Talking-to-Home-Assistant-(The-Skill)
+###########################################################################################
+
+###########################################################################################
+# ALEXA ACTIONABLE SKILLS
+###########################################################################################
+activate_alexa_actionable_notification:
+  alias: "Alexa - Actionable Notification"
+  sequence:
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.alexa_actionable_notification
+      data:
+        value: '{"text": "{{ text }}", "event": "{{ event_id }}"}'
+
+    - action: media_player.play_media
+      target:
+        entity_id: "{{ alexa_device }}"
+      data:
+        media_content_type: skill
+        media_content_id: !secret alexa_actionable_notification_id

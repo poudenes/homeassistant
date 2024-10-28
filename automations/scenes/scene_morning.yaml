@@ -1,0 +1,67 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ███╗   ███╗ ██████╗ ██████╗ ███╗   ██╗██╗███╗   ██╗ ██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ████╗ ████║██╔═══██╗██╔══██╗████╗  ██║██║████╗  ██║██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██╔████╔██║██║   ██║██████╔╝██╔██╗ ██║██║██╔██╗ ██║██║  ███╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║╚██╔╝██║██║   ██║██╔══██╗██║╚██╗██║██║██║╚██╗██║██║   ██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██║ ╚═╝ ██║╚██████╔╝██║  ██║██║ ╚████║██║██║ ╚████║╚██████╔╝
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝
+###########################################################################################
+# SCENE MORNING WHEN WE WAKEUP
+###########################################################################################
+- id: "2fd57171-58d5-408b-be64-6e7075c0bc49"
+  alias: "Scene - Morning"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: switch.momentary_scene_morning
+      from: "off"
+      to: "on"
+
+  conditions: []
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.bedroom_all
+      data:
+        brightness_pct: 1
+        kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+    - delay: "00:00:01"
+
+    - action: light.turn_on
+      target:
+        entity_id: light.bedroom_all
+      data:
+        brightness_pct: 100
+        transition: 300
+
+    - choose:
+        - conditions: "{{ states('sensor.bathroom_temperature')|int < 17 }}"
+          sequence:
+            - action: media_player.volume_set
+              target:
+                entity_id: media_player.bedroom
+              data:
+                volume_level: 0.20
+
+            - action: script.activate_alexa_actionable_notification
+              data_template:
+                text: "<amazon:effect name='whispered'> The bathroom is below 15 degrees. Do you want turn on the heating system? </amazon:effect>"
+                event_id: "alexa_custom_skill_heating_system"
+                alexa_device: "media_player.bedroom"
+
+            - wait_for_trigger:
+                - trigger: event
+                  event_type: alexa_actionable_notification
+                  event_data:
+                    event_id: alexa_custom_skill_heating_system
+                    event_response_type: ResponseYes
+
+              timeout: "00:00:30"
+              continue_on_timeout: false
+
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.entryway
+              data:
+                temperature: 23

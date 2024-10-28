@@ -1,0 +1,122 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ██╗  ██╗ ██████╗ ██╗     ██╗██████╗  █████╗ ██╗   ██╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██║  ██║██╔═══██╗██║     ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ███████║██║   ██║██║     ██║██║  ██║███████║ ╚████╔╝
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██╔══██║██║   ██║██║     ██║██║  ██║██╔══██║  ╚██╔╝
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██║  ██║╚██████╔╝███████╗██║██████╔╝██║  ██║   ██║
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
+###########################################################################################
+# SCENE FOR EMULATE SOMEONE IS HOME BUT WE ARE ON HOLIDAY
+###########################################################################################
+- id: "e3f5e72e-c3d5-4a32-a57d-d7deb2990270"
+  alias: "Scene - Emulate Vacation"
+  triggers:
+    - trigger: time_pattern
+      minutes: "/5"
+
+  conditions:
+    - "{{ is_state('input_boolean.function_vacation', 'on') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+
+  actions:
+    - choose:
+        ###########################################################################################
+        # WHEN THE SUN IS ABOVE HORIZON
+        ###########################################################################################
+        - conditions:
+            - condition: time
+              after: "15:00:00"
+              before: "21:50:00"
+
+            - condition: state
+              entity_id: input_boolean.function_holiday_emulation
+              state: "off"
+
+          sequence:
+            - action: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.function_holiday_emulation
+
+            - action: light.turn_on
+              target:
+                entity_id: light.nanoleaf
+              data:
+                brightness_pct: 30
+                effect: Fireplace
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_all
+                  - light.dressoir_all
+              data:
+                brightness_pct: 100
+                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+            - action: hue.activate_scene
+              data:
+                transition: 2
+              target:
+                entity_id: scene.scenes_balcony_rainbow
+
+            - action: script.mobile_notify_no_actionable
+              data:
+                title: "HA - Scenes"
+                message: |
+                  Enjoy holiday.
+                  Lights are on to emulate you are home.
+                thread_id: "ha_scenes"
+
+        ###########################################################################################
+        # HERE WHEN TIME IS BETWEEN TO TURN OFF THE LIGHTS
+        ###########################################################################################
+        - conditions:
+            - condition: time
+              after: "21:55:00"
+              before: "22:05:00"
+
+            - condition: state
+              entity_id: input_boolean.function_holiday_emulation
+              state: "on"
+
+          sequence:
+            - action: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.function_holiday_emulation
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.bedroom_all
+                  - light.bathroom_all
+              data:
+                brightness_pct: 50
+                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+            - action: light.turn_off
+              target:
+                entity_id:
+                  - light.dressoir_all
+                  - light.livingroom_all
+                  - light.nanoleaf
+                  - light.balcony_all
+                  - light.diningtable_all
+
+            - delay: "00:0{{ (range(5, 9)|random|int) }}:00"
+
+            - action: light.turn_off
+              target:
+                entity_id: light.bathroom_all
+
+            - delay: "00:0{{ (range(5, 10)|random|int) }}:00"
+
+            - action: light.turn_off
+              target:
+                entity_id: light.bedroom_all
+
+            - action: script.mobile_notify_no_actionable
+              data:
+                title: "HA - Scenes"
+                message: |
+                  Enjoy holiday.
+                  Lights are off to emulate you are home.
+                thread_id: "ha_scenes"

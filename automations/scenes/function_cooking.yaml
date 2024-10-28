@@ -1,0 +1,27 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗     ██████╗ ██████╗  ██████╗ ██╗  ██╗██╗███╗   ██╗ ██████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔════╝██╔═══██╗██╔═══██╗██║ ██╔╝██║████╗  ██║██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║     ██║   ██║██║   ██║█████╔╝ ██║██╔██╗ ██║██║  ███╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║     ██║   ██║██║   ██║██╔═██╗ ██║██║╚██╗██║██║   ██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ╚██████╗╚██████╔╝╚██████╔╝██║  ██╗██║██║ ╚████║╚██████╔╝
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝     ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝
+###########################################################################################
+# SCENE FOR COOKING TURN ON LIGHTS KITCHEN BRIGHTNESS 100%
+###########################################################################################
+- id: "2ed1ab56-f0df-48df-ac8e-c281fe31d92f"
+  alias: "Scene - Cooking"
+  triggers:
+    - trigger: state
+      entity_id: input_boolean.function_cooking
+
+  conditions:
+    - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.ceiling_all
+          - light.sink_all
+      data:
+        brightness_pct: "{{ 100 if is_state('input_boolean.function_cooking', 'on') else 0 }}"
+        kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"

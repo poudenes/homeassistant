@@ -1,0 +1,37 @@
+#  ██████╗  ██████╗  ██████╗ ██████╗      ██████╗ ██████╗ ███████╗███╗   ██╗        ██╗     ██████╗██╗      ██████╗ ███████╗███████╗
+#  ██╔══██╗██╔═══██╗██╔═══██╗██╔══██╗    ██╔═══██╗██╔══██╗██╔════╝████╗  ██║       ██╔╝    ██╔════╝██║     ██╔═══██╗██╔════╝██╔════╝
+#  ██║  ██║██║   ██║██║   ██║██████╔╝    ██║   ██║██████╔╝█████╗  ██╔██╗ ██║      ██╔╝     ██║     ██║     ██║   ██║███████╗█████╗
+#  ██║  ██║██║   ██║██║   ██║██╔══██╗    ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║     ██╔╝      ██║     ██║     ██║   ██║╚════██║██╔══╝
+#  ██████╔╝╚██████╔╝╚██████╔╝██║  ██║    ╚██████╔╝██║     ███████╗██║ ╚████║    ██╔╝       ╚██████╗███████╗╚██████╔╝███████║███████╗
+#  ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝     ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝    ╚═╝         ╚═════╝╚══════╝ ╚═════╝ ╚══════╝╚══════╝
+###########################################################################################
+# NOTIFY WHEN DOORS OPEN OR CLOSE
+###########################################################################################
+- id: "a7befea3-cbb9-4d40-bea6-f5ccae1e96da"
+  alias: "Notification - Door open/close"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.bedroom_door_contact
+        - binary_sensor.diningroom_door_contact
+        - binary_sensor.frondoor_door_contact
+        - binary_sensor.door_livingroom_contact
+
+  conditions:
+    - "{{ is_state('binary_sensor.group_family_manual', 'off') }}"
+
+  variables:
+    name: "{{ trigger.entity_id[14:-13] | title }}"
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Alarm"
+        message: |
+          Door open warning!:
+          {{ name }} is {{ 'open' if trigger.to_state.state == 'on' else 'closed' }}
+        thread_id: "ha_alarm"
+        soundname: "default"
+        critical: 1
+        volume: 1.0

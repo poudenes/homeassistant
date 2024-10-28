@@ -1,0 +1,55 @@
+#   ██████╗ ██████╗  ██████╗ ██╗  ██╗██╗███╗   ██╗ ██████╗     ████████╗██╗███╗   ███╗███████╗██████╗ ███████╗
+#  ██╔════╝██╔═══██╗██╔═══██╗██║ ██╔╝██║████╗  ██║██╔════╝     ╚══██╔══╝██║████╗ ████║██╔════╝██╔══██╗██╔════╝
+#  ██║     ██║   ██║██║   ██║█████╔╝ ██║██╔██╗ ██║██║  ███╗       ██║   ██║██╔████╔██║█████╗  ██████╔╝███████╗
+#  ██║     ██║   ██║██║   ██║██╔═██╗ ██║██║╚██╗██║██║   ██║       ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║
+#  ╚██████╗╚██████╔╝╚██████╔╝██║  ██╗██║██║ ╚████║╚██████╔╝       ██║   ██║██║ ╚═╝ ██║███████╗██║  ██║███████║
+#   ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝        ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝
+###########################################################################################
+# Cooking timers done
+###########################################################################################
+- id: "4bc36062-04a8-4a51-a6f8-96d8a1396e92"
+  alias: "Cooking timer is finished"
+  triggers:
+    - trigger: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.helpers_cooking_one
+      variables:
+        trigger_message: "one"
+        cooking_text: "{{ states('input_text.cooking_one') }}"
+
+    - trigger: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.helpers_cooking_two
+      variables:
+        trigger_message: "two"
+        cooking_text: "{{ states('input_text.cooking_two') }}"
+
+    - trigger: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.helpers_cooking_three
+      variables:
+        trigger_message: "three"
+        cooking_text: "{{ states('input_text.cooking_three') }}"
+
+  conditions: []
+
+  actions:
+    - action: script.engine_say
+      data:
+        media_player: media_player.livingroom
+        notify: notify.alexa_media_livingroom
+        message: "Cooking timer one is finished!. Check your {{ cooking_text }}"
+
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Notification"
+        message: |
+          The cooking timer {{ trigger_message }} is finished. 
+          Check your {{ cooking_text }}.
+        thread_id: "ha_cookiing_timers"
+        soundname: "default"
+        critical: 1
+        volume: 1.0

@@ -1,0 +1,382 @@
+#  ██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗
+#  ██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+#  ██████╔╝█████╗  ██║     ██║   ██║██████╔╝██║  ██║█████╗  ██████╔╝
+#  ██╔══██╗██╔══╝  ██║     ██║   ██║██╔══██╗██║  ██║██╔══╝  ██╔══██╗
+#  ██║  ██║███████╗╚██████╗╚██████╔╝██║  ██║██████╔╝███████╗██║  ██║
+#  ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# RECORDER
+# https://www.home-assistant.io/integrations/recorder/
+###########################################################################################
+# db_url: !secret recorder_postgres
+
+db_url: !secret recorder_mariadb
+
+purge_keep_days: 15
+auto_purge: true
+commit_interval: 5
+include:
+  domains:
+    - zone
+    - weather
+    - timer
+    - sun
+    - media_player
+    - input_datetime
+    - fan
+    - group
+    - person
+    - scene
+
+  entities:
+    # BambuLabs
+    - binary_sensor.bambulab_a1_mini_firmware_update
+    - binary_sensor.bambulab_a1_mini_hms_errors
+    - binary_sensor.bambulab_a1_mini_online
+    - binary_sensor.bambulab_a1_mini_recording_timelapse
+    - button.bambulab_a1_mini_pause_printing
+    - button.bambulab_a1_mini_resume_printing
+    - button.bambulab_a1_mini_stop_printing
+    - button.bambulab_a1_mini_force_refresh_data
+    - fan.bambulab_a1_mini_aux_fan
+    - fan.abambulab_a1_mini_cooling_fan
+    - fan.bambulab_a1_mini_cooling_fan
+    - image.bambulab_a1_mini_camera
+    - light.bambulab_a1_mini_chamber_light
+    - switch.bambulab_a1_mini_manual_refresh_mode
+    - select.bambulab_a1_mini_printing_speed
+    - sensor.bambulab_a1_mini_aux_fan_speed
+    - sensor.bambulab_a1_mini_cooling_fan_speed
+    - sensor.bambulab_a1_mini_heatbreak_fan_speed
+    - sensor.bambulab_a1_mini_print_progress
+    - sensor.bambulab_a1_mini_target_bed_temperature
+    - sensor.bambulab_a1_mini_bed_temperature
+    - sensor.bambulab_a1_mini_nozzle_target_temperature
+    - sensor.bambulab_a1_mini_nozzle_temperature
+    - sensor.bambulab_a1_mini_total_usage
+    - sensor.bambulab_a1_mini_wi_fi_signal
+    - sensor.bambulab_a1_mini_ams_lite_tray_1
+    - sensor.bambulab_a1_mini_ams_lite_tray_2
+    - sensor.bambulab_a1_mini_ams_lite_tray_3
+    - sensor.bambulab_a1_mini_ams_lite_tray_4
+    - sensor.bambulab_a1_mini_start_time
+    - sensor.bambulab_a1_mini_end_time
+    - sensor.bambulab_a1_mini_remaining_time
+    - sensor.bambulab_a1_mini_active_tray
+    - sensor.bambulab_a1_mini_active_tray_index
+    - sensor.bambulab_a1_mini_current_layer
+    - sensor.bambulab_a1_mini_current_stage
+    - sensor.bambulab_a1_mini_gcode_filename
+    - sensor.bambulab_a1_mini_nozzle_size
+    - sensor.bambulab_a1_mini_nozzle_type
+    - sensor.bambulab_a1_mini_print_status
+    - sensor.bambulab_a1_mini_print_type
+    - sensor.bambulab_a1_mini_speed_profile
+    - sensor.bambulab_a1_mini_task_name
+    - sensor.bambulab_a1_mini_total_layer_count
+
+    # Oral-B Sensors
+    - sensor.oral_b_io_series_8n_battery
+    - sensor.oral_b_io_series_8n_mode
+    - sensor.oral_b_io_series_8n_number_of_sectors
+    - sensor.oral_b_io_series_8n_pressure
+    - sensor.oral_b_io_series_8n_sector
+    - sensor.oral_b_io_series_8n_sector_timer
+    - sensor.oral_b_io_series_8n_signal_strength
+    - sensor.oral_b_io_series_8n_time
+    - sensor.oral_b_io_series_8n_toothbrush_state
+
+    # Crypto info
+    - sensor.cryptoinfo_btc_usd
+    - sensor.cryptoinfo_xrp_usd
+    - sensor.cryptoinfo_wax_usd
+    - sensor.cryptoinfo_vet_usd
+
+    - sensor.gas_station_euro95_home_lowest_price_1
+    - sensor.gas_station_euro95_home_lowest_price_2
+    - sensor.gas_station_euro95_home_lowest_price_3
+    - sensor.gas_station_euro95_home_lowest_price_4
+    - sensor.gas_station_euro95_home_lowest_price_5
+    - sensor.gas_station_euro95_work_lowest_price_1
+    - sensor.gas_station_euro95_work_lowest_price_2
+    - sensor.gas_station_euro95_work_lowest_price_3
+    - sensor.gas_station_euro95_work_lowest_price_4
+    - sensor.gas_station_euro95_work_lowest_price_5
+
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+
+    # Precense sensors and tools
+    - binary_sensor.group_family_manual
+    - input_boolean.helpers_kay_home_homekit
+    - input_boolean.helpers_peter_home_homekit
+    - device_tracker.cenkay_iphone_icloud3
+    - device_tracker.peter_iphone_icloud3
+    - sensor.cenkay_iphone_gps_accuracy
+    - sensor.peter_iphone_gps_accuracy
+
+    - calendar.work
+    - input_select.helpers_sunrise_sunset
+    - remote.woonkamer
+    - sensor.birthdays
+    - sensor.holidays
+    - sensor.adaptive_lighting_color_temperature
+    - sensor.hacs
+    - sensor.nextsunrise
+    - sensor.nextsunset
+    - sensor.processor_use
+    - sensor.season
+    - sensor.toyota_ago_apk_expiration
+    - sensor.toyota_ago_ascription_date
+    - sensor.uptime
+    - sensor.watchman_last_updated
+    - sensor.watchman_missing_entities
+    - sensor.watchman_missing_services
+    - switch.adaptive_lighting_default
+    - switch.helpers_switches
+    - switch.helpers_zwave_wallswitches
+    - switch.momentary_early_sleep
+    - switch.momentary_for_testing
+    - switch.momentary_guests
+    - switch.momentary_peter_early_up
+    - switch.newkaku_014e5906_a
+
+    # Roborock Vacuum
+    - sensor.roborock_s8_current_room
+
+    # Fan Bathroom and climate control
+    - sensor.climate_inside_temperature
+    - climate.entryway
+    - binary_sensor.hum_fan_calculate_difference
+    - sensor.master_bathroom_humidity_average_linear_24h
+    - sensor.mold_indicator
+    - input_select.helpers_master_bath_humidity_threshold
+    - sensor.fan_remote
+    - sensor.fan_speed
+    - sensor.fan_timer
+    - sensor.bathroom_average_humidity
+
+    # NEST Protect Smoke detectors
+    - binary_sensor.nest_protect_bedroom_smoke_status
+    - binary_sensor.nest_protect_bedroom_co_status
+    - binary_sensor.nest_protect_bedroom_heat_status
+    - binary_sensor.nest_protect_entryway_smoke_status
+    - binary_sensor.nest_protect_entryway_co_status
+    - binary_sensor.nest_protect_entryway_heat_status
+    - binary_sensor.nest_protect_living_room_smoke_status
+    - binary_sensor.nest_protect_living_room_co_status
+    - binary_sensor.nest_protect_living_room_heat_status
+
+    # Motion Sensors
+    - binary_sensor.bathroom_detection
+    - binary_sensor.bedroom_detection
+    - binary_sensor.hallway_closset_detection
+    - binary_sensor.hallway_detection
+    - binary_sensor.diningroom_detection
+    - binary_sensor.kitchen_detection
+    - binary_sensor.livingroom_detection
+    - binary_sensor.toilet_detection
+    - binary_sensor.door_livingroom_contact
+    - binary_sensor.frondoor_door_contact
+
+    # Waching, dryer and dishwasher machines
+    - binary_sensor.dishwasher_machine
+    - binary_sensor.dryer_machine
+    - binary_sensor.washing_machine
+
+    # Function services
+    - input_boolean.function_briefing
+    - input_boolean.function_burglar
+    - input_boolean.function_dnc
+    - input_boolean.function_full_manual_mode
+    - input_boolean.function_kay_learning
+    - input_boolean.function_disco
+    - input_boolean.function_lux_low
+    - input_boolean.function_romantic
+    - input_boolean.function_sleeping
+    - input_boolean.function_wakeup
+    - input_boolean.function_vacation
+    - input_boolean.function_holiday_emulation
+    - input_boolean.function_cooking
+
+    # Scene services
+    - switch.helpers_dinner
+    - switch.helpers_appletv
+    - switch.helpers_daytime
+    - switch.helpers_evening
+    - switch.helpers_goodnight
+    - switch.helpers_tv
+    - switch.helpers_nintendo
+    - switch.helpers_chromecast
+    - switch.momentary_scene_morning
+
+    # Lights
+    - light.balcony_all
+    - light.bathroom_all
+    - light.bedroom_all
+    - light.cooking_all
+    - light.diningtable_all
+    - light.dressoir_all
+    - light.hallway_all
+    - light.kitchen_all
+    - light.livingroom_all
+    - light.nanoleaf
+    - light.ceiling_all
+    - light.sink_all
+    - light.toilet_all
+    - light.wall_all
+    - light.window_all
+
+    # Zwave kWh and Watt sensors
+    - sensor.balcony_kwh
+    - sensor.balcony_watt
+    - sensor.xmas_tree_kwh
+    - sensor.xmas_tree_watt
+    - sensor.bedroom_kwh
+    - sensor.bedroom_watt
+    - sensor.dishwasher_kwh
+    - sensor.dishwasher_watt
+    - sensor.dryer_kwh
+    - sensor.dryer_watt
+    - sensor.fridge_kwh
+    - sensor.fridge_watt
+    - sensor.imac_kwh
+    - sensor.imac_watt
+    - sensor.kay_kwh
+    - sensor.kay_watt
+    - sensor.peter_kwh
+    - sensor.peter_watt
+    - sensor.toog_kwh
+    - sensor.toog_watt
+    - sensor.washer_kwh
+    - sensor.washer_watt
+    - sensor.xmas_1_kwh
+    - sensor.xmas_1_watt
+    - sensor.3d_printer_watt
+    - sensor.3d_printer_kwh
+
+    # Humidity and lux sensors
+    - sensor.bathroom_humidity
+    - sensor.bathroom_lux
+    - sensor.bathroom_temperature
+    - sensor.bedroom_lux
+    - sensor.bedroom_temperature
+    - sensor.diningroom_lux
+    - sensor.diningroom_temperature
+    - sensor.diningroom_door_temperature
+    - sensor.hallway_closset_lux
+    - sensor.hallway_closset_temperature
+    - sensor.hallway_lux
+    - sensor.hallway_temperature
+    - sensor.entryway_humidity
+    - sensor.entryway_temperature
+    - sensor.frondoor_door_temperature
+    - sensor.kitchen_lux
+    - sensor.kitchen_temperature
+    - sensor.livingroom_lux
+    - sensor.livingroom_temperature
+    - sensor.toilet_lux
+    - sensor.toilet_temperature
+
+    # History time watch movie/serie/tv
+    - sensor.history_apple_tv
+    - sensor.history_cromecast
+    - sensor.history_nintendo
+    - sensor.history_tv
+
+    # Energy usage daily/hourly/monthly
+    - sensor.energy_hourly
+    - sensor.energy_daily
+    - sensor.energy_weekly
+    - sensor.energy_monthly
+    - sensor.gas_hourly
+    - sensor.gas_daily
+    - sensor.gas_weekly
+    - sensor.gas_monthly
+
+    # DSMR Sensors
+    - sensor.dsmr_meter_stats_dsmr_version
+    - sensor.dsmr_meter_stats_electricity_tariff
+    - sensor.dsmr_meter_stats_long_power_failure_count
+    - sensor.dsmr_meter_stats_power_failure_count
+    - sensor.dsmr_meter_stats_rejected_telegrams
+    - sensor.dsmr_meter_stats_voltage_sag_count_l1
+    - sensor.dsmr_meter_stats_voltage_swell_count_l1
+    - sensor.dsmr_current_year_total_cost
+    - sensor.dsmr_day_consumption_electricity_cost_merged
+    - sensor.dsmr_day_consumption_gas_cost
+    - sensor.dsmr_current_month_electricity_cost_merged
+    - sensor.dsmr_current_month_gas_cost
+    - sensor.dsmr_current_year_electricity_cost_merged
+    - sensor.dsmr_current_year_gas_cost
+    - sensor.dsmr_consumption_gas_read_at
+    - sensor.dsmr_day_consumption_electricity1
+    - sensor.dsmr_day_consumption_electricity2
+    - sensor.dsmr_day_consumption_electricity_merged
+    - sensor.dsmr_reading_electricity_currently_delivered
+    - sensor.dsmr_reading_electricity_delivered_1
+    - sensor.dsmr_reading_electricity_delivered_2
+    - sensor.dsmr_reading_phase_currently_delivered_l1
+    - sensor.dsmr_reading_phase_voltage_l1
+    - sensor.dsmr_consumption_gas_currently_delivered
+    - sensor.dsmr_reading_extra_device_delivered
+    - sensor.dsmr_day_consumption_gas
+
+    # Zwave wall switches
+    - sensor.neo_plug_balcony
+    - sensor.neo_plug_bank
+    - sensor.neo_plug_bedroom
+    - sensor.neo_plug_dishwasher
+    - sensor.neo_plug_dryer
+    - sensor.neo_plug_fridge
+    - sensor.neo_plug_imac
+    - sensor.neo_plug_kay
+    - sensor.neo_plug_peter
+    - sensor.neo_plug_toog
+    - sensor.neo_plug_washer
+    - sensor.neo_plug_xmas_1
+    - sensor.neo_plug_3d_printer
+
+    # Sensors monitor times of using machines
+    - sensor.times_dishwasher_machine_has_been_on_last_14_days
+    - sensor.times_dryer_machine_has_been_on_last_14_days
+    - sensor.times_washing_machine_has_been_on_last_14_days
+
+    # ESPHome Modules switches for lights
+    - switch.balcony_light_switch
+    - switch.bathroom_light_switch
+    - switch.bedroom_light_switch
+    - switch.cooking_light_switch
+    - switch.diningtable_light_switch
+    - switch.dressoir_light_switch
+    - switch.hallway_light_switch
+    - switch.ceiling_light_switch
+    - switch.sink_light_switch
+    - switch.toilet_light_switch
+    - switch.wall_light_switch
+    - switch.window_light_switch
+
+    # Zwave Wall plugs
+    - switch.balcony_wall
+    - switch.wall_wall
+    - switch.xmas_tree_wall
+    - switch.bedroom_wall
+    - switch.dishwasher_wall
+    - switch.dryer_wall
+    - switch.fridge_wall
+    - switch.imac_wall
+    - switch.kay_wall
+    - switch.peter_wall
+    - switch.toog_wall
+    - switch.washer_wall
+    - switch.xmas_1_wall
+
+exclude:
+  domains:
+    - sensor
+  entities:
+    - sensor.icloud3_event_log
+  entity_globs:
+    - sensor.flightradar24*

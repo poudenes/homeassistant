@@ -1,0 +1,46 @@
+#  ██╗    ██╗ █████╗ ███████╗██╗  ██╗   ██████╗ ██╗███████╗██╗  ██╗   ██████╗ ██████╗ ██╗   ██╗███████╗██████╗     ██████╗  ██████╗ ███╗   ██╗███████╗
+#  ██║    ██║██╔══██╗██╔════╝██║  ██║   ██╔══██╗██║██╔════╝██║  ██║   ██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ██╔══██╗██╔═══██╗████╗  ██║██╔════╝
+#  ██║ █╗ ██║███████║███████╗███████║   ██║  ██║██║███████╗███████║   ██║  ██║██████╔╝ ╚████╔╝ █████╗  ██████╔╝    ██║  ██║██║   ██║██╔██╗ ██║█████╗
+#  ██║███╗██║██╔══██║╚════██║██╔══██║   ██║  ██║██║╚════██║██╔══██║   ██║  ██║██╔══██╗  ╚██╔╝  ██╔══╝  ██╔══██╗    ██║  ██║██║   ██║██║╚██╗██║██╔══╝
+#  ╚███╔███╔╝██║  ██║███████║██║  ██║   ██████╔╝██║███████║██║  ██║   ██████╔╝██║  ██║   ██║   ███████╗██║  ██║    ██████╔╝╚██████╔╝██║ ╚████║███████╗
+#   ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝   ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+###########################################################################################
+utility_notification:
+  alias: "Notify - Washing/Diskwasher/Dryer Done"
+  mode: parallel
+  max: 20
+
+  variables:
+    binary_sensor: "{{ 'binary_sensor.{}'.format(name) }}"
+    friendly_name: "{{ state_attr(binary_sensor, 'friendly_name') }}"
+    time_stamp: "{{ as_timestamp(now()) | timestamp_custom('%-H:%M:%S') }}"
+
+  sequence:
+    - variables:
+        start_time: "{{ as_timestamp(now()) }}"
+        start_kwh: "{{ state_attr(binary_sensor, 'kwh') }}"
+
+    - wait_for_trigger:
+        trigger: template
+        value_template: "{{ is_state(binary_sensor, 'off') }}"
+      timeout: "08:00:00"
+      continue_on_timeout: false
+
+    - variables:
+        end_time: "{{ as_timestamp(now()) }}"
+        end_kwh: "{{ state_attr(binary_sensor, 'kwh') }}"
+
+        total_time: "{{ (end_time - start_time) }}"
+        minutes: "{{ (total_time / 60) | round(0) }}"
+
+        total_kwh: "{{ (end_kwh - start_kwh) }}"
+        total_kwh_rounded: "{{ (total_kwh) | round(2) }}"
+
+        price: "{{ (0.30 * total_kwh) | round(2) }}"
+        message: "The {{ friendly_name }} is done after {{ minutes }} minutes and it used {{ total_kwh_rounded }} kWh (Cost: €{{ price }}). (Date: {{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }}). (Time:{{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }})."
+
+    - action: input_text.set_value
+      target:
+        entity_id: "input_text.{{ name }}_data"
+      data:
+        value: "Msg: {{ message }}."

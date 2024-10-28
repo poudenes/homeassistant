@@ -1,0 +1,65 @@
+#  ███╗   ███╗ ██████╗ ████████╗██╗ ██████╗ ███╗   ██╗    ██████╗ ██╗███╗   ██╗██╗███╗   ██╗ ██████╗ ██████╗  ██████╗  ██████╗ ███╗   ███╗
+#  ████╗ ████║██╔═══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██║████╗  ██║██║████╗  ██║██╔════╝ ██╔══██╗██╔═══██╗██╔═══██╗████╗ ████║
+#  ██╔████╔██║██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ██║  ██║██║██╔██╗ ██║██║██╔██╗ ██║██║  ███╗██████╔╝██║   ██║██║   ██║██╔████╔██║
+#  ██║╚██╔╝██║██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██║  ██║██║██║╚██╗██║██║██║╚██╗██║██║   ██║██╔══██╗██║   ██║██║   ██║██║╚██╔╝██║
+#  ██║ ╚═╝ ██║╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██████╔╝██║██║ ╚████║██║██║ ╚████║╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║ ╚═╝ ██║
+#  ╚═╝     ╚═╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝
+###########################################################################################
+# CONTROL LIGHT DRESSOIR WHEN GOODNIGHT SCENE IS ACTIVE
+###########################################################################################
+- id: "c55acaa0-5013-4e8a-adaa-8cced6f99bc7"
+  alias: "Motion Detection - Diningroom on/off"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.diningroom_detection
+
+  variables:
+    momentary_scene_morning: "{{ 255 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
+    function_wakeup: "{{ 'script.none' if is_state('input_boolean.function_wakeup', 'on') else 'light.turn_off' }}"
+
+  conditions:
+    - "{{ is_state('switch.dressoir_light_switch', 'off') }}"
+    - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+    - "{{ is_state('switch.momentary_guests', 'off') }}"
+    - "{{ is_state('input_boolean.function_wakeup', 'off') }}"
+
+  actions:
+    - if:
+        - "{{ is_state('binary_sensor.diningroom_detection', 'on') }}"
+
+      then:
+        - parallel:
+            - action: hue.activate_scene
+              data:
+                transition: 1
+                brightness: "{{ 75 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
+              target:
+                entity_id: scene.scenes_diningroom_night_light
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_neopixel_all
+                  - light.diningtable_neopixel
+              data:
+                xy_color: [0.28, 0.11] # Pink
+                brightness_pct: 30
+
+    - if:
+        - "{{ is_state('binary_sensor.diningroom_detection', 'off') }}"
+
+      then:
+        - parallel:
+            - action: "{{ 'script.none' if is_state('input_boolean.function_wakeup', 'on') else 'light.turn_off' }}"
+              target:
+                entity_id: light.dressoir_all
+
+            - action: "{{ 'script.none' if is_state('input_boolean.function_wakeup', 'on') else 'light.turn_on' }}"
+              target:
+                entity_id:
+                  - light.dressoir_neopixel_all
+                  - light.diningtable_neopixel
+              data:
+                xy_color: [0.70, 0.30] # Red
+                brightness_pct: 30

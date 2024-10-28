@@ -1,0 +1,34 @@
+###########################################################################################
+# Notification when dryer or washer machine is done. SMARKT THINGS
+###########################################################################################
+- id: 0c906145-8725-4001-b429-87d97ea7a9ac"
+  alias: "Notification - Dryer-Washer done"
+  triggers:
+    - trigger: state
+      entity_id: sensor.wasmachine_washer_machine_state
+      to: "stop"
+      variables:
+        trigger_message: "washing machine"
+
+    - trigger: state
+      entity_id: sensor.droger_dryer_machine_state
+      to: "stop"
+      variables:
+        trigger_message: "dryer"
+
+  conditions: []
+
+  actions:
+    - parallel:
+        - action: script.engine_say
+          data:
+            media_player: media_player.livingroom
+            notify: notify.alexa_media_livingroom
+            message: The {{ trigger_message }} is finished.
+
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - Notification"
+            message: |
+              The {{ trigger_message }} is finished.
+            thread_id: "ha_notification"

@@ -1,0 +1,120 @@
+#  ██╗    ██╗███████╗██████╗ ██╗  ██╗ ██████╗  ██████╗ ██╗  ██╗███████╗
+#  ██║    ██║██╔════╝██╔══██╗██║  ██║██╔═══██╗██╔═══██╗██║ ██╔╝██╔════╝
+#  ██║ █╗ ██║█████╗  ██████╔╝███████║██║   ██║██║   ██║█████╔╝ ███████╗
+#  ██║███╗██║██╔══╝  ██╔══██╗██╔══██║██║   ██║██║   ██║██╔═██╗ ╚════██║
+#  ╚███╔███╔╝███████╗██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║  ██╗███████║
+#   ╚══╝╚══╝ ╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝
+###########################################################################################
+# Notify me when webhook is triggered
+###########################################################################################
+- id: "4bc27643-e155-4212-82a3-296d5289e8b0"
+  alias: "Notification - Webhook trigger"
+
+  triggers:
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "ukstatus"
+      local_only: true
+      id: "ukstatus"
+
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "wud"
+      local_only: true
+      id: "wud"
+
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "nas"
+      local_only: true
+      id: "nas"
+
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "radarr"
+      local_only: true
+      id: "radarr"
+
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "sonarr"
+      local_only: true
+      id: "sonarr"
+
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "firefly"
+      local_only: true
+      id: "firefly"
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: "ukstatus"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                title: "HA - System"
+                message: |
+                  Webhook UptimeKuma:
+                  {{ trigger.json.msg }}
+                thread_id: "ha_system"
+
+        - conditions:
+            - condition: trigger
+              id: "nas"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                title: "HA - System"
+                message: |
+                  {{ trigger.json.description }}
+                thread_id: "ha_system"
+
+        - conditions:
+            - condition: trigger
+              id: "radarr"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                message: |
+                  {{ trigger.json.movie.title }} is downloaded.
+                title: Give me your properties !
+                thread_id: "ha_webhook_radarr"
+
+        - conditions:
+            - condition: trigger
+              id: "sonarr"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                message: |
+                  {{ trigger.json.msg }}
+                title: Give me your properties !
+                thread_id: "ha_webhook_sonarr"
+
+        - conditions:
+            - condition: trigger
+              id: "firefly"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                message: |
+                  {{ trigger.json.messages }}
+                title: Firefly
+                thread_id: "ha_webhook_firefly"

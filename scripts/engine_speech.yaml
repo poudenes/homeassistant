@@ -1,0 +1,81 @@
+#  ███████╗███╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗    ███████╗██████╗ ███████╗███████╗ ██████╗██╗  ██╗
+#  ██╔════╝████╗  ██║██╔════╝ ██║████╗  ██║██╔════╝    ██╔════╝██╔══██╗██╔════╝██╔════╝██╔════╝██║  ██║
+#  █████╗  ██╔██╗ ██║██║  ███╗██║██╔██╗ ██║█████╗      ███████╗██████╔╝█████╗  █████╗  ██║     ███████║
+#  ██╔══╝  ██║╚██╗██║██║   ██║██║██║╚██╗██║██╔══╝      ╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║     ██╔══██║
+#  ███████╗██║ ╚████║╚██████╔╝██║██║ ╚████║███████╗    ███████║██║     ███████╗███████╗╚██████╗██║  ██║
+#  ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝    ╚══════╝╚═╝     ╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝
+###########################################################################################
+# SPEAK ENGINE - NOTIFY SPEECH
+###########################################################################################
+engine_notify_speech:
+  alias: "TTS - Notify Engine"
+  description: "Engine to collect the message from other scripts"
+  mode: parallel
+  sequence:
+    - action: script.engine_say
+      data:
+        media_player: "{{ media_player }}"
+        message: >-
+          {%- if message is not string -%}
+            No message
+          {%- else -%}
+            {{ message }}
+          {%- endif -%}
+
+###########################################################################################
+# SPEAK ENGINE - SAY
+###########################################################################################
+engine_say:
+  alias: "TTS - Say Briefing Engine"
+  description: "Engine to collect messages from the scripts but also add aditional briefing parts to it"
+  mode: parallel
+  sequence:
+    - action: media_player.volume_set
+      target:
+        entity_id: "{{ media_player }}"
+      data:
+        volume_level: >-
+          {% if now().strftime('%H')|int < 11 and now().strftime('%H')|int > 6 %}
+            0.3
+          {% elif now().strftime('%H')|int > 11 and now().strftime('%H')|int < 19 %}
+            0.4
+          {% else %}
+            0.3
+          {% endif %}
+
+    - delay: "00:00:01"
+
+    - action: script.engine_speech_processing
+      data:
+        media_player: "{{ media_player }}"
+        notify: "{{ notify }}"
+        briefing: !include ../templates/briefing.yaml
+        title: >-
+          {%- if title is not string -%}
+            Home Assistant
+          {%- else -%}
+            {{ title }}
+          {%- endif -%}
+
+###########################################################################################
+# SPEAK ENGINE - PROSESSING
+###########################################################################################
+engine_speech_processing:
+  alias: "TTS - Processing Engine"
+  description: "Engine that collect all messages and briefing and send it to Alexa"
+  mode: parallel
+  sequence:
+    - action: "{{ notify }}"
+      data:
+        # data:
+        #   type: announce
+        #   method: all
+        title: "{{ title }}"
+        message: "{{ briefing }}"
+        target: "{{ media_player }}"
+
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.alexa_last_message
+      data:
+        value: "{{ briefing }} / {{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }} / {{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }}"

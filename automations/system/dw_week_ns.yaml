@@ -1,0 +1,57 @@
+#  ███╗   ██╗███████╗    ██████╗ ██╗    ██╗    ██╗███╗   ██╗████████╗ ██████╗      ██████╗ █████╗ ██╗
+#  ████╗  ██║██╔════╝    ██╔══██╗██║    ██║    ██║████╗  ██║╚══██╔══╝██╔═══██╗    ██╔════╝██╔══██╗██║
+#  ██╔██╗ ██║███████╗    ██║  ██║██║ █╗ ██║    ██║██╔██╗ ██║   ██║   ██║   ██║    ██║     ███████║██║
+#  ██║╚██╗██║╚════██║    ██║  ██║██║███╗██║    ██║██║╚██╗██║   ██║   ██║   ██║    ██║     ██╔══██║██║
+#  ██║ ╚████║███████║    ██████╔╝╚███╔███╔╝    ██║██║ ╚████║   ██║   ╚██████╔╝    ╚██████╗██║  ██║███████╗
+#  ╚═╝  ╚═══╝╚══════╝    ╚═════╝  ╚══╝╚══╝     ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝      ╚═════╝╚═╝  ╚═╝╚══════╝
+############################################################################################
+# Import DW NS from IMAP Content sensor into calendar.work
+###########################################################################################
+- id: "1898c692-de40-4050-8a0b-a769681f8702"
+  alias: "System - New DW NS into calendar"
+  triggers:
+    - trigger: state
+      entity_id: sensor.imap_import_dw_ns
+      attribute: Message
+
+  conditions:
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  actions:
+    - variables:
+        # message: "{{ trigger.to_state.attributes.Message | base64_decode }}"
+        # message: "{{ state_attr('sensor.imap_import_dw_ns','Message') | base64_decode }}"
+        message: "{{ state_attr('sensor.imap_import_dw_ns','Message') }}"
+        event_list: >-
+          {%- set m_list = message.rsplit('\n')|map('trim')|reject('eq', '')
+          | map('replace', '   ', ' ')
+          | map('replace', '  ', ' ') 
+          | map('replace', 'E 1009','E1009')
+          | map('replace', '= GVL','GVL 00:01 23:59 NRP NVT')
+          | select('match', '^[a-z]{2}\s\d{2}-\d{2}') | list %}
+          {%- set rest_list = m_list | select('search', ' R')|list %}
+          {%- set work_list = m_list | reject('search', ' R')|list %}
+          {%- set ns = namespace(events=[] ) %}
+
+          {%- for item in work_list if item.split(' ')[3] != '--' %}
+            {%- set date_list = item.split(' ')[1].split('-') %}
+            {%- set (month, day) = (date_list[1]|int, date_list[0]|int)%}
+            {%- set date = month~'-'~day %}
+            {%- set start = now().year~'-'~date ~' '~ item.split()[3]~':00'~now().strftime('%z') %}
+            {%- set end = now().year~'-'~date ~' '~ item.split()[4]~':00'~now().strftime('%z') %}
+            {%- set summary = item.split()[2] ~' - Zuid' %}
+            {%- set ns.events = ns.events + [{"summary": summary, "start": start, "end": end}] %}
+          {% endfor %}
+          {{ ns.events }}
+
+    - repeat:
+        for_each: "{{ event_list }}"
+        sequence:
+          - action: calendar.create_event
+            data:
+              summary: "{{ repeat.item.summary }}"
+              start_date_time: "{{ repeat.item.start }}"
+              end_date_time: "{{ repeat.item.end }}"
+              description: "Imported from DW NS"
+            target:
+              entity_id: calendar.work

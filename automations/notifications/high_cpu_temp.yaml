@@ -1,0 +1,26 @@
+#  ██╗  ██╗██╗ ██████╗ ██╗  ██╗     ██████╗██████╗ ██╗   ██╗    ████████╗███████╗███╗   ███╗██████╗
+#  ██║  ██║██║██╔════╝ ██║  ██║    ██╔════╝██╔══██╗██║   ██║    ╚══██╔══╝██╔════╝████╗ ████║██╔══██╗
+#  ███████║██║██║  ███╗███████║    ██║     ██████╔╝██║   ██║       ██║   █████╗  ██╔████╔██║██████╔╝
+#  ██╔══██║██║██║   ██║██╔══██║    ██║     ██╔═══╝ ██║   ██║       ██║   ██╔══╝  ██║╚██╔╝██║██╔═══╝
+#  ██║  ██║██║╚██████╔╝██║  ██║    ╚██████╗██║     ╚██████╔╝       ██║   ███████╗██║ ╚═╝ ██║██║
+#  ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝     ╚═════╝╚═╝      ╚═════╝        ╚═╝   ╚══════╝╚═╝     ╚═╝╚═╝
+###########################################################################################
+# NOTIFY WHEN RPI HAVE HIGH CPU TEMPERATURE
+###########################################################################################
+- id: "243c8b7c-d2df-4f34-a4b1-130ea308b36a"
+  alias: "Notification - CPU High temperature"
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_processor_temperature
+      above: 65
+
+  conditions: []
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - System"
+        message: |
+          HA CPU warning!
+          Temperature of {{ state_attr('sensor.system_monitor_processor_temperature','friendly_name') }} RPi is {{ trigger.to_state.state }} °C!
+        thread_id: "ha_system"

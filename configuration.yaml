@@ -1,0 +1,80 @@
+#  ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ ██╗   ██╗██████╗  █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ ██║   ██║██╔══██╗██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗██║   ██║██████╔╝███████║   ██║   ██║██║   ██║██╔██╗ ██║
+#  ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║██║   ██║██╔══██╗██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+#  ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝╚██████╔╝██║  ██║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
+#   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# http://patorjk.com/software/taag/#p=display&c=bash&f=ANSI%20Shadow
+# font: rectangles
+###########################################################################################
+# HOMEASSSTANT
+# https://www.home-assistant.io/docs/
+# https://www.home-assistant.io/docs/configuration/basic/
+# https://www.home-assistant.io/docs/frontend/
+###########################################################################################
+# Want learn more about:
+# https://www.home-assistant.io/integrations/bayesian/
+# https://www.home-assistant.io/integrations/compensation/
+# https://www.home-assistant.io/integrations/snmp/
+###########################################################################################
+api:
+battery_notes:
+config:
+counter:
+dhcp:
+energy:
+frontend:
+  themes: !include_dir_merge_named themes/
+history: # !include integrations/history.yaml
+homeassistant_alerts:
+media_source:
+mobile_app:
+my:
+person:
+powercalc:
+python_script:
+  allow_all_imports: true
+  hass_is_global: true
+ssdp:
+system_health:
+system_log:
+  fire_event: true
+zeroconf:
+
+alexa: !include integrations/alexa.yaml
+automation: !include_dir_merge_list automations/
+birthdays: !include integrations/birthday.yaml
+command_line: !include integrations/command_line.yaml
+calendar: !include integrations/calendar.yaml
+emulated_hue: !include integrations/emulated_hue.yaml
+fan: !include integrations/fan.yaml
+group: !include integrations/group.yaml
+homeassistant: !include integrations/homeassistant.yaml
+homekit: !include integrations/homekit_miltiple.yaml
+http: !include integrations/http.yaml
+input_button: !include integrations/input_button.yaml
+input_boolean: !include integrations/input_boolean.yaml
+input_datetime: !include integrations/input_datetime.yaml
+input_number: !include integrations/input_number.yaml
+input_select: !include integrations/input_select.yaml
+input_text: !include integrations/input_text.yaml
+ios: !include integrations/apple_watch_actions.yaml
+light: !include integrations/light.yaml
+logbook: !include integrations/logbook.yaml
+logger: !include integrations/logger.yaml
+mqtt: !include integrations/mqtt.yaml
+panel_custom: !include integrations/panel_custom.yaml
+notify: !include integrations/notify.yaml
+recorder: !include integrations/recorder.yaml
+rest_command: !include integrations//rest_command.yaml
+rflink: !include integrations/rflink.yaml
+sensor: !include integrations/sensors.yaml
+scene: !include integrations/scene.yaml
+script: !include_dir_merge_named scripts/
+shell_command: !include integrations/shell_commands.yaml
+switch: !include integrations/switches.yaml
+template: !include_dir_merge_list integrations/templates
+timer: !include integrations/timer.yaml
+utility_meter: !include integrations/utility_meter.yaml
+zone: !include integrations/zone.yaml

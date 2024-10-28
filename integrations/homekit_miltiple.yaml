@@ -1,0 +1,321 @@
+#  ██╗  ██╗ ██████╗ ███╗   ███╗███████╗██╗  ██╗██╗████████╗
+#  ██║  ██║██╔═══██╗████╗ ████║██╔════╝██║ ██╔╝██║╚══██╔══╝
+#  ███████║██║   ██║██╔████╔██║█████╗  █████╔╝ ██║   ██║
+#  ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝  ██╔═██╗ ██║   ██║
+#  ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██╗██║   ██║
+#  ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# HOMEKIT
+# https://www.home-assistant.io/integrations/homekit/
+#
+###########################################################################################
+
+###########################################################################################
+# NEST PRODUCTS
+###########################################################################################
+- port: 21105
+  name: "Nest"
+  mode: bridge
+  filter:
+    include_entities:
+      - climate.entryway
+      - binary_sensor.nest_protect_bedroom_smoke_status
+      - binary_sensor.nest_protect_bedroom_co_status
+      - binary_sensor.nest_protect_bedroom_heat_status
+      - binary_sensor.nest_protect_entryway_smoke_status
+      - binary_sensor.nest_protect_entryway_co_status
+      - binary_sensor.nest_protect_entryway_heat_status
+      - binary_sensor.nest_protect_living_room_smoke_status
+      - binary_sensor.nest_protect_living_room_co_status
+      - binary_sensor.nest_protect_living_room_heat_status
+
+  entity_config:
+    binary_sensor.bedroom_nest_protect_co_status:
+      name: "CO bedroom"
+    binary_sensor.bedroom_nest_protect_heat_status:
+      name: "Heat bedroom"
+    binary_sensor.bedroom_nest_protect_smoke_status:
+      name: "Smoke bedroom"
+    binary_sensor.dining_room_nest_protect_co_status:
+      name: "CO hallway"
+    binary_sensor.dining_room_nest_protect_heat_status:
+      name: "Heat hallweay"
+    binary_sensor.dining_room_nest_protect_smoke_status:
+      name: "Smoke hallway"
+    binary_sensor.living_room_nest_protect_co_status:
+      name: "CO livingroom"
+    binary_sensor.living_room_nest_protect_heat_status:
+      name: "Heat livingroom"
+    binary_sensor.living_room_nest_protect_smoke_status:
+      name: "Smoke livingroom"
+
+###########################################################################################
+# MOTION SENSORS
+###########################################################################################
+- port: 21106
+  name: "Motion Sensors"
+  mode: bridge
+  filter:
+    include_entities:
+      - binary_sensor.toilet_detection
+      - binary_sensor.bathroom_detection
+      - binary_sensor.hallway_detection
+      - binary_sensor.livingroom_detection
+      - binary_sensor.bedroom_detection
+      - binary_sensor.kitchen_detection
+      - binary_sensor.diningroom_detection
+      - binary_sensor.bedroom_door_contact
+      - binary_sensor.diningroom_door_contact
+      - binary_sensor.frondoor_door_contact
+      - binary_sensor.door_livingroom_contact
+
+  entity_config:
+    binary_sensor.kitchen_detection:
+      name: "Motion kitchen"
+      linked_battery_sensor: sensor.kitchen_battery_level
+      low_battery_threshold: 20
+    binary_sensor.bedroom_detection:
+      name: "Motion bedroom"
+      linked_battery_sensor: sensor.bedroom_battery_level
+      low_battery_threshold: 20
+    binary_sensor.hallway_detection:
+      name: "Motion hallway"
+      linked_battery_sensor: sensor.hallway_battery_level
+      low_battery_threshold: 20
+    binary_sensor.bathroom_detection:
+      name: "Motion bathroom"
+      linked_battery_sensor: sensor.bathroom_battery_level
+      low_battery_threshold: 20
+    binary_sensor.diningroom_detection:
+      name: "Motion diningroom"
+      linked_battery_sensor: sensor.diningroom_battery_level
+      low_battery_threshold: 20
+    binary_sensor.livingroom_detection:
+      name: "Motion livingroom"
+      linked_battery_sensor: sensor.livingroom_battery_level
+      low_battery_threshold: 20
+    binary_sensor.toilet_detection:
+      name: "Motion toilet"
+      linked_battery_sensor: sensor.toilet_battery_level
+      low_battery_threshold: 20
+
+###########################################################################################
+# LIGHT
+###########################################################################################
+- port: 21107
+  name: "Lights"
+  mode: bridge
+  filter:
+    include_entities:
+      - light.hallway_all
+      - light.wall_all
+      - light.window_all
+      - light.tv_sync
+      - light.nanoleaf
+      - light.bathroom_all
+      - light.dressoir_all
+      - light.diningtable_all
+      - light.kitchen_all
+      - light.cooking_all
+      - light.ceiling_all
+      - light.sink_all
+      - light.bedroom_all
+      - light.toilet_all
+      - light.balcony_all
+
+  entity_config:
+    light.diningtable_all:
+      name: "Diningroom"
+
+###########################################################################################
+# SWITCHES
+###########################################################################################
+- port: 21108
+  name: "Siwtches"
+  mode: bridge
+  filter:
+    include_entities:
+      # Scenes
+      - switch.helpers_dinner
+      - switch.helpers_appletv
+      - switch.helpers_daytime
+      - switch.helpers_evening
+      - switch.helpers_goodnight
+      - switch.helpers_tv
+      - switch.helpers_nintendo
+      - switch.helpers_chromecast
+      - switch.momentary_scene_morning
+
+      # Functions
+      - input_boolean.function_briefing
+      - input_boolean.function_sleeping
+      - input_boolean.function_romantic
+      - input_boolean.function_disco
+      - input_boolean.function_cooking
+      - input_boolean.function_kay_learning
+      - input_boolean.function_dnc
+      - switch.momentary_peter_early_up
+      - input_boolean.function_tvonly
+
+      # Meek switches
+      - switch.ceiling_light_switch
+      - switch.sink_light_switch
+      - switch.hallway_light_switch
+      - switch.toilet_light_switch
+      - switch.bedroom_light_switch
+      - switch.bathroom_light_switch
+      - switch.bedroom_light_switch
+      - switch.dressoir_light_switch
+      - switch.diningtable_light_switch
+      - switch.wall_light_switch
+      - switch.window_light_switch
+      - switch.balcony_light_switch
+      - switch.xmas_tree_wall
+      - switch.xmas_1_wall
+
+  entity_config:
+    input_boolean.function_briefing:
+      name: "Function Briefing"
+    input_boolean.function_sleeping:
+      name: "Function Sleeping"
+    input_boolean.function_romantic:
+      name: "Function Romantic"
+    input_boolean.function_disco:
+      name: "Function Disco"
+    input_boolean.function_cooking:
+      name: "Function Cooking"
+    input_boolean.function_kay_learning:
+      name: "Function Kay Learning"
+    switch.momentary_peter_early_up:
+      name: "Peter Early Up"
+    input_boolean.function_dnc:
+      name: "Function Disable Nest"
+    switch.ceiling_light_switch:
+      name: "Kitchen switch"
+    switch.sink_light_switch:
+      name: "Sink switch"
+    switch.hallway_light_switch:
+      name: "Hallway switch"
+    switch.toilet_light_switch:
+      name: "Toilet switch"
+    switch.bedroom_light_switch:
+      name: "Bedroom switch"
+    switch.bathroom_light_switch:
+      name: "Bathroom switch"
+    switch.dressoir_light_switch:
+      name: "Dressoir switch"
+    switch.diningtable_light_switch:
+      name: "Diningroom switch"
+    switch.wall_light_switch:
+      name: "Wall switch"
+    switch.window_light_switch:
+      name: "Window switch"
+    switch.balcony_light_switch:
+      name: "Balcony switch"
+    switch.momentary_scene_morning:
+      name: "Scene Morning"
+
+###########################################################################################
+# TEMPERATURE SENSORS
+###########################################################################################
+- port: 21109
+  name: "Temperature Sensors"
+  mode: bridge
+  filter:
+    include_entities:
+      - sensor.toilet_temperature
+      - sensor.bathroom_temperature
+      - sensor.hallway_temperature
+      - sensor.livingroom_temperature
+      - sensor.bedroom_temperature
+      - sensor.kitchen_temperature
+      - sensor.diningroom_temperature
+
+  entity_config:
+    sensor.bedroom_temperature:
+      name: "Temp. bedroom"
+      linked_battery_sensor: sensor.bedroom_battery_level
+      low_battery_threshold: 20
+    sensor.bathroom_temperature:
+      name: "Temp. bathroom"
+      linked_battery_sensor: sensor.bathroom_battery_level
+      low_battery_threshold: 20
+    sensor.kitchen_temperature:
+      name: "Temp. kitchen"
+      linked_battery_sensor: sensor.kitchen_battery_level
+      low_battery_threshold: 20
+    sensor.hallway_temperature:
+      name: "Temp. hallway"
+      linked_battery_sensor: sensor.hallway_battery_level
+      low_battery_threshold: 20
+    sensor.diningroom_temperature:
+      name: "Temp. diningroom"
+      linked_battery_sensor: sensor.diningroom_battery_level
+      low_battery_threshold: 20
+    sensor.livingroom_temperature:
+      name: "Temp. livingroom"
+      linked_battery_sensor: sensor.livingroom_battery_level
+      low_battery_threshold: 20
+    sensor.toilet_temperature:
+      name: "Temp. toilet"
+      linked_battery_sensor: sensor.toilet_battery_level
+      low_battery_threshold: 20
+
+###########################################################################################
+# MEDIA PLAYTERS
+###########################################################################################
+- port: 21110
+  name: "Mediaplayers"
+  mode: bridge
+  filter:
+    include_entities:
+      - media_player.livingroom
+      - media_player.bedroom
+      - media_player.woonkamer
+
+###########################################################################################
+# OTHER
+###########################################################################################
+- port: 21111
+  name: "Other"
+  mode: bridge
+  filter:
+    include_entities:
+      - fan.mechanical_ventilation
+      - script.alexa_clean_bedroom
+      - script.alexa_clean_hallway
+      - script.alexa_clean_kithcen
+      - script.alexa_clean_diningroom
+      - script.alexa_clean_livingroom
+      - script.alexa_clean_toilet
+      - script.alexa_clean_all
+      - script.alexa_return_base
+      - script.alexa_turn_on_appletv
+      - script.alexa_turn_on_tv
+      - script.alexa_turn_on_airplay
+      - script.alexa_turn_on_nintendo
+      - script.alexa_turn_on_morning
+      - script.alexa_turn_on_sleeping
+      - script.alexa_turn_on_goodnight
+      - script.alexa_turn_off_harmony
+      - input_boolean.helpers_peter_home_homekit
+      - input_boolean.helpers_kay_home_homekit
+
+  entity_config:
+    fan.mechanical_ventilation:
+      name: "Fan"
+###########################################################################################
+# ALARM SYSTEM
+###########################################################################################
+#- port: 21112
+#  name: "Alarm System"
+#  mode: bridge
+#  filter:
+#    include_domains:
+#      - alarm_control_panel
+
+#  entity_config:
+#    alarm_control_panel.house:
+#      code: !secret alarm_code

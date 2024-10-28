@@ -1,0 +1,140 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗     ██████╗  ██████╗  ██████╗ ██████╗ ███╗   ██╗██╗ ██████╗ ██╗  ██╗████████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔════╝ ██╔═══██╗██╔═══██╗██╔══██╗████╗  ██║██║██╔════╝ ██║  ██║╚══██╔══╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║  ███╗██║   ██║██║   ██║██║  ██║██╔██╗ ██║██║██║  ███╗███████║   ██║
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║   ██║██║   ██║██║   ██║██║  ██║██║╚██╗██║██║██║   ██║██╔══██║   ██║
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝██║ ╚████║██║╚██████╔╝██║  ██║   ██║
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝     ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝
+###########################################################################################
+# SCENE GOODNIGHT WHEN WE GONNA SLEEP 1/2
+###########################################################################################
+- id: "54898805-7986-46e3-8fc9-9485de89e8b1"
+  alias: "Scene - Goodnight 1/2"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_scenes
+      to: "scene goodnight"
+
+  conditions: []
+
+  variables:
+    guests_on: "{{ is_state('switch.momentary_guests', 'on') }}"
+
+  actions:
+    - parallel:
+        - continue_on_error: true
+          action: script.engine_say
+          data:
+            media_player: media_player.livingroom
+            notify: notify.alexa_media_livingroom
+            call_scene_goodnight: 1
+
+        - action: input_boolean.turn_off
+          target:
+            entity_id: group.helpers_function_switches
+
+        ###########################################################################################
+        # When scene started on daylight
+        ###########################################################################################
+        - action: "{{ 'switch.turn_on' if is_state('input_select.helpers_sunrise_sunset', 'above_horizon') else 'script.none' }}"
+          target:
+            entity_id: switch.momentary_early_sleep
+
+        - delay: "00:00:02"
+        ###########################################################################################
+        # END  When scene started on daylight
+        ###########################################################################################
+
+        ###########################################################################################
+        # Guest sleepover part
+        ###########################################################################################
+        - action: "{{ 'switch.turn_on' if is_state('switch.momentary_guests', 'on') else 'switch.turn_off' }}"
+          target:
+            entity_id:
+              - switch.window_light_switch
+              - switch.wall_light_switch
+
+        - action: "{{ 'script.none' if is_state('switch.momentary_guests', 'on') else 'light.turn_off' }}"
+          target:
+            entity_id: light.livingroom_all
+        ###########################################################################################
+        # END - Guest sleepover part
+        ###########################################################################################
+
+        - action: light.turn_on
+          target:
+            entity_id: light.bedroom_all
+          data:
+            brightness_pct: >
+              {% if is_state('switch.momentary_peter_early_up', 'on') %} 
+                0
+              {% elif is_state('binary_sensor.bedroom_detection', 'on') and is_state('binary_sensor.bedroom_door_contact', 'on') %}
+                {{ 100 if states('season') in ['autumn', 'winter'] else 70 }}
+              {% else %} 
+                100
+              {% endif %}
+            kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+        - action: light.turn_on
+          target:
+            entity_id: light.bathroom_all
+          data:
+            brightness_pct: "{{ 0 if is_state('switch.momentary_peter_early_up', 'on') else 100 }}"
+            kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+    - action: light.turn_off
+      target:
+        entity_id:
+          - light.dressoir_all
+          - light.hallway_all
+          - light.nanoleaf
+          - light.balcony_all
+          - light.cooking_all
+
+    - action: light.turn_on
+      target:
+        entity_id: light.diningtable_all
+      data:
+        brightness_pct: "{{ 98 if is_state('input_boolean.function_kay_learning', 'on') else 0 }}"
+
+    - action: "{{ 'script.none' if is_state('switch.momentary_peter_early_up', 'on') else 'remote.turn_off' }}"
+      target:
+        entity_id: remote.logitech_harmony
+
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.function_full_manual_mode
+
+    - action: switch.turn_off
+      target:
+        entity_id: >
+          {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+            | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+
+    - action: rest_command.scene_check
+      data:
+        payload: >
+          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
+          {"friendly_name": "Scene"}}
+
+    - parallel:
+        - sequence:
+            - wait_template: "{{ is_state('binary_sensor.kitchen_detection', 'off') }}"
+              timeout: "00:10:00"
+              continue_on_timeout: true
+
+            - action: light.turn_off
+              target:
+                entity_id:
+                  - light.ceiling_all
+                  - light.sink_all
+
+        - sequence:
+            - wait_template: "{{ is_state('binary_sensor.toilet_detection', 'off') }}"
+              timeout: "00:10:00"
+              continue_on_timeout: true
+
+            - action: homeassistant.turn_off
+              target:
+                entity_id:
+                  - light.toilet_all

@@ -1,0 +1,92 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH FIRST TEST SCRIPT
+###########################################################################################
+- id: "790dfe99-1380-4920-ae4c-09b633651ee8"
+  alias: "Apple Watch - Motion Detected"
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.diningroom_door_contact
+        - binary_sensor.frondoor_door_contact
+        - binary_sensor.door_livingroom_contact
+        - binary_sensor.bedroom_door_contact
+        - binary_sensor.toilet_detection
+        - binary_sensor.bathroom_detection
+        - binary_sensor.hallway_detection
+        - binary_sensor.livingroom_detection
+        - binary_sensor.bedroom_detection
+        - binary_sensor.kitchen_detection
+        - binary_sensor.diningroom_detection
+      to: "on"
+
+  conditions:
+    - "{{ is_state('binary_sensor.group_family_manual', 'off') }}"
+    - "{{ is_state('input_boolean.function_burglar', 'off') }}"
+
+  actions:
+    - action: input_boolean.turn_on
+      entity_id: input_boolean.function_burglar
+
+    - action: notify.mobile_app_peter_iphone
+      data:
+        title: "Apple Action - Motion detected!"
+        message: "{{ trigger.from_state.name }}"
+        data:
+          actions:
+            - action: "Turn off alarm"
+              title: "Turn off alarm"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+          push:
+            sound:
+              name: "default"
+              critical: 1
+              volume: 1.0
+
+    - action: scene.create
+      data:
+        scene_id: alarm
+        snapshot_entities:
+          - light.dressoir_all
+          - light.livingroom_all
+          - light.bedroom_all
+          - light.kitchen_all
+
+    - delay: "00:00:01"
+
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.dressoir_all
+          - light.livingroom_all
+          - light.bedroom_all
+          - light.kitchen_all
+      data:
+        effect: 8
+        brightness_pct: 100
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: ios.notification_action_fired
+          event_data:
+            actionName: "Turn off alarm"
+
+        - trigger: state
+          entity_id: input_boolean.function_burglar
+          to: "off"
+
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.function_burglar
+
+    - action: scene.turn_on
+      target:
+        entity_id: scene.alarm

@@ -1,0 +1,50 @@
+#  ██████╗ ██╗██████╗ ████████╗██╗  ██╗██████╗  █████╗ ██╗   ██╗
+#  ██╔══██╗██║██╔══██╗╚══██╔══╝██║  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+#  ██████╔╝██║██████╔╝   ██║   ███████║██║  ██║███████║ ╚████╔╝ 
+#  ██╔══██╗██║██╔══██╗   ██║   ██╔══██║██║  ██║██╔══██║  ╚██╔╝  
+#  ██████╔╝██║██║  ██║   ██║   ██║  ██║██████╔╝██║  ██║   ██║   
+#  ╚═════╝ ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+#                                                               
+---
+###########################################################################################
+# ALL Birthdays 
+###########################################################################################
+config:
+    attributes:
+      weeks_until_birthday: "{{ ((this.state or -1) / 7) | int }}"
+
+birthdays:
+  - unique_id: "1c664965-bfb8-43cb-a8ce-2cbfb311b9f7"
+    name: !secret family_name_1
+    icon: "mdi:zodiac-pisces"
+    date_of_birth: !secret date_of_birth_1
+    attributes:
+      past_away: "yes"
+      
+  - unique_id: "9bd1fed2-3b17-4231-8a09-285cb4509870"
+    name: !secret family_name_2
+    date_of_birth: !secret date_of_birth_2
+    icon: "mdi:zodiac-gemini"
+    attributes:
+      past_away: "yes"
+
+  - unique_id: "a1f9b3d7-4bcd-4527-ae3e-b81bb3362dda"
+    name: !secret family_name_3
+    date_of_birth: !secret date_of_birth_3
+    icon: "mdi:zodiac-taurus"
+    attributes:
+      past_away: "no"
+
+  - unique_id: "de0035da-8d5b-4dcb-9fa9-72c0461db434"
+    name: !secret family_name_4
+    date_of_birth: !secret date_of_birth_4
+    icon: "mdi:zodiac-pisces"
+    attributes:
+      past_away: "no"
+
+  - unique_id: "86588bff-63e4-459d-ba11-a330bff7f0fa"
+    name: !secret family_name_5
+    date_of_birth: !secret date_of_birth_5
+    icon: "mdi:zodiac-leo"
+    attributes:
+      past_away: "no"

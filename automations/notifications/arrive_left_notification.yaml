@@ -1,0 +1,38 @@
+#   █████╗ ██████╗ ██████╗ ██╗██╗   ██╗███████╗        ██╗    ██╗     ███████╗███████╗████████╗    ██╗  ██╗ ██████╗ ███╗   ███╗███████╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║██║   ██║██╔════╝       ██╔╝    ██║     ██╔════╝██╔════╝╚══██╔══╝    ██║  ██║██╔═══██╗████╗ ████║██╔════╝
+#  ███████║██████╔╝██████╔╝██║██║   ██║█████╗        ██╔╝     ██║     █████╗  █████╗     ██║       ███████║██║   ██║██╔████╔██║█████╗
+#  ██╔══██║██╔══██╗██╔══██╗██║╚██╗ ██╔╝██╔══╝       ██╔╝      ██║     ██╔══╝  ██╔══╝     ██║       ██╔══██║██║   ██║██║╚██╔╝██║██╔══╝
+#  ██║  ██║██║  ██║██║  ██║██║ ╚████╔╝ ███████╗    ██╔╝       ███████╗███████╗██║        ██║       ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████╗
+#  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝    ╚═╝        ╚══════╝╚══════╝╚═╝        ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+###########################################################################################
+# PETER / KAY LEAVE / ARRIVE HOME
+###########################################################################################
+- id: "633c8ed7-8fb9-4385-9154-3857798c6e36"
+  alias: "Notification - Left/Arrive home"
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_boolean.helpers_peter_home_homekit
+        - input_boolean.helpers_kay_home_homekit
+
+  conditions: []
+
+  actions:
+    - if: "{{ trigger.to_state.state == 'off' }}"
+      then:
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - Person"
+            message: |
+              {{ trigger.to_state.name }} Presence
+              {{ trigger.to_state.name }} left home
+            thread_id: "ha_persons"
+
+      else:
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - Person"
+            message: |
+              {{ trigger.to_state.name }} Presence
+              {{ trigger.to_state.name }} arrived home
+            thread_id: "ha_persons"

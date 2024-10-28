@@ -1,0 +1,35 @@
+#  ██████╗ ███████╗███████╗████████╗      ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ █████╗ ███╗   ██╗██████╗ 
+#  ██╔══██╗██╔════╝██╔════╝╚══██╔══╝     ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔══██╗████╗  ██║██╔══██╗
+#  ██████╔╝█████╗  ███████╗   ██║        ██║     ██║   ██║██╔████╔██║██╔████╔██║███████║██╔██╗ ██║██║  ██║
+#  ██╔══██╗██╔══╝  ╚════██║   ██║        ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══██║██║╚██╗██║██║  ██║
+#  ██║  ██║███████╗███████║   ██║        ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║██████╔╝
+#  ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝         ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ 
+###########################################################################################
+---
+###########################################################################################
+# REST COMMAND
+# https://www.home-assistant.io/integrations/rest_command/
+###########################################################################################
+nanoleaf:
+  url: http://192.168.100.2:16021/api/v1/IgnTWiV2GDWsLwE02mhme1HMMnBR8JmM/effects
+  method: PUT
+  payload: >
+    { "write" : {"command": "display", "animType": "static", "animData":
+    {%- set all = [ 15, 9, 1, 4, 7, 2, 14, 16, 6, 8, 18, 13, 17, 3, 12, 10, 19, 5 ] %}
+    {%- set ns = namespace(panels=[panels | count | string]) %}
+    {%- for panel in panels %}
+    {%- set ns.panels = ns.panels + [ '{} 1 {} {} {} 0 20'.format(all[panel.number-1], panel.r, panel.g, panel.b) ] %}
+    {%- endfor %}
+    "{{ ns.panels | join(' ') }}",
+    "loop": false, "palette": [], "colorType": "HSB"}
+    }
+  content_type: 'application/json'
+
+scene_check:
+  url: http://192.168.100.62:8123/api/states/sensor.scenes_from_production_ha
+  method: POST
+  headers:
+    Authorization: !secret ha_scene_to_ha_nas
+  payload: '{{ payload }}'
+  content_type: 'application/json'
+

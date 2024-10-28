@@ -1,0 +1,58 @@
+#  ██╗   ██╗████████╗██╗██╗     ██╗████████╗██╗   ██╗     ███╗   ███╗███████╗████████╗███████╗██████╗ 
+#  ██║   ██║╚══██╔══╝██║██║     ██║╚══██╔══╝╚██╗ ██╔╝     ████╗ ████║██╔════╝╚══██╔══╝██╔════╝██╔══██╗
+#  ██║   ██║   ██║   ██║██║     ██║   ██║    ╚████╔╝      ██╔████╔██║█████╗     ██║   █████╗  ██████╔╝
+#  ██║   ██║   ██║   ██║██║     ██║   ██║     ╚██╔╝       ██║╚██╔╝██║██╔══╝     ██║   ██╔══╝  ██╔══██╗
+#  ╚██████╔╝   ██║   ██║███████╗██║   ██║      ██║███████╗██║ ╚═╝ ██║███████╗   ██║   ███████╗██║  ██║
+#   ╚═════╝    ╚═╝   ╚═╝╚══════╝╚═╝   ╚═╝      ╚═╝╚══════╝╚═╝     ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+---
+###########################################################################################
+# https://www.home-assistant.io/integrations/utility_meter/
+###########################################################################################
+energy_hourly:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  name: "Energy hourly"
+  cycle: hourly
+  unique_id: "59640602-b730-4185-9f1d-77c901bf8674"
+
+energy_daily:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  name: "Energy daily"
+  cycle: daily
+  unique_id: "00611ac1-4ef1-4e1a-8101-9c4085398190"
+
+energy_weekly:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  name: "Energy weekly"
+  cycle: weekly
+  unique_id: "b37cfd63-a822-4228-b3b8-37400cb95539"
+
+energy_monthly:
+  source: sensor.dsmr_reading_phase_currently_delivered_l1
+  name: "Energy monthly"
+  cycle: monthly
+  unique_id: "d2e0e337-d7f3-417c-ac1f-c165e292a324"
+
+gas_hourly:
+  source: sensor.dsmr_day_consumption_gas
+  name: "Gas hourly"
+  cycle: hourly
+  unique_id: "c2589e98-1383-41b0-8cd9-3605a672e9c3"
+
+gas_daily:
+  source: sensor.dsmr_day_consumption_gas
+  name: "Gas daily"
+  cycle: daily
+  unique_id: "fe5c5ac0-3f88-4211-bdb5-eb2391ee6ad2"
+
+gas_weekly:
+  source: sensor.dsmr_day_consumption_gas
+  name: "Gas weekly"
+  cycle: weekly
+  unique_id: "4d69d98d-c827-45e9-bb44-ee8f8a7572d6"
+
+gas_monthly:
+  source: sensor.dsmr_day_consumption_gas
+  name: "Gas monthly"
+  cycle: monthly
+  unique_id: "41d5e9aa-c751-4463-9769-40211e7f8608"

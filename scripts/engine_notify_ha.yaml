@@ -1,0 +1,43 @@
+#  ███████╗███╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ████████╗██╗███████╗██╗   ██╗    ██╗  ██╗ █████╗      █████╗ ██████╗ ██████╗
+#  ██╔════╝████╗  ██║██╔════╝ ██║████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝╚██╗ ██╔╝    ██║  ██║██╔══██╗    ██╔══██╗██╔══██╗██╔══██╗
+#  █████╗  ██╔██╗ ██║██║  ███╗██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║   ██║   ██║█████╗   ╚████╔╝     ███████║███████║    ███████║██████╔╝██████╔╝
+#  ██╔══╝  ██║╚██╗██║██║   ██║██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║   ██║   ██║██╔══╝    ╚██╔╝      ██╔══██║██╔══██║    ██╔══██║██╔═══╝ ██╔═══╝
+#  ███████╗██║ ╚████║╚██████╔╝██║██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝   ██║   ██║██║        ██║       ██║  ██║██║  ██║    ██║  ██║██║     ██║
+#  ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝        ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝     ╚═╝
+###########################################################################################
+# SCRIPT
+# https://www.home-assistant.io/docs/scripts/
+###########################################################################################
+
+###########################################################################################
+# NOTIFY MOBILE APP HA MESSAGE ENGINE WITHOUT ACTION IN NOTIFICATION
+###########################################################################################
+mobile_notify_no_actionable:
+  alias: "Notify - Mobile App Engine without category"
+  description: "Notify App Mobile Engine to send messages to my mobile phone without category"
+  mode: parallel
+
+  sequence:
+    - action: notify.mobile_app_peter_iphone
+      data:
+        message: "{{ 'Message not set' if message is not defined else message }}"
+        title: "{{ 'Title not set' if title is not defined else title }}"
+        data:
+          subtitle: "{{ '' if subtitle is not defined else subtitle }}"
+          image: "{{ '' if img is not defined else img }}"
+          push:
+            thread-id: "{{ 'home_assistant' if thread_id is not defined else thread_id }}"
+            sound:
+              name: "{{ 'none' if soundname is not defined else soundname }}"
+              critical: "{{ 0 if critical is not defined else critical }}"
+              volume: "{{ 0 if volume is not defined else volume }}"
+          actions:
+            - action: "{{ 'none' if uri is not defined else uri }}"
+              title: "{{ 'none' if buttontitle is not defined else buttontitle }}" #"{{ buttontitle }}"
+              uri: "{{ 'none' if url is not defined else url }}" #"{{ url }}"
+
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.engine_ha_app
+      data:
+        value: "{{ 'Message not set' if message is not defined else message }} / {{ as_timestamp(now())|timestamp_custom('%d-%m-%Y') }} / {{ as_timestamp(now())|timestamp_custom('%H:%M:%S') }}"

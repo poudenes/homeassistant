@@ -1,0 +1,52 @@
+#  ████████╗██████╗  █████╗ ██╗  ██╗████████╗
+#  ╚══██╔══╝██╔══██╗██╔══██╗██║ ██╔╝╚══██╔══╝
+#     ██║   ██████╔╝███████║█████╔╝    ██║   
+#     ██║   ██╔══██╗██╔══██║██╔═██╗    ██║   
+#     ██║   ██║  ██║██║  ██║██║  ██╗   ██║   
+#     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
+###########################################################################################
+---
+###########################################################################################
+# https://github.com/dylandoamaral/trakt-integration
+###########################################################################################
+language: en
+timezone: Europe/Amsterdam
+sensors:
+  recommendation:
+    show:
+      max_medias: 10
+    movie:
+      max_medias: 10
+  upcoming:
+    show:
+      days_to_fetch: 90
+      max_medias: 20
+    new_show:
+      days_to_fetch: 90
+      max_medias: 20
+    movie:
+      days_to_fetch: 90
+      max_medias: 20
+    # premiere:
+    #   days_to_fetch: 90
+    #   max_medias: 3
+    # dvd:
+    #   days_to_fetch: 90
+    #   max_medias: 3
+  next_to_watch:
+    all:
+      max_medias: 20
+      # exclude:
+      #   - veep
+      #   - the-original
+      #   - friends
+    # only_aired:
+    #   max_medias: 5
+    #   exclude:
+    #     - veep
+    #     - the-original
+    #     - friends
+    # only_upcoming:
+    #   max_medias: 20
+    # only_upcoming:
+    #   max_medias: 5

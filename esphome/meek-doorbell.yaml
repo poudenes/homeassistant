@@ -1,0 +1,149 @@
+#########################################################
+# Below all fixed settings for doorbell PCB
+#########################################################
+substitutions:
+  devicename: meek-doorbell
+  friendly: Doorbell
+  ip: 192.168.100.211
+  neopixel: GPIO02 # (D4)
+  gpio_relay4: GPIO13 # (D7)
+
+#########################################################
+# Everything below can be copy/paste without problem
+#########################################################
+packages:
+  wifi: !include defaults/wifi.yaml
+  # device_base: !include defaults/for_all_devices.yaml
+
+esphome:
+  name: ${devicename}
+  on_boot:
+    priority: 600
+    then:
+      - lambda: WiFi.setPhyMode(WIFI_PHY_MODE_11G); 
+  
+# WIFI_PHY_MODE_11B: 802.11b mode, WIFI_PHY_MODE_11G: 802.11g mode, WIFI_PHY_MODE_11N: 802.11n mode
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+
+api:
+  encryption:
+    key: !secret api_key
+  reboot_timeout: 15min
+
+  # on_client_connected:
+  #   - homeassistant.service:
+  #       service: persistent_notification.create
+  #       data:
+  #         title: "HA - Notification"
+  #         message: "Meek ${friendly} connected again"
+  #         notification_id: "Meek ${friendly}"
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+captive_portal:
+
+web_server:
+  port: 80
+  
+preferences:
+  flash_write_interval: 1min
+  
+logger:
+  level: INFO
+  
+ota:
+  - platform: esphome
+    password: !secret password
+
+safe_mode:
+  reboot_timeout: 0s
+
+button:
+  - platform: factory_reset
+    name: "${friendly} - Reset"
+
+switch:
+  - platform: safe_mode
+    name: "${friendly} - safe mode"
+    id: "${friendly}_safe_mode"
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: ${gpio_relay4}
+      inverted: true
+    name: "${friendly} - Doorbell"
+
+  - platform: status
+    name: "${friendly} - Connection status"
+    
+sensor:
+  - platform: wifi_signal
+    id: "wifi_db_signal"
+    name: "${friendly} - Wifi Signal"
+    update_interval: 5min
+
+  - platform: uptime
+    name: "${friendly} - Uptime"
+    update_interval: 5min
+
+  - platform: template
+    name: "${friendly} WiFi Percentage"
+    id: wifi_percentage
+    entity_category: diagnostic
+    state_class: measurement
+    update_interval: 10s
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    icon: mdi:wifi
+    lambda: >
+      auto signal = id(wifi_db_signal).state;
+      float perc = 0;
+      if (signal < -92.0) 
+        perc = 100.0; 
+      else if (signal > -21.0) 
+        perc = 1.0; 
+      else 
+        perc = round(( -0.0154 * signal * signal )-( 0.3794 * signal ) + 98.182 );
+
+      if(perc <= 0)
+        return 0.0;
+      else if(perc >= 100)
+        return 100.0;
+      else
+        return perc;
+      
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly} - IP"
+      icon: mdi:lan
+    ssid:
+      name: "${friendly} - SSID"
+      icon: mdi:lan
+    bssid:
+      name: "${friendly} - BSSID"
+      icon: mdi:lan
+    mac_address:
+      name: "${friendly} - MAC"
+      icon: mdi:lan
+
+  - platform: version
+    name: "${friendly} - Version"
+    hide_timestamp: true
+
+light:
+  - platform: neopixelbus
+    default_transition_length: 0s
+    type: GRB
+    variant: 800KBPS
+    pin: ${neopixel}
+    num_leds: 1
+    name: "${friendly} - Neopixel"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: neopixel

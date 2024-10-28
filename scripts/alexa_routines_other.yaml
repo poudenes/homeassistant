@@ -1,0 +1,48 @@
+#   █████╗ ██╗     ███████╗██╗  ██╗ █████╗     ██████╗  ██████╗ ██╗   ██╗████████╗██╗███╗   ██╗███████╗███████╗
+#  ██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██║████╗  ██║██╔════╝██╔════╝
+#  ███████║██║     █████╗   ╚███╔╝ ███████║    ██████╔╝██║   ██║██║   ██║   ██║   ██║██╔██╗ ██║█████╗  ███████╗
+#  ██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ██╔══██╗██║   ██║██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  ╚════██║
+#  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ██║  ██║╚██████╔╝╚██████╔╝   ██║   ██║██║ ╚████║███████╗███████║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
+###########################################################################################
+# ALEXA ROUTINE OTHER
+###########################################################################################
+alexa_turn_on_morning:
+  alias: "Routine Morning"
+  icon: mdi:script
+  sequence:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.momentary_scene_morning
+
+alexa_turn_on_sleeping:
+  alias: "Routine Sleeping"
+  icon: mdi:script
+  sequence:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.function_sleeping
+
+alexa_turn_on_goodnight:
+  alias: "Routine Goodnight"
+  icon: mdi:script
+  sequence:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.helpers_goodnight
+
+alexa_turn_on_early_sleep:
+  alias: "Routine Early Sleep"
+  icon: mdi:script
+  sequence:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.momentary_early_sleep
+
+alexa_turn_on_peter_early_sleep:
+  alias: "Routine Peter Early Sleep"
+  icon: mdi:script
+  sequence:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.momentary_peter_early_up

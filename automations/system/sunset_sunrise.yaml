@@ -1,0 +1,60 @@
+#  ███████╗███████╗████████╗     █████╗ ██████╗  ██████╗ ██╗   ██╗███████╗    ██████╗ ███████╗██╗      ██████╗ ██╗    ██╗    ██╗  ██╗ ██████╗ ██████╗ ██╗███████╗ ██████╗ ███╗   ██╗
+#  ██╔════╝██╔════╝╚══██╔══╝    ██╔══██╗██╔══██╗██╔═══██╗██║   ██║██╔════╝    ██╔══██╗██╔════╝██║     ██╔═══██╗██║    ██║    ██║  ██║██╔═══██╗██╔══██╗██║╚══███╔╝██╔═══██╗████╗  ██║
+#  ███████╗█████╗     ██║       ███████║██████╔╝██║   ██║██║   ██║█████╗      ██████╔╝█████╗  ██║     ██║   ██║██║ █╗ ██║    ███████║██║   ██║██████╔╝██║  ███╔╝ ██║   ██║██╔██╗ ██║
+#  ╚════██║██╔══╝     ██║       ██╔══██║██╔══██╗██║   ██║╚██╗ ██╔╝██╔══╝      ██╔══██╗██╔══╝  ██║     ██║   ██║██║███╗██║    ██╔══██║██║   ██║██╔══██╗██║ ███╔╝  ██║   ██║██║╚██╗██║
+#  ███████║███████╗   ██║       ██║  ██║██████╔╝╚██████╔╝ ╚████╔╝ ███████╗    ██████╔╝███████╗███████╗╚██████╔╝╚███╔███╔╝    ██║  ██║╚██████╔╝██║  ██║██║███████╗╚██████╔╝██║ ╚████║
+#  ╚══════╝╚══════╝   ╚═╝       ╚═╝  ╚═╝╚═════╝  ╚═════╝   ╚═══╝  ╚══════╝    ╚═════╝ ╚══════╝╚══════╝ ╚═════╝  ╚══╝╚══╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# SET INPUT_SELECT TO RIGHT STATE
+# Now it is possible to test automation by selection above or below horizon
+# Just change the input_select to above or below horizon.
+###########################################################################################
+- id: "9efcd7e6-1981-47ad-97ca-a2f59a3c0545"
+  alias: "System - Sunset Sunrise switch"
+  mode: restart
+  triggers:
+    - trigger: time_pattern
+      minutes: "/1"
+
+    - trigger: state
+      entity_id: sun.sun
+      to:
+        - "below_horizon"
+        - "above_horizon"
+
+  conditions:
+    - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
+
+  actions:
+    - choose:
+        - conditions:
+            - "{{ is_state('sun.sun', 'below_horizon') }}"
+            - "{{ not is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+
+          sequence:
+            - parallel:
+                - action: input_select.select_option
+                  target:
+                    entity_id: input_select.helpers_sunrise_sunset
+                  data:
+                    option: "below_horizon"
+
+                - action: frontend.set_theme
+                  data:
+                    name: "peterdarkmode"
+
+        - conditions:
+            - "{{ is_state('sun.sun', 'above_horizon') }}"
+            - "{{ not is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+
+          sequence:
+            - parallel:
+                - action: input_select.select_option
+                  target:
+                    entity_id: input_select.helpers_sunrise_sunset
+                  data:
+                    option: "above_horizon"
+
+                - action: frontend.set_theme
+                  data:
+                    name: "peterlightmode"

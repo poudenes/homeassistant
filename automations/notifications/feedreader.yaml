@@ -1,0 +1,33 @@
+#  ███████╗███████╗███████╗██████╗ ██████╗ ███████╗ █████╗ ██████╗ ███████╗██████╗
+#  ██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗
+#  █████╗  █████╗  █████╗  ██║  ██║██████╔╝█████╗  ███████║██║  ██║█████╗  ██████╔╝
+#  ██╔══╝  ██╔══╝  ██╔══╝  ██║  ██║██╔══██╗██╔══╝  ██╔══██║██║  ██║██╔══╝  ██╔══██╗
+#  ██║     ███████╗███████╗██████╔╝██║  ██║███████╗██║  ██║██████╔╝███████╗██║  ██║
+#  ╚═╝     ╚══════╝╚══════╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+###########################################################################################
+# NOTIFY WHEN THERE IS A BAD LOGIN
+###########################################################################################
+- id: "80787f03-3d3c-49ea-9be9-1e2d0315ba2a"
+  alias: "Notification - Feedreader Update"
+  triggers:
+    - trigger: event
+      event_type: feedreader
+      event_data:
+        feed_url: "https://www.arodie.com/latest/rss"
+
+  conditions: []
+
+  actions:
+    - action: persistent_notification.create
+      data:
+        title: "New Feedreader info"
+        message: "New post - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
+        notification_id: "{{ trigger.event.data.title }}"
+
+    # - action: persistent_notification.create
+    #   data:
+    #     title: "HA - Alarm"
+    #     message: |
+    #       Someone try to login:
+    #       {{ state_attr('persistent_notification.http_login', 'message') }}
+    #     notification_id: "bad_login"

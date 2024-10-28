@@ -1,0 +1,164 @@
+#   ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ █████╗ ███╗   ██╗██████╗         ██╗     ██╗███╗   ██╗███████╗
+#  ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔══██╗████╗  ██║██╔══██╗        ██║     ██║████╗  ██║██╔════╝
+#  ██║     ██║   ██║██╔████╔██║██╔████╔██║███████║██╔██╗ ██║██║  ██║        ██║     ██║██╔██╗ ██║█████╗  
+#  ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══██║██║╚██╗██║██║  ██║        ██║     ██║██║╚██╗██║██╔══╝  
+#  ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║██████╔╝███████╗███████╗██║██║ ╚████║███████╗
+#   ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# https://www.home-assistant.io/integrations/command_line/
+###########################################################################################
+
+#################################################################
+# ipinfo.io and icanhazip.com check over VPN Routing
+#################################################################
+- sensor:
+    name: "ipinfo.io over VPN Routing"
+    unique_id: "dd315043-b657-42a9-b407-5e7f3017b09e"
+    scan_interval: 3600
+    command: "curl ipinfo.io/ip"
+
+- sensor:
+    name: "icanhazip.io over VPN Routing"
+    unique_id: "3feb22cb-4551-4c88-964c-141bb8f5fdd1"
+    scan_interval: 3600
+    command: "curl icanhazip.com"
+
+- sensor:
+    name: "ifcfg.me over VPN Routing"
+    unique_id: "f1e8ffc0-de6b-45a0-aede-33ecebf3b573"
+    scan_interval: 3600
+    command: "curl ifcfg.me"
+
+#################################################################
+# Allestorningen.nl
+#################################################################
+- sensor:
+    name: "Alle storingen - ODIDO TV Internet"
+    unique_id: "1ca6ccb6-4f95-486d-aa4b-9ad8158da7bb"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh odido"
+
+- sensor:
+    name: "Alle storingen - Apple iCloud"
+    unique_id: "c2f6d522-70a8-4376-8bc8-eb7eecede4e6"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh icloud"
+
+- sensor:
+    name: "Alle storingen - iDeal"
+    unique_id: "5cfff882-8228-4c74-a99a-590898a74159"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh ideal"
+
+- sensor:
+    name: "Alle storingen - Rabobank"
+    unique_id: "ed8801da-6862-4f89-a34a-e066e5309739"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh rabobank"
+
+- sensor:
+    name: "Alle storingen - Instagram"
+    unique_id: "587cb498-83f6-43fa-90c2-14b86bb1331e"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh instagram"
+
+- sensor:
+    name: "Alle storingen - TikTok"
+    unique_id: "363b7424-399f-4235-8426-c5ccc4c39f3c"
+    scan_interval: 3600
+    command: "/bin/bash /config/other/downdetector.sh tiktok"
+
+#################################################################
+# HA Backup Manager
+#################################################################
+- sensor:
+    name: "HA Backup Manager Addon List"
+    unique_id: "7b2d1bd7-13cc-438a-9d72-569a51ccfb6d"
+    command: 'curl http://supervisor/addons -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)"  | jq -rc ''.data.addons[] | select (.installed != false) | .slug'' | jq --raw-input . | jq --slurp  | jq -r ''{"List":.}'''
+    value_template: "{{ value_json|length }}"
+    json_attributes:
+      - List
+    scan_interval: 1800
+
+#################################################################
+# Sensor for Name
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Name"
+    unique_id: "8483db19-5342-4517-996f-af15ff3f99b6"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.name | default}}"
+    scan_interval: 10
+
+#################################################################
+# Dimension
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Dimension"
+    unique_id: "28f653de-0540-40dd-8699-fc92f44cb3eb"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.size | default}}"
+    unit_of_measurement: MB
+    scan_interval: 10
+
+#################################################################
+# Date
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Date"
+    unique_id: "b7a7716c-b0d0-4e29-a7b3-ad63d363edee"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{ value_json.date | as_timestamp | timestamp_custom('%Y-%m-%d') }}"
+    scan_interval: 10
+
+#################################################################
+# Type
+#################################################################
+- sensor:
+    name: "HA Backup Last Backup Type"
+    unique_id: "c7e4b267-02f7-4b43-a1c9-cf7f66f800ad"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.type | default}}"
+    scan_interval: 10
+
+#################################################################
+# Protected
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Protected"
+    unique_id: "837df50c-33ac-4587-a7fd-23799b2eee9a"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.protected | default}}"
+    scan_interval: 10
+
+#################################################################
+# File Name
+#################################################################
+- sensor:
+    name: "HA Backup Manager Last Backup Slug"
+    unique_id: "2f5ffd4f-9895-423f-bab9-e5b227431897"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq ''[.data.backups[]] | sort_by(.date) | last'''
+    value_template: "{{value_json.slug | default}}"
+    scan_interval: 10
+
+#################################################################
+# Number of backups
+#################################################################
+- sensor:
+    name: "HA Backup Retained Backups"
+    unique_id: "8e7cecb7-149d-4822-a1d9-f31296961496"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq --raw-output ".data.backups[].slug" | wc -w'
+    scan_interval: 10
+
+#################################################################
+# Dimension of backups archive
+#################################################################
+- sensor:
+    name: "HA Backup Manager Archive Dimension"
+    unique_id: "56281793-d4ea-4321-b2bc-930fe37cfc76"
+    command: 'curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/backups | jq --raw-output ''.data.backups[].size'' | awk ''{s+=$1} END {print s}'''
+    value_template: "{{ value | multiply(0.0009765625) | round(2) }}"
+    unit_of_measurement: "GB"
+    scan_interval: 10

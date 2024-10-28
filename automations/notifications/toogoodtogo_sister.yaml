@@ -1,0 +1,53 @@
+#  ████████╗ ██████╗  ██████╗  ██████╗  ██████╗  ██████╗ ██████╗ ████████╗ ██████╗  ██████╗  ██████╗
+#  ╚══██╔══╝██╔═══██╗██╔═══██╗██╔════╝ ██╔═══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔═══██╗██╔════╝ ██╔═══██╗
+#     ██║   ██║   ██║██║   ██║██║  ███╗██║   ██║██║   ██║██║  ██║   ██║   ██║   ██║██║  ███╗██║   ██║
+#     ██║   ██║   ██║██║   ██║██║   ██║██║   ██║██║   ██║██║  ██║   ██║   ██║   ██║██║   ██║██║   ██║
+#     ██║   ╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝   ██║   ╚██████╔╝╚██████╔╝╚██████╔╝
+#     ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝    ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝
+###########################################################################################
+# NOTIFY ME WHEN BOXES ARE IN STOCK AT TOGOODTOGO
+###########################################################################################
+# - id: "e8259323-1ece-4eb4-94be-390751f22b86"
+#   alias: "Notification - TooGoodToGo - Sister"
+#   triggers:
+#     - trigger: state
+#       entity_id:
+#         - sensor.toogoodtogo_broodhuys_meijer_verrassingspakket
+#         - sensor.toogoodtogo_the_roastary_amstelveen_verrassingspakket_large
+#         - sensor.toogoodtogo_the_roastary_amstelveen_verrassingspakket_medium
+#         - sensor.toogoodtogo_the_roastary_amstelveen_verrassingspakket_small
+#         - sensor.toogoodtogo_le_pain_quotidien_gelderlandplein_verrassingspakket
+
+#         # - sensor.toogoodtogo_japans_koreaans_foodmarket_shilla_amsterdam_magic_tht_box
+#         # - sensor.toogoodtogo_jumbo_velu_kastelenstraat_amsterdam_verrassingspakket
+#         # - sensor.toogoodtogo_hema_amsterdam_gelderlandplein_verrassingspakket
+#         # - sensor.toogoodtogo_hema_amsterdam_spoorslag_verrassingspakket
+#         # - sensor.toogoodtogo_ah_to_go_amsterdam_zuid_verrassingspakket
+#         # - sensor.toogoodtogo_a_deauville_verrassingspakket_lunch
+#         # - sensor.toogoodtogo_ah_to_go_vumc_verrassingspakket
+#         # - sensor.toogoodtogo_albert_heijn_amsterdamseweg_amstelveen_verrassingspakket
+#         # - sensor.toogoodtogo_cafe_bonjour_totalenergies_stadionplein_verrassingspakket
+#         # - sensor.toogoodtogo_dagelijks_lekker_amsterdam_verrassingspakket
+#         # - sensor.toogoodtogo_de_drie_graefjes_stadionplein_amsterdam_verrassingspakket
+#         # - sensor.toogoodtogo_dirk_van_den_broek_amsterdam_europaboulevard_broodpakket
+#         # - sensor.toogoodtogo_getir_kostverlorenhof_amstelveen_verrassingspakket
+#         # - sensor.toogoodtogo_sla_zuidas_verrassingspakket
+#         # - sensor.toogoodtogo_starbucks_amsterdam_zuid_verrassingspakket
+#         # - sensor.toogoodtogo_vomar_amstelveen_bankrashof_verrassingspakket
+#         # - sensor.toogoodtogo_wild_the_moon_arnold_schonberglaan_verrassingspakket
+#       from: false
+#       to: true
+#       attribute: stock_available
+
+#   conditions: []
+
+#   variables:
+#     stock: "{{ states(trigger.to_state.entity_id) }}"
+#     available: "{{ state_attr(trigger.to_state.entity_id, 'stock_available') }}"
+#     price: "{{ state_attr(trigger.to_state.entity_id, 'price') }}"
+#     name: "{{ state_attr(trigger.to_state.entity_id, 'friendly_name') }}"
+
+#   actions:
+#     - action: notify.mobile_app_martine
+#       data:
+#         message: "{{ name }}, # {{ stock }}, €: {{ price }}"

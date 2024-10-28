@@ -1,0 +1,69 @@
+#  ██╗███╗   ██╗██████╗ ██╗   ██╗████████╗    ████████╗███████╗██╗  ██╗████████╗
+#  ██║████╗  ██║██╔══██╗██║   ██║╚══██╔══╝    ╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝
+#  ██║██╔██╗ ██║██████╔╝██║   ██║   ██║          ██║   █████╗   ╚███╔╝    ██║   
+#  ██║██║╚██╗██║██╔═══╝ ██║   ██║   ██║          ██║   ██╔══╝   ██╔██╗    ██║   
+#  ██║██║ ╚████║██║     ╚██████╔╝   ██║          ██║   ███████╗██╔╝ ██╗   ██║   
+#  ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝    ╚═╝          ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   
+###########################################################################################
+---
+###########################################################################################
+# INPUT_TEXT
+# https://www.home-assistant.io/integrations/input_text/
+###########################################################################################
+# CANT BE A HELPER IN HA (INPUT_TEXT DOES NOT SUPPORT INITIAL TEXT)
+alexa_actionable_notification:
+  name: "Alexa Actionable Notification Holder"
+  max: 255
+  initial: '{"text": "This is a test of the alexa actionable notifications skill. Did it work?", "event": "actionable.skill.test"}'
+
+# Other
+medication_stock:
+  name: "Amount of medication"
+  max: 200
+
+engine_ha_app:
+  name: "HA enginge message"
+  max: 255
+
+alexa_last_message:
+  name: "Alexa last message"
+  max: 255
+
+yamaha_dps_modus:
+  name: "Yamaha DPS modus"
+  max: 255
+
+twitter_last_message:
+  name: "Twitter last message"
+  max: 255
+  
+dishwasher_machine_data:
+  name: dishwasher machine data
+  max: 255
+
+dryer_machine_data:
+  name: "Dryer machine data"
+  max: 255
+
+washing_machine_data:
+  name: "Washing machine data"
+  max: 255
+
+cooking_one:
+  name: "Cooking one"
+  max: 255
+
+cooking_two:
+  name: "Cooking two"
+  max: 255
+
+cooking_three:
+  name: "Cooking three"
+  max: 255
+
+#################################################################
+# HA Backup Manager
+#################################################################
+ha_backup_manager_status:
+  name: "Backup Status"
+  icon: mdi:database-check

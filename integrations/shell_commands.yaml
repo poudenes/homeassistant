@@ -1,0 +1,42 @@
+#  ███████╗██╗  ██╗███████╗██╗     ██╗          ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ █████╗ ███╗   ██╗██████╗ ███████╗
+#  ██╔════╝██║  ██║██╔════╝██║     ██║         ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝
+#  ███████╗███████║█████╗  ██║     ██║         ██║     ██║   ██║██╔████╔██║██╔████╔██║███████║██╔██╗ ██║██║  ██║███████╗
+#  ╚════██║██╔══██║██╔══╝  ██║     ██║         ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══██║██║╚██╗██║██║  ██║╚════██║
+#  ███████║██║  ██║███████╗███████╗███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║██████╔╝███████║
+#  ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# SHELL_COMMAND
+# https://www.home-assistant.io/integrations/shell_command/
+###########################################################################################
+clear_logs: truncate -s 0 /config/home-assistant.log
+
+#################################################################
+# HA Backup Manager
+#################################################################
+ha_backup_manager_remove_old: /bin/bash /config/other/backup_remove.sh {{ states('input_number.ha_backup_manager_retained_number')|int(0) }}
+
+#################################################################
+# MVPS Bash commands
+#################################################################
+mvps_rspamd_learn: !secret mvps_rspamd_learn
+mvps_clearlog: !secret mvps_clearlog
+mvps_backup_vmail: !secret mvps_backup_vmail
+mvps_backup_ispconfig: !secret mvps_backup_ispconfig
+mvps_backup_full: !secret mvps_backup_full
+mvps_backup_db: !secret mvps_backup_db
+mvps_update_blacklist: !secret mvps_update_blacklist
+mvps_ipset_abuseipdb: !secret mvps_ipset_abuseipdb
+mvps_apt_update: !secret mvps_apt_update
+
+
+
+
+
+
+
+
+
+
+

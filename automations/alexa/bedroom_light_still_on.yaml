@@ -1,0 +1,40 @@
+#   █████╗ ██╗     ███████╗██╗  ██╗ █████╗      ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗    ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+#  ██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║    ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+#  ███████║██║     █████╗   ╚███╔╝ ███████║    ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║    ███████╗█████╔╝ ██║██║     ██║     ███████╗
+#  ██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║    ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+#  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║    ███████║██║  ██╗██║███████╗███████╗███████║
+#  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝#
+###########################################################################################
+# Bedroom light on, ask to turn them off
+###########################################################################################
+- id: "5861af44-0e5a-4b7c-b341-90e98fa69d37"
+  alias: "Alexa Custom Skills - bedroom still on for 1 minutes"
+  triggers:
+    - trigger: time_pattern
+      minutes: "/5"
+
+  conditions:
+    - "{{ is_state('switch.bedroom_light_switch', 'on') }}"
+    - "{{ is_state('binary_sensor.bedroom_detection', 'off') }}"
+    - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+
+  actions:
+    - action: script.activate_alexa_actionable_notification
+      data_template:
+        text: "The bedroom switch is still ons. Do you want me to turn it off?"
+        event_id: "alexa_custom_skill_bedroom_light"
+        alexa_device: "media_player.livingroom"
+
+    - wait_for_trigger:
+        - trigger: event
+          event_type: alexa_actionable_notification
+          event_data:
+            event_id: alexa_custom_skill_bedroom_light
+            event_response_type: ResponseYes
+
+      timeout: "00:00:15"
+      continue_on_timeout: false
+
+    - action: switch.turn_off
+      target:
+        entity_id: switch.bedroom_light_switch

@@ -1,0 +1,38 @@
+#  ███████╗     ██╗    ██╗ █████╗ ██╗   ██╗███████╗     ██████╗ ██████╗ ███╗   ██╗████████╗██████╗  ██████╗ ██╗
+#  ╚══███╔╝     ██║    ██║██╔══██╗██║   ██║██╔════╝    ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██║
+#    ███╔╝█████╗██║ █╗ ██║███████║██║   ██║█████╗      ██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║██║
+#   ███╔╝ ╚════╝██║███╗██║██╔══██║╚██╗ ██╔╝██╔══╝      ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║██║
+#  ███████╗     ╚███╔███╔╝██║  ██║ ╚████╔╝ ███████╗    ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╔╝███████╗
+#  ╚══════╝      ╚══╝╚══╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+###########################################################################################
+# Z_WAVE TURN OFF WALL SWITCHES WHEN NOBODY IS HOME
+###########################################################################################
+- id: "69ae8dfe-565e-4bd9-870a-e373eac00ad9"
+  alias: "Control - Turn zwave on/off"
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.group_family_manual
+
+  conditions: []
+
+  actions:
+    ###########################################################################################
+    # CHRISTMAS
+    ###########################################################################################
+    - if: "{{ is_state('sensor.holidays', 'Christmas') }}"
+      then:
+        - action: "{{ 'switch.turn_on' if is_state('binary_sensor.group_family_manual', 'on') else 'switch.turn_off' }}"
+          target:
+            entity_id: >
+              {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+                | reject('in', ['switch.xmas_1_wall','switch.xmas_tree_wall','switch.imac_wall','switch.toog_wall','switch.balcony_wall']) | list }}
+
+      ###########################################################################################
+      # Default
+      ###########################################################################################
+      else:
+        - action: "{{ 'switch.turn_on' if is_state('binary_sensor.group_family_manual', 'on') else 'switch.turn_off' }}"
+          target:
+            entity_id: >
+              {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+                | reject('in', ['switch.xmas_1_wall']) | list }}

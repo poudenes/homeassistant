@@ -1,0 +1,73 @@
+#  ██████╗  ██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗██╗  ██╗    ███████╗ █████╗
+#  ██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝██║ ██╔╝    ██╔════╝██╔══██╗
+#  ██████╔╝██║   ██║██████╔╝██║   ██║██████╔╝██║   ██║██║     █████╔╝     ███████╗╚█████╔╝
+#  ██╔══██╗██║   ██║██╔══██╗██║   ██║██╔══██╗██║   ██║██║     ██╔═██╗     ╚════██║██╔══██╗
+#  ██║  ██║╚██████╔╝██████╔╝╚██████╔╝██║  ██║╚██████╔╝╚██████╗██║  ██╗    ███████║╚█████╔╝
+#  ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝    ╚══════╝ ╚════╝
+###########################################################################################
+# VACUUM CLEANER SCHEDULE
+###########################################################################################
+- id: "298d2f65-5ecd-4090-b91d-fb4d1fb58d7f"
+  alias: "Cleaning - Schedule"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.group_family_manual
+      to: "off"
+
+  conditions:
+    - condition: time
+      after: "07:00:00"
+      before: "21:00:00"
+    - "{{ is_state('input_boolean.helpers_vacuum_done', 'off') }}"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+
+  actions:
+    ###########################################################################################
+    # Select right cleaning modus
+    ###########################################################################################
+    - action: vacuum.set_fan_speed
+      target:
+        entity_id: vacuum.roborock_s8
+      data:
+        fan_speed: "{{ 'turbo' if states('sensor.day_of_the_week') in ['Monday','Wednesday','Friday'] else 'balanced' }} "
+
+    - action: select.select_option
+      target:
+        entity_id: select.roborock_s8_route
+      data:
+        option: standard
+
+    - action: select.select_option
+      target:
+        entity_id: select.roborock_s8_mop_intensity
+      data:
+        option: moderate
+
+      ###########################################################################################
+      # Start cleaning
+      ###########################################################################################
+    - action: vacuum.start
+      target:
+        entity_id: vacuum.roborock_s8
+
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.helpers_vacuum_done
+
+      ###########################################################################################
+      # Notification
+      ###########################################################################################
+    - action: persistent_notification.create
+      data:
+        title: "HA - Vacuum started"
+        message: "The S8 has been started cleaning your house!"
+        notification_id: "vacuum"
+
+    - wait_template: "{{ is_state('vacuum.roborock_s8', 'returning') }}"
+
+    - action: persistent_notification.create
+      data:
+        title: "HA - Vacuum finished"
+        message: "The S8 has finished cleaning your house!"
+        notification_id: "vacuum"

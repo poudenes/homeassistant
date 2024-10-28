@@ -1,0 +1,74 @@
+#  ██████╗ ██████╗ ██╗    ██╗    ██╗  ██╗ █████╗ ██╗   ██╗     █████╗ ██████╗ ██╗  ██╗
+#  ██╔══██╗██╔══██╗██║    ██║    ██║ ██╔╝██╔══██╗╚██╗ ██╔╝    ██╔══██╗██╔══██╗██║ ██╔╝
+#  ██████╔╝██║  ██║██║ █╗ ██║    █████╔╝ ███████║ ╚████╔╝     ███████║██████╔╝█████╔╝
+#  ██╔══██╗██║  ██║██║███╗██║    ██╔═██╗ ██╔══██║  ╚██╔╝      ██╔══██║██╔═══╝ ██╔═██╗
+#  ██║  ██║██████╔╝╚███╔███╔╝    ██║  ██╗██║  ██║   ██║       ██║  ██║██║     ██║  ██╗
+#  ╚═╝  ╚═╝╚═════╝  ╚══╝╚══╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝
+###########################################################################################
+# NOTIFY WHEN APK DATE IS EXPIRED SOON FOR THE CAR OF MY SISTER
+###########################################################################################
+- id: "262daf92-02bb-48c1-938d-d31512764a17"
+  alias: "Notification - RDW - Kay"
+  triggers:
+    - trigger: time
+      at: "14:00:00"
+      id: "time"
+
+    - trigger: state
+      entity_id: binary_sensor.peugeot_208_liability_insured
+      to: "off"
+      id: "insured"
+
+    - trigger: state
+      entity_id: binary_sensor.peugeot_208_pending_recall
+      to: "on"
+      id: "recall"
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: "time"
+            - condition: template
+              value_template: >
+                "{{ now().date() == (states('sensor.peugeot_208_ascription_date') | as_datetime | as_local - timedelta(days=21)).date() | float(false) }}
+
+          sequence:
+            - action: script.mobile_notify_no_actionable
+              data:
+                title: "HA - Notification"
+                message: |
+                  APK Vervaldatum:
+                  De APK keuring van Kay verloopt op {{ states('sensor.peugeot_208_ascription_date') }}.
+                  Plan een APK keuring bij de garage.
+                thread_id: "ha_notification"
+
+        - conditions:
+            - condition: trigger
+              id: "insured"
+
+          sequence:
+            - action: script.mobile_notify_no_actionable
+              data:
+                title: "HA - Notification"
+                message: |
+                  RDW Verzekering:
+                  De auto van Kay is niet verzekerd!
+                  Sluit een autoverzekering af voordat je ermee de weg op gaat.
+                thread_id: "ha_notification"
+
+        - conditions:
+            - condition: trigger
+              id: "recall"
+
+          sequence:
+            - action: script.mobile_notify_no_actionable
+              data:
+                title: "HA - Notification"
+                message: |
+                  RDW Terugroepactie:
+                  Er is een terugroepactie uitgevaardigd voor de auto van Kay. 
+                  Maak een afspraak bij de garage om het probleem te verhelpen.
+                thread_id: "ha_notification"

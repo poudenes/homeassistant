@@ -1,0 +1,2273 @@
+#  ███████╗██╗   ██╗██████╗  ██████╗ ██╗   ██╗██╗███████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔════╝██║   ██║██╔══██╗██╔═══██╗██║   ██║██║██╔════╝██║██╔═══██╗████╗  ██║
+#  █████╗  ██║   ██║██████╔╝██║   ██║██║   ██║██║███████╗██║██║   ██║██╔██╗ ██║
+#  ██╔══╝  ██║   ██║██╔══██╗██║   ██║╚██╗ ██╔╝██║╚════██║██║██║   ██║██║╚██╗██║
+#  ███████╗╚██████╔╝██║  ██║╚██████╔╝ ╚████╔╝ ██║███████║██║╚██████╔╝██║ ╚████║
+#  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝   ╚═══╝  ╚═╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# EUROVISION COUNTRY FLAG COLORS
+###########################################################################################
+- id: "0e3c35ac-2c8c-448f-a5d3-48d59f8e8027"
+  alias: "Scene - Eurovision Country"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: input_select.helpers_eurovision
+
+  conditions: []
+  
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id: light.balcony_all
+
+    - choose:
+        ###########################################################################################
+        # Off
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Off') }}"
+
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_all
+                  - light.dressoir_all
+              data:
+                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+                brightness_pct: 100
+
+            - action: light.turn_off
+              target:
+                entity_id:
+                  - light.livingroom_all
+                  - light.dressoir_all
+                  - light.nanoleaf
+
+        ###########################################################################################
+        # Pride
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Pride') }}"
+
+          sequence:
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 2, "r": 0, "g": 100, "b": 0 },
+                    { "number": 3, "r": 0, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 100, "g": 100, "b": 0 },
+                    { "number": 6, "r": 100, "g": 50, "b": 0 },
+                    { "number": 7, "r": 100, "g": 50, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 50 },
+                    { "number": 13, "r": 50, "g": 0, "b": 50 },
+                    { "number": 14, "r": 50, "g": 0, "b": 50 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 0, "b": 100 },
+                    { "number": 17, "r": 0, "g": 75, "b": 100 },
+                    { "number": 18, "r": 50, "g": 25, "b": 25 },
+                  ]
+
+        ###########################################################################################
+        # Albania
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Albania') }}"
+
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_all
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 0, "g": 0, "b": 0 },
+                    { "number": 2, "r": 0, "g": 0, "b": 0 },
+                    { "number": 3, "r": 0, "g": 0, "b": 0 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 0, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Australia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Australia') }}"
+
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 100, "g": 0, "b": 0 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 0, "g": 0, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 0, "g": 0, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Armenia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Armenia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: orange
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 0, "g": 0, "b": 100 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 100, "g": 50, "b": 0 },
+                    { "number": 14, "r": 100, "g": 50, "b": 0 },
+                    { "number": 15, "r": 100, "g": 50, "b": 0 },
+                    { "number": 16, "r": 100, "g": 50, "b": 0 },
+                    { "number": 17, "r": 100, "g": 50, "b": 0 },
+                    { "number": 18, "r": 100, "g": 50, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Austria
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Austria') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Azerbaijan
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Azerbaijan') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: green
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 0, "b": 0 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 0, "g": 100, "b": 0 },
+                    { "number": 16, "r": 0, "g": 100, "b": 0 },
+                    { "number": 17, "r": 0, "g": 100, "b": 0 },
+                    { "number": 18, "r": 0, "g": 100, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Belgium
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Belgium') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 0, "g": 0, "b": 0 },
+                    { "number": 6, "r": 0, "g": 0, "b": 0 },
+                    { "number": 7, "r": 0, "g": 0, "b": 0 },
+                    { "number": 8, "r": 0, "g": 0, "b": 0 },
+                    { "number": 9, "r": 0, "g": 0, "b": 0 },
+                    { "number": 10, "r": 0, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 0 },
+                    { "number": 12, "r": 100, "g": 100, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Croatia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Croatia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 0, "g": 0, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 0, "g": 0, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Cyprus
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Cyprus') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: orange
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 50, "b": 0 },
+                    { "number": 4, "r": 100, "g": 50, "b": 0 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 0, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 50, "b": 0 },
+                    { "number": 12, "r": 100, "g": 50, "b": 0 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 100, "g": 100, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Czech Republic
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Czech Republic') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 0, "b": 0 },
+                    { "number": 3, "r": 100, "g": 0, "b": 0 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Denmark
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Denmark') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Estonia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Estonia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 0 },
+                    { "number": 3, "r": 0, "g": 0, "b": 0 },
+                    { "number": 4, "r": 0, "g": 0, "b": 0 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 1, "r": 0, "g": 0, "b": 0 },
+                    { "number": 11, "r": 0, "g": 0, "b": 0 },
+                    { "number": 12, "r": 0, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 100, "g": 100, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Finland
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Finland') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 0, "g": 0, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 100, "g": 100, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # France
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'France') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Georgia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Georgia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 100, "g": 100, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Germany
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Germany') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 0, "b": 0 },
+                    { "number": 3, "r": 100, "g": 0, "b": 0 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 10, "g": 10, "b": 10 },
+                    { "number": 6, "r": 10, "g": 10, "b": 10 },
+                    { "number": 7, "r": 10, "g": 10, "b": 10 },
+                    { "number": 8, "r": 10, "g": 10, "b": 10 },
+                    { "number": 9, "r": 10, "g": 10, "b": 10 },
+                    { "number": 10, "r": 10, "g": 10, "b": 10 },
+                    { "number": 1, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 100, "b": 0 },
+                    { "number": 14, "r": 100, "g": 100, "b": 0 },
+                    { "number": 15, "r": 100, "g": 100, "b": 0 },
+                    { "number": 16, "r": 100, "g": 100, "b": 0 },
+                    { "number": 17, "r": 100, "g": 100, "b": 0 },
+                    { "number": 18, "r": 100, "g": 100, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Greece
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Greece') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 0, "g": 0, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 0, "g": 0, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Iceland
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Iceland') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 0, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 1, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 0, "g": 0, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 0, "g": 0, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 0, "g": 0, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Ireland
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Ireland') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: green
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: orange
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 0, "g": 100, "b": 0 },
+                    { "number": 6, "r": 0, "g": 100, "b": 0 },
+                    { "number": 7, "r": 0, "g": 100, "b": 0 },
+                    { "number": 8, "r": 0, "g": 100, "b": 0 },
+                    { "number": 9, "r": 0, "g": 100, "b": 0 },
+                    { "number": 10, "r": 0, "g": 100, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 50, "b": 0 },
+                    { "number": 14, "r": 100, "g": 50, "b": 0 },
+                    { "number": 15, "r": 100, "g": 50, "b": 0 },
+                    { "number": 16, "r": 100, "g": 50, "b": 0 },
+                    { "number": 17, "r": 100, "g": 50, "b": 0 },
+                    { "number": 18, "r": 100, "g": 50, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Israel
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Israel') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Italy
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Italy') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: green
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 0, "g": 100, "b": 0 },
+                    { "number": 6, "r": 0, "g": 100, "b": 0 },
+                    { "number": 7, "r": 0, "g": 100, "b": 0 },
+                    { "number": 8, "r": 0, "g": 100, "b": 0 },
+                    { "number": 9, "r": 0, "g": 100, "b": 0 },
+                    { "number": 10, "r": 0, "g": 100, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Latvia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Latvia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 70, "g": 0, "b": 0 },
+                    { "number": 5, "r": 70, "g": 0, "b": 0 },
+                    { "number": 6, "r": 70, "g": 0, "b": 0 },
+                    { "number": 7, "r": 70, "g": 0, "b": 0 },
+                    { "number": 8, "r": 70, "g": 0, "b": 0 },
+                    { "number": 9, "r": 70, "g": 0, "b": 0 },
+                    { "number": 10, "r": 70, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 70, "g": 0, "b": 0 },
+                    { "number": 13, "r": 70, "g": 0, "b": 0 },
+                    { "number": 14, "r": 70, "g": 0, "b": 0 },
+                    { "number": 15, "r": 70, "g": 0, "b": 0 },
+                    { "number": 16, "r": 70, "g": 0, "b": 0 },
+                    { "number": 17, "r": 70, "g": 0, "b": 0 },
+                    { "number": 18, "r": 70, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Lithuania
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Lithuania') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: green
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 0, "g": 80, "b": 0 },
+                    { "number": 3, "r": 0, "g": 80, "b": 0 },
+                    { "number": 4, "r": 0, "g": 80, "b": 0 },
+                    { "number": 5, "r": 100, "g": 100, "b": 0 },
+                    { "number": 6, "r": 100, "g": 100, "b": 0 },
+                    { "number": 7, "r": 100, "g": 100, "b": 0 },
+                    { "number": 8, "r": 100, "g": 100, "b": 0 },
+                    { "number": 9, "r": 100, "g": 100, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 0 },
+                    { "number": 1, "r": 0, "g": 80, "b": 0 },
+                    { "number": 11, "r": 0, "g": 80, "b": 0 },
+                    { "number": 12, "r": 0, "g": 80, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Malta
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Malta') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Moldova
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Moldova') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 0, "g": 0, "b": 60 },
+                    { "number": 6, "r": 0, "g": 0, "b": 60 },
+                    { "number": 7, "r": 0, "g": 0, "b": 60 },
+                    { "number": 8, "r": 0, "g": 0, "b": 60 },
+                    { "number": 9, "r": 0, "g": 0, "b": 60 },
+                    { "number": 10, "r": 0, "g": 0, "b": 60 },
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 0 },
+                    { "number": 12, "r": 100, "g": 100, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Luxembourg
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Luxembourg') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                brightness_pct: 100
+                rgb_color:
+                  - 58
+                  - 136
+                  - 254
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.balcony_all
+              data:
+                brightness_pct: 100
+                rgb_color:
+                  - 58
+                  - 136
+                  - 254
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 0, "g": 60, "b": 100 },
+                    { "number": 13, "r": 0, "g": 60, "b": 100 },
+                    { "number": 14, "r": 0, "g": 60,"b": 100 },
+                    { "number": 15, "r": 0, "g": 60, "b": 100 },
+                    { "number": 16, "r": 0, "g": 60, "b": 100 },
+                    { "number": 17, "r": 0, "g": 60, "b": 100 },
+                    { "number": 18, "r": 0, "g": 60, "b": 100 },
+                  ]
+
+
+
+        ###########################################################################################
+        # Netherlands
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Netherlands') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.balcony_all
+              data:
+                color_name: orange
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 0, "g": 0, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 0, "g": 0, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 100, "g": 45, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Norway
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Norway') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 0, "g": 0, "b": 100 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Poland
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Poland') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 1, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Portugal
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Portugal') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.livingroom_all
+              data:
+                color_name: green
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 0, "g": 50, "b": 0 },
+                    { "number": 4, "r": 0, "g": 50, "b": 0 },
+                    { "number": 5, "r": 0, "g": 50, "b": 0 },
+                    { "number": 6, "r": 0, "g": 50, "b": 0 },
+                    { "number": 7, "r": 0, "g": 50, "b": 0 },
+                    { "number": 8, "r": 0, "g": 50, "b": 0 },
+                    { "number": 9, "r": 0, "g": 50, "b": 0 },
+                    { "number": 10, "r": 0, "g": 50, "b": 0 },
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Romania
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Romania') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 0 },
+                    { "number": 12, "r": 100, "g": 100, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # San Marino
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'San Marino') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: light blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 0, "g": 0, "b": 100 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 100, "b": 100 },
+                    { "number": 13, "r": 100, "g": 100, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 100, "g": 100, "b": 100 },
+                    { "number": 16, "r": 100, "g": 100, "b": 100 },
+                    { "number": 17, "r": 100, "g": 100, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Serbia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Serbia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 100, "g": 45, "b": 0 },
+                    { "number": 2, "r": 100, "g": 45, "b": 0 },
+                    { "number": 3, "r": 0, "g": 0, "b": 100 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Slovenia
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Slovenia') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 2, "r": 0, "g": 0, "b": 100 },
+                    { "number": 3, "r": 0, "g": 0, "b": 100 },
+                    { "number": 4, "r": 0, "g": 0, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 100, "g": 100, "b": 100 },
+                    { "number": 7, "r": 100, "g": 100, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Spain
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Spain') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 100, "g": 100, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 0 },
+                    { "number": 12, "r": 100, "g": 100, "b": 0 },
+                    { "number": 13, "r": 100, "g": 100, "b": 0 },
+                    { "number": 14, "r": 100, "g": 100, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Sweden
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Sweden') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 100, "g": 100, "b": 0 },
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 0, "g": 0, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 0, "g": 0, "b": 100 },
+                    { "number": 9, "r": 0, "g": 0, "b": 100 },
+                    { "number": 10, "r": 0, "g": 0, "b": 100 },
+                    { "number": 11, "r": 100, "g": 100, "b": 0 },
+                    { "number": 12, "r": 100, "g": 100, "b": 0 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 0, "g": 0, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 0, "g": 0, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 0, "g": 0, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Switzerland
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Switzerland') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 0, "b": 0 },
+                    { "number": 5, "r": 100, "g": 0, "b": 0 },
+                    { "number": 6, "r": 100, "g": 0, "b": 0 },
+                    { "number": 7, "r": 100, "g": 0, "b": 0 },
+                    { "number": 8, "r": 100, "g": 0, "b": 0 },
+                    { "number": 9, "r": 100, "g": 0, "b": 0 },
+                    { "number": 10, "r": 100, "g": 0, "b": 0 },
+                    { "number": 11, "r": 100, "g": 100, "b": 100 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 100, "g": 0, "b": 0 },
+                    { "number": 14, "r": 100, "g": 0, "b": 0 },
+                    { "number": 15, "r": 100, "g": 0, "b": 0 },
+                    { "number": 16, "r": 100, "g": 0, "b": 0 },
+                    { "number": 17, "r": 100, "g": 0, "b": 0 },
+                    { "number": 18, "r": 100, "g": 0, "b": 0 },
+                  ]
+
+        ###########################################################################################
+        # Ukraine
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Ukraine') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: yellow
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 0, "g": 0, "b": 100 },
+                    { "number": 2, "r": 100, "g": 100, "b": 0 },
+                    { "number": 3, "r": 100, "g": 100, "b": 0 },
+                    { "number": 4, "r": 100, "g": 100, "b": 0 },
+                    { "number": 5, "r": 100, "g": 100, "b": 0 },
+                    { "number": 6, "r": 100, "g": 100, "b": 0 },
+                    { "number": 7, "r": 100, "g": 100, "b": 0 },
+                    { "number": 8, "r": 100, "g": 100, "b": 0 },
+                    { "number": 9, "r": 100, "g": 100, "b": 0 },
+                    { "number": 10, "r": 100, "g": 100, "b": 0 },
+                    { "number": 11, "r": 0, "g": 0, "b": 100 },
+                    { "number": 12, "r": 0, "g": 0, "b": 100 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 0, "g": 0, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 0, "g": 0, "b": 100 },
+                    { "number": 17, "r": 0, "g": 0, "b": 100 },
+                    { "number": 18, "r": 0, "g": 0, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # United Kingdom
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'United Kingdom') }}"
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_2
+                  - light.livingroom_3
+              data:
+                color_name: blue
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_1
+                  - light.livingroom_4
+              data:
+                color_name: red
+                brightness_pct: 100
+
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.dressoir_all
+              data:
+                color_name: white
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 100, "g": 100, "b": 100 },
+                    { "number": 2, "r": 100, "g": 100, "b": 100 },
+                    { "number": 3, "r": 100, "g": 100, "b": 100 },
+                    { "number": 4, "r": 100, "g": 100, "b": 100 },
+                    { "number": 5, "r": 100, "g": 100, "b": 100 },
+                    { "number": 6, "r": 0, "g": 0, "b": 100 },
+                    { "number": 7, "r": 0, "g": 0, "b": 100 },
+                    { "number": 8, "r": 100, "g": 100, "b": 100 },
+                    { "number": 9, "r": 100, "g": 100, "b": 100 },
+                    { "number": 10, "r": 100, "g": 100, "b": 100 },
+                    { "number": 11, "r": 100, "g": 0, "b": 0 },
+                    { "number": 12, "r": 100, "g": 0, "b": 0 },
+                    { "number": 13, "r": 0, "g": 0, "b": 100 },
+                    { "number": 14, "r": 100, "g": 100, "b": 100 },
+                    { "number": 15, "r": 0, "g": 0, "b": 100 },
+                    { "number": 16, "r": 0, "g": 0, "b": 100 },
+                    { "number": 17, "r": 100, "g": 100, "b": 100 },
+                    { "number": 18, "r": 100, "g": 100, "b": 100 },
+                  ]
+
+        ###########################################################################################
+        # Eurovision colors
+        ###########################################################################################
+        - conditions:
+            - "{{ is_state('input_select.helpers_eurovision', 'Eurovision') }}"
+
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id:
+                  - light.livingroom_all
+                  - light.dressoir_all
+              data:
+                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+                brightness_pct: 100
+
+            - action: rest_command.nanoleaf
+              data:
+                panels:
+                  [
+                    { "number": 1, "r": 155, "g": 0, "b": 155 },
+
+                    { "number": 2, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 3, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 4, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 5, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 6, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 7, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 8, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 9, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 10, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 11, "r": 155, "g": 0, "b": 155 },
+                    
+                    { "number": 12, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 13, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 14, "r": 155, "g": 155, "b": 0 },
+                    
+                    { "number": 15, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 16, "r": 155, "g": 45, "b": 0 },
+                    
+                    { "number": 17, "r": 155, "g": 0, "b": 155 },
+                    { "number": 18, "r": 155, "g": 0, "b": 155 },
+                  ]
+
+            # - action: rest_command.nanoleaf
+            #   data:
+            #     panels:
+            #       [
+            #         { "number": 1, "r": 80, "g": 0, "b": 80 },
+            #         { "number": 2, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 3, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 4, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 5, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 6, "r": 0, "g": 0, "b": 55 },
+            #         { "number": 7, "r": 0, "g": 0, "b": 55 },
+            #         { "number": 8, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 9, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 10, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 11, "r": 80, "g": 0, "b": 80 },
+            #         { "number": 12, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 13, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 14, "r": 100, "g": 100, "b": 0 },
+            #         { "number": 15, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 16, "r": 0, "g": 0, "b": 100 },
+            #         { "number": 17, "r": 80, "g": 0, "b": 80 },
+            #         { "number": 18, "r": 80, "g": 0, "b": 80 },
+            #       ]

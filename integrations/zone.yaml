@@ -1,0 +1,124 @@
+#  ███████╗ ██████╗ ███╗   ██╗███████╗███████╗
+#  ╚══███╔╝██╔═══██╗████╗  ██║██╔════╝██╔════╝
+#    ███╔╝ ██║   ██║██╔██╗ ██║█████╗  ███████╗
+#   ███╔╝  ██║   ██║██║╚██╗██║██╔══╝  ╚════██║
+#  ███████╗╚██████╔╝██║ ╚████║███████╗███████║
+#  ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
+# https://www.home-assistant.io/integrations/zone/
+###########################################################################################
+- name: "Home" # Manual set home to radius of 200 meter
+  latitude: !secret latitude_asingaborg
+  longitude: !secret longitude_asingaborg
+  radius: 150
+  icon: mdi:account-multiple
+
+- name: "K&D"
+  latitude: !secret lat_kd
+  longitude: !secret lon_kd
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "L&T"
+  latitude: !secret lat_lt
+  longitude: !secret lon_lt
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "Solo"
+  latitude: !secret lat_solo
+  longitude: !secret lon_solo
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "GLDPlein"
+  latitude: !secret lat_gelderlandplein
+  longitude: !secret lon_gelderlandplein
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "Ter Gooi"
+  latitude: !secret lat_tergooi
+  longitude: !secret lon_tergooi
+  radius: 350
+  icon: mdi:account-multiple
+
+- name: "UMCU"
+  latitude: !secret lat_umc_utrecht
+  longitude: !secret lon_umc_utrecht
+  radius: 650
+  icon: mdi:account-multiple
+
+- name: "ASDZ"
+  latitude: !secret lat_asdz
+  longitude: !secret lon_asdz
+  radius: 210
+  icon: mdi:account-multiple
+
+- name: "HLM"
+  latitude: !secret lat_hlm
+  longitude: !secret lon_hlm
+  radius: 100
+  icon: mdi:account-multiple
+
+- name: "ASA"
+  latitude: !secret lat_asa
+  longitude: !secret lon_asa
+  radius: 170
+  icon: mdi:account-multiple
+
+- name: "Anytime"
+  latitude: !secret lat_fitness
+  longitude: !secret lon_fitness
+  radius: 36
+  icon: mdi:account-multiple
+
+- name: "H&H"
+  latitude: !secret lat_hh
+  longitude: !secret lon_hh
+  radius: 80
+  icon: mdi:account-multiple
+
+- name: "Aveen Stadshart"
+  latitude: !secret lat_stadshart
+  longitude: !secret lon_stadshart
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "ASD"
+  latitude: !secret lat_asd
+  longitude: !secret lon_asd
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "SHL"
+  latitude: !secret lat_schiphol
+  longitude: !secret lon_schiphol
+  radius: 700
+  icon: mdi:account-multiple
+
+- name: "ASB"
+  latitude: !secret lat_asb
+  longitude: !secret lon_asb
+  radius: 150
+  icon: mdi:account-multiple
+
+- name: "KTT"
+  latitude: !secret lat_ktt
+  longitude: !secret lon_ktt
+  radius: 100
+  icon: mdi:account-multiple
+
+- name: "LVP"
+  latitude: !secret lat_lvp
+  longitude: !secret lon_lvp
+  radius: 100
+  icon: mdi:account-multiple
+
+- name: "AMF"
+  latitude: !secret lat_amf
+  longitude: !secret lon_amf
+  radius: 10
+  icon: mdi:account-multiple

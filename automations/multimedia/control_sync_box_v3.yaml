@@ -1,0 +1,189 @@
+#   ██████╗ ██████╗ ███╗   ██╗████████╗██████╗  ██████╗ ██╗         ███████╗██╗   ██╗███╗   ██╗ ██████╗     █████╗ ███╗   ██╗██████╗     ██╗     ██╗ ██████╗ ██╗  ██╗████████╗███████╗
+#  ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██║         ██╔════╝╚██╗ ██╔╝████╗  ██║██╔════╝    ██╔══██╗████╗  ██║██╔══██╗    ██║     ██║██╔════╝ ██║  ██║╚══██╔══╝██╔════╝
+#  ██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║██║         ███████╗ ╚████╔╝ ██╔██╗ ██║██║         ███████║██╔██╗ ██║██║  ██║    ██║     ██║██║  ███╗███████║   ██║   ███████╗
+#  ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║██║         ╚════██║  ╚██╔╝  ██║╚██╗██║██║         ██╔══██║██║╚██╗██║██║  ██║    ██║     ██║██║   ██║██╔══██║   ██║   ╚════██║
+#  ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╔╝███████╗    ███████║   ██║   ██║ ╚████║╚██████╗    ██║  ██║██║ ╚████║██████╔╝    ███████╗██║╚██████╔╝██║  ██║   ██║   ███████║
+#   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚══════╝   ╚═╝   ╚═╝  ╚═══╝ ╚═════╝    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝     ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+###########################################################################################
+# MEDIAPLAYER CONTROL LIGHTS RUN SCRIPT BASTED ON STATUS
+###########################################################################################
+- id: "3e7b1da6-2964-4000-84cc-86235529c281"
+  alias: "Control - Sync Box V3"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: media_player.woonkamer
+      to:
+        - "playing"
+      for: "00:00:05"
+      id: appletv_playing
+
+    - trigger: state
+      entity_id: media_player.woonkamer
+      to:
+        - "paused"
+        - "standby"
+        - "idle"
+      for: "00:00:05"
+      id: appletv_paused
+
+    - trigger: state
+      entity_id: input_select.helpers_scenes
+
+  conditions:
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
+    - "{{ is_state('input_boolean.function_disco', 'off') }}"
+    - "{{ trigger.from_state is none or trigger.to_state is not none and trigger.to_state.state != trigger.from_state.state }}"
+
+  actions:
+    - choose:
+        ###########################################################################################
+        # When Apple TV is playing
+        ###########################################################################################
+        - conditions:
+            - "{{ trigger.id == 'appletv_playing' or is_state('media_player.woonkamer', 'playing') }}"
+            - "{{ is_state('input_select.helpers_scenes', 'scene appletv') }}"
+
+          sequence:
+            - action: huesyncbox.set_sync_state
+              data:
+                sync: true
+                brightness: 70
+                intensity: high
+                mode: video
+                input: input1
+                entertainment_area: "{{ 'TV room' if is_state('input_boolean.function_tvonly', 'off') and state_attr('media_player.woonkamer', 'app_id') not in ['com.apple.TVMusic', 'com.apple.TVAirPlay'] else 'TV only' }}"
+              target:
+                device_id: ca734212663336331243ffd0104937dc
+
+            - parallel:
+                - action: light.turn_on
+                  target:
+                    entity_id:
+                      - light.nanoleaf
+                  data:
+                    brightness_pct: 5
+                    transition: 2
+
+                - action: light.turn_on
+                  target:
+                    entity_id: light.wall_all
+                  data:
+                    transition: 2
+                    brightness_pct: 40
+
+                - delay: "00:00:03"
+
+                - action: light.turn_on
+                  target:
+                    entity_id: light.window_all
+                  data:
+                    transition: 2
+                    brightness_pct: 5
+
+                - delay: "00:00:03"
+
+                - action: light.turn_on
+                  target:
+                    entity_id: light.dressoir_all
+                  data:
+                    transition: 2
+                    brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 15 }}"
+
+                - action: light.turn_on
+                  target:
+                    entity_id: light.balcony_all
+                  data:
+                    transition: 2
+                    brightness_pct: 5
+
+        ###########################################################################################
+        # When Apple TV is paused
+        ###########################################################################################
+        - conditions:
+            - "{{ trigger.id == 'appletv_paused' or states('media_player.woonkamer') in ['paused', 'standby', 'idle'] }}"
+            - "{{ is_state('input_select.helpers_scenes', 'scene appletv') }}"
+
+          sequence:
+            - action: huesyncbox.set_sync_state
+              data:
+                sync: false
+                brightness: 70
+                intensity: high
+                mode: video
+                input: input1
+                entertainment_area: TV only
+              target:
+                device_id: ca734212663336331243ffd0104937dc
+
+            - delay: "00:00:01"
+
+            - action: hue.activate_scene
+              data:
+                transition: 2
+                brightness: 255
+              target:
+                entity_id: >-
+                  {% if is_state('sensor.holidays', 'Christmas') %} 
+                    scene.scenes_appletv_christmas
+                  {% elif is_state('sensor.holidays', 'Halloween') %} 
+                    scene.scenes_appletv_halloween
+                  {% elif is_state('sensor.holidays', 'Eurovision') %} 
+                    scene.scenes_eurovision
+                  {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+                    scene.scenes_birthday
+                  {% elif is_state('sensor.holidays', 'Valentine') %}
+                    scene.scenes_romantic
+                  {% else %} 
+                    scene.scenes_appletv
+                  {% endif %}
+
+            - parallel:
+                - action: light.turn_on
+                  target:
+                    entity_id: light.nanoleaf
+                  data:
+                    brightness_pct: 50
+                    transition: 2
+
+                - action: light.turn_on
+                  target:
+                    entity_id:
+                      - light.livingroom_all
+                      - light.balcony_all
+                  data:
+                    transition: 2
+                    brightness_pct: 100
+
+                - action: light.turn_on
+                  target:
+                    entity_id: light.dressoir_all
+                  data:
+                    transition: 2
+                    brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
+
+                - action: light.turn_on
+                  target:
+                    entity_id: light.balcony_all
+                  data:
+                    transition: 2
+                    brightness_pct: 100
+
+        ###########################################################################################
+        # When TV or Nintendo is active
+        ###########################################################################################
+        - conditions:
+            - "{{ states('input_select.helpers_scenes') in ['scene tv', 'scene nintendo'] }}"
+
+          sequence:
+            - action: huesyncbox.set_sync_state
+              data:
+                sync: true
+                brightness: 70
+                intensity: high
+                mode: video
+                input: input1
+                entertainment_area: TV only
+              target:
+                device_id: ca734212663336331243ffd0104937dc

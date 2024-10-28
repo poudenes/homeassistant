@@ -1,0 +1,35 @@
+#   █████╗ ██████╗ ██████╗ ██╗     ███████╗     █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗
+#  ██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║
+#  ███████║██████╔╝██████╔╝██║     █████╗      ███████║██║        ██║   ██║██║   ██║██╔██╗ ██║
+#  ██╔══██║██╔═══╝ ██╔═══╝ ██║     ██╔══╝      ██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║
+#  ██║  ██║██║     ██║     ███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║
+#  ╚═╝  ╚═╝╚═╝     ╚═╝     ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+###########################################################################################
+# APPLE WATCH TEMPERATURE REPORT
+###########################################################################################
+- id: "6d01583b-5445-4d61-95ec-739e8a7aec3a"
+  alias: "Apple Watch - Temperature Report"
+  mode: parallel
+  triggers:
+    - trigger: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Temperature level"
+
+  conditions: []
+
+  actions:
+    - action: script.mobile_notify_no_actionable
+      data:
+        title: "HA - Apple Watch"
+        message: |
+          Livingroom: {{ states('sensor.toilet_temperature') }} °C,
+          Bedroom: {{ states('sensor.bedroom_temperature') }} °C,
+          Bathroom: {{ states('sensor.bathroom_temperature') }} °C,
+          Hallway: {{ states('sensor.hallway_temperature') }} °C,
+          Kitchen: {{ states('sensor.kitchen_temperature') }} °C,
+          Diningroom: {{ states('sensor.diningroom_temperature') }} °C,
+          Toilet: {{ states('sensor.toilet_temperature') }} °C,
+          Nest: {{ state_attr('climate.entryway', 'temperature') }} °C,
+          Outside: {{ states('sensor.accu_weather_realfeel_temperature') }} °C.
+        thread_id: "ha_apple_watch"

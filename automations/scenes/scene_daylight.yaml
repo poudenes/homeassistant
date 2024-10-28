@@ -1,0 +1,95 @@
+#  ███████╗ ██████╗███████╗███╗   ██╗███████╗    ██████╗  █████╗ ██╗   ██╗████████╗██╗███╗   ███╗███████╗
+#  ██╔════╝██╔════╝██╔════╝████╗  ██║██╔════╝    ██╔══██╗██╔══██╗╚██╗ ██╔╝╚══██╔══╝██║████╗ ████║██╔════╝
+#  ███████╗██║     █████╗  ██╔██╗ ██║█████╗      ██║  ██║███████║ ╚████╔╝    ██║   ██║██╔████╔██║█████╗
+#  ╚════██║██║     ██╔══╝  ██║╚██╗██║██╔══╝      ██║  ██║██╔══██║  ╚██╔╝     ██║   ██║██║╚██╔╝██║██╔══╝
+#  ███████║╚██████╗███████╗██║ ╚████║███████╗    ██████╔╝██║  ██║   ██║      ██║   ██║██║ ╚═╝ ██║███████╗
+#  ╚══════╝ ╚═════╝╚══════╝╚═╝  ╚═══╝╚══════╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+###########################################################################################
+# SCENE FOR DAYTIME WHEN SUN IS ABOVE HORIZON TURN OFF EVERYTHING THATS NOT NEEDED AT DAYTIME
+###########################################################################################
+- id: "13ea8c41-0328-4e66-80e3-bc966fd38875"
+  alias: "Scene - Daytime (1/5)"
+  mode: restart
+  triggers:
+    - trigger: time_pattern
+      minutes: "/5"
+
+    - trigger: state
+      entity_id: input_select.helpers_sunrise_sunset
+      to: "above_horizon"
+
+  conditions:
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+    - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
+    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+    - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
+    - "{{ not is_state('input_select.helpers_scenes', 'scene daytime') }}"
+
+  actions:
+    - action: input_select.select_option
+      target:
+        entity_id: input_select.helpers_scenes
+      data:
+        option: "scene daytime"
+
+    - action: homeassistant.turn_off
+      target:
+        entity_id:
+          - group.helpers_function_switches
+          - input_boolean.helpers_vacuum_done
+
+    - action: light.turn_off
+      target:
+        entity_id: >
+          {{ state_attr('light.helpers_daytime_lights', 'entity_id')
+            | reject('in', ['light.bedroom_all']) | list }}
+
+    - action: "{{ 'switch.turn_off' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
+      target:
+        entity_id: >
+          {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
+            | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+
+    - action: switch.turn_on
+      target:
+        entity_id:
+          - switch.bedroom_wall
+
+    - action: rest_command.scene_check
+      data:
+        payload: >
+          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
+          {"friendly_name": "Scene"}}
+
+    - parallel:
+        - sequence:
+            - wait_template: "{{ is_state('binary_sensor.toilet_detection', 'off') }}"
+              timeout: "00:05:00"
+              continue_on_timeout: false
+
+            - action: light.turn_off
+              target:
+                entity_id: light.toilet_all
+
+        - sequence:
+            - wait_template: "{{ is_state('binary_sensor.bathroom_detection', 'off') }}"
+              timeout: "00:05:00"
+              continue_on_timeout: false
+
+            - action: light.turn_off
+              target:
+                entity_id: light.bathroom_all
+
+        - sequence:
+            - wait_template: "{{ states('sensor.bedroom_lux')|int > 200 }}"
+              timeout: "01:00:00"
+              continue_on_timeout: false
+
+            - action: light.turn_off
+              target:
+                entity_id: light.bedroom_all
+
+        - sequence:
+            - action: light.turn_off
+              target:
+                entity_id: light.tv_sync

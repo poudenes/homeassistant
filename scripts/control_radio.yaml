@@ -1,0 +1,46 @@
+#   ██████╗ ██████╗ ███╗   ██╗████████╗██████╗  ██████╗ ██╗         ██████╗  █████╗ ██████╗ ██╗ ██████╗
+#  ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔═══██╗██║         ██╔══██╗██╔══██╗██╔══██╗██║██╔═══██╗
+#  ██║     ██║   ██║██╔██╗ ██║   ██║   ██████╔╝██║   ██║██║         ██████╔╝███████║██║  ██║██║██║   ██║
+#  ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██╗██║   ██║██║         ██╔══██╗██╔══██║██║  ██║██║██║   ██║
+#  ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╔╝███████╗    ██║  ██║██║  ██║██████╔╝██║╚██████╔╝
+#   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝ ╚═════╝
+###########################################################################################
+# SCRIPT
+# https://www.home-assistant.io/docs/scripts/
+###########################################################################################
+
+###########################################################################################
+# RADIO STREAM SEQUENCE
+###########################################################################################
+stream_radio:
+  alias: "Control - Play Radio"
+  icon: mdi:play
+  description: "Radio - Here all channels can be selected and turn them on or off on Tablet or Alexa"
+  sequence:
+    - variables:
+        select: "{{ states('input_select.helpers_radio_selector') }}"
+        entity:
+          Bedroom: media_player.bedroom
+          Livingroom: media_player.livingroom
+          Kitchen: media_player.galaxy_tab_a
+
+    - action: media_player.play_media
+      target:
+        entity_id: "{{ entity_id }}"
+      data:
+        media_content_id: "Radio {{ states('input_select.helpers_radio_station') }}"
+        media_content_type: TUNEIN
+
+###########################################################################################
+# RADIO STOP COMMAND
+###########################################################################################
+stream_radio_stop:
+  alias: "Stop Radio"
+  icon: mdi:stop
+  sequence:
+    - action: media_player.media_stop
+      target:
+        entity_id: >-
+          {% if is_state('input_select.helpers_radio_selector', 'Livingroom') %} media_player.livingroom
+          {% elif is_state('input_select.helpers_radio_selector', 'Bedroom') %} media_player.bedroom
+          {% endif %}
