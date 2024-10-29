@@ -48,32 +48,32 @@
           data:
             brightness_pct: "{{ 5 if is_state('media_player.woonkamer', 'playing') else 40 }}"
             effect: >-
-              {% set holiday = states('sensor.holidays') %}
-              {% set holiday_effects = {
-                'Christmas': 'Christmas',
-                'Halloween': 'Halloween',
-                'Eurovision': 'Euro 2023',
-                'Kingsday': 'Kingsday',
-                'Birthday': 'Kingsday',
-                'Valentine': 'Valentine',
-                'Special Day': 'Valentine'
-              } %}
-              {{ holiday_effects[holiday] if holiday in holiday_effects else 'Kay' }}
+              {% if is_state('sensor.holidays', 'Christmas') %} 
+                Christmas
+              {% elif is_state('sensor.holidays', 'Halloween') %} 
+                Halloween
+              {% elif is_state('sensor.holidays', 'Eurovision') %} 
+                Euro 2023
+              {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+                Kingsday
+              {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
+                Valentine
+              {% else %} 
+                Kay
+              {% endif %}
 
             # effect: >-
-            #   {% if is_state('sensor.holidays', 'Christmas') %} 
-            #     Christmas
-            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
-            #     Halloween
-            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
-            #     Euro 2023
-            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
-            #     Kingsday
-            #   {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
-            #     Valentine
-            #   {% else %} 
-            #     Kay
-            #   {% endif %}
+            #   {% set holiday = states('sensor.holidays') %}
+            #   {% set holiday_effects = {
+            #     'Christmas': 'Christmas',
+            #     'Halloween': 'Halloween',
+            #     'Eurovision': 'Euro 2023',
+            #     'Kingsday': 'Kingsday',
+            #     'Birthday': 'Kingsday',
+            #     'Valentine': 'Valentine',
+            #     'Special Day': 'Valentine'
+            #   } %}
+            #   {{ holiday_effects[holiday] if holiday in holiday_effects else 'Kay' }}
 
         - action: input_select.select_option
           target:
@@ -87,31 +87,31 @@
             transition: 2
           target:
             entity_id: >-
-              {% set holiday = states('sensor.holidays') %}
-              {% set holiday_scenes = {
-                'Christmas': 'scene.scenes_evening_christmas',
-                'Halloween': 'scene.scenes_evening_halloween',
-                'Eurovision': 'scene.scenes_evening_eurovision',
-                'Kingsday': 'scene.scenes_birthday',
-                'Birthday': 'scene.scenes_birthday',
-                'Valentine': 'scene.scenes_romantic'
-              } %}
-              {{ holiday_scenes[holiday] if holiday in holiday_scenes else 'scene.scenes_evening_evening' }}
-              
+              {% if is_state('sensor.holidays', 'Christmas') %} 
+                scene.scenes_appletv_christmas
+              {% elif is_state('sensor.holidays', 'Halloween') %} 
+                scene.scenes_appletv_halloween
+              {% elif is_state('sensor.holidays', 'Eurovision') %} 
+                scene.scenes_eurovision
+              {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
+                scene.scenes_birthday
+              {% elif is_state('sensor.holidays', 'Valentine') %}
+                scene.scenes_romantic
+              {% else %} 
+                scene.scenes_appletv
+              {% endif %}
+
             # entity_id: >-
-            #   {% if is_state('sensor.holidays', 'Christmas') %} 
-            #     scene.scenes_appletv_christmas
-            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
-            #     scene.scenes_appletv_halloween
-            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
-            #     scene.scenes_eurovision
-            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
-            #     scene.scenes_birthday
-            #   {% elif is_state('sensor.holidays', 'Valentine') %}
-            #     scene.scenes_romantic
-            #   {% else %} 
-            #     scene.scenes_appletv
-            #   {% endif %}
+            #   {% set holiday = states('sensor.holidays') %}
+            #   {% set holiday_scenes = {
+            #     'Christmas': 'scene.scenes_evening_christmas',
+            #     'Halloween': 'scene.scenes_evening_halloween',
+            #     'Eurovision': 'scene.scenes_evening_eurovision',
+            #     'Kingsday': 'scene.scenes_birthday',
+            #     'Birthday': 'scene.scenes_birthday',
+            #     'Valentine': 'scene.scenes_romantic'
+            #   } %}
+            #   {{ holiday_scenes[holiday] if holiday in holiday_scenes else 'scene.scenes_evening_evening' }}
 
         - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
           target:
@@ -143,3 +143,9 @@
         entity_id: light.balcony_all
       data:
         brightness_pct: "{{ 20 if is_state('media_player.woonkamer', 'playing') else 100 }}"
+
+    - action: rest_command.scene_check
+      data:
+        payload: >
+          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
+          {"friendly_name": "Scene"}}

@@ -35,6 +35,12 @@
         brightness_pct: 100
         transition: 300
 
+    - action: rest_command.scene_check
+      data:
+        payload: >
+          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
+          {"friendly_name": "Scene"}}
+
     - choose:
         - conditions: "{{ states('sensor.bathroom_temperature')|int < 17 }}"
           sequence:
