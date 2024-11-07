@@ -84,7 +84,7 @@ sensor:
   - platform: wifi_signal
     id: "wifi_db_signal"
     name: "${friendly} - Wifi Signal"
-    update_interval: 5min
+    update_interval: 1min
 
   - platform: uptime
     name: "${friendly} - Uptime"
