@@ -26,6 +26,21 @@ include:
     - scene
 
   entities:
+    # For debug why leds change color witg Apple TV
+    - input_select.helpers_scenes
+    - switch.balcony_light_switch
+    - switch.bathroom_light_switch
+    - switch.bedroom_light_switch
+    - switch.cooking_light_switch
+    - switch.diningtable_light_switch
+    - switch.dressoir_light_switch
+    - switch.hallway_light_switch
+    - switch.ceiling_light_switch
+    - switch.sink_light_switch
+    - switch.toilet_light_switch
+    - switch.wall_light_switch
+    - switch.window_light_switch
+    
     - sensor.bathroom_average_humidity
     
     # 3D Printer KwH Sensor
