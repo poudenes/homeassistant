@@ -24,7 +24,6 @@
     - "{{ states('sensor.fan_speed') not in ['high', 'high(t)'] }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ is_state('input_boolean.function_vacation', 'off') }}"
- #   - "{{ states('input_select.helpers_scenes') not in ['scene goodnight'] }}"
     - "{{ is_state('binary_sensor.bathroom_detection', 'on') }}"
 
 #    - condition: time
