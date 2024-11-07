@@ -50,7 +50,7 @@
               data:
                 sync: true
                 brightness: 70
-                intensity: high
+                intensity: intense #high
                 mode: video
                 input: input1
                 entertainment_area: "{{ 'TV room' if is_state('input_boolean.function_tvonly', 'off') and state_attr('media_player.woonkamer', 'app_id') not in ['com.apple.TVMusic', 'com.apple.TVAirPlay'] else 'TV only' }}"
@@ -110,7 +110,7 @@
               data:
                 sync: false
                 brightness: 70
-                intensity: high
+                intensity: intense #high
                 mode: video
                 input: input1
                 entertainment_area: TV only
@@ -181,7 +181,7 @@
               data:
                 sync: true
                 brightness: 70
-                intensity: high
+                intensity: intense #high
                 mode: video
                 input: input1
                 entertainment_area: TV only
