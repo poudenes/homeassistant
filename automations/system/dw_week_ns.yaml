@@ -39,7 +39,7 @@
             {%- set date = month~'-'~day %}
             {%- set start = now().year~'-'~date ~' '~ item.split()[3]~':00'~now().strftime('%z') %}
             {%- set end = now().year~'-'~date ~' '~ item.split()[4]~':00'~now().strftime('%z') %}
-            {%- set summary = item.split()[2] ~' - Zuid' %}
+            {%- set summary = item.split()[2] ~' - VerbeterMee' %}
             {%- set ns.events = ns.events + [{"summary": summary, "start": start, "end": end}] %}
           {% endfor %}
           {{ ns.events }}
