@@ -81,19 +81,7 @@
               {% else %} 
                 Kay
               {% endif %}
-            # effect: >-
-            #   {% set holiday = states('sensor.holidays') %}
-            #   {% set holiday_effects = {
-            #     'Christmas': 'Christmas',
-            #     'Halloween': 'Halloween',
-            #     'Eurovision': 'Euro 2023',
-            #     'Kingsday': 'Kingsday',
-            #     'Birthday': 'Kingsday',
-            #     'Valentine': 'Valentine',
-            #     'Special Day': 'Valentine'
-            #   } %}
-            #   {{ holiday_effects[holiday] if holiday in holiday_effects else 'Kay' }}
-              
+  
         - action: hue.activate_scene
           data:
             transition: 2
@@ -112,18 +100,6 @@
               {% else %} 
                 scene.scenes_evening_evening
               {% endif %}
-
-            # entity_id: >-
-              # {% set holiday = states('sensor.holidays') %}
-              # {% set holiday_scenes = {
-              #   'Christmas': 'scene.scenes_evening_christmas',
-              #   'Halloween': 'scene.scenes_evening_halloween',
-              #   'Eurovision': 'scene.scenes_evening_eurovision',
-              #   'Kingsday': 'scene.scenes_birthday',
-              #   'Birthday': 'scene.scenes_birthday',
-              #   'Valentine': 'scene.scenes_romantic'
-              # } %}
-              # {{ holiday_scenes[holiday] if holiday in holiday_scenes else 'scene.scenes_evening_evening' }}
 
         - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
           target:
