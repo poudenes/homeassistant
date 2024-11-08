@@ -12,15 +12,15 @@
   triggers:
     - trigger: state
       entity_id:
-        - binary_sensor.nest_protect_bedroom_smoke_status
-        - binary_sensor.nest_protect_bedroom_co_status
-        - binary_sensor.nest_protect_bedroom_heat_status
-        - binary_sensor.nest_protect_entryway_smoke_status
-        - binary_sensor.nest_protect_entryway_co_status
-        - binary_sensor.nest_protect_entryway_heat_status
-        - binary_sensor.nest_protect_living_room_smoke_status
-        - binary_sensor.nest_protect_living_room_co_status
-        - binary_sensor.nest_protect_living_room_heat_status
+        - binary_sensor.nest_protect_3_smoke_status
+        - binary_sensor.nest_protect_3_co_status
+        - binary_sensor.nest_protect_3_heat_status
+        - binary_sensor.nest_protect_1_smoke_status
+        - binary_sensor.nest_protect_1_co_status
+        - binary_sensor.nest_protect_1_heat_status
+        - binary_sensor.nest_protect_2_smoke_status
+        - binary_sensor.nest_protect_2_co_status
+        - binary_sensor.nest_protect_2_heat_status
       to: "on"
 
   conditions: []
