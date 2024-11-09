@@ -45,7 +45,7 @@ zeroconf:
 alexa: !include integrations/alexa.yaml
 automation: !include_dir_merge_list automations/
 birthdays: !include integrations/birthday.yaml
-calendar: !include integrations/calendar.yaml
+# calendar: !include integrations/calendar.yaml # Moved to UI integration
 command_line: !include integrations/command_line.yaml
 emulated_hue: !include integrations/emulated_hue.yaml
 fan: !include integrations/fan.yaml
