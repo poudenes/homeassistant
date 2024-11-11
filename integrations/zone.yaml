@@ -10,8 +10,8 @@
 # https://www.home-assistant.io/integrations/zone/
 ###########################################################################################
 - name: "Home" # Manual set home to radius of 200 meter
-  latitude: !secret latitude_asingaborg
-  longitude: !secret longitude_asingaborg
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
   radius: 150
   icon: mdi:account-multiple
 
@@ -34,20 +34,20 @@
   icon: mdi:account-multiple
 
 - name: "GLDPlein"
-  latitude: !secret lat_gelderlandplein
-  longitude: !secret lon_gelderlandplein
+  latitude: !secret lat_gp
+  longitude: !secret lon_gp
   radius: 200
   icon: mdi:account-multiple
 
 - name: "Ter Gooi"
-  latitude: !secret lat_tergooi
-  longitude: !secret lon_tergooi
+  latitude: !secret lat_tg
+  longitude: !secret lon_tg
   radius: 350
   icon: mdi:account-multiple
 
 - name: "UMCU"
-  latitude: !secret lat_umc_utrecht
-  longitude: !secret lon_umc_utrecht
+  latitude: !secret lat_umc
+  longitude: !secret lon_umc
   radius: 650
   icon: mdi:account-multiple
 
@@ -94,8 +94,8 @@
   icon: mdi:account-multiple
 
 - name: "SHL"
-  latitude: !secret lat_schiphol
-  longitude: !secret lon_schiphol
+  latitude: !secret lat_shl
+  longitude: !secret lon_shl
   radius: 700
   icon: mdi:account-multiple
 
