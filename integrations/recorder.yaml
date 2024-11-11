@@ -31,9 +31,6 @@ include:
     - scene
 
   entities:
-    # For debug why leds change color witg Apple TV
-    - input_select.helpers_scenes
-
     # BambuLabs
     - binary_sensor.bambulab_a1_mini_firmware_update
     - binary_sensor.bambulab_a1_mini_hms_errors
@@ -97,6 +94,7 @@ include:
     - sensor.cryptoinfo_wax_usd
     - sensor.cryptoinfo_vet_usd
 
+    # EURO95 Integration
     - sensor.gas_station_euro95_home_lowest_price_1
     - sensor.gas_station_euro95_home_lowest_price_2
     - sensor.gas_station_euro95_home_lowest_price_3
@@ -108,6 +106,7 @@ include:
     - sensor.gas_station_euro95_work_lowest_price_4
     - sensor.gas_station_euro95_work_lowest_price_5
 
+    # Speedtest
     - sensor.speedtest_download
     - sensor.speedtest_upload
 
@@ -120,6 +119,7 @@ include:
     - sensor.cenkay_iphone_gps_accuracy
     - sensor.peter_iphone_gps_accuracy
 
+    # Other
     - calendar.work
     - input_select.helpers_sunrise_sunset
     - remote.woonkamer
