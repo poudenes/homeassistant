@@ -29,7 +29,6 @@
     - switch.window_light_switch
     - switch.balcony_light_switch
     - switch.toilet_light_switch
-    # - switch.newkaku_014e5906_a
 
 - platform: group
   name: "helpers_zwave_wallswitches"
