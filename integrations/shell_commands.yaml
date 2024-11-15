@@ -29,6 +29,7 @@ mvps_backup_db: !secret mvps_backup_db
 mvps_update_blacklist: !secret mvps_update_blacklist
 mvps_ipset_abuseipdb: !secret mvps_ipset_abuseipdb
 mvps_apt_update: !secret mvps_apt_update
+mvps_umount_nas: !secret mvps_umount_nas
 
 
 
