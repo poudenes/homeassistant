@@ -13,39 +13,22 @@
   triggers:
     - trigger: state
       entity_id:
-        - switch.momentary_mvps_update_blacklist_manual
-        - switch.momentary_mvps_backup_db_manual
-        - switch.momentary_mvps_backup_ispconfig_full_manual
-        - switch.momentary_mvps_backup_vmail_manual
-        - switch.momentary_mvps_backup_www_full_manual
-        - switch.momentary_mvps_clean_logfiles
-        - switch.momentary_mvps_rspamd_learning
-        - switch.momentary_mvps_update_ipset_abuseipdb_manual
-        - switch.momentary_mvps_update_os_manual
+        - switch.momentary_mvps_update_blacklist
+        - switch.momentary_mvps_backup_db
+        - switch.momentary_mvps_backup_ispconfig
+        - switch.momentary_mvps_backup_vmail
+        - switch.momentary_mvps_backup_full
+        - switch.momentary_mvps_clearlog
+        - switch.momentary_mvps_rspamd_learn
+        - switch.momentary_mvps_ipset_abuseipdb
+        - switch.momentary_mvps_apt_update
+        - switch.momentary_mvps_umount_nas
+
 
   conditions:
     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
     - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
 
   actions:
-    - action: >-
-        {% if is_state('switch.momentary_mvps_update_blacklist_manual', 'on') %} 
-          shell_command.mvps_update_blacklist
-        {% elif is_state('switch.momentary_mvps_backup_db_manual', 'on') %} 
-          shell_command.mvps_backup_db
-        {% elif is_state('switch.momentary_mvps_backup_ispconfig_full_manual', 'on') %} 
-          shell_command.mvps_backup_ispconfig
-        {% elif is_state('switch.momentary_mvps_backup_vmail_manual', 'on') %} 
-          shell_command.mvps_backup_vmail
-        {% elif is_state('switch.momentary_mvps_backup_www_full_manual', 'on') %} 
-          shell_command.mvps_backup_full
-        {% elif is_state('switch.momentary_mvps_clean_logfiles', 'on') %}
-          shell_command.mvps_clearlog
-        {% elif is_state('switch.momentary_mvps_rspamd_learning', 'on') %}
-          shell_command.mvps_rspamd_learn
-        {% elif is_state('switch.momentary_mvps_update_ipset_abuseipdb_manual', 'on') %}
-          shell_command.mvps_ipset_abuseipdb
-        {% elif is_state('switch.momentary_mvps_update_os_manual', 'on') %}
-          shell_command.mvps_apt_update
-        {% endif %}
+    - action: shell_command.{{ trigger.entity_id[17:] }}
       data: {}
