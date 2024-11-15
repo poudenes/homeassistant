@@ -10,9 +10,9 @@
 # TWITTER
 # https://www.home-assistant.io/integrations/twitter/
 ###########################################################################################
-- platform: twitter
-  name: "Twitter"
-  consumer_key: !secret twitter_consumer_key
-  consumer_secret: !secret twitter_consumer_secret
-  access_token: !secret twitter_access_token
-  access_token_secret: !secret twitter_access_token_secret
+#- platform: twitter
+#  name: "Twitter"
+#  consumer_key: !secret twitter_consumer_key
+#  consumer_secret: !secret twitter_consumer_secret
+#  access_token: !secret twitter_access_token
+#  access_token_secret: !secret twitter_access_token_secret
