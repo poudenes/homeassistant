@@ -34,47 +34,51 @@ switches:
   cancellable: true
   toggle_for: 14400
 
-- name: "Momentary MVPS Update blacklist manual"
+- name: "Momentary MVPS Backup full"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Backup db manual"
+- name: "Momentary MVPS Update blacklist"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Backup ispconfig full manual"
+- name: "Momentary MVPS apt update"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Backup vmail manual"
+- name: "Momentary MVPS ipset abuseipdb"
+  cancellable: true
+  toggle_for: 30
+
+- name: "Momentary MVPS Umount NAS"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Backup www full manual"
+- name: "Momentary MVPS Backup db"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Clean logfiles"
+- name: "Momentary MVPS Backup ispconfig"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Rspamd learning"
+- name: "Momentary MVPS Backup vmail"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Update ipset abuseipdb manual"
+- name: "Momentary MVPS clearlog"
   mode: "on"
   cancellable: true
   toggle_for: 30
 
-- name: "Momentary MVPS Update OS manual"
+- name: "Momentary MVPS Rspamd learn" 
   mode: "on"
   cancellable: true
   toggle_for: 30
