@@ -34,6 +34,7 @@
 ###########################################################################################
 - platform: cryptoinfo_advanced
   id: "BTC USD"
+  unique_id: "ad002983-b311-4972-a4fb-576e883ae9bc"
   cryptocurrency_name: "bitcoin"
   currency_name: "usd"
   unit_of_measurement: "$"
@@ -45,33 +46,97 @@
 
 - platform: cryptoinfo_advanced
   id: "XRP USD"
+  unique_id: "7e65d997-9027-43b5-b8f9-70fccfeed23e"
   cryptocurrency_name: "ripple"
   currency_name: "usd"
   unit_of_measurement: "$"
   multiplier: 1
-  update_frequency: 1
+  update_frequency: 5
   extra_sensors:
     - property: "24h_volume"
       unit_of_measurement: "$"
 
 - platform: cryptoinfo_advanced
   id: "WAX USD"
+  unique_id: "9dd1dfdc-f862-425b-a3ff-6293da73cc10"
   cryptocurrency_name: "wax"
   currency_name: "usd"
   unit_of_measurement: "$"
   multiplier: 1
-  update_frequency: 1
+  update_frequency: 5
   extra_sensors:
     - property: "24h_volume"
       unit_of_measurement: "$"
 
 - platform: cryptoinfo_advanced
   id: "VET USD"
+  unique_id: "a05462ca-7a62-49e0-b3e8-d066e59c9ff0"
   cryptocurrency_name: "vechain"
   currency_name: "usd"
   unit_of_measurement: "$"
   multiplier: 1
-  update_frequency: 1
+  update_frequency: 5
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+# NEW ADDED
+- platform: cryptoinfo_advanced
+  id: "AVAX USD"
+  unique_id: "195faa94-8ca2-4d02-90f9-8df4baaf08a4"
+  cryptocurrency_name: "avalanche"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 5
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "SOL USD"
+  unique_id: "ca36f81a-e44b-48b8-a371-edc389dd2897"
+  cryptocurrency_name: "solana"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 5
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "DOGE USD"
+  unique_id: "45fe4791-89b7-48c4-8ca2-6097ab81b486"
+  cryptocurrency_name: "dogecoin"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 5
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "ADA USD"
+  unique_id: "edecafe5-31b3-401a-a122-64e71166596f"
+  cryptocurrency_name: "cardano"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 5
+  extra_sensors:
+    - property: "24h_volume"
+      unit_of_measurement: "$"
+
+- platform: cryptoinfo_advanced
+  id: "ETH USD"
+  unique_id: "fc86b368-1ef5-4da1-86aa-4e41aecf40f8"
+  cryptocurrency_name: "ethereum"
+  currency_name: "usd"
+  unit_of_measurement: "$"
+  multiplier: 1
+  update_frequency: 5
   extra_sensors:
     - property: "24h_volume"
       unit_of_measurement: "$"
