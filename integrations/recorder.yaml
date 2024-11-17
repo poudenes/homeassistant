@@ -89,10 +89,15 @@ include:
     - sensor.oral_b_io_series_8n_toothbrush_state
 
     # Crypto info
-    - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_xrp_usd
     - sensor.cryptoinfo_wax_usd
     - sensor.cryptoinfo_vet_usd
+    - sensor.cryptoinfo_sol_usd
+    - sensor.cryptoinfo_eth_usd
+    - sensor.cryptoinfo_doge_usd
+    - sensor.cryptoinfo_btc_usd
+    - sensor.cryptoinfo_ada_usd
+    - sensor.cryptoinfo_avax_usd
 
     # EURO95 Integration
     - sensor.gas_station_euro95_home_lowest_price_1

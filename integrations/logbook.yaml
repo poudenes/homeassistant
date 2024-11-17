@@ -88,10 +88,15 @@ include:
     - sensor.oral_b_io_series_8n_time
     - sensor.oral_b_io_series_8n_toothbrush_state
     
-    - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_xrp_usd
     - sensor.cryptoinfo_wax_usd
     - sensor.cryptoinfo_vet_usd
+    - sensor.cryptoinfo_sol_usd
+    - sensor.cryptoinfo_eth_usd
+    - sensor.cryptoinfo_doge_usd
+    - sensor.cryptoinfo_btc_usd
+    - sensor.cryptoinfo_ada_usd
+    - sensor.cryptoinfo_avax_usd
     
     - sensor.speedtest_download
     - sensor.speedtest_upload
