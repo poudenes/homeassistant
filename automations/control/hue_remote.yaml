@@ -1,0 +1,54 @@
+#  ██╗  ██╗██╗   ██╗███████╗    ██████╗ ███████╗███╗   ███╗ ██████╗ ████████╗███████╗
+#  ██║  ██║██║   ██║██╔════╝    ██╔══██╗██╔════╝████╗ ████║██╔═══██╗╚══██╔══╝██╔════╝
+#  ███████║██║   ██║█████╗      ██████╔╝█████╗  ██╔████╔██║██║   ██║   ██║   █████╗  
+#  ██╔══██║██║   ██║██╔══╝      ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║   ██║   ██╔══╝  
+#  ██║  ██║╚██████╔╝███████╗    ██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝   ██║   ███████╗
+#  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝    ╚═╝   ╚══════╝
+###########################################################################################
+# HUE Remote control
+###########################################################################################
+  - id: "ea1867f0-9ee4-46cb-83a0-f9942c63a820c"
+    alias: "HUE Remote control"
+    mode: restart
+    trigger:
+      - trigger: state
+        entity_id: sensor.hue_remote_sensor
+
+    condition: []
+
+    actions:
+      - choose:
+          - conditions: 
+              - "{{ is_state('sensor.holidays', 'Christmas') }}"
+              - "{{ state_attr('sensor.hue_remote_sensor', 'press_type') == 'short_release' }}"
+            sequence:
+              - action: switch.toggle
+                target:
+                  entity_id: >
+                    {% if trigger.to_state.state == '1' %} switch.xmas_1_wall
+                    {% elif trigger.to_state.state == '2' %} switch.xmas_tree_wall
+                    {% elif trigger.to_state.state == '3' %} switch.toog_wall
+                    {% elif trigger.to_state.state == '4' %} switch.imac_wall
+                    {% endif %}
+
+              # - delay: "00:00:05"
+
+          - conditions: 
+              - "{{ not is_state('sensor.holidays', 'Christmas') }}"
+              - "{{ state_attr('sensor.hue_remote_sensor', 'press_type') == 'short_release' }}"
+            sequence:
+              sequence:
+                - action: light.toggle
+                  target:
+                    entity_id: >
+                      {% if trigger.to_state.state == '1' %} light.livingroom_all
+                      {% elif trigger.to_state.state == '2' %} light.dressoir_all
+                      {% elif trigger.to_state.state == '3' %} light.hallway_all
+                      {% elif trigger.to_state.state == '4' %} light.bedroom_all
+                      {% endif %}
+                  data:
+                    brightness_pct: 98
+                    kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+                    effect: "none"
+
+                # - delay: "00:00:05"
