@@ -12,7 +12,7 @@
 # Philips Hue remote to sensor
 #########################################################################################
 - trigger:
-    - platform: event
+    - trigger: event
       event_type: hue_event
       event_data:
         id: remote_1_button
@@ -28,7 +28,7 @@
 # IMAP Triggers
 #########################################################################################
 - trigger:
-    - platform: event
+    - trigger: event
       event_type: "imap_content"
       id: "custom_event"
       event_data:
@@ -54,7 +54,7 @@
 #        Received-last: "{{ trigger.event.data['headers'].get('Received',['n/a'])[-1] }}"
 
 - trigger:
-    - platform: event
+    - trigger: event
       event_type: "imap_content"
       id: "custom_event"
       event_data:
@@ -72,7 +72,7 @@
 # Trigger on webhook and create a sensor
 ###########################################################################################        
 - trigger:
-    - platform: webhook
+    - trigger: webhook
       webhook_id: "postgress_backup"
       local_only: true
       allowed_methods:
