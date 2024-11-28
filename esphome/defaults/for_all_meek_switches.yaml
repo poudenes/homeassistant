@@ -1,5 +1,6 @@
 esphome:
   name: ${devicename}
+  name_add_mac_suffix: false
   on_boot:
     priority: 600
     then:
@@ -16,6 +17,9 @@ esp8266:
   board: esp01_1m
   restore_from_flash: true
 
+mdns:
+  disabled: false
+  
 api:
   encryption:
     key: !secret api_key
