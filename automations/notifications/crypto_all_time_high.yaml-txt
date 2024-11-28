@@ -1,0 +1,48 @@
+
+###########################################################################################
+# Notify when price is almost ATH < 0.5% difference
+###########################################################################################
+- id: "3995e11c-7813-42ff-b0c0-d780ba7894dd"
+  alias: "Notification - Crypto ATH"
+  trigger:
+    - trigger: state
+      entity_id:
+        - sensor.cryptoinfo_xrp_usd
+        - sensor.cryptoinfo_wax_usd
+        - sensor.cryptoinfo_vet_usd
+        - sensor.cryptoinfo_sol_usd
+        - sensor.cryptoinfo_eth_usd
+        - sensor.cryptoinfo_doge_usd
+        - sensor.cryptoinfo_btc_usd
+        - sensor.cryptoinfo_ada_usd
+        - sensor.cryptoinfo_avax_usd
+
+
+    # - trigger: template
+    #   value_template: >
+    #     {% for sensor in states.sensor %}
+    #       {% if 'all_time_high' in sensor.attributes %}
+    #         {% set price = sensor.state | float %}
+    #         {% set all_time_high = sensor.attributes.all_time_high | float %}
+    #         {% if price >= all_time_high * 0.995 and price <= all_time_high * 1.005 %}
+    #           true
+    #         {% endif %}
+    #       {% endif %}
+    #     {% endfor %}
+  action:
+
+    - action: persistent_notification.create
+      data:
+        title: "HA - Crypto ATH"
+        message: >-
+          {% for sensor in states.sensor %}
+            {% if 'all_time_high' in sensor.attributes %}
+              {% set price = sensor.state | float %}
+              {% set all_time_high = sensor.attributes.all_time_high | float %}
+              {% if price >= all_time_high * 0.995 and price <= all_time_high * 1.005 %}
+                De prijs van {{ sensor.name[11:-3] }} is nu {{ price }} en verschilt minder dan 0.5% van de all-time high van {{ all_time_high }}.
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        notification_id: crypto_almost_all_time_high
+
