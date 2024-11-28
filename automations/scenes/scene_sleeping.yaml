@@ -31,7 +31,7 @@
       data:
         transition: 2
       target:
-        entity_id: scene.scenes_bedroom_sleeping
+        entity_id: scene.scenes_bedroom_sleeping_candle
 
     - delay: "00:06:00"
 
