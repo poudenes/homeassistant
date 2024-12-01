@@ -25,7 +25,7 @@
     price: "{{ state_attr(trigger.to_state.entity_id, 'item_price') }}"
     pickup_start: "{{ state_attr(trigger.to_state.entity_id, 'pickup_start')[11:-4] }}"
     pickup_end: "{{ state_attr(trigger.to_state.entity_id, 'pickup_end')[11:-4] }}"
-
+    # image: "{{ state_attr(trigger.to_state.entity_id, 'logo_url') }}"
   actions:
     - action: script.mobile_notify_no_actionable
       data:
@@ -67,7 +67,7 @@
     price: "{{ state_attr(trigger.to_state.entity_id, 'item_price') }}"
     pickup_start: "{{ state_attr(trigger.to_state.entity_id, 'pickup_start')[11:-4] }}"
     pickup_end: "{{ state_attr(trigger.to_state.entity_id, 'pickup_end')[11:-4] }}"
-
+    # image: "{{ state_attr(trigger.to_state.entity_id, 'logo_url') }}"
   actions:
     - action: script.mobile_notify_no_actionable
       data:
