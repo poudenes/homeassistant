@@ -49,6 +49,7 @@ smart_home:
       - script.alexa_turn_on_sleeping
       - script.alexa_turn_on_goodnight
       - script.alexa_turn_off_harmony
+      - script.alexa_turn_on_xbox
 
       # Routines for Roborock
       - script.alexa_return_base

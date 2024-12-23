@@ -75,6 +75,7 @@ helpers_scenes:
     - "scene goodnight"
     - "scene nintendo"
     - "scene tv"
+    - "scene xbox"
     - "None"
 
 helpers_master_bath_humidity_threshold:

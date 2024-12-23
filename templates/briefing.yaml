@@ -57,11 +57,15 @@
     ]|random }}
   {%- endmacro -%}
 
+  {#SCENE XBOX #######################################################################}
+  {%- macro scene_xbox() -%}
+      "The scene Xbox is activated."
+  {%- endmacro -%}
+
   {# SCENE APPLE TV #######################################################################}
   {%- macro scene_appletv() -%}
     {{ [
       "The scene apple tv is activated.",
-      ""
       "Enjoy the movie or serie, activated the scene apple tv."
     ]|random }}
   {%- endmacro -%}
@@ -220,6 +224,11 @@
     {########################################################################}
     {% if call_scene_goodnight == 1 %}
     {{ scene_goodnight() }}
+    {% endif %}
+
+    {########################################################################}
+    {% if call_scene_xbox == 1 %}
+    {{ scene_xbox() }}
     {% endif %}
 
     {########################################################################}

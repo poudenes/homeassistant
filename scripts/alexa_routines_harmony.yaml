@@ -229,6 +229,16 @@ alexa_turn_on_nintendo:
       target:
         entity_id: select.logitech_harmony_activities
 
+alexa_turn_on_xbox:
+  alias: "Routine Xbox"
+  icon: mdi:start
+  sequence:
+    - action: select.select_option
+      data:
+        option: Xbox
+      target:
+        entity_id: select.logitech_harmony_activities
+
 alexa_turn_on_chromecast:
   alias: "Routine Chromecast"
   icon: mdi:script

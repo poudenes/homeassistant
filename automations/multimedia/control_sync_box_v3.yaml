@@ -174,7 +174,7 @@
         # When TV or Nintendo is active
         ###########################################################################################
         - conditions:
-            - "{{ states('input_select.helpers_scenes') in ['scene tv', 'scene nintendo'] }}"
+            - "{{ states('input_select.helpers_scenes') in ['scene tv', 'scene nintendo', 'scene xbox'] }}"
 
           sequence:
             - action: huesyncbox.set_sync_state

@@ -296,6 +296,7 @@
       - script.alexa_turn_on_tv
       - script.alexa_turn_on_airplay
       - script.alexa_turn_on_nintendo
+      - script.alexa_turn_on_xbox
       - script.alexa_turn_on_morning
       - script.alexa_turn_on_sleeping
       - script.alexa_turn_on_goodnight
