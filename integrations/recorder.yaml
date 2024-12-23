@@ -119,8 +119,8 @@ include:
     - binary_sensor.group_family_manual
     - input_boolean.helpers_kay_home_homekit
     - input_boolean.helpers_peter_home_homekit
-    - device_tracker.cenkay_iphone_icloud3
-    - device_tracker.peter_iphone_icloud3
+    - device_tracker.icloud3_kay
+    - device_tracker.icloud3_peter
     - sensor.cenkay_iphone_gps_accuracy
     - sensor.peter_iphone_gps_accuracy
 
