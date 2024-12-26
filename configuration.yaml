@@ -42,6 +42,9 @@ system_log:
   fire_event: true
 zeroconf:
 
+remote_homeassistant:
+  instances:
+
 alexa: !include integrations/alexa.yaml
 automation: !include_dir_merge_list automations/
 birthdays: !include integrations/birthday.yaml
