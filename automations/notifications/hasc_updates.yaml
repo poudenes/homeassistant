@@ -11,11 +11,11 @@
   alias: "Notification - HASC update"
   mode: restart
   triggers:
-    - trigger: time
-      at: "14:00:00"
+    - trigger: state
+      entity_id: update.hacs_update
+      to: "on"
 
-  conditions:
-    - "{{ (states('sensor.hacs')) | int > 0 | float(false) }}"
+  conditions: []
 
   actions:
     - action: persistent_notification.create

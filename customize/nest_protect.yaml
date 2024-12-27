@@ -1,8 +1,8 @@
 ---
 button.nest_protect_1_battery_replaced:
   friendly_name: "Livingroom - Battery replaced"
-device_tracker.nest_labs_inc_1:
-  friendly_name: "Livingroom - Tracker"
+# device_tracker.nest_labs_inc_1:
+#   friendly_name: "Livingroom - Tracker"
 select.nest_protect_1_brightness:
   friendly_name: "Livingroom - Brightness"
 switch.nest_protect_1_heads_up:
@@ -17,14 +17,14 @@ sensor.nest_protect_1_battery_last_replaced:
   friendly_name: "Livingroom - Battery lasted replaced"
 sensor.nest_protect_1_battery_type:
   friendly_name: "Livingroom - Battery type"
-sensor.1_nest_protect_battery_plus:
-  friendly_name: "Livingroom - Battery plus"
+# sensor.1_nest_protect_battery_plus:
+#   friendly_name: "Livingroom - Battery plus"
 sensor.nest_protect_1_battery_level:
   friendly_name: "Livingroom - Battery level"
 sensor.nest_protect_1_replace_by:
   friendly_name: "Livingroom - Replaced by"
-binary_sensor.1_nest_protect_battery_plus_low:
-  friendly_name: "Livingroom - Battery plus low"
+# binary_sensor.1_nest_protect_battery_plus_low:
+#   friendly_name: "Livingroom - Battery plus low"
 binary_sensor.nest_protect_1_battery_health:
   friendly_name: "Livingroom - Battery health"
 binary_sensor.nest_protect_1_buzzer_test:
@@ -68,14 +68,14 @@ sensor.nest_protect_2_battery_last_replaced:
   friendly_name: "Hallway - Battery lasted replaced"
 sensor.nest_protect_2_battery_type:
   friendly_name: "Hallway - Battery type"
-sensor.2_nest_protect_battery_plus:
-  friendly_name: "Hallway - Battery plus"
+# sensor.2_nest_protect_battery_plus:
+#   friendly_name: "Hallway - Battery plus"
 sensor.nest_protect_2_battery_level:
   friendly_name: "Hallway - Battery level"
 sensor.nest_protect_2_replace_by:
   friendly_name: "Hallway - Replaced by"
-binary_sensor.2_nest_protect_battery_plus_low:
-  friendly_name: "Hallway - Battery plus low"
+# binary_sensor.2_nest_protect_battery_plus_low:
+#   friendly_name: "Hallway - Battery plus low"
 binary_sensor.nest_protect_2_battery_health:
   friendly_name: "Hallway - Battery health"
 binary_sensor.nest_protect_2_buzzer_test:

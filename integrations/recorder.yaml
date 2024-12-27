@@ -41,7 +41,6 @@ include:
     - button.bambulab_a1_mini_stop_printing
     - button.bambulab_a1_mini_force_refresh_data
     - fan.bambulab_a1_mini_aux_fan
-    - fan.abambulab_a1_mini_cooling_fan
     - fan.bambulab_a1_mini_cooling_fan
     - image.bambulab_a1_mini_camera
     - light.bambulab_a1_mini_chamber_light
@@ -93,23 +92,22 @@ include:
     - sensor.cryptoinfo_wax_usd
     - sensor.cryptoinfo_vet_usd
     - sensor.cryptoinfo_sol_usd
-    - sensor.cryptoinfo_eth_usd
     - sensor.cryptoinfo_doge_usd
     - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_ada_usd
     - sensor.cryptoinfo_avax_usd
 
     # EURO95 Integration
-    - sensor.gas_station_euro95_home_lowest_price_1
-    - sensor.gas_station_euro95_home_lowest_price_2
-    - sensor.gas_station_euro95_home_lowest_price_3
-    - sensor.gas_station_euro95_home_lowest_price_4
-    - sensor.gas_station_euro95_home_lowest_price_5
-    - sensor.gas_station_euro95_work_lowest_price_1
-    - sensor.gas_station_euro95_work_lowest_price_2
-    - sensor.gas_station_euro95_work_lowest_price_3
-    - sensor.gas_station_euro95_work_lowest_price_4
-    - sensor.gas_station_euro95_work_lowest_price_5
+    # - sensor.gas_station_euro95_home_lowest_price_1
+    # - sensor.gas_station_euro95_home_lowest_price_2
+    # - sensor.gas_station_euro95_home_lowest_price_3
+    # - sensor.gas_station_euro95_home_lowest_price_4
+    # - sensor.gas_station_euro95_home_lowest_price_5
+    # - sensor.gas_station_euro95_work_lowest_price_1
+    # - sensor.gas_station_euro95_work_lowest_price_2
+    # - sensor.gas_station_euro95_work_lowest_price_3
+    # - sensor.gas_station_euro95_work_lowest_price_4
+    # - sensor.gas_station_euro95_work_lowest_price_5
 
     # Speedtest
     - sensor.speedtest_download
@@ -121,8 +119,8 @@ include:
     - input_boolean.helpers_peter_home_homekit
     - device_tracker.icloud3_kay
     - device_tracker.icloud3_peter
-    - sensor.cenkay_iphone_gps_accuracy
-    - sensor.peter_iphone_gps_accuracy
+    # - sensor.cenkay_iphone_gps_accuracy
+    # - sensor.peter_iphone_gps_accuracy
 
     # Other
     - calendar.work
@@ -131,10 +129,10 @@ include:
     - sensor.birthdays
     - sensor.holidays
     - sensor.adaptive_lighting_color_temperature
-    - sensor.hacs
+    # - sensor.hacs
     - sensor.nextsunrise
     - sensor.nextsunset
-    - sensor.processor_use
+    # - sensor.processor_use
     - sensor.season
     - sensor.toyota_ago_apk_expiration
     - sensor.toyota_ago_ascription_date
@@ -149,7 +147,7 @@ include:
     - switch.momentary_for_testing
     - switch.momentary_guests
     - switch.momentary_peter_early_up
-    - switch.newkaku_014e5906_a
+    # - switch.newkaku_014e5906_a
 
     # Roborock Vacuum
     - sensor.roborock_s8_current_room
@@ -164,7 +162,7 @@ include:
     - sensor.fan_remote
     - sensor.fan_speed
     - sensor.fan_timer
-    - sensor.bathroom_average_humidity
+    - sensor.master_bathroom_humidity_average_linear_24h
 
     # NEST Protect Smoke detectors
     - binary_sensor.nest_protect_3_smoke_status
@@ -368,7 +366,7 @@ include:
 
     # Zwave Wall plugs
     - switch.balcony_wall
-    - switch.wall_wall
+    # - switch.wall_wall
     - switch.xmas_tree_wall
     - switch.bedroom_wall
     - switch.dishwasher_wall

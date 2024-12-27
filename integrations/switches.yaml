@@ -179,8 +179,8 @@
         action: script.none
 
     helpers_xbox:
-      friendly_name: "Scene TV"
-      unique_id: "2a738e92-bf64-46a2-9919-bc8303e6d027"
+      friendly_name: "Scene Xbox"
+      unique_id: "c3bb279c-7f71-4184-adb5-a3ca9a7a4f32"
       value_template: "{{ is_state('input_select.helpers_scenes', 'scene xbox')}}"
       turn_on:
         action: input_select.select_option

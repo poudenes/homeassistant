@@ -45,14 +45,14 @@
               conditions:
                 - condition: trigger
                   id: up-date
-                - "{{ state_attr('update.meek_toilet_firmware', 'latest_version') > state_attr('update.meek_toilet_firmware', 'installed_version') }}"
+                - "{{ state_attr('update.meek_toilet_block_internet_firmware', 'latest_version') > state_attr('update.meek_toilet_block_internet_firmware', 'installed_version') }}"
 
           sequence:
             - action: persistent_notification.create
               data:
                 message: |
                   Your ESPHome devices will now be updated.
-                  from {{ state_attr("update.meek_toilet_firmware","installed_version") }} to {{ state_attr("update.meek_toilet_firmware", "latest_version") }}.
+                  from {{ state_attr("update.meek_toilet_block_internet_firmware","installed_version") }} to {{ state_attr("update.meek_toilet_block_internet_firmware", "latest_version") }}.
                 title: "HA - Update"
                 notification_id: "ha_update"
 
@@ -79,7 +79,7 @@
               data:
                 message: |
                   Your ESPHome devices are now all.
-                  updated to {{ state_attr("update.meek_toilet_firmware","installed_version") }}.
+                  updated to {{ state_attr("update.meek_toilet_block_internet_firmware","installed_version") }}.
                 title: "HA - Update"
                 notification_id: "ha_update"
 
@@ -88,7 +88,7 @@
           ###########################################################################################
         - conditions:
             - "{{ is_state('group.helpers_esphome_updates', 'on') }}"
-            - "{{ state_attr('update.meek_toilet_firmware', 'latest_version') < state_attr('update.meek_toilet_firmware', 'installed_version') }}"
+            - "{{ state_attr('update.meek_toilet_block_internet_firmware', 'latest_version') < state_attr('update.meek_toilet_block_internet_firmware', 'installed_version') }}"
 
           sequence:
             - action: persistent_notification.create

@@ -32,23 +32,23 @@
       - binary_sensor.nest_protect_2_heat_status
 
   entity_config:
-    binary_sensor.bedroom_nest_protect_co_status:
+    binary_sensor.nest_protect_3_co_status:
       name: "CO bedroom"
-    binary_sensor.bedroom_nest_protect_heat_status:
+    binary_sensor.nest_protect_3_heat_status:
       name: "Heat bedroom"
-    binary_sensor.bedroom_nest_protect_smoke_status:
+    binary_sensor.nest_protect_3_smoke_status:
       name: "Smoke bedroom"
-    binary_sensor.dining_room_nest_protect_co_status:
+    binary_sensor.nest_protect_2_co_status:
       name: "CO hallway"
-    binary_sensor.dining_room_nest_protect_heat_status:
+    binary_sensor.nest_protect_2_heat_status:
       name: "Heat hallweay"
-    binary_sensor.dining_room_nest_protect_smoke_status:
+    binary_sensor.nest_protect_2_smoke_status:
       name: "Smoke hallway"
-    binary_sensor.living_room_nest_protect_co_status:
+    binary_sensor.nest_protect_1_co_status:
       name: "CO livingroom"
-    binary_sensor.living_room_nest_protect_heat_status:
+    binary_sensor.nest_protect_1_heat_status:
       name: "Heat livingroom"
-    binary_sensor.living_room_nest_protect_smoke_status:
+    binary_sensor.nest_protect_1_smoke_status:
       name: "Smoke livingroom"
 
 ###########################################################################################

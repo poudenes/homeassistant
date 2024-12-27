@@ -26,7 +26,7 @@ include:
     - scene
 
   entities:
-    - sensor.bathroom_average_humidity
+    - sensor.master_bathroom_humidity_average_linear_24h
     
     # 3D Printer KwH Sensor
     - sensor.neo_plug_3d_printer
@@ -41,7 +41,6 @@ include:
     - button.bambulab_a1_mini_stop_printing
     - button.bambulab_a1_mini_force_refresh_data
     - fan.bambulab_a1_mini_aux_fan
-    - fan.abambulab_a1_mini_cooling_fan
     - fan.bambulab_a1_mini_cooling_fan
     - image.bambulab_a1_mini_camera
     - light.bambulab_a1_mini_chamber_light
@@ -92,7 +91,6 @@ include:
     - sensor.cryptoinfo_wax_usd
     - sensor.cryptoinfo_vet_usd
     - sensor.cryptoinfo_sol_usd
-    - sensor.cryptoinfo_eth_usd
     - sensor.cryptoinfo_doge_usd
     - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_ada_usd
@@ -103,13 +101,13 @@ include:
 
     - sensor.roborock_s8_current_room
     
-    - sensor.gas_station_euro95_lowest_price_1
-    - sensor.gas_station_euro95_lowest_price_2
-    - sensor.gas_station_euro95_lowest_price_3
-    - sensor.gas_station_3097_euro95
-    - sensor.gas_station_3161_euro95
-    - sensor.gas_station_3106_euro95
-    - sensor.gas_station_3124_euro95
+    # - sensor.gas_station_euro95_lowest_price_1
+    # - sensor.gas_station_euro95_lowest_price_2
+    # - sensor.gas_station_euro95_lowest_price_3
+    # - sensor.gas_station_3097_euro95
+    # - sensor.gas_station_3161_euro95
+    # - sensor.gas_station_3106_euro95
+    # - sensor.gas_station_3124_euro95
     
     - binary_sensor.toilet_detection
     - binary_sensor.bathroom_detection
@@ -129,10 +127,10 @@ include:
 
     - binary_sensor.group_family_manual # MANUAL FAMILIY HOME
 
-    - sensor.cenkay_iphone_gps_accuracy
-    - sensor.peter_iphone_gps_accuracy
-    - device_tracker.cenkay_iphone_icloud3 # iCloud3 Kay
-    - device_tracker.peter_iphone_icloud3 # iCloud3 Peter
+    # - sensor.cenkay_iphone_gps_accuracy
+    # - sensor.peter_iphone_gps_accuracy
+    - device_tracker.icloud3_kay # iCloud3 Kay
+    - device_tracker.icloud3_peter # iCloud3 Peter
 
     - input_text.engine_ha_app
     - input_select.helpers_sunrise_sunset

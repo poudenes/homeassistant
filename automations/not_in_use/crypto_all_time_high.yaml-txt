@@ -11,7 +11,6 @@
         - sensor.cryptoinfo_wax_usd
         - sensor.cryptoinfo_vet_usd
         - sensor.cryptoinfo_sol_usd
-        - sensor.cryptoinfo_eth_usd
         - sensor.cryptoinfo_doge_usd
         - sensor.cryptoinfo_btc_usd
         - sensor.cryptoinfo_ada_usd
