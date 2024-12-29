@@ -18,6 +18,7 @@ ip_bans.yaml
 icloud3-event-log.log
 known_devices.yaml
 home-assistant_*
+icloud3.log.*
 
 # WILDCARD FILES
 home-assistant.log*
