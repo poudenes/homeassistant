@@ -47,6 +47,10 @@
     - !secret haveibeenpwned_3
     - !secret haveibeenpwned_4
     - !secret haveibeenpwned_5
+    - !secret haveibeenpwned_6
+    - !secret haveibeenpwned_7
+    - !secret haveibeenpwned_8
+    - !secret haveibeenpwned_9
   api_key: !secret haveibeenpwned_api
 
 ###########################################################################################

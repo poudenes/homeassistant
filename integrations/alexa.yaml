@@ -21,7 +21,7 @@ flash_briefings:
       text: >
         Inside the house, it is {{ (states('sensor.entryway_temperature') | int) }} degrees.
         Outside it is {{ (states('sensor.accu_weather_realfeel_temperature')) | int }} degrees.
-        The forcast for today is {{ (states('sensor.sensor.accu_weather_condition_day_0d')) }}, tomorrow it will be {{ (states('sensor.sensor.accu_weather_condition_day_1d')) }}.
+        The forcast for today is {{ (states('sensor.accu_weather_condition_day_0d')) }}, tomorrow it will be {{ (states('sensor.accu_weather_condition_day_1d')) }}.
         There is {% set ns = namespace(res=0) %}{% for count in state_attr('switch.helpers_switches', 'entity_id') if is_state(count, 'on') %}{% set ns.res = ns.res + 1 %}{%endfor%}{{ ns.res }} Meek wall switch on.
         {% for entity_id in state_attr('switch.helpers_switches','entity_id') if not is_state(entity_id, 'off') %} The {{ entity_id }} is on.{% endfor %}.
 

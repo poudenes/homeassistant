@@ -65,10 +65,10 @@ tweet_random_post:
               ],
               "weather": [
                 "I keep the average humidity of the house at {{ states('sensor.entryway_humidity') }} percent. #Nest #homeassistant #rpi4 #IoT",
-                "Outside is {{ states('sensor.sensor.accu_weather_realfeel_temperature_max_0d') }} °C. I keep the average inside temperature at {{ states('sensor.entryway_temperature') }} °C. #Weather #Nest #homeassistant #rpi4 #IoT",
-                "I know that it will be {{ states('sensor.sensor.accu_weather_condition_day_0d') }} So I will adjust the Heating/Cooling, irrigation and lighting accordingly. #Nest #homeassistant #rpi4 #IoT",
-                "Today the weather is {{ states('sensor.sensor.accu_weather_condition_day_0d') }} and tomorrow it will be {{ states('sensor.sensor.accu_weather_condition_day_1d') }}. #homeassistant #rpi4 #IoT",
-                "Its {{ states('sensor.sensor.accu_weather_condition_day_0d') }} with a temperature of {{ states('sensor.sensor.accu_weather_realfeel_temperature_max_0d') }} celsius. The windspeed is {{ states('sensor.accu_weather_wind_day_0d') }} KM/h. #homeassistant #rpi4 #IoT #automation"
+                "Outside is {{ states('sensor.accu_weather_realfeel_temperature_max_0d') }} °C. I keep the average inside temperature at {{ states('sensor.entryway_temperature') }} °C. #Weather #Nest #homeassistant #rpi4 #IoT",
+                "I know that it will be {{ states('sensor.accu_weather_condition_day_0d') }} So I will adjust the Heating/Cooling, irrigation and lighting accordingly. #Nest #homeassistant #rpi4 #IoT",
+                "Today the weather is {{ states('sensor.accu_weather_condition_day_0d') }} and tomorrow it will be {{ states('sensor.accu_weather_condition_day_1d') }}. #homeassistant #rpi4 #IoT",
+                "Its {{ states('sensor.accu_weather_condition_day_0d') }} with a temperature of {{ states('sensor.accu_weather_realfeel_temperature_max_0d') }} celsius. The windspeed is {{ states('sensor.accu_weather_wind_day_0d') }} KM/h. #homeassistant #rpi4 #IoT #automation"
               ],
               "internet": [
                 "I'll keep my internet save with #Adguard. Installed this as Add-On in #homeassistant. More info here https://github.com/hassio-addons/addon-adguard-home. #rpi4 #IoT",
