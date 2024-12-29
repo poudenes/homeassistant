@@ -60,9 +60,3 @@
         transition: 2
       target:
         entity_id: scene.scenes_nintendo
-
-    - action: rest_command.scene_check
-      data:
-        payload: >
-          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
-          {"friendly_name": "Scene"}}

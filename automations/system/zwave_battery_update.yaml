@@ -8,7 +8,7 @@
 # Update Zwwave batteries information
 ###########################################################################################
 - id: "e243bf58-0ea5-4cdc-b133-4848e81e308c"
-  alias: "Zwave batteries refresh update"
+  alias: "Zwave - batteries refresh update"
   mode: single
   triggers:
     - trigger: time

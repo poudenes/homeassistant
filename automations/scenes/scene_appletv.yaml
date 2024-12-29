@@ -118,9 +118,3 @@
         entity_id: light.balcony_all
       data:
         brightness_pct: "{{ 20 if is_state('media_player.woonkamer', 'playing') else 100 }}"
-
-    - action: rest_command.scene_check
-      data:
-        payload: >
-          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
-          {"friendly_name": "Scene"}}

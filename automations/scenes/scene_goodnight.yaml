@@ -111,12 +111,6 @@
           {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
             | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
 
-    - action: rest_command.scene_check
-      data:
-        payload: >
-          {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
-          {"friendly_name": "Scene"}}
-
     - parallel:
         - sequence:
             - wait_template: "{{ is_state('binary_sensor.kitchen_detection', 'off') }}"

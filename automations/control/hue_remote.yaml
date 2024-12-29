@@ -8,7 +8,7 @@
 # HUE Remote control
 ###########################################################################################
   - id: "ea1867f0-9ee4-46cb-83a0-f9942c63a820c"
-    alias: "HUE Remote control"
+    alias: "HUE - Remote control"
     mode: restart
     trigger:
       - trigger: state

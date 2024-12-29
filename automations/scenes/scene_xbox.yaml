@@ -99,9 +99,3 @@
             entity_id: light.dressoir_all
           data:
             brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
-
-        - action: rest_command.scene_check
-          data:
-            payload: >
-              {"state": "{{states('input_select.helpers_scenes')}}", "attributes":
-              {"friendly_name": "Scene"}}

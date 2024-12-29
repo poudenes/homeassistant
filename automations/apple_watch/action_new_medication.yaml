@@ -65,7 +65,7 @@
 # I TOOK MY MEDICINE
 ###########################################################################################
 - id: "2c33a1ec-ec31-46c8-ab73-87d1252e52b6"
-  alias: "Apple Watch: I took my medicine"
+  alias: "Apple Watch - I took my medicine"
   triggers:
     - trigger: event
       event_type: ios.notification_action_fired
