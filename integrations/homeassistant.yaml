@@ -28,4 +28,3 @@ auth_providers:
         - 9863ce4921dc47dab852efee983e12c9
     allow_bypass_login: true
   - type: homeassistant
-# packages: !include_dir_merge_named packs/
