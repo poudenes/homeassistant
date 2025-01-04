@@ -9,10 +9,6 @@ substitutions:
 #########################################################
 # Everything below can be copy/paste without problem
 #########################################################
-# packages:
-#   wifi: !include defaults/wifi.yaml
-#   device_base: !include defaults/for_all_devices.yaml
-
 esphome:
   name: ${devicename}
   platform: ESP8266
@@ -53,14 +49,6 @@ api:
     key: !secret api_key
   reboot_timeout: 15min
 
-  # on_client_connected:
-  #   - homeassistant.service:
-  #       service: persistent_notification.create
-  #       data:
-  #         title: "HA - Notification"
-  #         message: "Meek ${friendly} connected again"
-  #         notification_id: "Meek ${friendly}"
-          
 time:
   - platform: homeassistant
     id: homeassistant_time

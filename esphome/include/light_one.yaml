@@ -1,0 +1,10 @@
+  - platform: neopixelbus
+    default_transition_length: 0s
+    type: GRB
+    variant: 800KBPS
+    pin: ${neopixel}
+    num_leds: 1
+    name: "${friendly} - Neopixel"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: neopixel
+    effects: !include effects.yaml

@@ -1,0 +1,48 @@
+  - strobe:
+  - addressable_rainbow:
+  - addressable_color_wipe:
+  - addressable_scan:
+  - addressable_twinkle:
+  - addressable_random_twinkle:
+  - addressable_flicker:
+  - pulse:
+      name: "Slow Pulse"
+      update_interval: 1s
+  - addressable_lambda:
+      name: "Green Pink"
+      update_interval: 100ms
+      lambda:
+        static int state = 0;
+        if (initial_run){
+          state = 0;
+          it.all() = ESPColor(0,255,0);
+        } else {
+          it.all() = ESPColor(255, 0, 127);
+          if(state==0){
+            int i = rand() % it.size();
+            it[i] = ESPColor(0,255,0);
+            state += 1;
+          } else {
+            state += 1;
+            state = state % 10;
+          }
+        }
+  - addressable_lambda:
+      name: "Green red"
+      update_interval: 100ms
+      lambda:
+        static int state = 0;
+        if (initial_run){
+          state = 0;
+          it.all() = ESPColor(0,255,0);
+        } else {
+          it.all() = ESPColor(255, 0, 0);
+          if(state==0){
+            int i = rand() % it.size();
+            it[i] = ESPColor(0,255,0);
+            state += 1;
+          } else {
+            state += 1;
+            state = state % 10;
+          }
+        }

@@ -1,0 +1,24 @@
+  - platform: gpio
+    pin: ${touch_power}
+    name: "${friendly} - Touch 1 power"
+    icon: mdi:electric-switch
+    id: touch_power
+
+  - platform: template
+    name: "${friendly} - Light Switch"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: switch1
+    optimistic: true
+    icon: mdi:nintendo-switch
+
+  - platform: template
+    name: "${friendly} - Switch longpress"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: switch_longpress1
+    optimistic: true
+    icon: mdi:nintendo-switch
+
+  - platform: gpio
+    pin: ${gpio_relay1}
+    name: "${friendly} - Relay"
+    icon: mdi:electric-switch

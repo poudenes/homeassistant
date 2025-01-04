@@ -1,0 +1,43 @@
+  - platform: gpio
+    pin: ${touch_power}
+    name: "${friendly} - Touch 1 power"
+    icon: mdi:electric-switch
+    id: touch_power
+
+  - platform: template
+    name: "${friendly_switch_1} - Light Switch"
+    icon: mdi:nintendo-switch
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: switch1
+    optimistic: true
+
+  - platform: template
+    name: "${friendly_switch_1} - Switch longpress"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: switch_longpress1
+    optimistic: true
+    icon: mdi:nintendo-switch
+
+  - platform: template
+    name: "${friendly_switch_2} - Light Switch"
+    icon: mdi:nintendo-switch
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: switch2
+    optimistic: true
+
+  - platform: template
+    name: "${friendly_switch_2} - Switch longpress"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: switch_longpress2
+    optimistic: true
+    icon: mdi:nintendo-switch
+
+  - platform: gpio
+    pin: ${gpio_relay1}
+    name: "${friendly_switch_1} - Relay"
+    icon: mdi:electric-switch
+
+  - platform: gpio
+    pin: ${gpio_relay2}
+    name: "${friendly_switch_2} - Relay"
+    icon: mdi:electric-switch

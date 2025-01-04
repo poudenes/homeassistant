@@ -1,0 +1,32 @@
+  - platform: neopixelbus
+    default_transition_length: 0s
+    type: GRB
+    variant: 800KBPS
+    pin: ${neopixel}
+    num_leds: 2
+    name: "${friendly_switch_1} - Neopixel All"
+    restore_mode: RESTORE_DEFAULT_OFF
+    id: neopixel
+    effects: !include effects.yaml
+
+  - platform: partition
+    name: "${friendly_switch_1} - neopixel"
+    restore_mode: RESTORE_DEFAULT_OFF
+    default_transition_length: 0s
+    id: neopixel1
+    segments:
+      - id: neopixel
+        from: 0
+        to: 0
+    effects: !include effects.yaml
+  
+  - platform: partition
+    name: "${friendly_switch_2} - neopixel"
+    restore_mode: RESTORE_DEFAULT_OFF
+    default_transition_length: 0s
+    id: neopixel2
+    segments:
+      - id: neopixel
+        from: 1
+        to: 1
+    effects: !include effects.yaml

@@ -14,190 +14,124 @@ substitutions:
   gpio_relay1: GPIO05 # (D1)
   gpio_relay2: GPIO4 # (D2)
   gpio_relay3: GPIO15 # (D8)
-
+ 
 #########################################################
 # Everything below can be copy/paste without problem
 #########################################################
 packages:
-  wifi: !include defaults/wifi.yaml
-  device_base: !include defaults/for_all_meek_switches.yaml
+  wifi: !include include/wifi.yaml
+  device_base: !include include/device_base.yaml
 
-light:
-  - platform: neopixelbus
-    default_transition_length: 0s
-    type: GRB
-    variant: 800KBPS
-    pin: ${neopixel}
-    num_leds: 2
-    name: "${friendly_switch_1} - Neopixel All"
-    restore_mode: RESTORE_DEFAULT_OFF
-    id: neopixel
-    effects:
-      - strobe:
-      - addressable_rainbow:
-      - addressable_color_wipe:
-      - addressable_scan:
-      - addressable_twinkle:
-      - addressable_random_twinkle:
-      - addressable_flicker:
-      - pulse:
-          name: "Slow Pulse"
-          update_interval: 1s
+light: !include include/light_two.yaml
+switch: !include include/switch_two.yaml
+binary_sensor: !include include/binary_sensor_two.yaml
 
-#########################################################
-# Only needed when you use more then 1 neopixel
-#########################################################
-  - platform: partition
-    name: "${friendly_switch_1} - neopixel"
-    restore_mode: RESTORE_DEFAULT_OFF
-    default_transition_length: 0s
-    id: neopixel1
-    segments:
-      - id: neopixel
-        from: 0
-        to: 0
-    effects:
-      - strobe:
-      - flicker:
-      - addressable_rainbow:
-      - addressable_color_wipe:
-      - addressable_scan:
-      - addressable_twinkle:
-      - addressable_random_twinkle:
-      - addressable_flicker:
-      - pulse:
-          name: "Slow Pulse"
-          update_interval: 1s
-      - addressable_lambda:
-          name: "Green Pink"
-          update_interval: 100ms
-          lambda:
-            static int state = 0;
-            if (initial_run){
-              state = 0;
-              it.all() = ESPColor(0,255,0);
-            } else {
-              it.all() = ESPColor(255, 0, 127);
-              if(state==0){
-                int i = rand() % it.size();
-                it[i] = ESPColor(0,255,0);
-                state += 1;
-              } else {
-                state += 1;
-                state = state % 10;
-              }
-            }
+# light:
+#   - platform: neopixelbus
+#     default_transition_length: 0s
+#     type: GRB
+#     variant: 800KBPS
+#     pin: ${neopixel}
+#     num_leds: 2
+#     name: "${friendly_switch_1} - Neopixel All"
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     id: neopixel
+#     effects: !include defaults/effects.yaml
+
+# #########################################################
+# # Only needed when you use more then 1 neopixel
+# #########################################################
+#   - platform: partition
+#     name: "${friendly_switch_1} - neopixel"
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     default_transition_length: 0s
+#     id: neopixel1
+#     segments:
+#       - id: neopixel
+#         from: 0
+#         to: 0
+#     effects: !include defaults/effects.yaml
   
-  - platform: partition
-    name: "${friendly_switch_2} - neopixel"
-    restore_mode: RESTORE_DEFAULT_OFF
-    default_transition_length: 0s
-    id: neopixel2
-    segments:
-      - id: neopixel
-        from: 1
-        to: 1
-    effects:
-      - strobe:
-      - flicker:
-      - addressable_rainbow:
-      - addressable_color_wipe:
-      - addressable_scan:
-      - addressable_twinkle:
-      - addressable_random_twinkle:
-      - addressable_flicker:
-      - pulse:
-          name: "Slow Pulse"
-          update_interval: 1s
-      - addressable_lambda:
-          name: "Green Pink"
-          update_interval: 100ms
-          lambda:
-            static int state = 0;
-            if (initial_run){
-              state = 0;
-              it.all() = ESPColor(0,255,0);
-            } else {
-              it.all() = ESPColor(255, 0, 127);
-              if(state==0){
-                int i = rand() % it.size();
-                it[i] = ESPColor(0,255,0);
-                state += 1;
-              } else {
-                state += 1;
-                state = state % 10;
-              }
-            }
+#   - platform: partition
+#     name: "${friendly_switch_2} - neopixel"
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     default_transition_length: 0s
+#     id: neopixel2
+#     segments:
+#       - id: neopixel
+#         from: 1
+#         to: 1
+#     effects: !include defaults/effects.yaml
 
-switch:
-  - platform: gpio
-    pin: ${touch_power}
-    name: "${friendly} - Touch 1 power"
-    icon: mdi:electric-switch
-    id: touch_power
+# switch:
+#   - platform: gpio
+#     pin: ${touch_power}
+#     name: "${friendly} - Touch 1 power"
+#     icon: mdi:electric-switch
+#     id: touch_power
 
-  - platform: template
-    name: "${friendly_switch_1} - Light Switch"
-    icon: mdi:nintendo-switch
-    restore_mode: RESTORE_DEFAULT_OFF
-    id: switch1
-    optimistic: true
+#   - platform: template
+#     name: "${friendly_switch_1} - Light Switch"
+#     icon: mdi:nintendo-switch
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     id: switch1
+#     optimistic: true
 
-  - platform: template
-    name: "${friendly_switch_1} - Switch longpress"
-    restore_mode: RESTORE_DEFAULT_OFF
-    id: switch_longpress1
-    optimistic: true
-    icon: mdi:nintendo-switch
+#   - platform: template
+#     name: "${friendly_switch_1} - Switch longpress"
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     id: switch_longpress1
+#     optimistic: true
+#     icon: mdi:nintendo-switch
 
-  - platform: template
-    name: "${friendly_switch_2} - Light Switch"
-    icon: mdi:nintendo-switch
-    restore_mode: RESTORE_DEFAULT_OFF
-    id: switch2
-    optimistic: true
+#   - platform: template
+#     name: "${friendly_switch_2} - Light Switch"
+#     icon: mdi:nintendo-switch
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     id: switch2
+#     optimistic: true
 
-  - platform: template
-    name: "${friendly_switch_2} - Switch longpress"
-    restore_mode: RESTORE_DEFAULT_OFF
-    id: switch_longpress2
-    optimistic: true
-    icon: mdi:nintendo-switch
+#   - platform: template
+#     name: "${friendly_switch_2} - Switch longpress"
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     id: switch_longpress2
+#     optimistic: true
+#     icon: mdi:nintendo-switch
 
-  - platform: gpio
-    pin: ${gpio_relay1}
-    name: "${friendly_switch_1} - Relay"
-    icon: mdi:electric-switch
+#   - platform: gpio
+#     pin: ${gpio_relay1}
+#     name: "${friendly_switch_1} - Relay"
+#     icon: mdi:electric-switch
 
-  - platform: gpio
-    pin: ${gpio_relay2}
-    name: "${friendly_switch_2} - Relay"
-    icon: mdi:electric-switch
+#   - platform: gpio
+#     pin: ${gpio_relay2}
+#     name: "${friendly_switch_2} - Relay"
+#     icon: mdi:electric-switch
 
-binary_sensor:
-  - platform: gpio
-    pin: ${gpio_touch1}
-    name: "${friendly_switch_1} - Touch"
-    icon: mdi:gesture-tap-button
-    on_click:
-      - min_length: 10ms
-        max_length: 500ms
-        then:
-          - switch.toggle: switch1
-      - min_length: 1000ms
-        max_length: 2000ms
-        then:
-          - switch.toggle: switch_longpress1
+# binary_sensor:
+#   - platform: gpio
+#     pin: ${gpio_touch1}
+#     name: "${friendly_switch_1} - Touch"
+#     icon: mdi:gesture-tap-button
+#     on_click:
+#       - min_length: 10ms
+#         max_length: 500ms
+#         then:
+#           - switch.toggle: switch1
+#       - min_length: 1000ms
+#         max_length: 2000ms
+#         then:
+#           - switch.toggle: switch_longpress1
 
-  - platform: gpio
-    pin: ${gpio_touch2}
-    name: "${friendly_switch_2} - Touch"
-    on_click:
-      - min_length: 10ms
-        max_length: 500ms
-        then:
-          - switch.toggle: switch2
-      - min_length: 1000ms
-        max_length: 2000ms
-        then:
-          - switch.toggle: switch_longpress2
+#   - platform: gpio
+#     pin: ${gpio_touch2}
+#     name: "${friendly_switch_2} - Touch"
+#     on_click:
+#       - min_length: 10ms
+#         max_length: 500ms
+#         then:
+#           - switch.toggle: switch2
+#       - min_length: 1000ms
+#         max_length: 2000ms
+#         then:
+#           - switch.toggle: switch_longpress2
