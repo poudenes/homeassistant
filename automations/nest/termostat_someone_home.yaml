@@ -18,8 +18,8 @@
     - "{{ is_state('input_boolean.function_dnc', 'off') }}"
 
   variables:
-    outside: "{{ states('sensor.accu_weather_realfeel_temperature')|int }}"
-    inside: "{{ states('sensor.climate_inside_temperature')|int }}"
+    outside: "{{ states('sensor.accu_weather_apparent_temperature')|int(12) }}"
+    inside: "{{ states('sensor.climate_inside_temperature')|int(16) }}"
 
   actions:
     - continue_on_error: true
@@ -28,11 +28,11 @@
         entity_id: climate.entryway
       data:
         temperature: >-
-          {% if outside > 12 and inside > 15 %} 
+          {% if outside > 12 and inside > 16 %} 
             10
-          {% elif outside < 12 and inside > 15 %} 
+          {% elif outside < 12 and inside > 16 %} 
             12
-          {% elif outside < 12 and inside < 15 %} 
+          {% elif outside < 12 and inside < 16 %} 
             21
           {% else %} 
             11
