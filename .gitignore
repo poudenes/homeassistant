@@ -10,6 +10,7 @@ esphome/.gitignore
 .DS_Store
 .ip_authenticated.yaml
 .shopping_list.json
+.homeassistant
 
 # FILES
 core
