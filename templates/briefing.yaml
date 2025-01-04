@@ -25,6 +25,22 @@
     ]|random }}
   {%- endmacro -%}
 
+  {# SCENE APPLE TV #######################################################################}
+  {%- macro scene_appletv() -%}
+    {{ [
+      "The scene apple tv is activated.",
+      "Enjoy the movie or serie, activated the scene apple tv."
+    ]|random }}
+  {%- endmacro -%}
+
+  {# SCENE TV #######################################################################}
+  {%- macro scene_tv() -%}
+    {{ [
+      "The scene tv is activated.",
+      "You watching tv so i activated the scene tv."
+    ]|random }}
+  {%- endmacro -%}
+
   {# SCENE EDINNER #######################################################################}
   {%- macro scene_dinner() -%}
       "The scene dinner is activated."
@@ -34,7 +50,7 @@
   {%- macro scene_nintendo() -%}
     {{ [
       "The scene Nintendo is activated.",
-      "Again fall guys? I turned on the scene for you."
+      "Are you gonna play a game? I turned on the scene for you."
     ]|random }}
   {%- endmacro -%}
 
@@ -59,22 +75,17 @@
 
   {#SCENE XBOX #######################################################################}
   {%- macro scene_xbox() -%}
-      "The scene Xbox is activated."
-  {%- endmacro -%}
-
-  {# SCENE APPLE TV #######################################################################}
-  {%- macro scene_appletv() -%}
     {{ [
-      "The scene apple tv is activated.",
-      "Enjoy the movie or serie, activated the scene apple tv."
-    ]|random }}
-  {%- endmacro -%}
-
-  {# SCENE TV #######################################################################}
-  {%- macro scene_tv() -%}
-    {{ [
-      "The scene tv is activated.",
-      "You watching tv so i activated the scene tv."
+      "The controllers are ready, the games are waiting—let's jump into the action and play on Xbox!",
+      "Time to power up the Xbox and dive into a world of adventure, fun, and competition.",
+      "Grab your controller—it's time to conquer new worlds and challenge friends on Xbox!",
+      "The Xbox is calling! Lets team up, take on epic quests, and have some fun!",
+      "Game on! Lets fire up the Xbox and get lost in some seriously fun gameplay.",
+      "Ready to play? The Xbox is fired up, and adventure awaits—lets make tonight legendary!",
+      "Its time to unlock achievements, defeat bosses, and make some epic memories on Xbox!",
+      "The Xbox is powered up—lets grab the controllers and dive into a gaming marathon!",
+      "Whats better than a night of fun? Playing on Xbox and showing off those gaming skills!",
+      "The Xbox is ready to go—lets get our game faces on and enjoy some epic multiplayer action!"
     ]|random }}
   {%- endmacro -%}
 
@@ -147,6 +158,11 @@
     {########################################################################}
 
     {########################################################################}
+    {% if call_outside_weather == 1 and is_state('sun.sun', 'above_horizon') %}
+    {{ outside_weather() }}
+    {% endif %}
+
+    {########################################################################}
     {% if call_washing_machine_done == 1 %}
     {{ washing_machine_done() }}
     {%- endif -%}
@@ -179,11 +195,6 @@
     {########################################################################}
     {% if call_inside_weather == 1 %}
     {{ inside_weather() }}
-    {% endif %}
-
-    {########################################################################}
-    {% if call_outside_weather == 1 and is_state('sun.sun', 'above_horizon') %}
-    {{ outside_weather() }}
     {% endif %}
 
     {########################################################################}
