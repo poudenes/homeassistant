@@ -11,6 +11,15 @@
 ###########################################################################################
 
 #################################################################
+# Calculate total amount of lines in YAML conifg
+#################################################################
+- sensor:
+    name: "Count total lines YAML Config"
+    unique_id: bc018019-ae40-4da4-a362-4e4f00665581
+    scan_interval: 600
+    command: 'find . -name "*.yaml" -not -path "*/custom_components/*" -not -path "*/Purgatory/*" | xargs wc -l | grep "total" | grep "[0-9]*" -o'
+    
+#################################################################
 # ipinfo.io and icanhazip.com check over VPN Routing
 #################################################################
 - sensor:
