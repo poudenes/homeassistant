@@ -10,20 +10,38 @@
 # CREATE CUSTOM SIDEBAR LINKS
 # https://gist.github.com/Acqua-H/a33ef5bd5a95f14c5888494565bb0436
 ###########################################################################################
-- name: "Addons"
+- name: "HA - Addons"
   url_path: hassio/dashboard
   sidebar_title: "HA - Add-ons"
   sidebar_icon: mdi:plus-network
   module_url: /local/panel-redirect.js
 
-- name: "Server Control"
+- name: "HA - Intergrations"
+  url_path: config/integrations
+  sidebar_title: "HA - Intergrations"
+  sidebar_icon: mdi:application-cog-outline
+  module_url: /local/panel-redirect.js
+
+- name: "HA - Server Control"
   url_path: developer-tools/yaml
   sidebar_title: "HA - Server Control"
   sidebar_icon: mdi:cog-outline
   module_url: /local/panel-redirect.js
 
-- name: "Intergrations"
-  url_path: config/integrations
-  sidebar_title: "HA - Intergrations"
-  sidebar_icon: mdi:application-cog-outline
-  module_url: /local/panel-redirect.js
+- name: config/logs
+  sidebar_title: HA - Logs
+  sidebar_icon: mdi:math-log
+  module_url: http://192.168.100.24:8123/config/logs
+  embed_iframe: true
+  require_admin: true
+  config:
+    ingress: Logs
+
+- name: config/system
+  sidebar_title: HA - System
+  sidebar_icon: mdi:cog
+  module_url: 'http://192.168.100.24:8123/config/system'
+  embed_iframe: true
+  require_admin: true
+  config:
+    ingress: System
