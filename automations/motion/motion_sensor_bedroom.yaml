@@ -16,13 +16,14 @@
 
   conditions:
     - "{{ is_state('switch.bedroom_light_switch', 'off') }}"
-    - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
+    # - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
 
   actions:
     - if:
         - "{{ is_state('binary_sensor.bedroom_detection', 'on') }}"
+        - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
 
       then:
         - parallel:
@@ -49,6 +50,7 @@
 
     - if:
         - "{{ is_state('binary_sensor.bedroom_detection', 'off') }}"
+        - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
 
       then:
         - parallel:
@@ -75,3 +77,27 @@
                     [0.70,0.30]
                   {% endif %}
                 brightness_pct: 100
+
+    - if:
+        - "{{ is_state('switch.momentary_peter_early_up', 'on') }}"
+
+      then:
+        - action: light.turn_on
+          data:
+            effect: Green Pink
+          target:
+            entity_id: light.bedroom_neopixel
+
+        - delay: "00:00:05"
+
+        - action: light.turn_on
+          data:
+            effect: none
+          target:
+            entity_id: light.bedroom_neopixel
+
+        - action: light.turn_on
+          target:
+            entity_id: light.bedroom_neopixel
+          data:
+            xy_color: [0.70,0.30]
