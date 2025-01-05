@@ -68,6 +68,7 @@ esphome/.esphome/
 extensions/
 glances/
 image/
+not_in_use_anymore/
 old/
 other/
 ozw_config/
