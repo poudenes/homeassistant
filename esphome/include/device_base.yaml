@@ -12,6 +12,7 @@ esphome:
           red: 1
           green: 1
           blue: 1
+      - lambda: WiFi.setPhyMode(WIFI_PHY_MODE_11G); 
 
 esp8266:
   board: esp01_1m
@@ -55,8 +56,8 @@ time:
 
 captive_portal:
 
-web_server:
-  port: 80
+# web_server:
+#   port: 80
 
 preferences:
   flash_write_interval: 1min

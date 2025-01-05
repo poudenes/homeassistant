@@ -19,6 +19,11 @@ esphome:
     - SPI
     - Ticker
     - https://github.com/Scriptman/ESPHome_ITHO_Eco_Fan_CC1101.git
+
+#########################################################
+# MOGELIJK NIEUW COMPONENT OM TE GEBRUIKEN
+# https://github.com/CoMPaTech/esphome_ct/tree/main/components/cc1101
+#########################################################
     
   on_boot:
     then:
