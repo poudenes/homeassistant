@@ -38,16 +38,3 @@ helpers_washing_machine_on:
   name: "Washing machine last started"
   has_date: true
   has_time: true
-
-#################################################################
-# HA Backup Manager
-#################################################################
-ha_backup_manager_time: # for full backup
-  name: "Backup Time"
-  has_date: false
-  has_time: true
-
-ha_backup_manager_partial_time: # for partial backup
-  name: "Partial Backup Time"
-  has_date: false
-  has_time: true

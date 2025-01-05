@@ -21,18 +21,3 @@ helpers_low_battery_report_threshold:
   max: 100
   step: 1
   unit_of_measurement: "%"
-
-  #################################################################
-# HA Backup Manager
-#################################################################
-ha_backup_manager_timeout: # Selector to choose the wait duration for backup check.
-  name: "HA Backup timeout"
-  min: 15
-  max: 180
-  step: 15
-
-ha_backup_manager_retained_number: # Selector to chose how many backuops to mantain
-  name: "HA Backup retain"
-  min: 1
-  max: 20
-  step: 1

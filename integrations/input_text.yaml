@@ -60,10 +60,3 @@ cooking_two:
 cooking_three:
   name: "Cooking three"
   max: 255
-
-#################################################################
-# HA Backup Manager
-#################################################################
-ha_backup_manager_status:
-  name: "Backup Status"
-  icon: mdi:database-check

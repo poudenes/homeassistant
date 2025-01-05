@@ -8,17 +8,3 @@
 # https://www.home-assistant.io/integrations/input_button/
 ###########################################################################################
 ---
-#################################################################
-# HA Backup Manager
-#################################################################
-ha_backup_manager_full_execute_manually:
-  name: "Create Full Backup"
-  icon: mdi:backup-restore
-
-ha_backup_manager_partial_execute_manually:
-  name: "Create Partial Backup"
-  icon: mdi:backup-restore
-
-ha_delete_backup_manually:
-  name: "Delete Backups"
-  icon: mdi:close-circle-outline

@@ -13,11 +13,6 @@
 clear_logs: truncate -s 0 /config/home-assistant.log
 
 #################################################################
-# HA Backup Manager
-#################################################################
-ha_backup_manager_remove_old: /bin/bash /config/other/backup_remove.sh {{ states('input_number.ha_backup_manager_retained_number')|int(0) }}
-
-#################################################################
 # MVPS Bash commands
 #################################################################
 mvps_rspamd_learn: !secret mvps_rspamd_learn
