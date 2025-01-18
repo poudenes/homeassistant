@@ -21,3 +21,38 @@ helpers_cooking_two:
 helpers_cooking_three:
   name: "Cooking 3"
   duration: "00:00:00"
+
+###########################################################################################
+# Timers that will count down when motion is not detected. Manual select time to stay on
+###########################################################################################
+helpers_motion_test:
+  name: "Motion Test"
+  duration: "00:00:00"
+
+helpers_motion_kitchen:
+  name: "Motion kitchen"
+  duration: "00:00:00"
+
+helpers_motion_hallway:
+  name: "Motion hallway"
+  duration: "00:00:00"
+
+helpers_motion_toilet:
+  name: "Motion toilet"
+  duration: "00:00:00"
+
+helpers_motion_bedroom:
+  name: "Motion bedroom"
+  duration: "00:00:00"
+
+helpers_motion_bathroom:
+  name: "Motion batroom"
+  duration: "00:00:00"
+
+helpers_motion_diningroom:
+  name: "Motion diningroom"
+  duration: "00:00:00"
+
+helpers_motion_livingroom:
+  name: "Motion livingroom"
+  duration: "00:00:00"

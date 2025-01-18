@@ -16,13 +16,11 @@
 
   conditions:
     - "{{ is_state('switch.bedroom_light_switch', 'off') }}"
-    # - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
 
   actions:
     - if:
-        - "{{ is_state('binary_sensor.bedroom_detection', 'on') }}"
         - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
 
       then:
@@ -48,13 +46,27 @@
                 xy_color: [0.28, 0.11] # Pink
                 brightness_pct: 100
 
-    - if:
-        - "{{ is_state('binary_sensor.bedroom_detection', 'off') }}"
-        - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
+        - repeat:
+            while:
+              - condition: state 
+                entity_id: binary_sensor.bedroom_detection
+                state: "on"
+            sequence:
+              - delay: "00:00:05"
 
-      then:
+              - action: timer.start
+                target:
+                  entity_id: timer.helpers_motion_bedroom
+                data:
+                  duration: "{{ states('input_number.helpers_motion_bedroom') | int() }}"
+
+        - wait_for_trigger:
+            - trigger: state
+              entity_id: timer.helpers_motion_bedroom
+              to: "idle"
+
         - parallel:
-            - action: light.turn_off
+            - action: "{{ 'script.none' if is_state('input_select.helpers_scenes', 'scene goodnight') else 'light.turn_off' }}"
               target:
                 entity_id: light.bedroom_all
 
@@ -76,7 +88,7 @@
                   {% else %} 
                     [0.70,0.30]
                   {% endif %}
-                brightness_pct: 100
+                brightness_pct: "{{ 10 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
 
     - if:
         - "{{ is_state('switch.momentary_peter_early_up', 'on') }}"

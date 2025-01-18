@@ -32,6 +32,19 @@
       data:
         option: "scene daytime"
 
+    ###########################################################################################
+    # Set timers for motion sensors to a higher level
+    ###########################################################################################
+    - action: input_number.set_value
+      target:
+        entity_id: 
+          - input_number.helpers_motion_toilet
+          - input_number.helpers_motion_kitchen
+          - input_number.helpers_motion_bedroom
+          - input_number.helpers_motion_bathroom
+      data:
+        value: 120
+        
     - action: homeassistant.turn_off
       target:
         entity_id:

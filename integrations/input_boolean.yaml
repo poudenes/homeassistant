@@ -10,6 +10,8 @@
 # INPUT_BOOLEAN
 # https://www.home-assistant.io/integrations/input_boolean/
 ###########################################################################################
+helpers_motion_test:
+  name: "Motion Test"
 
 ###########################################################################################
 # HELPERS

@@ -99,3 +99,16 @@
             entity_id: light.dressoir_all
           data:
             brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
+
+    ###########################################################################################
+    # Set timers for motion sensors to a higher level
+    ###########################################################################################
+    - action: input_number.set_value
+      target:
+        entity_id: 
+          - input_number.helpers_motion_toilet
+          - input_number.helpers_motion_kitchen
+          - input_number.helpers_motion_bedroom
+          - input_number.helpers_motion_bathroom
+      data:
+        value: 120

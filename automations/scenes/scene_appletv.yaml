@@ -118,3 +118,10 @@
         entity_id: light.balcony_all
       data:
         brightness_pct: "{{ 20 if is_state('media_player.woonkamer', 'playing') else 100 }}"
+
+    - action: input_number.set_value
+      target:
+        entity_id: 
+          - input_number.helpers_motion_kitchen
+      data:
+        value: 30
