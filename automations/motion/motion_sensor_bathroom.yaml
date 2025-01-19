@@ -18,50 +18,61 @@
     - "{{ is_state('switch.bathroom_light_switch', 'off') }}"
 
   actions:
-    - if:
-        - "{{ is_state('binary_sensor.bathroom_detection', 'on') }}"
+      - parallel:
+          - action: "{{ 'light.turn_on' if is_state('light.bathroom_all', 'off') else 'script.none' }}"
+            target:
+              entity_id: light.bathroom_all
+            data:
+              brightness_pct: 100
+              kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-      then:
-        - parallel:
-            - action: light.turn_on
+          - action: light.turn_on
+            target:
+              entity_id: light.bathroom_neopixel
+            data:
+              xy_color: [0.28, 0.11] # Pink # pink
+              brightness_pct: "{{ 30 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+
+      - repeat:
+          while:
+            - condition: state 
+              entity_id: binary_sensor.bathroom_detection
+              state: "on"
+          sequence:
+            - delay: "00:00:05"
+
+            - action: timer.start
               target:
-                entity_id: light.bathroom_all
+                entity_id: timer.helpers_motion_bathroom
               data:
-                brightness_pct: 100
-                kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+                duration: "{{ states('input_number.helpers_motion_bathroom') | int() }}"
 
-            - action: light.turn_on
-              target:
-                entity_id: light.bathroom_neopixel
-              data:
-                xy_color: [0.28, 0.11] # Pink # pink
-                brightness_pct: "{{ 30 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+      - wait_for_trigger:
+          - trigger: state
+            entity_id: timer.helpers_motion_bathroom
+            to: "idle"
 
-    - if:
-        - "{{ is_state('binary_sensor.bathroom_detection', 'off') }}"
+      - parallel:
+          - action: light.turn_off
+            target:
+              entity_id: light.bathroom_all
 
-      then:
-        - parallel:
-            - action: light.turn_off
-              target:
-                entity_id: light.bathroom_all
-
-            - action: light.turn_on
-              target:
-                entity_id: light.bathroom_neopixel
-              data:
-                xy_color: >-
-                  {% if is_state('binary_sensor.bathroom_detection', 'on') %}
-                    [0.14,0.19]
-                  {% elif is_state('input_select.helpers_scenes', 'scene appletv') %} 
-                    [0.44,0.52]
-                  {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
-                    [0.74,0.52]
-                  {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
-                    [0.14,0.19]
-                  {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
-                    [0.22,0.08]
-                  {% else %} 
-                    [0.70,0.30]
-                  {% endif %}
-                brightness_pct: "{{ 30 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+          - action: light.turn_on
+            target:
+              entity_id: light.bathroom_neopixel
+            data:
+              xy_color: >-
+                {% if is_state('binary_sensor.bathroom_detection', 'on') %}
+                  [0.14,0.19]
+                {% elif is_state('input_select.helpers_scenes', 'scene appletv') %} 
+                  [0.44,0.52]
+                {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
+                  [0.74,0.52]
+                {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
+                  [0.14,0.19]
+                {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
+                  [0.22,0.08]
+                {% else %} 
+                  [0.70,0.30]
+                {% endif %}
+              brightness_pct: "{{ 30 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"

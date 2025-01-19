@@ -27,7 +27,7 @@
         - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
       then:
-        - action: hue.activate_scene
+        - action: "{{ 'hue.activate_scene' if is_state('light.kitchen_all', 'off') else 'script.none' }}"
           data:
             transition: 1
             brightness: "{{ 75 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"

@@ -26,7 +26,7 @@
 
       then:
         - parallel:
-            - action: hue.activate_scene
+            - action: "{{ 'hue.activate_scene' if is_state('light.toilet_all', 'off') else 'script.none' }}"
               target:
                 entity_id: scene.scenes_toilet_rainbow
 
@@ -112,9 +112,9 @@
 
       then:
         - parallel:
-            - action: hue.activate_scene
+            - action: "{{ 'hue.activate_scene' if is_state('light.toilet_all', 'off') else 'script.none' }}"
               data:
-                brightness: 30
+                brightness: "{{ 75 if is_state('switch.momentary_scene_morning', 'on') else 30 }}"
               target:
                 entity_id: scene.scenes_toilet_night_light
 

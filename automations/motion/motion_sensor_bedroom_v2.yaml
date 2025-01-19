@@ -19,13 +19,14 @@
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
 
+
   actions:
     - if:
         - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
 
       then:
         - parallel:
-            - action: light.turn_on
+            - action: "{{ 'light.turn_on' if is_state('light.bedroom_all', 'off') else 'script.none' }}"
               target:
                 entity_id: light.bedroom_all
               data:

@@ -14,10 +14,6 @@
     - trigger: state
       entity_id: binary_sensor.diningroom_detection
 
-  variables:
-    momentary_scene_morning: "{{ 255 if is_state('switch.momentary_scene_morning', 'on') else 10 }}"
-    function_wakeup: "{{ 'script.none' if is_state('input_boolean.function_wakeup', 'on') else 'light.turn_off' }}"
-
   conditions:
     - "{{ is_state('switch.dressoir_light_switch', 'off') }}"
     - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
