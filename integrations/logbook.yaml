@@ -26,6 +26,7 @@ include:
     - scene
 
   entities:
+    - light.bedroom_neopixel
     - sensor.master_bathroom_humidity_average_linear_24h
     
     # 3D Printer KwH Sensor

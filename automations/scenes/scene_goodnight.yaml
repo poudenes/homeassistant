@@ -153,4 +153,4 @@
           - input_number.helpers_motion_hallway
           - input_number.helpers_motion_bedroom
       data:
-        value: 10
+        value: 15

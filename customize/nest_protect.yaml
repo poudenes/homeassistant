@@ -1,106 +1,126 @@
 ---
-button.nest_protect_1_battery_replaced:
-  friendly_name: "Livingroom - Battery replaced"
-# device_tracker.nest_labs_inc_1:
-#   friendly_name: "Livingroom - Tracker"
-select.nest_protect_1_brightness:
-  friendly_name: "Livingroom - Brightness"
-switch.nest_protect_1_heads_up:
-  friendly_name: "Livingroom - Heads up"
-switch.nest_protect_1_nightly_promise:
-  friendly_name: "Livingroom - Nightly promise"
-switch.nest_protect_1_pathlight:
-  friendly_name: "Livingroom - Pathlight"
-switch.nest_protect_1_steam_check:
-  friendly_name: "Livingroom - Steam check"
-sensor.nest_protect_1_battery_last_replaced:
-  friendly_name: "Livingroom - Battery lasted replaced"
-sensor.nest_protect_1_battery_type:
-  friendly_name: "Livingroom - Battery type"
-# sensor.1_nest_protect_battery_plus:
-#   friendly_name: "Livingroom - Battery plus"
-sensor.nest_protect_1_battery_level:
-  friendly_name: "Livingroom - Battery level"
-sensor.nest_protect_1_replace_by:
-  friendly_name: "Livingroom - Replaced by"
-# binary_sensor.1_nest_protect_battery_plus_low:
-#   friendly_name: "Livingroom - Battery plus low"
-binary_sensor.nest_protect_1_battery_health:
-  friendly_name: "Livingroom - Battery health"
-binary_sensor.nest_protect_1_buzzer_test:
-  friendly_name: "Livingroom - Buzzer test"
-binary_sensor.nest_protect_1_co_test:
-  friendly_name: "Livingroom - CO test"
-binary_sensor.nest_protect_1_humidity_test:
-  friendly_name: "Livingroom - Humidity test"
-binary_sensor.nest_protect_1_led_test:
-  friendly_name: "Livingroom - Led test"
-binary_sensor.nest_protect_1_pir_test:
-  friendly_name: "Livingroom - Pir test"
-binary_sensor.nest_protect_1_smoke_test:
-  friendly_name: "Livingroom - Smoke test"
-binary_sensor.nest_protect_1_speaker_test:
-  friendly_name: "Livingroom - Speaker test"
-binary_sensor.nest_protect_1_wifi_test:
-  friendly_name: "Livingroom - WiFi test"
-binary_sensor.nest_protect_1_co_status:
-  friendly_name: "Livingroom - CO status"
-binary_sensor.nest_protect_1_heat_status:
-  friendly_name: "Livingroom - Heat status"
-binary_sensor.nest_protect_1_smoke_status:
-  friendly_name: "Livingroom - Smoke status"
+device_tracker.nest_labs_inc:
+  friendly_name: "Nest Lab inc - Device tracker"
 
-button.nest_protect_2_battery_replaced:
-  friendly_name: "Hallway - Battery replaced"
-device_tracker.nest_labs_inc_2:
-  friendly_name: "Hallway - Tracker"
-select.nest_protect_2_brightness:
-  friendly_name: "Hallway - Brightness"
-switch.nest_protect_2_heads_up:
-  friendly_name: "Hallway - Heads up"
-switch.nest_protect_2_nightly_promise:
-  friendly_name: "Hallway - Nightly promise"
-switch.nest_protect_2_pathlight:
-  friendly_name: "Hallway - Pathlight"
-switch.nest_protect_2_steam_check:
-  friendly_name: "Hallway - Steam check"
-sensor.nest_protect_2_battery_last_replaced:
-  friendly_name: "Hallway - Battery lasted replaced"
-sensor.nest_protect_2_battery_type:
-  friendly_name: "Hallway - Battery type"
-# sensor.2_nest_protect_battery_plus:
-#   friendly_name: "Hallway - Battery plus"
-sensor.nest_protect_2_battery_level:
-  friendly_name: "Hallway - Battery level"
-sensor.nest_protect_2_replace_by:
-  friendly_name: "Hallway - Replaced by"
-# binary_sensor.2_nest_protect_battery_plus_low:
-#   friendly_name: "Hallway - Battery plus low"
-binary_sensor.nest_protect_2_battery_health:
-  friendly_name: "Hallway - Battery health"
-binary_sensor.nest_protect_2_buzzer_test:
-  friendly_name: "Hallway - Buzzer test"
-binary_sensor.nest_protect_2_co_test:
-  friendly_name: "Hallway - CO test"
-binary_sensor.nest_protect_2_humidity_test:
+binary_sensor.nest_protect_1_humidity_test:
   friendly_name: "Hallway - Humidity test"
-binary_sensor.nest_protect_2_led_test:
+sensor.nest_protect_2_last_audio_self_test:
+  friendly_name: "Hallway - Last audio self test"
+sensor.nest_protect_2_last_manual_test:
+  friendly_name: "Hallway - Last manual test"
+binary_sensor.nest_protect_2_removed_from_base:
+  friendly_name: "Hallway - Removed from base"
+sensor.nest_protect_1_battery_plus:
+  friendly_name: "Hallway - Battery plus"
+binary_sensor.nest_protect_1_battery_plus_low:
+  friendly_name: "Hallway - Battery plus low"
+button.nest_protect_1_battery_replaced:
+  friendly_name: "Hallway - Battery replaced"
+select.nest_protect_1_brightness:
+  friendly_name: "Hallway - Brightness"
+switch.nest_protect_1_heads_up:
+  friendly_name: "Hallway - Heads up"
+switch.nest_protect_1_nightly_promise:
+  friendly_name: "Hallway - Nightly promise"
+switch.nest_protect_1_pathlight:
+  friendly_name: "Hallway - Pathlight"
+switch.nest_protect_1_steam_check:
+  friendly_name: "Hallway - Steam check"
+sensor.nest_protect_1_battery_last_replaced:
+  friendly_name: "Hallway - Battery lasted replaced"
+sensor.nest_protect_1_battery_type:
+  friendly_name: "Hallway - Battery type"
+sensor.nest_protect_1_battery_level:
+  friendly_name: "Hallway - Battery level"
+sensor.nest_protect_1_replace_by:
+  friendly_name: "Hallway - Replaced by"
+binary_sensor.nest_protect_1_battery_health:
+  friendly_name: "Hallway - Battery health"
+binary_sensor.nest_protect_1_buzzer_test:
+  friendly_name: "Hallway - Buzzer test"
+binary_sensor.nest_protect_1_co_test:
+  friendly_name: "Hallway - CO test"
+binary_sensor.nest_protect_1_led_test:
   friendly_name: "Hallway - Led test"
-binary_sensor.nest_protect_2_pir_test:
+binary_sensor.nest_protect_1_pir_test:
   friendly_name: "Hallway - Pir test"
-binary_sensor.nest_protect_2_smoke_test:
+binary_sensor.nest_protect_1_smoke_test:
   friendly_name: "Hallway - Smoke test"
-binary_sensor.nest_protect_2_speaker_test:
+binary_sensor.nest_protect_1_speaker_test:
   friendly_name: "Hallway - Speaker test"
-binary_sensor.nest_protect_2_wifi_test:
+binary_sensor.nest_protect_1_wifi_test:
   friendly_name: "Hallway - WiFi test"
-binary_sensor.nest_protect_2_co_status:
+binary_sensor.nest_protect_1_co_status:
   friendly_name: "Hallway - CO status"
-binary_sensor.nest_protect_2_heat_status:
+binary_sensor.nest_protect_1_heat_status:
   friendly_name: "Hallway - Heat status"
-binary_sensor.nest_protect_2_smoke_status:
+binary_sensor.nest_protect_1_smoke_status:
   friendly_name: "Hallway - Smoke status"
 
+sensor.nest_protect_1_last_audio_self_test:
+  friendly_name: "Livingroom - Last audio self test"
+sensor.nest_protect_1_last_manual_test:
+  friendly_name: "Livingroom - Last manual test"
+binary_sensor.nest_protect_1_room_removed_from_base:
+  friendly_name: "Livingroom - Removed from base"
+binary_sensor.2_nest_protect_battery_plus_low:
+  friendly_name: "Livingroom - Battery plus low"
+sensor.nest_protect_2_battery_plus:
+  friendly_name: "Livingroom - Battery plus"
+button.nest_protect_2_battery_replaced:
+  friendly_name: "Livingroom - Battery replaced"
+device_tracker.nest_labs_inc_2:
+  friendly_name: "Livingroom - Tracker"
+select.nest_protect_2_brightness:
+  friendly_name: "Livingroom - Brightness"
+switch.nest_protect_2_heads_up:
+  friendly_name: "Livingroom - Heads up"
+switch.nest_protect_2_nightly_promise:
+  friendly_name: "Livingroom - Nightly promise"
+switch.nest_protect_2_pathlight:
+  friendly_name: "Livingroom - Pathlight"
+switch.nest_protect_2_steam_check:
+  friendly_name: "Livingroom - Steam check"
+sensor.nest_protect_2_battery_last_replaced:
+  friendly_name: "Livingroom - Battery lasted replaced"
+sensor.nest_protect_2_battery_type:
+  friendly_name: "Livingroom - Battery type"
+sensor.nest_protect_2_battery_level:
+  friendly_name: "Livingroom - Battery level"
+sensor.nest_protect_2_replace_by:
+  friendly_name: "Livingroom - Replaced by"
+binary_sensor.nest_protect_2_battery_health:
+  friendly_name: "Livingroom - Battery health"
+binary_sensor.nest_protect_2_buzzer_test:
+  friendly_name: "Livingroom - Buzzer test"
+binary_sensor.nest_protect_2_co_test:
+  friendly_name: "Livingroom - CO test"
+binary_sensor.nest_protect_2_humidity_test:
+  friendly_name: "Livingroom - Humidity test"
+binary_sensor.nest_protect_2_led_test:
+  friendly_name: "Livingroom - Led test"
+binary_sensor.nest_protect_2_pir_test:
+  friendly_name: "Livingroom - Pir test"
+binary_sensor.nest_protect_2_smoke_test:
+  friendly_name: "Livingroom - Smoke test"
+binary_sensor.nest_protect_2_speaker_test:
+  friendly_name: "Livingroom - Speaker test"
+binary_sensor.nest_protect_2_wifi_test:
+  friendly_name: "Livingroom - WiFi test"
+binary_sensor.nest_protect_2_co_status:
+  friendly_name: "Livingroom - CO status"
+binary_sensor.nest_protect_2_heat_status:
+  friendly_name: "Livingroom - Heat status"
+binary_sensor.nest_protect_2_smoke_status:
+  friendly_name: "Livingroom - Smoke status"
+
+
+sensor.nest_protect_3_last_audio_self_test:
+  friendly_name: "Bedroom - Last audio self test"
+sensor.nest_protect_3_last_manual_test:
+  friendly_name: "Bedroom - Last manual test"
+binary_sensor.nest_protect_3_removed_from_base:
+  friendly_name: "Bedroom - Removed from base"
 button.nest_protect_3_battery_replaced:
   friendly_name: "Bedroom - Battery replaced"
 device_tracker.nest_labs_inc_3:

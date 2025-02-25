@@ -31,9 +31,7 @@
                 entity_id: light.bedroom_all
               data:
                 brightness_pct: >-
-                  {% if is_state('switch.momentary_peter_early_up', 'on') %} 
-                    0
-                  {% elif is_state('binary_sensor.bedroom_door_contact', 'on') %} 
+                  {% if is_state('binary_sensor.bedroom_door_contact', 'on') %} 
                     {{ 100 if states('season') in ['autumn', 'winter'] else 20 }}
                   {% else %} 
                     100
@@ -89,7 +87,7 @@
                   {% else %} 
                     [0.70,0.30]
                   {% endif %}
-                brightness_pct: "{{ 10 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+                brightness_pct: "{{ 30 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
 
     - if:
         - "{{ is_state('switch.momentary_peter_early_up', 'on') }}"
@@ -114,3 +112,4 @@
             entity_id: light.bedroom_neopixel
           data:
             xy_color: [0.70,0.30]
+            brightness_pct: 100

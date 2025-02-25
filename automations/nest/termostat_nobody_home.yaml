@@ -23,4 +23,4 @@
       target:
         entity_id: climate.entryway
       data:
-        temperature: 9
+        temperature: 10

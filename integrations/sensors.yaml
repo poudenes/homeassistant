@@ -40,7 +40,8 @@
 ###########################################################################################
 # HAVE I BEEN PWNED
 ###########################################################################################
-- platform: haveibeenpwned
+- platform: haveibeenpwned_custom
+
   email:
     - !secret haveibeenpwned_1
     - !secret haveibeenpwned_2
