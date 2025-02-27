@@ -19,6 +19,10 @@
       entity_id: select.logitech_harmony_activities
       to: "TV"
 
+    - trigger: state
+      entity_id:
+        - input_select.helpers_scenes
+
   conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
