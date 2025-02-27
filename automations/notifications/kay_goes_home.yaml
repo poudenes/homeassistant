@@ -19,7 +19,7 @@
     - trigger: state
       entity_id:
         - sensor.icloud3_kay_badge
-      from: "UMC Utrecht"
+      from: "Ter Gooi"
 
   conditions: []
 
