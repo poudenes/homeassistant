@@ -27,6 +27,15 @@
       - switch.toilet_light_switch
       - switch.wall_light_switch
       - switch.window_light_switch
+    
+    neopixel_color: >
+      {{ {'scene appletv': [0.44,0.52],
+          'scene daytime': [0.70,0.30],
+          'scene dinner': [0.74,0.52],
+          'scene evening': [0.70,0.30],
+          'scene tv': [0.14,0.19],
+          'scene nintendo': [0.22,0.08],
+          'scene goodnight': [0.70, 0.30]}.get(trigger.to_state.state, [0.70,0.30]) }}
 
   conditions: []
 
@@ -38,12 +47,15 @@
             target:
               entity_id: "light.{{ repeat.item[7:-13] }}_neopixel"
             data:
-              xy_color: >-
-                {{ {'scene appletv': [0.44,0.52],
-                    'scene daytime': [0.70,0.30],
-                    'scene dinner': [0.74,0.52],
-                    'scene evening': [0.70,0.30],
-                    'scene tv': [0.14,0.19],
-                    'scene nintendo': [0.22,0.08],
-                    'scene goodnight': [0.70, 0.30]}.get(trigger.to_state.state, [0.70,0.30]) }}
+              xy_color: "{{ neopixel_color }}"
               brightness_pct: "{{ 15 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
+              
+              # xy_color: >-
+              #   {{ {'scene appletv': [0.44,0.52],
+              #       'scene daytime': [0.70,0.30],
+              #       'scene dinner': [0.74,0.52],
+              #       'scene evening': [0.70,0.30],
+              #       'scene tv': [0.14,0.19],
+              #       'scene nintendo': [0.22,0.08],
+              #       'scene goodnight': [0.70, 0.30]}.get(trigger.to_state.state, [0.70,0.30]) }}
+              # brightness_pct: "{{ 15 if is_state('input_select.helpers_scenes', 'scene goodnight') else 100 }}"
