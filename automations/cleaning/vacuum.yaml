@@ -34,7 +34,7 @@
 
     - action: select.select_option
       target:
-        entity_id: select.roborock_s8_route
+        entity_id: select.roborock_s8_mop_mode
       data:
         option: standard
 
