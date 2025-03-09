@@ -32,14 +32,6 @@
     - "{{ states('input_select.helpers_scenes') not in ['scene appletv', 'scene goodnight','scene dinner'] }}"
 
   actions:
-    ###################
-    # TEMP SOLUTION BECAUSE OF APPLETV ISSUE 
-    ###################
-    - action: homeassistant.reload_config_entry
-      metadata: {}
-      data:
-        entity_id: remote.woonkamer
-
     - parallel:
         - action: input_select.select_option
           target:
