@@ -12,7 +12,7 @@
   mode: restart
   triggers:
     - trigger: state
-      entity_id: sensor.roborock_s8_current_error
+      entity_id: sensor.roborock_s8_vacuum_error
 
   conditions:
     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
