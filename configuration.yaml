@@ -22,6 +22,7 @@ api:
 battery_notes:
 config:
 counter:
+default_config:
 dhcp:
 energy:
 frontend:
