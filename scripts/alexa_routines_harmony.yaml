@@ -248,3 +248,280 @@ alexa_turn_on_chromecast:
         option: Cromecast
       target:
         entity_id: select.logitech_harmony_activities
+
+###########################################################################################
+# ALEXA ROUTINE OPEN NETFLIX
+###########################################################################################
+alexa_turn_on_netflix:
+  alias: "Routine ATV Netflix"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - right
+          - right
+          - right
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN VIDEOLAND
+###########################################################################################
+alexa_turn_on_videoland:
+  alias: "Routine ATV Videoland"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - down
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN HBO
+###########################################################################################
+alexa_turn_on_hbo:
+  alias: "Routine ATV HBO"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN INFUSE
+###########################################################################################
+alexa_turn_on_plex:
+  alias: "Routine ATV Infuse"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - right
+          - right
+          - right
+          - right
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN PRIME
+###########################################################################################
+alexa_turn_on_amazon:
+  alias: "Routine ATV Prime"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN SKYSHOWTIME
+###########################################################################################
+alexa_turn_on_sky:
+  alias: "Routine ATV Sky"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - right
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN DISNEY
+###########################################################################################
+alexa_turn_on_disney:
+  alias: "Routine ATV Disney"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - right
+          - right
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN YOUTUBE
+###########################################################################################
+alexa_turn_on_youtube:
+  alias: "Routine ATV Youtube"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - down
+          - right
+          - right
+          - right
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN MUSIC
+###########################################################################################
+alexa_turn_on_music:
+  alias: "Routine ATV Music"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - down
+          - right
+          - right
+          - right
+          - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN PATHE
+###########################################################################################
+alexa_turn_on_pathe:
+  alias: "Routine ATV Pathe"
+  icon: mdi:script
+  sequence:
+    - action: select.select_option
+      data:
+        option: AppleTV
+      target:
+        entity_id: select.logitech_harmony_activities
+
+    - delay: "00:00:10"
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.woonkamer
+      data:
+        delay_secs: 0.5
+        command:
+          - top_menu
+          - home
+          - down
+          - right
+          - select
