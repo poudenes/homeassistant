@@ -5,13 +5,13 @@
   alias: "Notification - Dryer-Washer done"
   triggers:
     - trigger: state
-      entity_id: sensor.wasmachine_washer_machine_state
+      entity_id: sensor.wasmachine_machine_state
       to: "stop"
       variables:
         trigger_message: "washing machine"
 
     - trigger: state
-      entity_id: sensor.droger_dryer_machine_state
+      entity_id: sensor.droger_machine_state
       to: "stop"
       variables:
         trigger_message: "dryer"
