@@ -18,15 +18,7 @@
       webhook_id: "ukstatus"
       local_only: true
       id: "ukstatus"
-
-    - trigger: "webhook"
-      allowed_methods:
-        - POST
-        - PUT
-      webhook_id: "wud"
-      local_only: true
-      id: "wud"
-
+      
     - trigger: "webhook"
       allowed_methods:
         - POST
