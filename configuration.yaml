@@ -37,8 +37,6 @@ powercalc:
 python_script:
   allow_all_imports: true
   hass_is_global: true
-remote_homeassistant:
-  instances:
 ssdp:
 system_health:
 system_log:
