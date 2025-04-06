@@ -21,7 +21,7 @@
   actions:
     - action: camera.snapshot
       target:
-        entity_id: camera.roborock_s8_map
+        entity_id: image.roborock_s8_map_0_custom
       data:
         filename: "/config/www/snapshot/vacuum.jpg"
 
@@ -32,6 +32,6 @@
         title: "HA - Vacuum in trouble"
         message: |
           The S8 is in trouble:
-          "{{ states('sensor.roborock_s8_current_error') }}"
+          "{{ states('sensor.roborock_s8_vacuum_error') }}"
         thread_id: "ha_alarm"
         img: "/local/snapshot/vacuum.jpg"

@@ -20,9 +20,9 @@
   conditions: []
 
   actions:
-    - action: roborock.vacuum_goto
+    - action: roborock.set_vacuum_goto_position
       target:
         entity_id: vacuum.roborock_s8
       data:
-        x_coord: "24999"
-        y_coord: "23375"
+        x: "24999"
+        "y": "23375"

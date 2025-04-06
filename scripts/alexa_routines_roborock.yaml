@@ -33,11 +33,15 @@ alexa_clean_kithcen: # SEGMENT 16 - Kitchen
       data:
         fan_speed: balanced
 
-    - action: roborock.vacuum_clean_segment
+    - action: vacuum.send_command
+      data:
+        command: app_segment_clean
+        params:
+          - segments:
+              - 17
+            repeat: 1
       target:
         entity_id: vacuum.roborock_s8
-      data:
-        segments: 17
 
     - delay: "00:00:40"
 
@@ -57,11 +61,15 @@ alexa_clean_hallway: # SEGMENT 22 - Hallway
       data:
         fan_speed: balanced
 
-    - action: roborock.vacuum_clean_segment
+    - action: vacuum.send_command
+      data:
+        command: app_segment_clean
+        params:
+          - segments:
+              - 16
+            repeat: 1
       target:
         entity_id: vacuum.roborock_s8
-      data:
-        segments: 16
 
 alexa_clean_bedroom: # SEGMENT 21 - Bedroom
   alias: "Routine Clean bedroom"
@@ -74,11 +82,15 @@ alexa_clean_bedroom: # SEGMENT 21 - Bedroom
       data:
         fan_speed: balanced
 
-    - action: roborock.vacuum_clean_segment
+    - action: vacuum.send_command
+      data:
+        command: app_segment_clean
+        params:
+          - segments:
+              - 21
+            repeat: 1
       target:
         entity_id: vacuum.roborock_s8
-      data:
-        segments: 21
 
 alexa_clean_diningroom: # SEGMENT 20 - Diningroom
   alias: "Routine Clean diningroom"
@@ -91,11 +103,15 @@ alexa_clean_diningroom: # SEGMENT 20 - Diningroom
       data:
         fan_speed: balanced
 
-    - action: roborock.vacuum_clean_segment
+    - action: vacuum.send_command
+      data:
+        command: app_segment_clean
+        params:
+          - segments:
+              - 20
+            repeat: 1
       target:
         entity_id: vacuum.roborock_s8
-      data:
-        segments: 20
 
 alexa_clean_livingroom: # SEGMENT 19 - Livingroom
   alias: "Routine Clean livingroom"
@@ -107,11 +123,15 @@ alexa_clean_livingroom: # SEGMENT 19 - Livingroom
       data:
         fan_speed: balanced
 
-    - action: roborock.vacuum_clean_segment
+    - action: vacuum.send_command
+      data:
+        command: app_segment_clean
+        params:
+          - segments:
+              - 19
+            repeat: 1
       target:
         entity_id: vacuum.roborock_s8
-      data:
-        segments: 19
 
 alexa_clean_toilet: # SEGMENT 17 - Toilet
   alias: "Routine Clean toilet"
@@ -123,8 +143,12 @@ alexa_clean_toilet: # SEGMENT 17 - Toilet
       data:
         fan_speed: balanced
 
-    - action: roborock.vacuum_clean_segment
+    - action: vacuum.send_command
+      data:
+        command: app_segment_clean
+        params:
+          - segments:
+              - 22
+            repeat: 1
       target:
         entity_id: vacuum.roborock_s8
-      data:
-        segments: 22
