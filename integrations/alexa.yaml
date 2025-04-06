@@ -51,6 +51,18 @@ smart_home:
       - script.alexa_turn_off_harmony
       - script.alexa_turn_on_xbox
 
+      # Routines for streaming apps
+      - script.alexa_turn_on_netflix
+      - script.alexa_turn_on_videoland
+      - script.alexa_turn_on_hbo
+      - script.alexa_turn_on_plex
+      - script.alexa_turn_on_amazon
+      - script.alexa_turn_on_sky
+      - script.alexa_turn_on_disney
+      - script.alexa_turn_on_youtube
+      - script.alexa_turn_on_music
+      - script.alexa_turn_on_pathe
+
       # Routines for Roborock
       - script.alexa_return_base
       - script.alexa_clean_all
