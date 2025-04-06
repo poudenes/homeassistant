@@ -32,6 +32,9 @@
       data:
         option: "scene daytime"
 
+    - action: rest_command.update_remote_entity
+      data: {}
+
     ###########################################################################################
     # Set timers for motion sensors to a higher level
     ###########################################################################################

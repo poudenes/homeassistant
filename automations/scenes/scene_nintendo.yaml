@@ -60,3 +60,6 @@
         transition: 2
       target:
         entity_id: scene.scenes_nintendo
+
+    - action: rest_command.update_remote_entity
+      data: {}

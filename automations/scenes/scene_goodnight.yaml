@@ -29,6 +29,9 @@
             notify: notify.alexa_media_livingroom
             call_scene_goodnight: 1
 
+        - action: rest_command.update_remote_entity
+          data: {}
+
         - action: input_boolean.turn_off
           target:
             entity_id: group.helpers_function_switches

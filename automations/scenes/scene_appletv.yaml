@@ -39,6 +39,9 @@
           data:
             option: "scene appletv"
 
+        - action: rest_command.update_remote_entity
+          data: {}
+
         - continue_on_error: true
           action: script.engine_say
           data:

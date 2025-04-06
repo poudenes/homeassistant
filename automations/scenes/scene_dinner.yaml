@@ -55,3 +55,6 @@
           Scene dinner is activated. 
           All lights are on correctly.
         notification_id: "scene_dinner"
+
+    - action: rest_command.update_remote_entity
+      data: {}

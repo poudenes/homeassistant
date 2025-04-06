@@ -58,6 +58,9 @@
           data:
             option: "scene evening"
 
+        - action: rest_command.update_remote_entity
+          data: {}
+
         - action: light.turn_off
           target:
             entity_id: light.tv_sync
