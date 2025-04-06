@@ -24,3 +24,13 @@ nanoleaf:
     "loop": false, "palette": [], "colorType": "HSB"}
     }
   content_type: 'application/json'
+
+
+
+update_remote_entity:
+  url: "http://192.168.100.62:8123/api/states/input_text.update_scene"
+  method: POST
+  headers:
+    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlZmUzZmFmZDIxNWQ0NzMzOTAwNTQ3ODRlZmFlMTJjMSIsImlhdCI6MTczNTA3NDgyOSwiZXhwIjoyMDUwNDM0ODI5fQ.3EEJXzaNbQNJqxI9RR6dLfHF_tufiyyl11Fpk-AtXBs"
+    Content-Type: "application/json"
+  payload: '{"state": "{{ states("input_select.helpers_scenes") }}"}' 
