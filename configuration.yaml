@@ -33,7 +33,6 @@ media_source:
 mobile_app:
 my:
 person:
-powercalc:
 python_script:
   allow_all_imports: true
   hass_is_global: true
