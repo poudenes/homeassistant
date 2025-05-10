@@ -269,3 +269,21 @@ helpers_yamaha_power_mute_info:
     - VolumeUp
     - Info
     - Display
+
+helpers_somfy_shaders:
+  name: "Somfy - Positions"
+  options:
+    - None
+    - Jan
+    - Feb
+    - Mrt
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sept
+    - Okt
+    - Nov
+    - Dec
+  initial: "None"
