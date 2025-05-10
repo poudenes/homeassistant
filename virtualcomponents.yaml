@@ -1,0 +1,76 @@
+#  ██╗   ██╗██╗██████╗ ████████╗██╗   ██╗ █████╗ ██╗          ██████╗ ██████╗ ███╗   ███╗██████╗  ██████╗ ███╗   ██╗███████╗███╗   ██╗████████╗███████╗
+#  ██║   ██║██║██╔══██╗╚══██╔══╝██║   ██║██╔══██╗██║         ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔═══██╗████╗  ██║██╔════╝████╗  ██║╚══██╔══╝██╔════╝
+#  ██║   ██║██║██████╔╝   ██║   ██║   ██║███████║██║         ██║     ██║   ██║██╔████╔██║██████╔╝██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║   ██║   ███████╗
+#  ╚██╗ ██╔╝██║██╔══██╗   ██║   ██║   ██║██╔══██║██║         ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║
+#   ╚████╔╝ ██║██║  ██║   ██║   ╚██████╔╝██║  ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ╚██████╔╝██║ ╚████║███████╗██║ ╚████║   ██║   ███████║
+#    ╚═══╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
+###########################################################################################
+Switch One:
+  - platform: virtual
+    name: "Virtual Components Switch One"
+    persistent: true
+    initial_value: on
+
+Virtual Components Switch Two:
+  - platform: switch
+    name: "Virtual Components Switch Two"
+
+Virtual Components Binary Sensor:
+  - platform: binary_sensor
+    name: "Virtual Components Binary Sensor"
+    initial_value: 'on'
+    class: presence
+
+Virtual Components Sensor:
+  - platform: sensor
+    name: "Virtual Components Sensor"
+    class: temperature
+    initial_value: 37
+    unit_of_measurement: "C"
+
+Virtual Components Lights:
+  - platform: light
+    name: "Virtual Components Light"
+    initial_value: 'on'
+    support_brightness: true
+    initial_brightness: 100
+    support_color: true
+    initial_color: [0,255]
+    support_color_temp: true
+    initial_color_temp: 255
+    support_white_value: true
+    initial_white_value: 240
+
+Virtual Components Lock:
+  - platform: lock
+    name: "Virtual Components Door Lock"
+    initial_value: locked
+    locking_time: 5
+    jamming_test: 5
+
+Virtual Components Fan:
+  - platform: fan
+    name: "Virtual Components Fan"
+    speed: True
+    speed_count: 5
+    direction: True
+    oscillate: True
+
+Virtual Components Cover:
+  - platform: cover
+    name: "Virtual Components Cover"
+    initial_value: 'closed'
+    open_close_duration: 10
+    open_close_tick: 1
+
+Virtual Components Valve:
+  - platform: valve
+    name: "Virtual Components Valve"
+    initial_value: 'closed'
+    open_close_duration: 10
+    open_close_tick: 1
+
+Virtual Components Device_Tracker:
+  - platform: device_tracker
+    name: "Virtual Components Device Tracker"
+    initial_value: home
