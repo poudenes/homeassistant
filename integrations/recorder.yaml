@@ -95,7 +95,7 @@ include:
     - sensor.cryptoinfo_sol_usd
     - sensor.cryptoinfo_doge_usd
     - sensor.cryptoinfo_btc_usd
-    - sensor.cryptoinfo_ada_usd
+
     - sensor.cryptoinfo_avax_usd
 
     # EURO95 Integration
@@ -109,10 +109,6 @@ include:
     # - sensor.gas_station_euro95_work_lowest_price_3
     # - sensor.gas_station_euro95_work_lowest_price_4
     # - sensor.gas_station_euro95_work_lowest_price_5
-
-    # Speedtest
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
 
     # Precense sensors and tools
     - binary_sensor.group_family_manual

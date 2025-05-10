@@ -94,11 +94,7 @@ include:
     - sensor.cryptoinfo_sol_usd
     - sensor.cryptoinfo_doge_usd
     - sensor.cryptoinfo_btc_usd
-    - sensor.cryptoinfo_ada_usd
     - sensor.cryptoinfo_avax_usd
-    
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
 
     - sensor.roborock_s8_current_room
     

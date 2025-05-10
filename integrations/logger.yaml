@@ -30,3 +30,5 @@ logs:
   roborock.cloud_api: fatal
   custom_components.bambu_lab.pybambu: fatal
   custom_components.cloudflare_tunnel_monitor.sensor: fatal
+
+  # rflink: debug
