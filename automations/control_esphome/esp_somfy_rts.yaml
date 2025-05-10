@@ -1,0 +1,52 @@
+
+###########################################################################################
+# Control Somfy Shaders
+###########################################################################################
+- id: "6cda4fe8-102a-43d1-b1b4-8137fce09132"
+  alias: "Somfy - Shaders"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: 
+        - input_select.helpers_somfy_shaders
+
+  conditions: []
+
+  variables:
+    delay_time: >-
+      {% set position = state_attr('cover.balcony', 'current_position') | float(0) %}
+      {% if position >= 75 and position <= 100 %} 8
+      {% elif position >= 50 and position < 75 %} 16
+      {% elif position >= 25 and position < 50 %} 24
+      {% elif position >= 0 and position < 25 %} 30
+      {% endif %}
+    balcony: >-
+      {% if (states('input_select.helpers_somfy_shaders') in ['Jan', 'Feb', 'Mrt']) %} 25
+      {% elif (states('input_select.helpers_somfy_shaders') in ['Apr', 'May', 'Jun']) %} 50
+      {% elif (states('input_select.helpers_somfy_shaders') in ['Jul', 'Aug', 'Sept']) %} 75
+      {% elif (states('input_select.helpers_somfy_shaders') in ['Okt', 'Nov', 'Dec']) %} 90
+      {% elif is_state('input_select.helpers_somfy_shaders', 'None') %} 100
+      {% endif %}
+    livingroom: >-
+      {% if (states('input_select.helpers_somfy_shaders') in ['Jan', 'Feb', 'Mrt']) %} 25
+      {% elif (states('input_select.helpers_somfy_shaders') in ['Apr', 'May', 'Jun']) %} 50
+      {% elif (states('input_select.helpers_somfy_shaders') in ['Jul', 'Aug', 'Sept']) %} 75
+      {% elif (states('input_select.helpers_somfy_shaders') in ['Okt', 'Nov', 'Dec']) %} 90
+      {% elif is_state('input_select.helpers_somfy_shaders', 'None') %} 100
+      {% endif %}
+  
+  actions:
+    - action: cover.set_cover_position
+      target:
+        entity_id: cover.balcony
+      data:
+        position: "{{ balcony }}"
+
+    - delay: 
+        seconds: "{{ delay_time }}"
+
+    - action: cover.set_cover_position
+      target:
+        entity_id: cover.livingroom
+      data:
+        position: "{{ livingroom }}"
