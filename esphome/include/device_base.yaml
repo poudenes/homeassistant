@@ -18,8 +18,16 @@ esp8266:
   board: esp01_1m
   restore_from_flash: true
 
+# mdns:
+#   disabled: false
+
 mdns:
-  disabled: false
+  services:
+    - service: "_custom_service"
+      protocol: "_tcp"
+      port: 8080
+      txt:
+        txt_key_1: ${devicename}
   
 api:
   encryption:
