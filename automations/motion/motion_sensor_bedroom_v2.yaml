@@ -74,9 +74,7 @@
                 entity_id: light.bedroom_neopixel
               data:
                 xy_color: >-
-                  {% if is_state('binary_sensor.bedroom_detection', 'on') %}
-                    [0.14,0.19]
-                  {% elif is_state('input_select.helpers_scenes', 'scene appletv') %} 
+                  {% if is_state('input_select.helpers_scenes', 'scene appletv') %} 
                     [0.44,0.52]
                   {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
                     [0.74,0.52]
