@@ -16,6 +16,9 @@ helpers_motion_test:
 ###########################################################################################
 # HELPERS
 ###########################################################################################
+helpers_somfy_blinds:
+  name: "Somfy Blinds"
+
 helpers_vacuum_done:
   name: "Vacuum done"
 
@@ -27,7 +30,7 @@ helpers_peter_home_homekit:
 
 helpers_post_twitter_random:
   name: "Post twitter random"
-  
+
 helpers_radio_play:
   name: "Radio play"
 
@@ -42,7 +45,7 @@ helpers_tracker_icloud3_log: # For pull down menus in Dashbaord
 
 helpers_hacs_updates:
   name: "Pulldown HACS updates"
-  
+
 helpers_other_updates:
   name: "Pulldown other updates"
 
@@ -97,7 +100,7 @@ function_holiday_emulation:
 
 function_wakeup:
   name: "function Wake up"
-  icon: mdi:arrow-decision-auto  
+  icon: mdi:arrow-decision-auto
 
 function_romantic:
   name: "function Romantic"
