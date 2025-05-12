@@ -31,7 +31,7 @@
       entity_id: input_select.helpers_scenes
 
   conditions:
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('input_boolean.function_disco', 'off') }}"
     - "{{ trigger.from_state is none or trigger.to_state is not none and trigger.to_state.state != trigger.from_state.state }}"

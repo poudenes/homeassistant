@@ -15,7 +15,7 @@
       entity_id: binary_sensor.bedroom_door_contact
 
   conditions:
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
     - "{{ is_state('light.bedroom_all', 'on') }}"
     - "{{ is_state('switch.bedroom_light_switch', 'off') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"

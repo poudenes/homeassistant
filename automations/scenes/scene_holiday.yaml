@@ -15,7 +15,7 @@
 
   conditions:
     - "{{ is_state('input_boolean.function_vacation', 'on') }}"
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
 
   actions:
     - choose:

@@ -13,7 +13,7 @@
   triggers:
     - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
-      to: "below_horizon"
+      to: "below horizon"
 
     - trigger: state
       entity_id: select.logitech_harmony_activities
@@ -24,7 +24,7 @@
         - input_select.helpers_scenes
 
   conditions:
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
@@ -128,7 +128,7 @@
 
     - action: input_number.set_value
       target:
-        entity_id: 
+        entity_id:
           - input_number.helpers_motion_kitchen
       data:
         value: 30

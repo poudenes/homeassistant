@@ -15,7 +15,7 @@
       to: "scene dinner"
 
   conditions:
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
 
   actions:

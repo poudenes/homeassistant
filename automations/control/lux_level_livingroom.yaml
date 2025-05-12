@@ -24,7 +24,7 @@
     - condition: time
       after: "07:00:00"
       before: "23:00:00"
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above horizon') }}"
     - "{{ is_state('select.logitech_harmony_activities', 'power_off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ is_state('switch.momentary_guests', 'off') }}"

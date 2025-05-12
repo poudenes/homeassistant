@@ -33,7 +33,7 @@ helpers_eurovision:
     - "Georgia"
     - "Germany"
     - "Greece"
-    - "Iceland" 
+    - "Iceland"
     - "Ireland"
     - "Israel"
     - "Italy"
@@ -60,8 +60,8 @@ helpers_sunrise_sunset:
   name: "Select Sunrise Sunset"
   icon: mdi:nintendo-switch
   options:
-    - "above_horizon"
-    - "below_horizon"
+    - "above horizon"
+    - "below horizon"
 
 helpers_scenes:
   name: "Scenes"

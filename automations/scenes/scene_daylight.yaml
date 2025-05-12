@@ -16,13 +16,13 @@
 
     - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
-      to: "above_horizon"
+      to: "above horizon"
 
   conditions:
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'above horizon') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
-    - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
+    - "{{ is_state('input_boolean.function_test_below horizon', 'off') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene daytime') }}"
 
   actions:
@@ -40,14 +40,14 @@
     ###########################################################################################
     - action: input_number.set_value
       target:
-        entity_id: 
+        entity_id:
           - input_number.helpers_motion_toilet
           - input_number.helpers_motion_kitchen
           - input_number.helpers_motion_bedroom
           - input_number.helpers_motion_bathroom
       data:
         value: 120
-        
+
     - action: homeassistant.turn_off
       target:
         entity_id:

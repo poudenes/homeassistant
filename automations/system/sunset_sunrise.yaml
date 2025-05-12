@@ -19,17 +19,17 @@
     - trigger: state
       entity_id: sun.sun
       to:
-        - "below_horizon"
-        - "above_horizon"
+        - "below horizon"
+        - "above horizon"
 
   conditions:
-    - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
+    - "{{ is_state('input_boolean.function_test_below horizon', 'off') }}"
 
   actions:
     - choose:
         - conditions:
-            - "{{ is_state('sun.sun', 'below_horizon') }}"
-            - "{{ not is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+            - "{{ is_state('sun.sun', 'below horizon') }}"
+            - "{{ not is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
 
           sequence:
             - parallel:
@@ -37,15 +37,15 @@
                   target:
                     entity_id: input_select.helpers_sunrise_sunset
                   data:
-                    option: "below_horizon"
+                    option: "below horizon"
 
                 - action: frontend.set_theme
                   data:
                     name: "peterdarkmode"
 
         - conditions:
-            - "{{ is_state('sun.sun', 'above_horizon') }}"
-            - "{{ not is_state('input_select.helpers_sunrise_sunset', 'above_horizon') }}"
+            - "{{ is_state('sun.sun', 'above horizon') }}"
+            - "{{ not is_state('input_select.helpers_sunrise_sunset', 'above horizon') }}"
 
           sequence:
             - parallel:
@@ -53,7 +53,7 @@
                   target:
                     entity_id: input_select.helpers_sunrise_sunset
                   data:
-                    option: "above_horizon"
+                    option: "above horizon"
 
                 - action: frontend.set_theme
                   data:

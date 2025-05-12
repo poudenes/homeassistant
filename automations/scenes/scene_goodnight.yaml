@@ -39,7 +39,7 @@
         ###########################################################################################
         # When scene started on daylight
         ###########################################################################################
-        - action: "{{ 'switch.turn_on' if is_state('input_select.helpers_sunrise_sunset', 'above_horizon') else 'script.none' }}"
+        - action: "{{ 'switch.turn_on' if is_state('input_select.helpers_sunrise_sunset', 'above horizon') else 'script.none' }}"
           target:
             entity_id: switch.momentary_early_sleep
 
@@ -141,7 +141,7 @@
     ###########################################################################################
     - action: input_number.set_value
       target:
-        entity_id: 
+        entity_id:
           - input_number.helpers_motion_kitchen
           - input_number.helpers_motion_toilet
           - input_number.helpers_motion_bathroom
@@ -150,7 +150,7 @@
 
     - action: input_number.set_value
       target:
-        entity_id: 
+        entity_id:
           - input_number.helpers_motion_diningroom
           - input_number.helpers_motion_livingroom
           - input_number.helpers_motion_hallway

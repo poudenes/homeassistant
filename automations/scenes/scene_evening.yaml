@@ -16,7 +16,7 @@
 
     - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
-      to: "below_horizon"
+      to: "below horizon"
 
     - trigger: state
       entity_id: select.logitech_harmony_activities
@@ -33,7 +33,7 @@
       after: "15:00:00"
       before: "04:00:00"
     - "{{ states('select.logitech_harmony_activities') in ['power_off', 'AirPlay'] }}"
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
@@ -84,7 +84,7 @@
               {% else %} 
                 Kay
               {% endif %}
-  
+
         - action: hue.activate_scene
           data:
             transition: 2
@@ -128,7 +128,7 @@
     ###########################################################################################
     - action: input_number.set_value
       target:
-        entity_id: 
+        entity_id:
           - input_number.helpers_motion_toilet
           - input_number.helpers_motion_kitchen
           - input_number.helpers_motion_bedroom

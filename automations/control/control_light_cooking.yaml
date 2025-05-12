@@ -17,7 +17,7 @@
         - sensor.fan_speed
 
   conditions:
-    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below_horizon') }}"
+    - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
 
   actions:
     - action: "{{ 'input_boolean.turn_on' if is_state('sensor.fan_remote', 'kitchen') and is_state('sensor.fan_speed', 'high') else 'input_boolean.turn_off' }}"
