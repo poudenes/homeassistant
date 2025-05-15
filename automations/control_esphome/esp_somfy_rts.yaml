@@ -13,18 +13,10 @@
   conditions: []
 
   variables:
-    delay_time: >-
-      {% set position = state_attr('cover.balcony', 'current_position') | float(0) %}
-      {% if position >= 75 and position <= 100 %} 8
-      {% elif position >= 50 and position < 75 %} 16
-      {% elif position >= 25 and position < 50 %} 24
-      {% elif position >= 0 and position < 25 %} 30
-      {% endif %}
-
     balcony: >-
       {% set maand = now().month %}
       {% if maand in [1, 2, 3] %} 25
-      {% elif maand in [4, 5, 6] %} 50
+      {% elif maand in [4, 5, 6] %} 60
       {% elif maand in [7, 8, 9] %} 75
       {% elif maand in [10, 11, 12] %} 90
       {% endif %}
@@ -47,9 +39,6 @@
           data:
             position: "{{ balcony }}"
 
-        - delay: 
-            seconds: "{{ delay_time }}"
-
         - action: cover.set_cover_position
           target:
             entity_id: cover.livingroom
@@ -62,9 +51,6 @@
             entity_id: cover.balcony
           data:
             position: 100
-
-        - delay: 
-            seconds: "{{ delay_time }}"
 
         - action: cover.set_cover_position
           target:

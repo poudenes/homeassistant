@@ -14,7 +14,7 @@
     - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
       to: "below horizon"
-
+      
     - trigger: state
       entity_id: select.logitech_harmony_activities
       to: "AppleTV"

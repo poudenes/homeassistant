@@ -12,7 +12,7 @@
   mode: restart
   triggers:
     - trigger: time_pattern
-      minutes: "/5"
+      minutes: "/1"
 
     - trigger: state
       entity_id: input_select.helpers_sunrise_sunset
@@ -22,7 +22,7 @@
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'above horizon') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
-    - "{{ is_state('input_boolean.function_test_below horizon', 'off') }}"
+    - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene daytime') }}"
 
   actions:

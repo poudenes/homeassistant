@@ -19,16 +19,16 @@
     - trigger: state
       entity_id: sun.sun
       to:
-        - "below horizon"
-        - "above horizon"
+        - "below_horizon"
+        - "above_horizon"
 
   conditions:
-    - "{{ is_state('input_boolean.function_test_below horizon', 'off') }}"
+    - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
 
   actions:
     - choose:
         - conditions:
-            - "{{ is_state('sun.sun', 'below horizon') }}"
+            - "{{ is_state('sun.sun', 'below_horizon') }}"
             - "{{ not is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"
 
           sequence:
@@ -44,7 +44,7 @@
                     name: "peterdarkmode"
 
         - conditions:
-            - "{{ is_state('sun.sun', 'above horizon') }}"
+            - "{{ is_state('sun.sun', 'above_horizon') }}"
             - "{{ not is_state('input_select.helpers_sunrise_sunset', 'above horizon') }}"
 
           sequence:
