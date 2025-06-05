@@ -1,0 +1,107 @@
+#  ███╗   ███╗ ██████╗ ████████╗██╗ ██████╗ ███╗   ██╗    ████████╗ ██████╗ ██╗██╗     ███████╗████████╗
+#  ████╗ ████║██╔═══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║    ╚══██╔══╝██╔═══██╗██║██║     ██╔════╝╚══██╔══╝
+#  ██╔████╔██║██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║       ██║   ██║   ██║██║██║     █████╗     ██║
+#  ██║╚██╔╝██║██║   ██║   ██║   ██║██║   ██║██║╚██╗██║       ██║   ██║   ██║██║██║     ██╔══╝     ██║
+#  ██║ ╚═╝ ██║╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║       ██║   ╚██████╔╝██║███████╗███████╗   ██║
+#  ╚═╝     ╚═╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝       ╚═╝    ╚═════╝ ╚═╝╚══════╝╚══════╝   ╚═╝
+###########################################################################################
+# CONTROL LIGHT TOILET WHEN GOODNIGHT SCENE IS ACTIVE
+###########################################################################################
+- id: "4d9b740a-db32-4529-a29f-b64731100645"
+  alias: "Motion Detection - Toilet on/off"
+  mode: restart
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.toilet_detection
+
+  conditions: []
+
+  actions:
+    ###########################################################################################
+    # GOODNIGHT SCENE IS OFF
+    ###########################################################################################
+    - if:
+        - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+        - "{{ is_state('switch.toilet_light_switch', 'off') }}"
+        - "{{ is_state('binary_sensor.toilet_detection', 'on') }}"
+
+      then:
+        - parallel:
+            - action: hue.activate_scene
+              target:
+                entity_id: scene.scenes_toilet_rainbow
+
+            - action: light.turn_on
+              target:
+                entity_id: light.toilet_neopixel
+              data:
+                xy_color: [0.28, 0.11] # Pink
+                brightness_pct: 100
+
+    - if:
+        - "{{ not is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+        - "{{ is_state('switch.toilet_light_switch', 'off') }}"
+        - "{{ is_state('binary_sensor.toilet_detection', 'off') }}"
+
+      then:
+        - parallel:
+            - action: light.turn_off
+              target:
+                entity_id: light.toilet_all
+
+            - action: light.turn_on
+              target:
+                entity_id: light.toilet_neopixel
+              data:
+                xy_color: >-
+                  {% if is_state('input_select.helpers_scenes', 'scene appletv') %} 
+                    [0.44,0.52]
+                  {% elif is_state('input_select.helpers_scenes', 'scene dinner') %} 
+                    [0.74,0.52]
+                  {% elif is_state('input_select.helpers_scenes', 'scene tv') %} 
+                    [0.14,0.19]
+                  {% elif is_state('input_select.helpers_scenes', 'scene nintendo') %} 
+                    [0.22,0.08]
+                  {% else %} 
+                    [0.70,0.30]
+                  {% endif %}
+
+    ###########################################################################################
+    # GOODNIGHT SCENE IS ON
+    ###########################################################################################
+    - if:
+        - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+        - "{{ is_state('switch.toilet_light_switch', 'off') }}"
+        - "{{ is_state('binary_sensor.toilet_detection', 'on') }}"
+
+      then:
+        - parallel:
+            - action: hue.activate_scene
+              data:
+                brightness: "{{ 75 if is_state('switch.momentary_scene_morning', 'on') else 30 }}"
+              target:
+                entity_id: scene.scenes_toilet_night_light
+
+            - action: light.turn_on
+              target:
+                entity_id: light.toilet_neopixel
+              data:
+                xy_color: [0.28, 0.11] # Pink
+
+    - if:
+        - "{{ is_state('input_select.helpers_scenes', 'scene goodnight') }}"
+        - "{{ is_state('switch.toilet_light_switch', 'off') }}"
+        - "{{ is_state('binary_sensor.toilet_detection', 'off') }}"
+
+      then:
+        - parallel:
+            - action: light.turn_off
+              target:
+                entity_id: light.toilet_all
+
+            - action: light.turn_on
+              target:
+                entity_id: light.toilet_neopixel
+              data:
+                xy_color: [0.70, 0.30] # Red
+                brightness_pct: 30
