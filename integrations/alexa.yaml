@@ -51,6 +51,10 @@ smart_home:
       - script.alexa_turn_off_harmony
       - script.alexa_turn_on_xbox
 
+      # Routines for Somfy Blinds
+      - script.alexa_somfy_down_up
+      - script.alexa_somfy_down_down
+
       # Routines for streaming apps
       - script.alexa_turn_on_netflix
       - script.alexa_turn_on_videoland
