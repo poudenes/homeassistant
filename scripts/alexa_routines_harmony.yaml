@@ -525,3 +525,22 @@ alexa_turn_on_pathe:
           - down
           - right
           - select
+
+###########################################################################################
+# ALEXA ROUTINE OPEN PATHE
+###########################################################################################
+alexa_somfy_down_up:
+  alias: "Routine Somfy Blinds"
+  icon: mdi:start
+  sequence:
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.helpers_somfy_blinds
+
+alexa_somfy_down_down:
+  alias: "Routine Somfy Blinds"
+  icon: mdi:start
+  sequence:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.helpers_somfy_blinds
