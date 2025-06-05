@@ -39,18 +39,18 @@ helpers_function_switches:
 ###########################################################################################
 # GROUP FOR NEW ESPHOME UPDATE
 ###########################################################################################
-helpers_esphome_updates:
-  name: "ESPhome updates"
-  entities:
-    - update.meek_toilet_block_internet_firmware
-    - update.meek_livingroom_block_internet_firmware
-    - update.meek_kitchen_block_internet_firmware
-    - update.meek_hallway_block_internet_firmware
-    - update.meek_dressoir_block_internet_firmware
-    - update.meek_doorbell_block_internet_firmware
-    - update.meek_diningtable_block_internet_firmware
-    - update.meek_bedroom_block_internet_firmware
-    - update.meek_bathroom_block_internet_firmware
+# helpers_esphome_updates:
+#   name: "ESPhome updates"
+#   entities:
+#     - update.meek_toilet_block_internet_firmware
+#     - update.meek_livingroom_block_internet_firmware
+#     - update.meek_kitchen_block_internet_firmware
+#     - update.meek_hallway_block_internet_firmware
+#     - update.meek_dressoir_block_internet_firmware
+#     - update.meek_doorbell_block_internet_firmware
+#     - update.meek_diningtable_block_internet_firmware
+#     - update.meek_bedroom_block_internet_firmware
+#     - update.meek_bathroom_block_internet_firmware
 
 ###########################################################################################
 # HELPERS_SCENE_SWITCHES: the one you not turn off will be reject by automation. Example:
