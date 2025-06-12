@@ -31,6 +31,26 @@ include:
     - scene
 
   entities:
+    - sensor.icloud3_peter_distance_adjustments
+    - sensor.icloud3_peter_distance_biking
+    - sensor.icloud3_peter_distance_driving
+    - sensor.icloud3_peter_distance_traveled
+    - sensor.icloud3_peter_distance_updates
+    - sensor.icloud3_peter_distance_walking
+    - sensor.icloud3_peter_gps_accuracy_2
+    - sensor.icloud3_peter_mode_of_transit
+    - sensor.icloud3_peter_speed
+    
+    - sensor.icloud3_kay_distance_adjustments
+    - sensor.icloud3_kay_distance_biking
+    - sensor.icloud3_kay_distance_driving
+    - sensor.icloud3_kay_distance_traveled
+    - sensor.icloud3_kay_distance_updates
+    - sensor.icloud3_kay_distance_walking
+    - sensor.icloud3_kay_gps_accuracy_2
+    - sensor.icloud3_kay_mode_of_transit
+    - sensor.icloud3_kay_speed
+
     - light.bedroom_neopixel
     # BambuLabs
     - binary_sensor.bambulab_a1_mini_firmware_update

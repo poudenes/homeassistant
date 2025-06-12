@@ -14,8 +14,8 @@
 
   triggers:
     - trigger: state
-      entity_id: sensor.roborock_water
-      to: "empty"
+      entity_id: binary_sensor.roborock_s8_water_shortage
+      to: "on"
   
   conditions: []
 

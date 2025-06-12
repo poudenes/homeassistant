@@ -8,6 +8,9 @@
 ---
 ###########################################################################################
 version: 1
+virtual:
+  yaml_config: True
+  
 switches:
 - name: "Momentary Peter Early Up"
   mode: "on"

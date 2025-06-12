@@ -30,16 +30,16 @@
 
 "button.":
   templates:
-    icon_color: if (state === 'on') return 'green'; return 'red';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
 
 "update.":
   templates:
     icon: mdi:radar
-    icon_color: if (state === 'on') return 'green'; return 'red';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
 
 "switch.*":
   templates:
-    icon_color: if (state === 'on') return 'green'; return 'red';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
 
 "device_tracker.*":
   templates:
@@ -48,7 +48,7 @@
 
 "input_boolean.*":
   templates:
-    icon_color: if (state === 'on') return 'green'; return 'red';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
 
 "binary_sensor.":
   templates:
@@ -93,7 +93,7 @@
 "switch.*_wall":
   templates:
     icon: mdi:power-socket-eu
-    icon_color: if (state === 'on') return 'green'; return 'red';
+    icon_color: if (state === 'on') return '#1E90FF'; return 'grey';
 
 "binary_sensor.*_detection":
   templates:
