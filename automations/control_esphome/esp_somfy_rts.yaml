@@ -50,10 +50,10 @@
           target:
             entity_id: cover.balcony
           data:
-            position: 100
+            position: 0
 
         - action: cover.set_cover_position
           target:
             entity_id: cover.livingroom
           data:
-            position: 100
+            position: 0
