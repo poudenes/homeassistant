@@ -14,6 +14,6 @@ ip_ban_enabled: true
 login_attempts_threshold: 5
 use_x_forwarded_for: true
 trusted_proxies:
-  - 172.30.32.0/24
-  - 10.8.0.0/24
-  - 192.168.100.62
+  - 192.168.100.62/32 # Synology NAS
+  # - 172.30.32.0/24
+  # - 10.8.0.0/24
