@@ -19,10 +19,11 @@ allowlist_external_dirs:
 auth_providers:
   - type: trusted_networks
     trusted_networks:
-      - 192.168.100.0/24
-      - 172.30.32.0/24
-      - 10.8.0.0/24
-      - 192.168.100.62
+      - 192.168.100.0/24 # Local network
+      - 192.168.100.62/32 # Synology IP
+      # - 10.8.0.0/24 # Asus VPN
+      # - 172.30.32.0/24 # Local docker network
+
     trusted_users:
       192.168.100.0/24:
         - 9863ce4921dc47dab852efee983e12c9
