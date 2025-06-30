@@ -32,7 +32,7 @@
       {% for state in states.binary_sensor %}
       {% if state.state == 'on'  and '_connection_status' in state.entity_id %}
       
-      {{ state.state }} - Meek {{ state.attributes.friendly_name[:-20] }}
+      {{ state.state }} - {{ state.attributes.friendly_name }}
       {% endif %}
       {% endfor %}
 
