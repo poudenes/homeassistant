@@ -66,6 +66,7 @@ peterlightmode:
   ha-card-box-shadow: 0px 0px 1px 1px rgba(50,50,50,0.5)
   paper-dialog-background-color: var(--card-background-color)
   paper-card-background-color: var(--card-background-color)
+  
   # Switches
   switch-checked-button-color: rgb(52, 199, 89)
   switch-checked-track-color: rgb(52, 199, 89)
