@@ -32,7 +32,7 @@
       else:
         - action: script.mobile_notify_no_actionable
           data:
-            title: "HA - Person"
+            title: "Person Arrive"
             message: >-
               {{ trigger.to_state.name }} Presence
               {{ trigger.to_state.name }} arrived home

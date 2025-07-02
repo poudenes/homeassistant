@@ -24,4 +24,4 @@ packages:
 
 light: !include include/light_two.yaml
 switch: !include include/switch_two.yaml
-binary_sensor: !include include/binary_sensor_two.yaml
+binary_sensor: !include include/binary_sensor_two.yaml 

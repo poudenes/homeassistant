@@ -40,7 +40,7 @@
 
           - action: persistent_notification.create
             data:
-              title: "HA - Notification"
+              title: "Notification"
               message: >
                 {% set entity = expand(repeat.item)[0] %}
                 The {{ entity.name.split(" battery level")[0] }} is at {{ entity.state }}%.

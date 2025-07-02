@@ -18,7 +18,7 @@
   actions:
     - action: persistent_notification.create
       data:
-        title: "HA - Alarm"
+        title: "Alarm"
         message: |
           Someone try to login:
           {{ state_attr('persistent_notification.http_login', 'message') }}

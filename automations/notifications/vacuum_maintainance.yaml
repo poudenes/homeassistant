@@ -28,7 +28,7 @@
         sequence:
           - condition: >-
               {% set entity = expand(repeat.item)[0] %}
-              {{ entity.state | int < 7200 }}
+              {{ entity.state | int < 1 }}
 
           - action: persistent_notification.create
             data:
