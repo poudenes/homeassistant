@@ -18,6 +18,7 @@
 # https://www.home-assistant.io/integrations/compensation/
 # https://www.home-assistant.io/integrations/snmp/
 ###########################################################################################
+#
 api:
 battery_notes:
 config:
