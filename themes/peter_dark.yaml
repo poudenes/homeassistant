@@ -1,5 +1,9 @@
 peterdarkmode:
 
+  # NEW ADDED 2025.7.0
+  # ha-tab-padding-start: 14px
+  # ha-tab-padding-end: 14px
+
   iron-overlay-backdrop-filter: "blur(10px) grayscale(50%)"
   iron-overlay-backdrop-background-color: "rgba(41,128,185,0.25)"
 
