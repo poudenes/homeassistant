@@ -6,6 +6,25 @@
 #  ╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
 ###########################################################################################
 ---
+
+# - platform: rest
+#   name: "iPhone Local Time"
+#   resource_template: "http://worldtimeapi.org/api/timezone/{{ state_attr('device_tracker.peter_iphone', 'latitude') }},{{ state_attr('device_tracker.peter_iphone', 'longitude') }}"
+#   method: GET
+#   value_template: "{{ value_json.datetime | as_datetime | as_local }}"
+#   json_attributes:
+#     - timezone
+#     - utc_offset
+#     - dst
+#     - dst_offset
+#     - day_of_week
+#     - day_of_year
+#     - week_number
+#   scan_interval: 3600  # Update every hour
+#   headers:
+#     User-Agent: "Home Assistant"
+#   timeout: 30
+
 # - platform: nederlandse_spoorwegen
 #   api_key: NS_API_KEY
 #   routes:
@@ -29,13 +48,13 @@
 ###########################################################################################
 # TooGoodToGo
 ###########################################################################################
-- platform: tgtg
-  scan_interval: 900
-  email: !secret tgtg_email
-  access_token: !secret tgtg_access_token
-  refresh_token: !secret tgtg_refresh_token
-  user_id: !secret tgtg_user_id
-  cookie: !secret tgtg_cookie
+# - platform: tgtg
+#   scan_interval: 900
+#   email: !secret tgtg_email
+#   access_token: !secret tgtg_access_token
+#   refresh_token: !secret tgtg_refresh_token
+#   user_id: !secret tgtg_user_id
+#   cookie: !secret tgtg_cookie
 
 ###########################################################################################
 # HAVE I BEEN PWNED

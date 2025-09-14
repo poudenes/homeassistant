@@ -32,7 +32,7 @@ mobile_notify_no_actionable:
               critical: "{{ 0 if critical is not defined else critical }}"
               volume: "{{ 0 if volume is not defined else volume }}"
           actions:
-            - action: "{{ 'none' if uri is not defined else uri }}"
+            - action: "{{ 'more-info' if uri is not defined else uri }}"
               title: "{{ 'none' if buttontitle is not defined else buttontitle }}" #"{{ buttontitle }}"
               uri: "{{ 'none' if url is not defined else url }}" #"{{ url }}"
 

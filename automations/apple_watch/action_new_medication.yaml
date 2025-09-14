@@ -11,7 +11,7 @@
   alias: "Notification - Take medication"
   triggers:
     - trigger: time
-      at: "20:20:00"
+      at: "14:20:00" # "20:20:00"
 
     # - trigger: template
     #   value_template: "{{ today_at(states('sensor.medication_take_time')) - timedelta(minutes = 420) }}"

@@ -60,24 +60,6 @@ alexa_receiver_down_vol:
 ###########################################################################################
 # ALEXA ROUTINE PAUSE PLAY STOP UNIVERSAL FOR ALL ACTIVITIES - TEST
 ###########################################################################################
-alexa_pause_harmony:
-  alias: "Routine Pause Harmony"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Pause
-        device: Apple TV
-
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Pause
-        device: T-mobile remote
-
 alexa_play_harmony:
   alias: "Routine Play Harmony"
   icon: mdi:script
@@ -94,6 +76,24 @@ alexa_play_harmony:
         entity_id: remote.logitech_harmony
       data:
         command: Play
+        device: T-mobile remote
+
+alexa_pause_harmony:
+  alias: "Routine Pause Harmony"
+  icon: mdi:script
+  sequence:
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Pause
+        device: Apple TV
+
+    - action: remote.send_command
+      target:
+        entity_id: remote.logitech_harmony
+      data:
+        command: Pause
         device: T-mobile remote
 
 alexa_stop_harmony:
@@ -127,38 +127,38 @@ alexa_turn_on_appletv:
       target:
         entity_id: select.logitech_harmony_activities
 
-alexa_turn_on_appletv_pause:
-  alias: "Routine AppleTV - Pause"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Pause
-        device: Apple TV
+# alexa_turn_on_appletv_pause:
+#   alias: "Routine AppleTV - Pause"
+#   icon: mdi:script
+#   sequence:
+#     - action: remote.send_command
+#       target:
+#         entity_id: remote.logitech_harmony
+#       data:
+#         command: Pause
+#         device: Apple TV
 
-alexa_turn_on_appletv_play:
-  alias: "Routine AppleTV - Play"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Play
-        device: Apple TV
+# alexa_turn_on_appletv_play:
+#   alias: "Routine AppleTV - Play"
+#   icon: mdi:script
+#   sequence:
+#     - action: remote.send_command
+#       target:
+#         entity_id: remote.logitech_harmony
+#       data:
+#         command: Play
+#         device: Apple TV
 
-alexa_turn_on_appletv_stop:
-  alias: "Routine AppleTV - Stop"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Back
-        device: Apple TV
+# alexa_turn_on_appletv_stop:
+#   alias: "Routine AppleTV - Stop"
+#   icon: mdi:script
+#   sequence:
+#     - action: remote.send_command
+#       target:
+#         entity_id: remote.logitech_harmony
+#       data:
+#         command: Back
+#         device: Apple TV
 
 ###########################################################################################
 # ALEXA ROUTINE TV
@@ -173,38 +173,38 @@ alexa_turn_on_tv:
       target:
         entity_id: select.logitech_harmony_activities
 
-alexa_turn_on_tv_pause:
-  alias: "Routine TV - Pause"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Pause
-        device: T-mobile remote
+# alexa_turn_on_tv_pause:
+#   alias: "Routine TV - Pause"
+#   icon: mdi:script
+#   sequence:
+#     - action: remote.send_command
+#       target:
+#         entity_id: remote.logitech_harmony
+#       data:
+#         command: Pause
+#         device: T-mobile remote
 
-alexa_turn_on_tv_play:
-  alias: "Routine TV - Play"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Play
-        device: T-mobile remote
+# alexa_turn_on_tv_play:
+#   alias: "Routine TV - Play"
+#   icon: mdi:script
+#   sequence:
+#     - action: remote.send_command
+#       target:
+#         entity_id: remote.logitech_harmony
+#       data:
+#         command: Play
+#         device: T-mobile remote
 
-alexa_turn_on_tv_stop:
-  alias: "Routine TV - Stop"
-  icon: mdi:script
-  sequence:
-    - action: remote.send_command
-      target:
-        entity_id: remote.logitech_harmony
-      data:
-        command: Stop
-        device: T-mobile remote
+# alexa_turn_on_tv_stop:
+#   alias: "Routine TV - Stop"
+#   icon: mdi:script
+#   sequence:
+#     - action: remote.send_command
+#       target:
+#         entity_id: remote.logitech_harmony
+#       data:
+#         command: Stop
+#         device: T-mobile remote
 
 ###########################################################################################
 # ALEXA ROUTINE OTHER ACTIVITIES

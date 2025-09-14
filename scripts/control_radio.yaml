@@ -22,7 +22,7 @@ stream_radio:
         entity:
           Bedroom: media_player.bedroom
           Livingroom: media_player.livingroom
-          Kitchen: media_player.galaxy_tab_a
+          Kitchen: media_player.samsung
 
     - action: media_player.play_media
       target:

@@ -23,7 +23,7 @@
 
     - action: number.set_value
       target:
-        entity_id: number.galaxy_tab_a_screen_brightness
+        entity_id: number.samsung_screen_brightness
       data:
         value: >-
           {% if is_state('group.family', 'off') %} 

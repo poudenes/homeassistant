@@ -31,6 +31,10 @@ include:
     - scene
 
   entities:
+    # Blinds
+    - cover.balcony
+    - cover.livingroom
+    
     - sensor.icloud3_peter_distance_adjustments
     - sensor.icloud3_peter_distance_biking
     - sensor.icloud3_peter_distance_driving

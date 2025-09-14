@@ -31,7 +31,7 @@
     esphome: >-
       {% for state in states.binary_sensor %}
       {% if state.state == 'on'  and '_connection_status' in state.entity_id %}
-      
+
       {{ state.state }} - {{ state.attributes.friendly_name }}
       {% endif %}
       {% endfor %}
@@ -39,7 +39,7 @@
   actions:
     - action: button.press
       target:
-        entity_id: button.galaxy_tab_a_load_start_url
+        entity_id: button.samsung_load_start_url
 
     - action: automation.turn_on
       entity_id: automation.control_light_lux_control
@@ -51,7 +51,7 @@
     - action: button.press
       data: {}
       target:
-        entity_id: button.galaxy_tab_a_load_start_url
+        entity_id: button.samsung_load_start_url
 
     - action: script.mobile_notify_no_actionable
       data:

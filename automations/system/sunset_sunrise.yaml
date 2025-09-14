@@ -41,7 +41,8 @@
 
                 - action: frontend.set_theme
                   data:
-                    name: "peterdarkmode"
+                    name: "Frosted Glass Dark"
+                    mode: light
 
         - conditions:
             - "{{ is_state('sun.sun', 'above_horizon') }}"
@@ -57,4 +58,5 @@
 
                 - action: frontend.set_theme
                   data:
-                    name: "peterlightmode"
+                    name: "Frosted Glass"
+                    mode: light
