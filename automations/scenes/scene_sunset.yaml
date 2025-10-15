@@ -35,3 +35,19 @@
           data:
             brightness_pct: 30
             effect: "{{ 'Christmas' if is_state('sensor.holidays', 'Christmas') else '20MinSunset' }}"
+
+        - action: light.turn_on
+          target:
+            entity_id: "{{ 'light.wall_all' if is_state('media_player.woonkamer', 'playing') else 'light.livingroom_all' }}"
+          data:
+            brightness_pct: 1
+            kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+
+        - delay: "00:00:01"
+
+        - action: light.turn_on
+          target:
+            entity_id: light.livingroom_all
+          data:
+            brightness_pct: 100
+            transition: 1300

@@ -121,7 +121,7 @@
 
   {########################################################################}
   {%- macro outside_weather() -%}
-    "Outside, it is "{{ (states('sensor.accu_weather_realfeel_temperature')) | int }}" degrees. The forcast for today is "{{ (states('sensor.accu_weather_condition_day_0d')) }}" and tomorrow it will be "{{ (states('sensor.accu_weather_condition_day_1d')) }}"."
+    "Outside, it is "{{ (states('sensor.temperature')) | int }}" degrees. The forcast for today is "{{ (states('sensor.condition')) }}" and tomorrow it will be "{{ (states('sensor.condition_1d')) }}"."
   {%- endmacro -%}
 
   {########################################################################}

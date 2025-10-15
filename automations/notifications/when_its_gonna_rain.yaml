@@ -11,7 +11,7 @@
   alias: "Notification - It will gonna rain"
   triggers:
     - trigger: state
-      entity_id: weather.asingaborg
+      entity_id: weather.buienradar 
       to: "rainy"
 
   conditions:

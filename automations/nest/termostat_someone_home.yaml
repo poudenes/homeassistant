@@ -18,7 +18,7 @@
     - "{{ is_state('input_boolean.function_dnc', 'off') }}"
 
   variables:
-    outside: "{{ states('sensor.accu_weather_apparent_temperature')|int(12) }}"
+    outside: "{{ states('sensor.temperature')|int(12) }}"
     inside: "{{ states('sensor.climate_inside_temperature')|int(16) }}"
 
   actions:

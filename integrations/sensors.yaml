@@ -180,7 +180,7 @@
   name: "Mold indicator"
   indoor_temp_sensor: sensor.bathroom_temperature
   indoor_humidity_sensor: sensor.bathroom_humidity
-  outdoor_temp_sensor: sensor.accu_weather_realfeel_temperature
+  outdoor_temp_sensor: sensor.temperature
   calibration_factor: 1.10
 
 ###########################################################################################
