@@ -1,0 +1,37 @@
+#    ██████╗ ██████╗ ██╗   ██╗███████╗██████╗      ██████╗██╗   ██╗ ██████╗██╗     ███████╗
+#    ██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ██╔════╝╚██╗ ██╔╝██╔════╝██║     ██╔════╝
+#    ██║  ██║██████╔╝ ╚████╔╝ █████╗  ██████╔╝    ██║      ╚████╔╝ ██║     ██║     █████╗  
+#    ██║  ██║██╔══██╗  ╚██╔╝  ██╔══╝  ██╔══██╗    ██║       ╚██╔╝  ██║     ██║     ██╔══╝  
+#    ██████╔╝██║  ██║   ██║   ███████╗██║  ██║    ╚██████╗   ██║   ╚██████╗███████╗███████╗
+#    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝     ╚═════╝   ╚═╝    ╚═════╝╚══════╝╚══════╝
+###########################################################################################
+# START DRYER CYCLE WHEN SWITCH IS ON AT 12:00 PM
+###########################################################################################
+- id: "919cf06d-9053-4ed4-81bf-c5d75c05f52f"
+  alias: "System - Dryer cycle"
+  triggers:
+    - trigger: time
+      at: "12:01:00"
+
+  conditions: []
+
+  actions:
+    - if:
+        - "{{ is_state('input_boolean.helpers_run_dryer_machine_program', 'on') }}"
+      then:
+        - action: select.select_option
+          target:
+            entity_id: select.droger
+          data:
+            option: run
+
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "SmartThings - dryer cycle"
+            message: >-
+              The dryer cycle has been started
+            thread_id: "ha_smartthings"
+
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.helpers_run_dryer_machine_program

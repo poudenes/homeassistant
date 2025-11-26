@@ -16,6 +16,12 @@ helpers_motion_test:
 ###########################################################################################
 # HELPERS
 ###########################################################################################
+helpers_run_washer_machine_program:
+  name: "Enable washer program"
+
+helpers_run_dryer_machine_program:
+  name: "Enable dryer program"
+
 helpers_somfy_blinds:
   name: "Somfy Blinds"
 
