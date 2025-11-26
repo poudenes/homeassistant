@@ -1,0 +1,47 @@
+esphome:
+  name: fancontrol
+  platform: ESP8266
+  board: d1_mini_lite
+  libraries:
+    - SPI
+    - Ticker
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/CoMPaTech/esphome_ct
+    # refresh: 3600s # only set this briefly otherwise it just refreshes daily, see https://esphome.io/components/external_components#external-components-refresh for setting refresh too low
+
+fan:
+  - platform: "cc1101"
+    speed_count: 3
+    name: "Mechanical Fan"
+    data_pin: D1
+    map_off_to_zero: True
+    id: mech_fan
+
+button:
+  - platform: template
+    name: "Send join command"
+    on_press:
+      then:
+        - lambda: |-
+            ((cc1101fan::CC1101Fan*)(&id(mech_fan)))->send_other_command(0);
+  - platform: template
+    name: "Run Timer for 10 Minutes"
+    on_press:
+      then:
+        - lambda: |-
+            ((cc1101fan::CC1101Fan*)(&id(mech_fan)))->send_other_command(1);
+  - platform: template
+    name: "Run Timer for 20 Minutes"
+    on_press:
+      then:
+        - lambda: |-
+            ((cc1101fan::CC1101Fan*)(&id(mech_fan)))->send_other_command(2);
+  - platform: template
+    name: "Run Timer for 30 Minutes"
+    on_press:
+      then:
+        - lambda: |-
+            ((cc1101fan::CC1101Fan*)(&id(mech_fan)))->send_other_command(3);

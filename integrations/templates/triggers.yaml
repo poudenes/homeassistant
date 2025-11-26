@@ -33,25 +33,28 @@
       id: "custom_event"
       event_data:
         sender: !secret imap_sender_2
+        initial: true
   sensor:
     - name: "Imap import DW NS" 
       state: >-
-        {% if 'DiSys' in trigger.event.data["subject"] %}
+        {% if 'Persoonlijke' in trigger.event.data["subject"] %}
           Nieuwe DW
+        {% else %}
+          Geen nieuwe DW
         {% endif %}
       attributes:
         Message: "{{ trigger.event.data['text'] }}"
         Date: "{{ trigger.event.data['date'] }}"
-#        Server: "{{ trigger.event.data['server'] }}"
-#        Username: "{{ trigger.event.data['username'] }}"
-#        Search: "{{ trigger.event.data['search'] }}"
-#        Folder: "{{ trigger.event.data['folder'] }}"
-#        Sender: "{{ trigger.event.data['sender'] }}"
-#        Subject: "{{ trigger.event.data['subject'] }}"
-#        To: "{{ trigger.event.data['headers'].get('Delivered-To', ['n/a'])[0] }}"
-#        Return-Path: "{{ trigger.event.data['headers'].get('Return-Path',['n/a'])[0] }}"
-#        Received-first: "{{ trigger.event.data['headers'].get('Received',['n/a'])[0] }}"
-#        Received-last: "{{ trigger.event.data['headers'].get('Received',['n/a'])[-1] }}"
+        Server: "{{ trigger.event.data['server'] }}"
+        Username: "{{ trigger.event.data['username'] }}"
+        Search: "{{ trigger.event.data['search'] }}"
+        Folder: "{{ trigger.event.data['folder'] }}"
+        Sender: "{{ trigger.event.data['sender'] }}"
+        Subject: "{{ trigger.event.data['subject'] }}"
+        To: "{{ trigger.event.data['headers'].get('Delivered-To', ['n/a'])[0] }}"
+        Return-Path: "{{ trigger.event.data['headers'].get('Return-Path',['n/a'])[0] }}"
+        Received-first: "{{ trigger.event.data['headers'].get('Received',['n/a'])[0] }}"
+        Received-last: "{{ trigger.event.data['headers'].get('Received',['n/a'])[-1] }}"
 
 - trigger:
     - trigger: event

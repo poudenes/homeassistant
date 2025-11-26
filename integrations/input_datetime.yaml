@@ -9,6 +9,16 @@
 # INPUT_DATETIME
 # https://www.home-assistant.io/integrations/input_datetime/
 ###########################################################################################
+helpers_dryer_machine_start:
+  name: "Dishwasher machine start time"
+  has_date: false
+  has_time: true
+
+helpers_washer_machine_start:
+  name: "Washer machine start time"
+  has_date: false
+  has_time: true
+
 helpers_dishwasher_machine_off:
   name: "Dishwasher machine last done"
   has_date: true

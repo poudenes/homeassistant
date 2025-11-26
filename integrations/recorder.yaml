@@ -35,26 +35,6 @@ include:
     - cover.balcony
     - cover.livingroom
     
-    - sensor.icloud3_peter_distance_adjustments
-    - sensor.icloud3_peter_distance_biking
-    - sensor.icloud3_peter_distance_driving
-    - sensor.icloud3_peter_distance_traveled
-    - sensor.icloud3_peter_distance_updates
-    - sensor.icloud3_peter_distance_walking
-    - sensor.icloud3_peter_gps_accuracy_2
-    - sensor.icloud3_peter_mode_of_transit
-    - sensor.icloud3_peter_speed
-    
-    - sensor.icloud3_kay_distance_adjustments
-    - sensor.icloud3_kay_distance_biking
-    - sensor.icloud3_kay_distance_driving
-    - sensor.icloud3_kay_distance_traveled
-    - sensor.icloud3_kay_distance_updates
-    - sensor.icloud3_kay_distance_walking
-    - sensor.icloud3_kay_gps_accuracy_2
-    - sensor.icloud3_kay_mode_of_transit
-    - sensor.icloud3_kay_speed
-
     - light.bedroom_neopixel
     # BambuLabs
     - binary_sensor.bambulab_a1_mini_firmware_update
@@ -122,26 +102,12 @@ include:
 
     - sensor.cryptoinfo_avax_usd
 
-    # EURO95 Integration
-    # - sensor.gas_station_euro95_home_lowest_price_1
-    # - sensor.gas_station_euro95_home_lowest_price_2
-    # - sensor.gas_station_euro95_home_lowest_price_3
-    # - sensor.gas_station_euro95_home_lowest_price_4
-    # - sensor.gas_station_euro95_home_lowest_price_5
-    # - sensor.gas_station_euro95_work_lowest_price_1
-    # - sensor.gas_station_euro95_work_lowest_price_2
-    # - sensor.gas_station_euro95_work_lowest_price_3
-    # - sensor.gas_station_euro95_work_lowest_price_4
-    # - sensor.gas_station_euro95_work_lowest_price_5
-
     # Precense sensors and tools
     - binary_sensor.group_family_manual
     - input_boolean.helpers_kay_home_homekit
     - input_boolean.helpers_peter_home_homekit
-    - device_tracker.icloud3_kay
-    - device_tracker.icloud3_peter
-    # - sensor.cenkay_iphone_gps_accuracy
-    # - sensor.peter_iphone_gps_accuracy
+    - device_tracker.icloud_kay
+    - device_tracker.icloud_peter
 
     # Other
     - calendar.work
@@ -150,10 +116,8 @@ include:
     - sensor.birthdays
     - sensor.holidays
     - sensor.adaptive_lighting_color_temperature
-    # - sensor.hacs
     - sensor.nextsunrise
     - sensor.nextsunset
-    # - sensor.processor_use
     - sensor.season
     - sensor.toyota_ago_apk_expiration
     - sensor.toyota_ago_ascription_date
@@ -168,7 +132,6 @@ include:
     - switch.momentary_for_testing
     - switch.momentary_guests
     - switch.momentary_peter_early_up
-    # - switch.newkaku_014e5906_a
 
     # Roborock Vacuum
     - sensor.roborock_s8_current_room
