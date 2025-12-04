@@ -1,38 +1,38 @@
-#  ███████╗ █████╗ ███╗   ██╗
-#  ██╔════╝██╔══██╗████╗  ██║
-#  █████╗  ███████║██╔██╗ ██║
-#  ██╔══╝  ██╔══██║██║╚██╗██║
-#  ██║     ██║  ██║██║ ╚████║
-#  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝
-###########################################################################################
----
-###########################################################################################
-# https://www.home-assistant.io/integrations/fan.template/
-###########################################################################################
-- platform: template
-  fans:
-    mechanical_ventilation:
-      friendly_name: "Mechanische afzuiging"
+# #  ███████╗ █████╗ ███╗   ██╗
+# #  ██╔════╝██╔══██╗████╗  ██║
+# #  █████╗  ███████║██╔██╗ ██║
+# #  ██╔══╝  ██╔══██║██║╚██╗██║
+# #  ██║     ██║  ██║██║ ╚████║
+# #  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝
+# ###########################################################################################
+# ---
+# ###########################################################################################
+# # https://www.home-assistant.io/integrations/fan.template/
+# ###########################################################################################
+# - platform: template
+#   fans:
+#     mechanical_ventilation:
+#       friendly_name: "Mechanische afzuiging"
 
-      value_template: >
-        {{ "off" if states('sensor.fan_speed') == 'off' else "on" }}
+#       value_template: >
+#         {{ "off" if states('sensor.fan_speed') == 'off' else "on" }}
 
-      percentage_template: >
-        {% set speed = {'off': 0, 'low': 33, 'medium': 66, 'high': 100} %}
-        {{ speed.get(states('sensor.fan_speed'), 0) }}
+#       percentage_template: >
+#         {% set speed = {'off': 0, 'low': 33, 'medium': 66, 'high': 100} %}
+#         {{ speed.get(states('sensor.fan_speed'), 0) }}
 
-      turn_on:
-        action: switch.turn_on
-        data:
-          entity_id: switch.fan_high
-      turn_off:
-        action: switch.turn_on
-        data:
-          entity_id: switch.fan_standby
-      set_percentage:
-        action: switch.turn_on
-        data_template:
-          entity_id: >
-            {% set id_mapp = {0: 'switch.fan_standby', 33:'switch.fan_low', 66:'switch.fan_medium', 100:'switch.fan_high'} %}
-            {{id_mapp[percentage]}}
-      speed_count: 2
+#       turn_on:
+#         action: switch.turn_on
+#         data:
+#           entity_id: switch.fan_high
+#       turn_off:
+#         action: switch.turn_on
+#         data:
+#           entity_id: switch.fan_standby
+#       set_percentage:
+#         action: switch.turn_on
+#         data_template:
+#           entity_id: >
+#             {% set id_mapp = {0: 'switch.fan_standby', 33:'switch.fan_low', 66:'switch.fan_medium', 100:'switch.fan_high'} %}
+#             {{id_mapp[percentage]}}
+#       speed_count: 2

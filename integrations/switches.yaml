@@ -42,151 +42,151 @@
     - switch.bedroom_wall
     - switch.xmas_1_wall
 
-###########################################################################################
+# ##########################################################################################
 # LOGITECH HARMONY
 # https://www.home-assistant.io/integrations/switch.template/
-###########################################################################################
-- platform: template
-  switches:
-    helpers_puredirectdts:
-      friendly_name: "DTS Pure Direct"
-      unique_id: "61dd7a8b-8c11-4c76-9470-f3985f944826"
-      #value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
-      turn_on:
-        action: remote.send_command
-        target:
-          entity_id: remote.logitech_harmony
-        data:
-          command: "PureDirectOn"
-          device: 41633063
-      turn_off:
-        action: remote.send_command
-        target:
-          entity_id: remote.logitech_harmony
-        data:
-          command: "PureDirectOff"
-          device: 41633063
+# ##########################################################################################
+# - platform: template
+#   switches:
+#     helpers_puredirectdts:
+#       friendly_name: "DTS Pure Direct"
+#       unique_id: "61dd7a8b-8c11-4c76-9470-f3985f944826"
+#       #value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
+#       turn_on:
+#         action: remote.send_command
+#         target:
+#           entity_id: remote.logitech_harmony
+#         data:
+#           command: "PureDirectOn"
+#           device: 41633063
+#       turn_off:
+#         action: remote.send_command
+#         target:
+#           entity_id: remote.logitech_harmony
+#         data:
+#           command: "PureDirectOff"
+#           device: 41633063
 
-    ###########################################################################################
-    # TEMPLATE SCENES FOR ALEXA TO CONTROL SCENES INPUT_SELECT.HELPERS_SCENES
-    ###########################################################################################
-    helpers_appletv:
-      friendly_name: "Scene AppleTV"
-      unique_id: "2bcdc44b-8d10-4933-b94b-6de61adb63dc"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene appletv"
-      turn_off:
-        action: script.none
+#     ###########################################################################################
+#     # TEMPLATE SCENES FOR ALEXA TO CONTROL SCENES INPUT_SELECT.HELPERS_SCENES
+#     ###########################################################################################
+#     helpers_appletv:
+#       friendly_name: "Scene AppleTV"
+#       unique_id: "2bcdc44b-8d10-4933-b94b-6de61adb63dc"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene appletv"
+#       turn_off:
+#         action: script.none
 
-    helpers_chromecast:
-      friendly_name: "Scene Chromecast"
-      unique_id: "562b18c0-1dc2-498c-922a-e4e1eac50912"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene chromecast')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene chromecast"
-      turn_off:
-        action: script.none
+#     helpers_chromecast:
+#       friendly_name: "Scene Chromecast"
+#       unique_id: "562b18c0-1dc2-498c-922a-e4e1eac50912"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene chromecast')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene chromecast"
+#       turn_off:
+#         action: script.none
 
-    helpers_daytime:
-      friendly_name: "Scene Daytime"
-      unique_id: "4c60b38d-a9ea-46cf-b4ec-9818f1d54552"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene daytime')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene daytime"
-      turn_off:
-        action: script.none
+#     helpers_daytime:
+#       friendly_name: "Scene Daytime"
+#       unique_id: "4c60b38d-a9ea-46cf-b4ec-9818f1d54552"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene daytime')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene daytime"
+#       turn_off:
+#         action: script.none
 
-    helpers_dinner:
-      friendly_name: "Scene Dinner"
-      unique_id: "1d18381a-4392-4494-9dff-eb23fb385b81"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene dinner')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene dinner"
-      turn_off:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "None"
+#     helpers_dinner:
+#       friendly_name: "Scene Dinner"
+#       unique_id: "1d18381a-4392-4494-9dff-eb23fb385b81"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene dinner')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene dinner"
+#       turn_off:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "None"
 
-    helpers_evening:
-      friendly_name: "Scene Evening"
-      unique_id: "760c0565-0b5f-4587-a28a-b3e50706a18d"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene evening')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene evening"
-      turn_off:
-        action: script.none
+#     helpers_evening:
+#       friendly_name: "Scene Evening"
+#       unique_id: "760c0565-0b5f-4587-a28a-b3e50706a18d"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene evening')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene evening"
+#       turn_off:
+#         action: script.none
 
-    helpers_goodnight:
-      friendly_name: "Scene Goodnight"
-      unique_id: "9eed7e61-62be-4946-8555-3f1de05bca09"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene goodnight')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene goodnight"
-      turn_off:
-        action: script.none
+#     helpers_goodnight:
+#       friendly_name: "Scene Goodnight"
+#       unique_id: "9eed7e61-62be-4946-8555-3f1de05bca09"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene goodnight')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene goodnight"
+#       turn_off:
+#         action: script.none
 
-    helpers_nintendo:
-      friendly_name: "Scene Nintendo"
-      unique_id: "82b8a3a1-4448-4d2f-b279-68fc75038ab7"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene nintendo')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene nintendo"
-      turn_off:
-        action: script.none
+#     helpers_nintendo:
+#       friendly_name: "Scene Nintendo"
+#       unique_id: "82b8a3a1-4448-4d2f-b279-68fc75038ab7"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene nintendo')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene nintendo"
+#       turn_off:
+#         action: script.none
 
-    helpers_tv:
-      friendly_name: "Scene TV"
-      unique_id: "2a738e92-bf64-46a2-9919-bc8303e6d027"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene tv')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene tv"
-      turn_off:
-        action: script.none
+#     helpers_tv:
+#       friendly_name: "Scene TV"
+#       unique_id: "2a738e92-bf64-46a2-9919-bc8303e6d027"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene tv')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene tv"
+#       turn_off:
+#         action: script.none
 
-    helpers_xbox:
-      friendly_name: "Scene Xbox"
-      unique_id: "c3bb279c-7f71-4184-adb5-a3ca9a7a4f32"
-      value_template: "{{ is_state('input_select.helpers_scenes', 'scene xbox')}}"
-      turn_on:
-        action: input_select.select_option
-        target:
-          entity_id: input_select.helpers_scenes
-        data:
-          option: "scene xbox"
-      turn_off:
-        action: script.none
+#     helpers_xbox:
+#       friendly_name: "Scene Xbox"
+#       unique_id: "c3bb279c-7f71-4184-adb5-a3ca9a7a4f32"
+#       value_template: "{{ is_state('input_select.helpers_scenes', 'scene xbox')}}"
+#       turn_on:
+#         action: input_select.select_option
+#         target:
+#           entity_id: input_select.helpers_scenes
+#         data:
+#           option: "scene xbox"
+#       turn_off:
+#         action: script.none
