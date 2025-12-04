@@ -12,7 +12,7 @@
   triggers:
     - trigger: calendar
       event: start
-      entity_id: calendar.work
+      entity_id: calendar.ns_dw
       offset: "-1:0:0"
 
   conditions: []
@@ -41,7 +41,7 @@
   triggers:
     - trigger: calendar
       event: end
-      entity_id: calendar.work
+      entity_id: calendar.ns_dw
       offset: "-0:15:0"
 
   conditions: []

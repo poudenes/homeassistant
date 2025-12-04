@@ -12,14 +12,14 @@
   mode: restart
   triggers:
     - trigger: state
-      entity_id: media_player.woonkamer
+      entity_id: media_player.woonkamer_4k
       to:
         - "playing"
       for: "00:00:05"
       id: appletv_playing
 
     - trigger: state
-      entity_id: media_player.woonkamer
+      entity_id: media_player.woonkamer_4k
       to:
         - "paused"
         - "standby"
@@ -42,7 +42,7 @@
         # When Apple TV is playing
         ###########################################################################################
         - conditions:
-            - "{{ trigger.id == 'appletv_playing' or is_state('media_player.woonkamer', 'playing') }}"
+            - "{{ trigger.id == 'appletv_playing' or is_state('media_player.woonkamer_4k', 'playing') }}"
             - "{{ is_state('input_select.helpers_scenes', 'scene appletv') }}"
 
           sequence:
@@ -53,7 +53,7 @@
                 intensity: intense #high
                 mode: video
                 input: input1
-                entertainment_area: "{{ 'TV room' if is_state('input_boolean.function_tvonly', 'off') and state_attr('media_player.woonkamer', 'app_id') not in ['com.apple.TVMusic', 'com.apple.TVAirPlay'] else 'TV only' }}"
+                entertainment_area: "{{ 'TV room' if is_state('input_boolean.function_tvonly', 'off') and state_attr('media_player.woonkamer_4k', 'app_id') not in ['com.apple.TVMusic', 'com.apple.TVAirPlay'] else 'TV only' }}"
               target:
                 device_id: ca734212663336331243ffd0104937dc
 
@@ -102,7 +102,7 @@
         # When Apple TV is paused
         ###########################################################################################
         - conditions:
-            - "{{ trigger.id == 'appletv_paused' or states('media_player.woonkamer') in ['paused', 'standby', 'idle'] }}"
+            - "{{ trigger.id == 'appletv_paused' or states('media_player.woonkamer_4k') in ['paused', 'standby', 'idle'] }}"
             - "{{ is_state('input_select.helpers_scenes', 'scene appletv') }}"
 
           sequence:

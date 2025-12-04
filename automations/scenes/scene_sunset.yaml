@@ -38,7 +38,7 @@
 
         - action: light.turn_on
           target:
-            entity_id: "{{ 'light.wall_all' if is_state('media_player.woonkamer', 'playing') else 'light.livingroom_all' }}"
+            entity_id: "{{ 'light.wall_all' if is_state('media_player.woonkamer_4k', 'playing') else 'light.livingroom_all' }}"
           data:
             brightness_pct: 1
             kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"

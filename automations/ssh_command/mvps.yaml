@@ -24,7 +24,6 @@
         - switch.momentary_mvps_apt_update
         - switch.momentary_mvps_umount_nas
 
-
   conditions:
     - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
     - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"

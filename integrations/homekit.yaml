@@ -13,6 +13,20 @@
 ###########################################################################################
 
 ###########################################################################################
+# ALARM SYSTEM
+###########################################################################################
+#- port: 21112
+#  name: "Alarm System"
+#  mode: bridge
+#  filter:
+#    include_domains:
+#      - alarm_control_panel
+
+#  entity_config:
+#    alarm_control_panel.house:
+#      code: !secret alarm_code
+
+###########################################################################################
 # NEST PRODUCTS
 ###########################################################################################
 - port: 21105
@@ -20,7 +34,7 @@
   mode: bridge
   filter:
     include_entities:
-      - climate.entryway
+      # - climate.entryway
       - binary_sensor.nest_protect_3_smoke_status
       - binary_sensor.nest_protect_3_co_status
       - binary_sensor.nest_protect_3_heat_status
@@ -273,7 +287,7 @@
     include_entities:
       - media_player.livingroom
       - media_player.bedroom
-      - media_player.woonkamer
+      - media_player.woonkamer_4k
 
 ###########################################################################################
 # OTHER
@@ -307,16 +321,3 @@
   entity_config:
     fan.mechanical_ventilation:
       name: "Fan"
-###########################################################################################
-# ALARM SYSTEM
-###########################################################################################
-#- port: 21112
-#  name: "Alarm System"
-#  mode: bridge
-#  filter:
-#    include_domains:
-#      - alarm_control_panel
-
-#  entity_config:
-#    alarm_control_panel.house:
-#      code: !secret alarm_code

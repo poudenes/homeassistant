@@ -5,10 +5,10 @@
 #  ██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ██║  ██║╚██████╔╝╚██████╔╝   ██║   ██║██║ ╚████║███████╗███████║
 #  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
 ###########################################################################################
-# ALEXA ROUTINE ROBOROCK
+# ALEXA HA Routine ROBOROCK
 ###########################################################################################
 alexa_clean_all:
-  alias: "Routine Clean all"
+  alias: "HA Routine Clean all"
   icon: mdi:script
   sequence:
     - action: vacuum.start
@@ -16,7 +16,7 @@ alexa_clean_all:
         entity_id: vacuum.roborock_s8
 
 alexa_return_base:
-  alias: "Routine Return to base"
+  alias: "HA Routine Return to base"
   icon: mdi:script
   sequence:
     - action: vacuum.return_to_base
@@ -24,7 +24,7 @@ alexa_return_base:
         entity_id: vacuum.roborock_s8
 
 alexa_clean_kithcen: # SEGMENT 16 - Kitchen
-  alias: "Routine Clean kitchen"
+  alias: "HA Routine Clean kitchen"
   icon: mdi:script
   sequence:
     - action: vacuum.set_fan_speed
@@ -52,7 +52,7 @@ alexa_clean_kithcen: # SEGMENT 16 - Kitchen
         fan_speed: max
 
 alexa_clean_hallway: # SEGMENT 22 - Hallway
-  alias: "Routine Clean hallway"
+  alias: "HA Routine Clean hallway"
   icon: mdi:script
   sequence:
     - action: vacuum.set_fan_speed
@@ -72,7 +72,7 @@ alexa_clean_hallway: # SEGMENT 22 - Hallway
         entity_id: vacuum.roborock_s8
 
 alexa_clean_bedroom: # SEGMENT 21 - Bedroom
-  alias: "Routine Clean bedroom"
+  alias: "HA Routine Clean bedroom"
   icon: mdi:script
 
   sequence:
@@ -93,7 +93,7 @@ alexa_clean_bedroom: # SEGMENT 21 - Bedroom
         entity_id: vacuum.roborock_s8
 
 alexa_clean_diningroom: # SEGMENT 20 - Diningroom
-  alias: "Routine Clean diningroom"
+  alias: "HA Routine Clean diningroom"
   icon: mdi:script
 
   sequence:
@@ -114,7 +114,7 @@ alexa_clean_diningroom: # SEGMENT 20 - Diningroom
         entity_id: vacuum.roborock_s8
 
 alexa_clean_livingroom: # SEGMENT 19 - Livingroom
-  alias: "Routine Clean livingroom"
+  alias: "HA Routine Clean livingroom"
   icon: mdi:script
   sequence:
     - action: vacuum.set_fan_speed
@@ -134,7 +134,7 @@ alexa_clean_livingroom: # SEGMENT 19 - Livingroom
         entity_id: vacuum.roborock_s8
 
 alexa_clean_toilet: # SEGMENT 17 - Toilet
-  alias: "Routine Clean toilet"
+  alias: "HA Routine Clean toilet"
   icon: mdi:script
   sequence:
     - action: vacuum.set_fan_speed

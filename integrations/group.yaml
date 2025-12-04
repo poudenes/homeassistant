@@ -11,32 +11,6 @@
 ###########################################################################################
 
 ###########################################################################################
-# GROUP
-# https://www.home-assistant.io/integrations/group/
-###########################################################################################
-arriving: #ARRIVING - CANT BE A HELPER IN HA (GROUP DOES NOT SUPPORT INPUT_BOOLEAN YET)
-  name: "Arriving"
-  entities: []
-
-family: # FAMILY GROUP - CANT BE A HELPER IN HA (GROUP DOES NOT SUPPORT INPUT_BOOLEAN YET)
-  name: "Group family"
-  entities:
-    - input_boolean.helpers_kay_home_homekit
-    - input_boolean.helpers_peter_home_homekit
-
-###########################################################################################
-# FUNCTIONS
-###########################################################################################
-helpers_function_switches:
-  name: "Helpers all functions"
-  entities:
-    - input_boolean.function_disco
-    - input_boolean.function_lux_low
-    - input_boolean.function_romantic
-    - input_boolean.function_sleeping
-    - input_boolean.function_wakeup
-
-###########################################################################################
 # GROUP FOR NEW ESPHOME UPDATE
 ###########################################################################################
 # helpers_esphome_updates:
@@ -61,3 +35,29 @@ helpers_function_switches:
 #       {{ state_attr('group.helpers_scene_switches', 'entity_id')
 #         | reject('in', ['input_boolean.scene_appletv']) | list }}
 ###########################################################################################
+
+###########################################################################################
+# GROUP
+# https://www.home-assistant.io/integrations/group/
+###########################################################################################
+arriving: #ARRIVING - CANT BE A HELPER IN HA (GROUP DOES NOT SUPPORT INPUT_BOOLEAN YET)
+  name: "Arriving"
+  entities: []
+
+family: # FAMILY GROUP - CANT BE A HELPER IN HA (GROUP DOES NOT SUPPORT INPUT_BOOLEAN YET)
+  name: "Group family"
+  entities:
+    - input_boolean.helpers_kay_home_homekit
+    - input_boolean.helpers_peter_home_homekit
+
+###########################################################################################
+# FUNCTIONS
+###########################################################################################
+helpers_function_switches:
+  name: "Helpers all functions"
+  entities:
+    - input_boolean.function_disco
+    - input_boolean.function_lux_low
+    - input_boolean.function_romantic
+    - input_boolean.function_sleeping
+    - input_boolean.function_wakeup

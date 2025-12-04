@@ -6,45 +6,6 @@
 #  ╚══════╝╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
 ###########################################################################################
 ---
-
-# - platform: rest
-#   name: "iPhone Local Time"
-#   resource_template: "http://worldtimeapi.org/api/timezone/{{ state_attr('device_tracker.peter_iphone', 'latitude') }},{{ state_attr('device_tracker.peter_iphone', 'longitude') }}"
-#   method: GET
-#   value_template: "{{ value_json.datetime | as_datetime | as_local }}"
-#   json_attributes:
-#     - timezone
-#     - utc_offset
-#     - dst
-#     - dst_offset
-#     - day_of_week
-#     - day_of_year
-#     - week_number
-#   scan_interval: 3600  # Update every hour
-#   headers:
-#     User-Agent: "Home Assistant"
-#   timeout: 30
-
-# - platform: nederlandse_spoorwegen
-#   api_key: NS_API_KEY
-#   routes:
-#     - name: "ASDZ-UT-0756"
-#       from: Asdz
-#       to: Ut
-#       time: "07:56:00"
-#     - name: "UT-ASDZ-1552"
-#       from: ut
-#       to: Asdz
-#       time: "15:52:00"
-#     - name: "ASDZ-AMF-0815"
-#       from: Asdz
-#       to: Amf
-#       time: "08:15:00"
-#     - name: "AMF-ASDZ-1611"
-#       from: Amf
-#       to: Asdz
-#       time: "16:11:00"
-
 ###########################################################################################
 # TooGoodToGo
 ###########################################################################################
@@ -55,6 +16,25 @@
 #   refresh_token: !secret tgtg_refresh_token
 #   user_id: !secret tgtg_user_id
 #   cookie: !secret tgtg_cookie
+
+###########################################################################################
+# TooGoodTankstation Euro95
+###########################################################################################
+# - platform: rest
+#   name: "Tankstation Euro95"
+#   resource: "https://www.tankplanner.nl/api/v1/price/euro95/"
+#   json_attributes_path: "$.[?(@.address=='Havenstraat 12')]"
+#   json_attributes:
+#     - organization
+#     - address
+#     - town
+#     - gps
+#   value_template: >-
+#     {{ value_json | selectattr('organization', 'eq', 'Fieten Olie') | selectattr('address', 'eq', 'Havenstraat 12') | map(attribute='price') | list | first }}
+#   scan_interval: 7200
+#   unit_of_measurement: "€"
+#   icon: mdi:fuel
+#   unique_id: gas_station_euro95
 
 ###########################################################################################
 # HAVE I BEEN PWNED
@@ -285,22 +265,3 @@
   type: time
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
-
-###########################################################################################
-# TooGoodTankstation Euro95
-###########################################################################################
-# - platform: rest
-#   name: "Tankstation Euro95"
-#   resource: "https://www.tankplanner.nl/api/v1/price/euro95/"
-#   json_attributes_path: "$.[?(@.address=='Havenstraat 12')]"
-#   json_attributes:
-#     - organization
-#     - address
-#     - town
-#     - gps
-#   value_template: >-
-#     {{ value_json | selectattr('organization', 'eq', 'Fieten Olie') | selectattr('address', 'eq', 'Havenstraat 12') | map(attribute='price') | list | first }}
-#   scan_interval: 7200
-#   unit_of_measurement: "€"
-#   icon: mdi:fuel
-#   unique_id: gas_station_euro95

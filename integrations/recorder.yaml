@@ -31,10 +31,26 @@ include:
     - scene
 
   entities:
+    # Neo plugs - value filter
+    - sensor.neo_plug_3d_printer
+    - sensor.neo_plug_balcony
+    - sensor.neo_plug_bank
+    - sensor.neo_plug_bedroom
+    - sensor.neo_plug_dishwasher
+    - sensor.neo_plug_dryer
+    - sensor.neo_plug_fridge
+    - sensor.neo_plug_imac
+    - sensor.neo_plug_kay
+    - sensor.neo_plug_peter
+    - sensor.neo_plug_toog
+    - sensor.neo_plug_washer
+    - sensor.neo_plug_xmas_1
+    - sensor.neo_plug_xmas_tree
+    
     # Blinds
     - cover.balcony
     - cover.livingroom
-    
+
     - light.bedroom_neopixel
     # BambuLabs
     - binary_sensor.bambulab_a1_mini_firmware_update
@@ -112,7 +128,7 @@ include:
     # Other
     - calendar.work
     - input_select.helpers_sunrise_sunset
-    - remote.woonkamer
+    - remote.woonkamer_4k
     - sensor.birthdays
     - sensor.holidays
     - sensor.adaptive_lighting_color_temperature

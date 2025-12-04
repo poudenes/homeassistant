@@ -12,76 +12,76 @@ virtual:
   yaml_config: True
   
 switches:
-- name: "Momentary Peter Early Up"
-  mode: "on"
-  cancellable: true
-  toggle_for: 18000
+  - name: "Momentary Peter Early Up"
+    mode: "on"
+    cancellable: true
+    toggle_for: 18000
 
-- name: "Momentary Early Sleep"
-  mode: "on"
-  cancellable: true
-  toggle_for: 18000
+  - name: "Momentary Early Sleep"
+    mode: "on"
+    cancellable: true
+    toggle_for: 18000
 
-- name: "Momentary Guests"
-  mode: "on"
-  cancellable: true
-  toggle_for: 32400
+  - name: "Momentary Guests"
+    mode: "on"
+    cancellable: true
+    toggle_for: 32400
 
-- name: "Momentary For testing"
-  mode: "on"
-  cancellable: true
-  toggle_for: 5
+  - name: "Momentary For testing"
+    mode: "on"
+    cancellable: true
+    toggle_for: 5
 
-- name: "Momentary Scene Morning"
-  mode: "on"
-  cancellable: true
-  toggle_for: 14400
+  - name: "Momentary Scene Morning"
+    mode: "on"
+    cancellable: true
+    toggle_for: 14400
 
-- name: "Momentary MVPS Backup full"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Backup full"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS Update blacklist"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Update blacklist"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS apt update"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS apt update"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS ipset abuseipdb"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS ipset abuseipdb"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS Umount NAS"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Umount NAS"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS Backup db"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Backup db"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS Backup ispconfig"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Backup ispconfig"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS Backup vmail"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Backup vmail"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS clearlog"
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS clearlog"
+    mode: "on"
+    cancellable: true
+    toggle_for: 30
 
-- name: "Momentary MVPS Rspamd learn" 
-  mode: "on"
-  cancellable: true
-  toggle_for: 30
+  - name: "Momentary MVPS Rspamd learn" 
+    mode: "on"
+    cancellable: true
+    toggle_for: 30

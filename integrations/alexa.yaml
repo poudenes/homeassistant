@@ -26,9 +26,9 @@ flash_briefings:
         {% for entity_id in state_attr('switch.helpers_switches','entity_id') if not is_state(entity_id, 'off') %} The {{ entity_id }} is on.{% endfor %}.
 
 smart_home:
-  endpoint: https://api.amazonalexa.com/v3/events # Needed for Alexa Skill build witg amazon_nl@ account
-  client_id: !secret alexa_smart_home_id
-  client_secret: !secret alexa_smart_home_secret
+  # endpoint: https://api.amazonalexa.com/v3/events # Needed for Alexa Skill build witg amazon_nl@ account
+  # client_id: !secret alexa_smart_home_id
+  # client_secret: !secret alexa_smart_home_secret
   filter:
     include_entities:
       # Routines for Harmony

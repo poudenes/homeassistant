@@ -135,6 +135,7 @@
       unique_id: "0e4707c6-e8fc-44d0-bd21-969dbafa0485"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.xmas_tree_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -149,6 +150,7 @@
       unique_id: "057b2213-4d33-48b6-a2ae-c1417b5cc40e"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.imac_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -163,6 +165,7 @@
       unique_id: "82f79833-3425-4a1b-9efa-e607c5edd9f3"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.toog_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -177,6 +180,7 @@
       unique_id: "70aeb45a-f59a-45de-8bd4-c7a613b17e9c"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.balcony_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -191,6 +195,7 @@
       unique_id: "235a3ab2-d9c9-4f23-ba2e-df2a0c53f3a4"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.xmas_1_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -201,10 +206,26 @@
         {% endif %}
 
 - sensor:
+    - name: "Neo plug xmas tree"
+      unique_id: "235a3ab2-d9c9-4f23-ba2e-df2a1c53f3a4"
+      unit_of_measurement: kWh
+      device_class: energy
+      state_class: total_increasing
+      state: >-
+        {% set value = states('sensor.xmas_tree_kwh') | float(0) %}
+        {% set const = 21474836.47 %}
+        {% if value < 0 %}
+          {{ (value + const) | round(2) }}
+        {% else %}
+          {{ value }}
+        {% endif %}
+        
+- sensor:
     - name: "Neo plug bedroom"
       unique_id: "4b69d231-bf1a-40e5-97a4-f635715d5ded"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.bedroom_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -219,6 +240,7 @@
       unique_id: "227a8418-104c-4660-81bf-fd8dbbd90db5"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.peter_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -233,6 +255,7 @@
       unique_id: "0eccf3e2-c450-4545-a545-3731c898cb20"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.kay_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -245,9 +268,9 @@
 - sensor:
     - name: "Neo plug dryer"
       unique_id: "f5c75226-c061-4d71-89bf-4dc154efe9f1"
-
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.dryer_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -262,6 +285,7 @@
       unique_id: "713beb4c-df86-4ce4-b79b-f64b8a28eb96"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.washer_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -276,6 +300,7 @@
       unique_id: "702331b3-b71f-46d6-8b65-73ed71aac058"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.dishwasher_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -290,6 +315,7 @@
       unique_id: "515ae57a-4598-40f3-b170-4775fad55df4"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.fridge_kwh') | float(0) %}
         {% set const = 21474836.47 %}
@@ -304,6 +330,7 @@
       unique_id: "9dece29b-04db-4877-aac0-2ac95669c0174"
       unit_of_measurement: kWh
       device_class: energy
+      state_class: total_increasing
       state: >-
         {% set value = states('sensor.3d_printer_kwh') | float(0) %}
         {% set const = 21474836.47 %}

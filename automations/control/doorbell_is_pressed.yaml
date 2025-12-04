@@ -63,7 +63,7 @@
     ###########################################################################################
     # APPLE TV
     ###########################################################################################
-    - action: "{{ 'remote.send_command' if is_state('media_player.woonkamer', 'playing') else 'script.none' }}"
+    - action: "{{ 'remote.send_command' if is_state('media_player.woonkamer_4k', 'playing') else 'script.none' }}"
       target:
         entity_id: remote.logitech_harmony
       data:
