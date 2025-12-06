@@ -30,6 +30,6 @@
           Kitchen: {{ states('sensor.kitchen_temperature') }} °C,
           Diningroom: {{ states('sensor.diningroom_temperature') }} °C,
           Toilet: {{ states('sensor.toilet_temperature') }} °C,
-          Nest: {{ state_attr('climate.entryway', 'temperature') }} °C,
+          Nest: {{ state_attr('climate.nest_02aa01ac35140a4t', 'temperature') }} °C,
           Outside: {{ states('sensor.temperature') }} °C.
         thread_id: "ha_apple_watch"

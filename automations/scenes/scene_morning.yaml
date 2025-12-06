@@ -37,7 +37,7 @@
 
     - action: input_number.set_value
       target:
-        entity_id: 
+        entity_id:
           - input_number.helpers_motion_toilet
           - input_number.helpers_motion_kitchen
           - input_number.helpers_motion_bedroom
@@ -46,33 +46,33 @@
       data:
         value: 120
 
-    # - choose:
-    #     - conditions: "{{ states('sensor.bathroom_temperature')|int < 17 }}"
-    #       sequence:
-    #         - action: media_player.volume_set
-    #           target:
-    #             entity_id: media_player.bedroom
-    #           data:
-    #             volume_level: 0.20
+    - choose:
+        - conditions: "{{ states('sensor.bathroom_temperature')|int < 17 }}"
+          sequence:
+            - action: media_player.volume_set
+              target:
+                entity_id: media_player.bedroom
+              data:
+                volume_level: 0.20
 
-    #         - action: script.activate_alexa_actionable_notification
-    #           data_template:
-    #             text: "<amazon:effect name='whispered'> The bathroom is below 15 degrees. Do you want turn on the heating system? </amazon:effect>"
-    #             event_id: "alexa_custom_skill_heating_system"
-    #             alexa_device: "media_player.bedroom"
+            - action: script.activate_alexa_actionable_notification
+              data_template:
+                text: "<amazon:effect name='whispered'> The bathroom is below 15 degrees. Do you want turn on the heating system? </amazon:effect>"
+                event_id: "alexa_custom_skill_heating_system"
+                alexa_device: "media_player.bedroom"
 
-    #         - wait_for_trigger:
-    #             - trigger: event
-    #               event_type: alexa_actionable_notification
-    #               event_data:
-    #                 event_id: alexa_custom_skill_heating_system
-    #                 event_response_type: ResponseYes
+            - wait_for_trigger:
+                - trigger: event
+                  event_type: alexa_actionable_notification
+                  event_data:
+                    event_id: alexa_custom_skill_heating_system
+                    event_response_type: ResponseYes
 
-    #           timeout: "00:00:30"
-    #           continue_on_timeout: false
+              timeout: "00:00:30"
+              continue_on_timeout: false
 
-    #         - action: climate.set_temperature
-    #           target:
-    #             entity_id: climate.entryway
-    #           data:
-    #             temperature: 23
+            - action: climate.set_temperature
+              target:
+                entity_id: climate.nest_02aa01ac35140a4t
+              data:
+                temperature: 23

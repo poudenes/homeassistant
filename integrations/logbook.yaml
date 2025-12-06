@@ -49,6 +49,16 @@ include:
     - light.bedroom_neopixel
     - sensor.master_bathroom_humidity_average_linear_24h
     
+    # PowerCalc
+    - light.powercalc_ambient_light
+    - light.powercalc_hall
+    - sensor.powercalc_bathroom_energy
+    - sensor.powercalc_bedroom_energy
+    - sensor.powercalc_dressoir_energy
+    - sensor.powercalc_kitchen_energy
+    - sensor.powercalc_livingroom_energy
+    - sensor.powercalc_toilet_energy
+
     # 3D Printer KwH Sensor
     - sensor.neo_plug_3d_printer
 

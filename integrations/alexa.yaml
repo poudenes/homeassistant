@@ -95,7 +95,7 @@ smart_home:
       - switch.helpers_goodnight
 
       # Nest
-      - climate.entryway
+      - climate.nest_02aa01ac35140a4t
 
       # Wall switches
       - switch.ceiling_light_switch

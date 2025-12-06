@@ -1,0 +1,49 @@
+sensors:
+  - create_group: PowerCalc Bedroom
+    entities:
+      - entity_id: light.bedroom_1
+      - entity_id: light.bedroom_2
+      - entity_id: light.bedroom_3
+      - entity_id: light.bedroom_4
+      - entity_id: light.bedroom_5
+      - entity_id: light.bedroom_6
+
+  - create_group: PowerCalc Bathroom
+    entities:
+      - entity_id: light.bathroom_1
+      - entity_id: light.bathroom_2
+      - entity_id: light.bathroom_3
+      - entity_id: light.bathroom_4
+
+  - create_group: PowerCalc Livingroom
+    entities:
+      - entity_id: light.livingroom_1
+      - entity_id: light.livingroom_2
+      - entity_id: light.livingroom_3
+      - entity_id: light.livingroom_4
+
+  - create_group: PowerCalc Dressoir
+    entities:
+      - entity_id: light.dressoir_1
+      - entity_id: light.dressoir_2
+      - entity_id: light.dressoir_3
+
+  - create_group: PowerCalc Kitchen
+    entities:
+      - entity_id: light.ceiling_1
+      - entity_id: light.ceiling_2
+      - entity_id: light.ceiling_3
+      - entity_id: light.sink_1
+      - entity_id: light.sink_2
+      - entity_id: light.sink_3
+
+  - create_group: PowerCalc Toilet
+    entities:
+      - entity_id: light.toilet_1
+      - entity_id: light.toilet_2
+      - entity_id: light.toilet_3
+
+  - create_group: PowerCalc Balcony
+    entities:
+      - entity_id: light.balcony_1
+      - entity_id: light.balcony_2

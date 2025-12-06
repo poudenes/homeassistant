@@ -46,7 +46,17 @@ include:
     - sensor.neo_plug_washer
     - sensor.neo_plug_xmas_1
     - sensor.neo_plug_xmas_tree
-    
+
+    # PowerCalc
+    - light.powercalc_ambient_light
+    - light.powercalc_hall
+    - sensor.powercalc_bathroom_energy
+    - sensor.powercalc_bedroom_energy
+    - sensor.powercalc_dressoir_energy
+    - sensor.powercalc_kitchen_energy
+    - sensor.powercalc_livingroom_energy
+    - sensor.powercalc_toilet_energy
+
     # Blinds
     - cover.balcony
     - cover.livingroom
@@ -154,7 +164,7 @@ include:
 
     # Fan Bathroom and climate control
     - sensor.climate_inside_temperature
-    - climate.entryway
+    - climate.nest_02aa01ac35140a4t
     - binary_sensor.hum_fan_calculate_difference
     - sensor.master_bathroom_humidity_average_linear_24h
     - sensor.mold_indicator

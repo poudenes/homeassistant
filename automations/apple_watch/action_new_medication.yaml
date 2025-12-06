@@ -53,7 +53,7 @@
 
     - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.hallway_1
+        entity_id: light.hallway_all
       data:
         xy_color: [0.65, 0.30] # Red
         brightness_pct: 100
@@ -83,13 +83,13 @@
   actions:
     - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.hallway_1
+        entity_id: light.hallway_all
       data:
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
     - action: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.hallway_1
+        entity_id: light.hallway_all
 
     - variables:
         old_value: "{{ states('input_text.medication_stock') | int () }}"
@@ -125,13 +125,13 @@
   actions:
     - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.hallway_1
+        entity_id: light.hallway_all
       data:
         kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
     - action: "{{ 'light.turn_off' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.hallway_1
+        entity_id: light.hallway_all
 
     - delay: "00:05:00"
 
@@ -172,7 +172,7 @@
 
     - action: "{{ 'light.turn_on' if is_state('input_boolean.helpers_peter_home_homekit', 'on') else 'script.none' }}"
       target:
-        entity_id: light.hallway_1
+        entity_id: light.hallway_all
       data:
         xy_color: [0.70, 0.30] # Red
         brightness_pct: 100

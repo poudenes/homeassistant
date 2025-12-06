@@ -34,7 +34,7 @@
   mode: bridge
   filter:
     include_entities:
-      # - climate.entryway
+      - climate.nest_02aa01ac35140a4t
       - binary_sensor.nest_protect_3_smoke_status
       - binary_sensor.nest_protect_3_co_status
       - binary_sensor.nest_protect_3_heat_status

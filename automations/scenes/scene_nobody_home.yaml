@@ -45,6 +45,6 @@
 
     # - action: climate.set_temperature
     #   target:
-    #     entity_id: climate.entryway
+    #     entity_id: climate.nest_02aa01ac35140a4t
     #   data:
     #     temperature: 11

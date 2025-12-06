@@ -20,7 +20,7 @@
 ###########################################################################################
 #
 api:
-battery_notes:
+# battery_notes:
 config:
 counter:
 default_config:
@@ -65,6 +65,7 @@ logger: !include integrations/logger.yaml
 mqtt: !include integrations/mqtt.yaml
 notify: !include integrations/notify.yaml
 panel_custom: !include integrations/panel_custom.yaml
+powercalc: !include integrations/powercalc.yaml
 recorder: !include integrations/recorder.yaml
 rest_command: !include integrations//rest_command.yaml
 rflink: !include integrations/rflink.yaml
