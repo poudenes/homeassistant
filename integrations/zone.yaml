@@ -15,13 +15,19 @@
   radius: 150
   icon: mdi:account-multiple
 
-- name: "K&D"
+- name: "Sel&Fab"
+  latitude: !secret lat_sf
+  longitude: !secret lon_sf
+  radius: 200
+  icon: mdi:account-multiple
+
+- name: "Kel&DJ"
   latitude: !secret lat_kd
   longitude: !secret lon_kd
   radius: 200
   icon: mdi:account-multiple
 
-- name: "L&T"
+- name: "Lau&Trey"
   latitude: !secret lat_lt
   longitude: !secret lon_lt
   radius: 200
@@ -75,7 +81,7 @@
   radius: 36
   icon: mdi:account-multiple
 
-- name: "H&H"
+- name: "H&H Boom"
   latitude: !secret lat_hh
   longitude: !secret lon_hh
   radius: 80

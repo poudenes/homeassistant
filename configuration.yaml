@@ -18,9 +18,8 @@
 # https://www.home-assistant.io/integrations/compensation/
 # https://www.home-assistant.io/integrations/snmp/
 ###########################################################################################
-#
+
 api:
-# battery_notes:
 config:
 counter:
 default_config:
@@ -43,11 +42,13 @@ system_log:
   fire_event: true
 zeroconf:
 
-alexa: !include integrations/alexa.yaml
 automation: !include_dir_merge_list automations/
+script: !include_dir_merge_named scripts/
+template: !include_dir_merge_list integrations/templates
+
+alexa: !include integrations/alexa.yaml
 birthdays: !include integrations/birthday.yaml
 command_line: !include integrations/command_line.yaml
-# fan: !include integrations/fan.yaml
 group: !include integrations/group.yaml
 homeassistant: !include integrations/homeassistant.yaml
 homekit: !include integrations/homekit.yaml
@@ -69,12 +70,10 @@ powercalc: !include integrations/powercalc.yaml
 recorder: !include integrations/recorder.yaml
 rest_command: !include integrations//rest_command.yaml
 rflink: !include integrations/rflink.yaml
-script: !include_dir_merge_named scripts/
 scene: !include integrations/scene.yaml
 sensor: !include integrations/sensors.yaml
 shell_command: !include integrations/shell_commands.yaml
 switch: !include integrations/switches.yaml
-template: !include_dir_merge_list integrations/templates
 timer: !include integrations/timer.yaml
 utility_meter: !include integrations/utility_meter.yaml
 zone: !include integrations/zone.yaml

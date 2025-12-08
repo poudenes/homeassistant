@@ -339,6 +339,21 @@
           {{ value }}
         {% endif %}
 
+- sensor:
+    - name: "Neo plug airfryer"
+      unique_id: "9eece29b-04db-4877-aac0-2ac95639c0174"
+      unit_of_measurement: kWh
+      device_class: energy
+      state_class: total_increasing
+      state: >-
+        {% set value = states('sensor.airfryer_kwh') | float(0) %}
+        {% set const = 21474836.47 %}
+        {% if value < 0 %}
+          {{ (value + const) | round(2) }}
+        {% else %}
+          {{ value }}
+        {% endif %}
+
 ###########################################################################################
 # Total count of domains
 ###########################################################################################

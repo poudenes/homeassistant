@@ -7,36 +7,6 @@
 ###########################################################################################
 ---
 ###########################################################################################
-# TooGoodToGo
-###########################################################################################
-# - platform: tgtg
-#   scan_interval: 900
-#   email: !secret tgtg_email
-#   access_token: !secret tgtg_access_token
-#   refresh_token: !secret tgtg_refresh_token
-#   user_id: !secret tgtg_user_id
-#   cookie: !secret tgtg_cookie
-
-###########################################################################################
-# TooGoodTankstation Euro95
-###########################################################################################
-# - platform: rest
-#   name: "Tankstation Euro95"
-#   resource: "https://www.tankplanner.nl/api/v1/price/euro95/"
-#   json_attributes_path: "$.[?(@.address=='Havenstraat 12')]"
-#   json_attributes:
-#     - organization
-#     - address
-#     - town
-#     - gps
-#   value_template: >-
-#     {{ value_json | selectattr('organization', 'eq', 'Fieten Olie') | selectattr('address', 'eq', 'Havenstraat 12') | map(attribute='price') | list | first }}
-#   scan_interval: 7200
-#   unit_of_measurement: "€"
-#   icon: mdi:fuel
-#   unique_id: gas_station_euro95
-
-###########################################################################################
 # HAVE I BEEN PWNED
 ###########################################################################################
 - platform: haveibeenpwned_custom
@@ -264,3 +234,33 @@
   type: time
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
+
+###########################################################################################
+# TooGoodToGo
+###########################################################################################
+# - platform: tgtg
+#   scan_interval: 900
+#   email: !secret tgtg_email
+#   access_token: !secret tgtg_access_token
+#   refresh_token: !secret tgtg_refresh_token
+#   user_id: !secret tgtg_user_id
+#   cookie: !secret tgtg_cookie
+
+###########################################################################################
+# TooGoodTankstation Euro95
+###########################################################################################
+# - platform: rest
+#   name: "Tankstation Euro95"
+#   resource: "https://www.tankplanner.nl/api/v1/price/euro95/"
+#   json_attributes_path: "$.[?(@.address=='Havenstraat 12')]"
+#   json_attributes:
+#     - organization
+#     - address
+#     - town
+#     - gps
+#   value_template: >-
+#     {{ value_json | selectattr('organization', 'eq', 'Fieten Olie') | selectattr('address', 'eq', 'Havenstraat 12') | map(attribute='price') | list | first }}
+#   scan_interval: 7200
+#   unit_of_measurement: "€"
+#   icon: mdi:fuel
+#   unique_id: gas_station_euro95
