@@ -19,7 +19,7 @@ flash_briefings:
   ha_briefing:
     - title: "Temperature"
       text: >
-        Inside the house, it is {{ (states('sensor.entryway_temperature') | int) }} degrees.
+        Inside the house, it is {{ (states('sensor.nest_02aa01ac35140a4t_temperature') | int) }} degrees.
         Outside it is {{ (states('weather.buienradar')) | int }} degrees.
         The forcast for today is {{ (states('sensor.condition')) }}, tomorrow it will be {{ (states('sensor.condition_1d')) }}.
         There is {% set ns = namespace(res=0) %}{% for count in state_attr('switch.helpers_switches', 'entity_id') if is_state(count, 'on') %}{% set ns.res = ns.res + 1 %}{%endfor%}{{ ns.res }} Meek wall switch on.
@@ -124,10 +124,8 @@ smart_home:
     light.nanoleaf:
       name: "Nanoleaf"
       description: "Incredible nanoleafs"
-      # display_categories: LIGHT
     light.diningtable_all:
       name: "Diningroom"
-      # display_categories: LIGHT
     light.hallway_all:
       name: "Hallway"
     light.livingroom_all:
@@ -206,47 +204,3 @@ smart_home:
     switch.momentary_scene_morning:
       name: "Scene Morning"
       display_categories: SWITCH
-
-      # Function
-      # - input_boolean.function_romantic
-      # - input_boolean.function_disco
-
-      # Routines for streaming apps
-      # - script.alexa_turn_on_netflix
-      # - script.alexa_turn_on_videoland
-      # - script.alexa_turn_on_hbo
-      # - script.alexa_turn_on_plex
-      # - script.alexa_turn_on_amazon
-      # - script.alexa_turn_on_sky
-      # - script.alexa_turn_on_disney
-      # - script.alexa_turn_on_youtube
-      # - script.alexa_turn_on_music
-      # - script.alexa_turn_on_pathe
-
-    # input_boolean.helpers_peter_home_homekit:
-    #   name: "Presence Kay"
-    #   description: "Precense Kay"
-    #   display_categories: MOTION_SENSOR
-    # input_boolean.helpers_kay_home_homekit:
-    #   name: "Presence Peter"
-    #   description: "Precence Peter"
-    #   display_categories: MOTION_SENSOR
-
-    # input_boolean.function_romantic:
-    #   name: "Function Romantic"
-    #   display_categories: SWITCH
-    #   description: "Function for you know what"
-    # input_boolean.function_disco:
-    #   name: "Function Disco"
-    #   display_categories: SWITCH
-    #   description: "Function when there is a party"
-
-    # input_boolean.function_kay_learning:
-    #   name: "Kay Learning"
-    #   display_categories: SWITCH
-    #   description: "Scene when Kay must learn"
-
-    # input_boolean.function_dnc:
-    #   name: "Disable Nest"
-    #   display_categories: SWITCH
-    #   description: "When we dont wanna auto control of the thermostat"

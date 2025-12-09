@@ -116,7 +116,7 @@
 
   {########################################################################}
   {%- macro inside_weather() -%}
-    "Inside the house, it is {{ (states('sensor.entryway_temperature') | int) }} degrees."
+    "Inside the house, it is {{ (states('sensor.nest_02aa01ac35140a4t_temperature') | int) }} degrees."
   {%- endmacro -%}
 
   {########################################################################}

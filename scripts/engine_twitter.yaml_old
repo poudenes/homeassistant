@@ -64,8 +64,8 @@ tweet_random_post:
                 "Home Assistant Server info: CPU Usage: {{ states('sensor.processor_use') }} %, Memory Used: {{ states('sensor.memory_use_percent') }} %, Disk Usage is {{ states('sensor.disk_use_percent') }} % amd Last Boot was {{ states('sensor.last_boot') }} ago. #homeassistant #rpi4 #IoT #systemmonitor"
               ],
               "weather": [
-                "I keep the average humidity of the house at {{ states('sensor.entryway_humidity') }} percent. #Nest #homeassistant #rpi4 #IoT",
-                "Outside is {{ states('sensor.temperature') }} °C. I keep the average inside temperature at {{ states('sensor.entryway_temperature') }} °C. #Weather #Nest #homeassistant #rpi4 #IoT",
+                "I keep the average humidity of the house at {{ states('sensor.nest_02aa01ac35140a4t_humidity') }} percent. #Nest #homeassistant #rpi4 #IoT",
+                "Outside is {{ states('sensor.temperature') }} °C. I keep the average inside temperature at {{ states('sensor.nest_02aa01ac35140a4t_temperature') }} °C. #Weather #Nest #homeassistant #rpi4 #IoT",
                 "I know that it will be {{ states('sensor.condition') }} So I will adjust the Heating/Cooling, irrigation and lighting accordingly. #Nest #homeassistant #rpi4 #IoT",
                 "Today the weather is {{ states('sensor.condition') }} and tomorrow it will be {{ states('sensor.condition_1d') }}. #homeassistant #rpi4 #IoT",
                 "Its {{ states('sensor.condition') }} with a temperature of {{ states('sensor.temperature') }} celsius. The windspeed is {{ states('sensor.accu_weather_wind_day_0d') }} KM/h. #homeassistant #rpi4 #IoT #automation"
