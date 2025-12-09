@@ -9,6 +9,63 @@
 ##########################################################################################
 ---
 #########################################################################################
+# Cost low and high energy usage for energy dashboard
+#########################################################################################
+- sensor:
+    - name: "Costs daily high kWh custom sensor"
+      unique_id: "1e31ae10-f2d9-4cfe-bb7f-33fcde14e1af"
+      state_class: total
+      device_class: monetary
+      unit_of_measurement: EUR
+      state: >-
+        {% set prijs_per_kwh = 0.250034 %}
+        {% set vaste1 = 0.66 %}
+        {% set vaste2 = 0.31 %}
+        {% set verbruik = states('sensor.dsmr_day_consumption_electricity2') | float(0) %}
+        {% set vaste_totaal = vaste1 + vaste2 %}
+        {% set seconden_vandaag = (now() - now().replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() %}
+        {% set dagdeel = seconden_vandaag / 86400 %}
+        {% set variabel = verbruik * prijs_per_kwh %}
+        {% set vast_deel = vaste_totaal * dagdeel %}
+        {{ (variabel + vast_deel) | round(2) }}
+
+- sensor:
+    - name: "Costs daily low kWh custom sensor"
+      unique_id: "1e31ae11-f2d9-4cfe-bb7f-33fcde14e1af"
+      state_class: total
+      device_class: monetary
+      unit_of_measurement: EUR
+      state: >-
+        {% set prijs_per_kwh = 0.234304 %}
+        {% set vaste1 = 0.66 %}
+        {% set vaste2 = 0.31 %}
+        {% set verbruik = states('sensor.dsmr_day_consumption_electricity1') | float(0) %}
+        {% set vaste_totaal = vaste1 + vaste2 %}
+        {% set seconden_vandaag = (now() - now().replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() %}
+        {% set dagdeel = seconden_vandaag / 86400 %}
+        {% set variabel = verbruik * prijs_per_kwh %}
+        {% set vast_deel = vaste_totaal * dagdeel %}
+        {{ (variabel + vast_deel) | round(2) }}
+
+- sensor:
+    - name: "Costs daily gas custom sensor"
+      unique_id: "1e31ae11-f1d9-4cfe-bb7f-33fcde14e1af"
+      state_class: total
+      device_class: monetary
+      unit_of_measurement: EUR
+      state: >-
+        {% set prijs_per_kwh = 0.234304 %}
+        {% set vaste1 = 0.66 %}
+        {% set vaste2 = 0.31 %}
+        {% set verbruik = states('sensor.dsmr_day_consumption_electricity1') | float(0) %}
+        {% set vaste_totaal = vaste1 + vaste2 %}
+        {% set seconden_vandaag = (now() - now().replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() %}
+        {% set dagdeel = seconden_vandaag / 86400 %}
+        {% set variabel = verbruik * prijs_per_kwh %}
+        {% set vast_deel = vaste_totaal * dagdeel %}
+        {{ (variabel + vast_deel) | round(2) }}
+
+#########################################################################################
 # Medication
 #########################################################################################
 - sensor:
@@ -353,191 +410,3 @@
         {% else %}
           {{ value }}
         {% endif %}
-
-###########################################################################################
-# Total count of domains
-###########################################################################################
-# - sensor:
-#     - name: "Total count Domains - automation"
-#       unique_id: "98e54749-105b-4938-9f8b-a366d56b5347"
-#       state: "{{ states.automation | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - binary_sensor"
-#       unique_id: "907a4e54-aca1-4bd6-8092-563353f1711b"
-#       state: "{{ states.binary_sensor | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - birthdays"
-#       unique_id: "a5355c1a-3e47-4684-8786-0719c67fb93a"
-#       state: "{{ states.birthdays | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - o"
-#       unique_id: "14cc9e08-662b-4153-b9c8-afc0e67ccaf2"
-#       state: "{{ states.button | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - calendar"
-#       unique_id: "f53f70d0-4bf1-407a-a26e-9585129185e0"
-#       state: "{{ states.calendar | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - camera"
-#       unique_id: "0fa1633d-bcc1-445c-a0d1-10f234c72ed2"
-#       state: "{{ states.camera | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - climate"
-#       unique_id: "2395b297-de6c-4a26-bfb0-4910d294ad78"
-#       state: "{{ states.climate | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - conversation"
-#       unique_id: "51dd1016-fb21-4098-8350-2c3f0683a4c9"
-#       state: "{{ states.conversation | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - device tracker"
-#       unique_id: "988ee7a3-c4df-4646-8ca4-803b4e5a4000"
-#       state: "{{ states.device_tracker | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - event"
-#       unique_id: "8c701cec-3c34-45de-9d46-d3d0f8a96e7d"
-#       state: "{{ states.event | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - fan"
-#       unique_id: "4b10123f-4c41-438c-b023-87bf018aca60"
-#       state: "{{ states.fan | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - group"
-#       unique_id: "fd60d7f2-992c-418b-af01-0c6ebca08065"
-#       state: "{{ states.group | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - image"
-#       unique_id: "1a8ecd51-0083-40dc-9908-a687d88ecdc0"
-#       state: "{{ states.image | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - inmput boolean"
-#       unique_id: "690772ba-8ef6-4063-b145-68498bc9ae58"
-#       state: "{{ states.input_boolean | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - input button"
-#       unique_id: "c868fcf1-2cc3-4004-aa51-76b20f13c7fd"
-#       state: "{{ states.input_button | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - datetime"
-#       unique_id: "1af54d74-0f3a-485d-935c-4f155746d51d"
-#       state: "{{ states.input_datetime | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - input number"
-#       unique_id: "b3d4900b-120d-4644-b4a1-08e54410caaf"
-#       state:  "{{ states.input_number | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - input select"
-#       unique_id: "bc49010c-5e0f-4d71-8137-40c22f0a46e7"
-#       state: "{{ states.input_select | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - input text"
-#       unique_id: "7f86884b-9b59-43db-8412-fd0f985761e5"
-#       state: "{{ states.input_text | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - light"
-#       unique_id: "c8fb87bd-f4c3-4b23-b02e-0115e712da45"
-#       state: "{{ states.light | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - media player"
-#       unique_id: "0c435bda-e4a2-4e3c-bf9d-d5d78a830536"
-#       state:  "{{ states.media_player | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - notify"
-#       unique_id: "78dbab1c-282b-4947-bc2f-0de8a7d0da67"
-#       state: "{{ states.notify | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - number"
-#       unique_id: "0b835a78-0cd5-446d-8f23-bbd51b8740af"
-#       state: "{{ states.number | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - person"
-#       unique_id: "b40f0735-b9d1-4679-8e93-3dfb6a7f0ec5"
-#       state: "{{ states.person | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - scene"
-#       unique_id: "87af670d-56f9-4fe0-9fce-d09b4f810bda"
-#       state: "{{ states.scene | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - script"
-#       unique_id: "d9896fd4-3c6a-4937-b6f6-e96cede4fae5"
-#       state: "{{ states.script | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - select"
-#       unique_id: "e90f3e0b-d304-4944-a4df-a3e216857420"
-#       state: "{{ states.select | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - sensor"
-#       unique_id: "7978077d-28c7-4431-bdf8-492f7e07ff4c"
-#       state: "{{ states.sensor | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - sun"
-#       unique_id: "ce9a2974-63d0-45ac-82d0-dc984dcbfbde"
-#       state: "{{ states.sun | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - switch"
-#       unique_id: "28d56c8c-1469-4a6d-878b-eb35b5a6577e"
-#       state: "{{ states.switch | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - tag"
-#       unique_id: "461239bc-9e0e-4c64-81fe-a0d012e44ad6"
-#       state: "{{ states.tag | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - time"
-#       unique_id: "05d8fd7d-31d1-4ef2-816c-4fad79428d09"
-#       state: "{{ states.time | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - timer"
-#       unique_id: "e8bef18c-dfb6-46a1-9478-389d3357de73"
-#       state: "{{ states.timer | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - update"
-#       unique_id: "1a0c4a09-4e9f-4c8e-8019-4cfdc8c77585"
-#       state: "{{ states.update | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - vacuum"
-#       unique_id: "cfd0ea63-04d6-4a2d-bbee-d218da2599fe"
-#       state: "{{ states.vacuum | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - weather"
-#       unique_id: "30d084d7-bce2-4ba5-9023-3670326911a5"
-#       state: "{{ states.weather | count }}"
-
-# - sensor:
-#     - name: "Total count Domains - zone"
-#       unique_id: "9f672d99-55f0-4aae-83ea-515e180629ea"
-#       state: "{{ states.zone | count }}"
