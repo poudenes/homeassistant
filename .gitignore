@@ -11,6 +11,7 @@ esphome/.gitignore
 .ip_authenticated.yaml
 .shopping_list.json
 .homeassistant
+.ha_run.lock
 
 # FILES
 core
