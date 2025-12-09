@@ -41,14 +41,15 @@ include:
     - sensor.neo_plug_washer
     - sensor.neo_plug_xmas_1
     - sensor.neo_plug_xmas_tree
+    - sensor.neo_plug_airfryer
 
     # Blinds
     - cover.balcony
     - cover.livingroom
-        
+
     - light.bedroom_neopixel
     - sensor.master_bathroom_humidity_average_linear_24h
-    
+
     # PowerCalc
     - light.powercalc_ambient_light
     - light.powercalc_hall
@@ -58,6 +59,8 @@ include:
     - sensor.powercalc_kitchen_energy
     - sensor.powercalc_livingroom_energy
     - sensor.powercalc_toilet_energy
+    - sensor.costs_daily_low_kwh_custom_sensor
+    - sensor.costs_daily_high_kwh_custom_sensor
 
     # 3D Printer KwH Sensor
     - sensor.neo_plug_3d_printer
@@ -118,6 +121,7 @@ include:
     - sensor.oral_b_io_series_8n_time
     - sensor.oral_b_io_series_8n_toothbrush_state
     
+    # Crypto
     - sensor.cryptoinfo_xrp_usd
     - sensor.cryptoinfo_wax_usd
     - sensor.cryptoinfo_vet_usd
@@ -126,8 +130,10 @@ include:
     - sensor.cryptoinfo_btc_usd
     - sensor.cryptoinfo_avax_usd
 
+    # Roborock
     - sensor.roborock_s8_current_room
-        
+    
+    # Motion
     - binary_sensor.toilet_detection
     - binary_sensor.bathroom_detection
     - binary_sensor.hallway_detection
@@ -140,6 +146,7 @@ include:
     - binary_sensor.frondoor_door_contact
     - binary_sensor.door_livingroom_contact
 
+    # Other
     - binary_sensor.washing_machine
     - binary_sensor.dryer_machine
     - binary_sensor.dishwasher_machine
@@ -154,6 +161,7 @@ include:
 
     - binary_sensor.hum_fan_calculate_difference
     - sensor.master_bathroom_humidity_average_linear_24h
+    
 ###################################################
 #  EXCLUDE
 ###################################################

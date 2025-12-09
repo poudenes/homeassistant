@@ -30,7 +30,7 @@ include:
     - person
     - scene
 
-  entities:
+  entities:    
     # Neo plugs - value filter
     - sensor.neo_plug_3d_printer
     - sensor.neo_plug_balcony
@@ -56,12 +56,13 @@ include:
     - sensor.powercalc_kitchen_energy
     - sensor.powercalc_livingroom_energy
     - sensor.powercalc_toilet_energy
+    - sensor.costs_daily_low_kwh_custom_sensor
+    - sensor.costs_daily_high_kwh_custom_sensor
 
     # Blinds
     - cover.balcony
     - cover.livingroom
 
-    - light.bedroom_neopixel
     # BambuLabs
     - binary_sensor.bambulab_a1_mini_firmware_update
     - binary_sensor.bambulab_a1_mini_hms_errors
@@ -125,7 +126,6 @@ include:
     - sensor.cryptoinfo_sol_usd
     - sensor.cryptoinfo_doge_usd
     - sensor.cryptoinfo_btc_usd
-
     - sensor.cryptoinfo_avax_usd
 
     # Precense sensors and tools
@@ -286,8 +286,8 @@ include:
     - sensor.hallway_closset_temperature
     - sensor.hallway_lux
     - sensor.hallway_temperature
-    - sensor.entryway_humidity
-    - sensor.entryway_temperature
+    - sensor.nest_02aa01ac35140a4t_humidity
+    - sensor.nest_02aa01ac35140a4t_temperature
     - sensor.frondoor_door_temperature
     - sensor.kitchen_lux
     - sensor.kitchen_temperature
@@ -313,8 +313,6 @@ include:
     - sensor.gas_monthly
 
     # DSMR Sensors
-    - sensor.dsmr_day_consumption_electricity2_cost_2
-    - sensor.dsmr_day_consumption_electricity1_cost_2
     - sensor.gas_daily_cost
     - sensor.dsmr_meter_stats_dsmr_version
     - sensor.dsmr_meter_stats_electricity_tariff
@@ -357,6 +355,7 @@ include:
     - sensor.neo_plug_washer
     - sensor.neo_plug_xmas_1
     - sensor.neo_plug_3d_printer
+    - sensor.neo_plug_airfryer
 
     # Sensors monitor times of using machines
     - sensor.times_dishwasher_machine_has_been_on_last_14_days
@@ -379,7 +378,6 @@ include:
 
     # Zwave Wall plugs
     - switch.balcony_wall
-    # - switch.wall_wall
     - switch.xmas_tree_wall
     - switch.bedroom_wall
     - switch.dishwasher_wall
