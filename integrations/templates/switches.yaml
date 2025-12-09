@@ -1,12 +1,20 @@
+#  ███████╗██╗    ██╗██╗████████╗ ██████╗██╗  ██╗███████╗███████╗
+#  ██╔════╝██║    ██║██║╚══██╔══╝██╔════╝██║  ██║██╔════╝██╔════╝
+#  ███████╗██║ █╗ ██║██║   ██║   ██║     ███████║█████╗  ███████╗
+#  ╚════██║██║███╗██║██║   ██║   ██║     ██╔══██║██╔══╝  ╚════██║
+#  ███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║███████╗███████║
+#  ╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝
+###########################################################################################
+---
+###########################################################################################
 ##########################################################################################
 # LOGITECH HARMONY
 # https://www.home-assistant.io/integrations/switch.template/
 ##########################################################################################
 - switch:
     - name: "helpers_puredirectdts"
-      # friendly_name: "DTS Pure Direct"
       unique_id: "61dd7a8b-8c11-4c76-9470-f3985f944826"
-      #value_template: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
+      state: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
       turn_on:
         action: remote.send_command
         target:
@@ -27,7 +35,6 @@
   ###########################################################################################
 - switch:
     - name: "helpers_appletv"
-      # friendly_name: "Scene AppleTV"
       unique_id: "2bcdc44b-8d10-4933-b94b-6de61adb63dc"
       state: "{{ is_state('input_select.helpers_scenes', 'scene appletv')}}"
       turn_on:
@@ -41,7 +48,6 @@
 
 - switch:
     - name: "helpers_chromecast"
-      # friendly_name: "Scene Chromecast"
       unique_id: "562b18c0-1dc2-498c-922a-e4e1eac50912"
       state: "{{ is_state('input_select.helpers_scenes', 'scene chromecast')}}"
       turn_on:
@@ -55,7 +61,6 @@
 
 - switch:
     - name: "helpers_daytime"
-      # friendly_name: "Scene Daytime"
       unique_id: "4c60b38d-a9ea-46cf-b4ec-9818f1d54552"
       state: "{{ is_state('input_select.helpers_scenes', 'scene daytime')}}"
       turn_on:
@@ -69,7 +74,6 @@
 
 - switch:
     - name: "helpers_dinner"
-      # friendly_name: "Scene Dinner"
       unique_id: "1d18381a-4392-4494-9dff-eb23fb385b81"
       state: "{{ is_state('input_select.helpers_scenes', 'scene dinner')}}"
       turn_on:
@@ -87,7 +91,6 @@
 
 - switch:
     - name: "helpers_evening"
-      # friendly_name: "Scene Evening"
       unique_id: "760c0565-0b5f-4587-a28a-b3e50706a18d"
       state: "{{ is_state('input_select.helpers_scenes', 'scene evening')}}"
       turn_on:
@@ -101,7 +104,6 @@
 
 - switch:
     - name: "helpers_goodnight"
-      # friendly_name: "Scene Goodnight"
       unique_id: "9eed7e61-62be-4946-8555-3f1de05bca09"
       state: "{{ is_state('input_select.helpers_scenes', 'scene goodnight')}}"
       turn_on:
@@ -115,7 +117,6 @@
 
 - switch:
     - name: "helpers_nintendo"
-      # friendly_name: "Scene Nintendo"
       unique_id: "82b8a3a1-4448-4d2f-b279-68fc75038ab7"
       state: "{{ is_state('input_select.helpers_scenes', 'scene nintendo')}}"
       turn_on:
@@ -129,7 +130,6 @@
 
 - switch:
     - name: "helpers_tv"
-      # friendly_name: "Scene TV"
       unique_id: "2a738e92-bf64-46a2-9919-bc8303e6d027"
       state: "{{ is_state('input_select.helpers_scenes', 'scene tv')}}"
       turn_on:
@@ -143,7 +143,6 @@
 
 - switch:
     - name: "helpers_xbox"
-      # friendly_name: "Scene Xbox"
       unique_id: "c3bb279c-7f71-4184-adb5-a3ca9a7a4f32"
       state: "{{ is_state('input_select.helpers_scenes', 'scene xbox')}}"
       turn_on:
