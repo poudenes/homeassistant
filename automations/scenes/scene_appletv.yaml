@@ -8,7 +8,7 @@
 # SCENE FOR APPLE TV WHEN SUN IS BELOW HORIZON - test
 ###########################################################################################
 - id: "c54afbee-cd69-4cf3-8a55-4cbc2979234f"
-  alias: "Scene - AppleTV"
+  alias: "Scene - AppleTV" 
   mode: restart
   triggers:
     - trigger: state
@@ -20,8 +20,7 @@
       to: "AppleTV"
 
     - trigger: state
-      entity_id:
-        - input_select.helpers_scenes
+      entity_id: input_select.helpers_scenes
 
   conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"

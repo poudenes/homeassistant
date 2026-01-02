@@ -14,7 +14,7 @@
 - sensor:
     - name: "Costs daily high kWh custom sensor"
       unique_id: "1e31ae10-f2d9-4cfe-bb7f-33fcde14e1af"
-      state_class: total
+      state_class: total_increasing
       device_class: monetary
       unit_of_measurement: EUR
       state: >-
@@ -32,7 +32,7 @@
 - sensor:
     - name: "Costs daily low kWh custom sensor"
       unique_id: "1e31ae11-f2d9-4cfe-bb7f-33fcde14e1af"
-      state_class: total
+      state_class: total_increasing
       device_class: monetary
       unit_of_measurement: EUR
       state: >-
@@ -50,7 +50,7 @@
 - sensor:
     - name: "Costs daily gas custom sensor"
       unique_id: "1e31ae11-f1d9-4cfe-bb7f-33fcde14e1af"
-      state_class: total
+      state_class: total_increasing
       device_class: monetary
       unit_of_measurement: EUR
       state: >-

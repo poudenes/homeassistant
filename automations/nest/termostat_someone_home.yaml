@@ -29,11 +29,11 @@
       data:
         temperature: >-
           {% if outside > 12 and inside > 16 %} 
-            10
+            9
           {% elif outside < 12 and inside > 16 %} 
             12
           {% elif outside < 12 and inside < 16 %} 
             21
           {% else %} 
-            11
+            9
           {% endif %}

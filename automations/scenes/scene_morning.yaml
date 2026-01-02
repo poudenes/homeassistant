@@ -75,4 +75,4 @@
               target:
                 entity_id: climate.nest_02aa01ac35140a4t
               data:
-                temperature: 23
+                temperature: 21

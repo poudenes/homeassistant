@@ -63,7 +63,6 @@
         ###########################################################################################
         # END - Guest sleepover part
         ###########################################################################################
-
         - action: light.turn_on
           target:
             entity_id: light.bedroom_all
@@ -112,8 +111,14 @@
       target:
         entity_id: >
           {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
-            | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+            | reject('in', ['switch.peter_wall','switch.kay_wall']) | list }}
 
+#    - action: climate.set_temperature
+#      target:
+#        entity_id: climate.nest_02aa01ac35140a4t
+#      data:
+#        temperature: 9
+        
     - parallel:
         - sequence:
             - wait_template: "{{ is_state('binary_sensor.kitchen_detection', 'off') }}"

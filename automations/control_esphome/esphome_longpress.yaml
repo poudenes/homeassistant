@@ -1,0 +1,49 @@
+#  ███╗   ███╗███████╗███████╗██╗  ██╗    ███████╗██╗    ██╗██╗████████╗ ██████╗██╗  ██╗███████╗███████╗
+#  ████╗ ████║██╔════╝██╔════╝██║ ██╔╝    ██╔════╝██║    ██║██║╚══██╔══╝██╔════╝██║  ██║██╔════╝██╔════╝
+#  ██╔████╔██║█████╗  █████╗  █████╔╝     ███████╗██║ █╗ ██║██║   ██║   ██║     ███████║█████╗  ███████╗
+#  ██║╚██╔╝██║██╔══╝  ██╔══╝  ██╔═██╗     ╚════██║██║███╗██║██║   ██║   ██║     ██╔══██║██╔══╝  ╚════██║
+#  ██║ ╚═╝ ██║███████╗███████╗██║  ██╗    ███████║╚███╔███╔╝██║   ██║   ╚██████╗██║  ██║███████╗███████║
+#  ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝    ╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝
+###########################################################################################
+# ESPHOME BATHROOM LONGPRESS
+###########################################################################################
+- id: "bb68c1cb-4e0e-4ee3-80c4-39aad00d3a61"
+  alias: "ESPHome - Longpress"
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        # - switch.balcony_light_switch_longpress
+        # - switch.bathroom_light_switch_longpress
+        # - switch.bedroom_light_switch_longpress
+        # - switch.dressoir_light_switch_longpress
+        # - switch.hallway_light_switch_longpress
+        # - switch.seeling_light_switch_longpress # NOT DONE YET
+        # - switch.sink_light_switch_longpress # NOT DONE YET
+        # - switch.toilet_light_switch_longpress # NOT DONE YET
+        - switch.wall_switch_longpress
+        - switch.window_switch_longpress
+
+  condition:
+    - "{{ trigger.to_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+    - "{{ trigger.from_state.state not in ['unknown', 'unavailable', '', 'None']}}"
+
+  variables:
+    from_state: "{{ trigger.from_state.state }}"
+    to_state: "{{ trigger.to_state.state }}"
+    name: "{{ trigger.entity_id[7:-17] }}" 
+
+  action:
+    - if:
+        - "{{ (name == 'wall') }}"
+      then:
+        - service: "{{ 'switch.turn_on' if ('trigger.to_state.state', 'on') else 'switch.turn_off' }}"
+          target:
+            entity_id: switch.xmas_tree_wall
+
+    - if:
+        - "{{ (name == 'window') }}"
+      then:
+        - service: "{{ 'switch.turn_on' if ('trigger.to_state.state', 'on') else 'switch.turn_off' }}"
+          target:
+            entity_id: switch.xmas_1_wall

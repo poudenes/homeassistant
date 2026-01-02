@@ -8,7 +8,7 @@
 # SCENE FOR TV WHEN SUN IS BELOW HORIZON
 ###########################################################################################
 - id: "b8d3258a-7905-42a2-b944-8db65674d6fc"
-  alias: "Scene - TV Automation"
+  alias: "Scene - TV Automation" 
   mode: restart
   triggers:
     - trigger: state
@@ -20,8 +20,7 @@
       to: "TV"
 
     - trigger: state
-      entity_id:
-        - input_select.helpers_scenes
+      entity_id: input_select.helpers_scenes
 
   conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'below horizon') }}"

@@ -15,12 +15,12 @@
         static int state = 0;
         if (initial_run){
           state = 0;
-          it.all() = ESPColor(0,255,0);
+          it.all() = Color(0,255,0);
         } else {
-          it.all() = ESPColor(255, 0, 127);
+          it.all() = Color(255, 0, 127);
           if(state==0){
             int i = rand() % it.size();
-            it[i] = ESPColor(0,255,0);
+            it[i] = Color(0,255,0);
             state += 1;
           } else {
             state += 1;
@@ -34,12 +34,12 @@
         static int state = 0;
         if (initial_run){
           state = 0;
-          it.all() = ESPColor(0,255,0);
+          it.all() = Color(0,255,0);
         } else {
-          it.all() = ESPColor(255, 0, 0);
+          it.all() = Color(255, 0, 0);
           if(state==0){
             int i = rand() % it.size();
-            it[i] = ESPColor(0,255,0);
+            it[i] = Color(0,255,0);
             state += 1;
           } else {
             state += 1;
