@@ -56,7 +56,7 @@ storage.*
 
 # FOLDERS
 ESPSomfyRTS_8BE5C4/
-Backup/
+backup/
 addons_config/
 archive_backup/
 blueprints/
