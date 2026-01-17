@@ -38,7 +38,7 @@ twitter_last_message:
   max: 255
   
 dishwasher_machine_data:
-  name: dishwasher machine data
+  name: "Dishwasher machine data"
   max: 255
 
 dryer_machine_data:

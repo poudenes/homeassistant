@@ -10,8 +10,6 @@
 # RECORDER
 # https://www.home-assistant.io/integrations/recorder/
 ###########################################################################################
-# db_url: !secret recorder_postgres
-
 db_url: !secret recorder_mariadb
 
 purge_keep_days: 15

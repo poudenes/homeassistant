@@ -18,6 +18,7 @@ logs:
   alexapy.alexaapi: fatal
   roborock.cloud_api: fatal
 
+  homeassistant.components.alexa: debug
   homeassistant.components.alexa.auth: debug
   homeassistant.components.alexa.state_report: debug
   homeassistant.components.fully_kiosk: fatal
