@@ -9,13 +9,23 @@
 ###########################################################################################
 # https://www.home-assistant.io/integrations/command_line/
 ###########################################################################################
-
+#################################################################
+# Check of IPTV domain is alive
+#################################################################
+- binary_sensor:
+    name: "Check line.clear_ocean.link status"
+    unique_id: "bc018019-ae40-4de4-a162-4e4f00665581"
+    command: 'dig +short line.clear-ocean.link A | grep -q NXDOMAIN && echo DEAD || echo ALIVE'
+    device_class: connectivity
+    payload_on: ALIVE
+    payload_off: DEAD
+    scan_interval: 600      
 #################################################################
 # Calculate total amount of lines in YAML conifg
 #################################################################
 - sensor:
     name: "Count total lines YAML Config"
-    unique_id: bc018019-ae40-4da4-a362-4e4f00665581
+    unique_id: "bc018019-ae40-4da4-a362-4e4f00665581"
     scan_interval: 600
     command: 'find . -name "*.yaml" -not -path "*/custom_components/*" -not -path "*/Purgatory/*" | xargs wc -l | grep "total" | grep "[0-9]*" -o'
     
