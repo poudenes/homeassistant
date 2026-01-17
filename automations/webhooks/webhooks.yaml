@@ -50,11 +50,30 @@
       webhook_id: "firefly"
       local_only: true
       id: "firefly"
+      
+    - trigger: "webhook"
+      allowed_methods:
+        - POST
+        - PUT
+      webhook_id: "apt-updates"
+      local_only: true
+      id: "apt-updates"
 
   conditions: []
 
   actions:
     - choose:
+        - conditions:
+            - condition: trigger
+              id: "apt-updates"
+          sequence:
+            - action: "script.mobile_notify_no_actionable"
+              data:
+                title: "HA - VPS Dime APT update"
+                message: |
+                  {{ trigger.json.message }}
+                thread_id: "ha_system"          
+      
         - conditions:
             - condition: trigger
               id: "ukstatus"
