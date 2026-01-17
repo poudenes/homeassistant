@@ -114,7 +114,6 @@ binary_sensor.nest_protect_2_heat_status:
 binary_sensor.nest_protect_2_smoke_status:
   friendly_name: "Livingroom - Smoke status"
 
-
 sensor.nest_protect_3_last_audio_self_test:
   friendly_name: "Bedroom - Last audio self test"
 sensor.nest_protect_3_last_manual_test:

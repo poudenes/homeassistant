@@ -98,33 +98,3 @@
             entity_id: light.dressoir_all
           data:
             brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
-
-            # effect: >-
-            #   {% if is_state('sensor.holidays', 'Christmas') %} 
-            #     Christmas
-            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
-            #     Halloween
-            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
-            #     Euro 2023
-            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
-            #     Kingsday
-            #   {% elif states('sensor.holidays') in ['Valentine', 'Special Day'] %} 
-            #     Valentine
-            #   {% else %} 
-            #     Kay
-            #   {% endif %}
-
-            # entity_id: >-
-            #   {% if is_state('sensor.holidays', 'Christmas') %} 
-            #     scene.scenes_evening_christmas
-            #   {% elif is_state('sensor.holidays', 'Halloween') %} 
-            #     scene.scenes_evening_halloween
-            #   {% elif is_state('sensor.holidays', 'Eurovision') %} 
-            #     scene.scenes_evening_eurovision
-            #   {% elif states('sensor.holidays') in ['Kingsday', 'Birthday'] %} 
-            #     scene.scenes_birthday
-            #   {% elif is_state('sensor.holidays', 'Valentine') %}
-            #     scene.scenes_romantic
-            #   {% else %} 
-            #     scene.scenes_evening_evening
-            #   {% endif %}

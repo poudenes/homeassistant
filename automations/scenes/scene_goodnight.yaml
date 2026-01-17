@@ -112,12 +112,6 @@
         entity_id: >
           {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
             | reject('in', ['switch.peter_wall','switch.kay_wall']) | list }}
-
-#    - action: climate.set_temperature
-#      target:
-#        entity_id: climate.nest_02aa01ac35140a4t
-#      data:
-#        temperature: 9
         
     - parallel:
         - sequence:

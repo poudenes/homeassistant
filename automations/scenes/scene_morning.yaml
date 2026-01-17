@@ -35,17 +35,6 @@
         brightness_pct: 100
         transition: 300
 
-#    - action: input_number.set_value
-#      target:
-#        entity_id:
-#          - input_number.helpers_motion_toilet
-#          - input_number.helpers_motion_kitchen
-#          - input_number.helpers_motion_bedroom
-#          - input_number.helpers_motion_bathroom
-#          - input_number.helpers_motion_diningroom
-#      data:
-#        value: 120
-
     - choose:
         - conditions: "{{ states('sensor.bathroom_temperature')|int < 17 }}"
           sequence:
