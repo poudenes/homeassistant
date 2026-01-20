@@ -17,7 +17,7 @@ No Ports are open on my router anymore, and no subdomains are pointing to my IP 
 **My hardware:**
 - 1 ESP Somfy blind control DiY module. Build by using ESP32 and some other modules
 
-- 1 Dell 3050 4GB Memory 128GB SSD with Home Assistant OS
+- 1 Dell 3050 4GB Memory 128GB SSD with Home Assistant OS.
 
 - 8 Meek ESP Wifi Wall Switches - https://www.meek-ha.com
 
