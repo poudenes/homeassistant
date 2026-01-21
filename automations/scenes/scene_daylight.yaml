@@ -21,7 +21,7 @@
   conditions:
     - "{{ is_state('input_select.helpers_sunrise_sunset', 'above horizon') }}"
     - "{{ is_state('switch.momentary_early_sleep', 'off') }}"
-    - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
+#     - "{{ is_state('binary_sensor.group_family_manual', 'on') }}"
     - "{{ is_state('input_boolean.function_test_below_horizon', 'off') }}"
     - "{{ not is_state('input_select.helpers_scenes', 'scene daytime') }}"
 
