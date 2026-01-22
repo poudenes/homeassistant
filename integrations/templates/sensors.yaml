@@ -9,6 +9,24 @@
 ##########################################################################################
 ---
 #########################################################################################
+# Calculate when my medication run out on what date
+#########################################################################################
+- sensor:
+    - name: "Medication run out date"
+      unique_id: medicatie_op_tot
+      icon: mdi:pill
+      device_class: date
+      state: >-
+        {% set tablets = states('input_text.medication_stock') | float(0) %}
+        {% if tablets <= 0 %}
+          unknown
+        {% else %}
+          {% set days_left = (tablets / 2) | round(0, 'floor') %}
+          {{ (now().date() + timedelta(days=days_left)) }}
+        {% endif %}
+          
+          
+#########################################################################################
 # Cost low and high energy usage for energy dashboard
 #########################################################################################
 - sensor:
