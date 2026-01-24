@@ -19,7 +19,8 @@
     device_class: connectivity
     payload_on: ALIVE
     payload_off: DEAD
-    scan_interval: 600      
+    scan_interval: 600    
+    
 #################################################################
 # Calculate total amount of lines in YAML conifg
 #################################################################

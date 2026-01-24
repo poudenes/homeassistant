@@ -44,9 +44,9 @@
     - action: automation.turn_on
       entity_id: automation.control_light_lux_control
 
-    - action: switch.turn_on
+    - action: button.press
       target:
-        entity_id: switch.fan_low
+        entity_id: button.fan_low # switch.fan_low
 
     - action: button.press
       data: {}

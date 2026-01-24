@@ -31,7 +31,7 @@
           - remote.logitech_harmony
           - switch.helpers_switches
           - light.scenes_house
-          - switch.fan_low
+          - button.fan_low # switch.fan_low
 
     - action: "{{ 'switch.turn_off' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
       target:
@@ -39,9 +39,9 @@
           {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
             | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
 
-    - action: switch.turn_on
+    - action: button.press
       target:
-        entity_id: switch.fan_low
+        entity_id: button.fan_low
 
     - action: climate.set_temperature
       target:

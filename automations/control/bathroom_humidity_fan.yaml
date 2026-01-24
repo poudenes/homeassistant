@@ -28,13 +28,13 @@
 
   actions:
     - parallel:
-        - action: switch.turn_on
+        - action: button.press
           target:
-            entity_id: switch.fan_high
+            entity_id: button.fan_high
 
-        - action: switch.turn_on
+        - action: button.press
           target:
-            entity_id: switch.fan_high
+            entity_id: button.fan_high
 
         - action: script.mobile_notify_no_actionable
           data:
@@ -53,9 +53,11 @@
 
       then:
         - parallel:
-            - action: switch.turn_on
+            - delay: "00:20:00"
+
+            - action: button.press
               target:
-                entity_id: switch.fan_timer_20min
+                entity_id: button.fan_low # switch.fan_timer_20min
 
             - action: script.mobile_notify_no_actionable
               data:

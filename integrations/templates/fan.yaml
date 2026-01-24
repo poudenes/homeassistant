@@ -9,30 +9,6 @@
 ###########################################################################################
 # https://www.home-assistant.io/integrations/fan.template/
 ###########################################################################################
-#- fan:
-##    mechanical_ventilation:
-#      friendly_name: "mechanical_ventilation"
-#      value_template: >
-#        {{ "off" if states('sensor.fan_speed') == 'Low' else "on" }}
-#      percentage_template: >
-#        {% set speedperc = {'Low': 0, 'Medium': 50, 'High': 100} %}
-#        {{ speedperc[states('sensor.fan_speed')] }}
-#      turn_on:
-#        service: switch.turn_on
-#        data:
-#          entity_id: switch.fan_high
-#      turn_off:
-#        service: switch.turn_on
-#        data:
-#          entity_id: switch.fan_low
-#      set_percentage:
-#        service: switch.turn_on
-##        data:
-#          entity_id: >
-#            {% set id_mapp = {0:'switch.fan_low', 50:'switch.fan_medium', 100:'switch.fan_high'} %}
-#            {{ id_mapp[percentage] }}
-#      speed_count: 2
-
 - fan:
     - name: "mechanical_ventilation"
       state: >
@@ -41,17 +17,49 @@
         {% set speed = {'off': 0, 'low': 33, 'medium': 66, 'high': 100} %}
         {{ speed.get(states('sensor.fan_speed'), 0) }}
       turn_on:
-        action: switch.turn_on
+        action: button.press # switch.turn_on
         data:
-          entity_id: switch.fan_high
+          entity_id: button.fan_high # switch.fan_high
       turn_off:
-        action: switch.turn_on
+        action: button.press # switch.turn_on
         data:
-          entity_id: switch.fan_standby
+          entity_id: button.fan_low # switch.fan_standby
       set_percentage:
-        action: switch.turn_on
+        action: button.press # switch.turn_on
         data_template:
           entity_id: >
-            {% set id_mapp = {0: 'switch.fan_standby', 33:'switch.fan_low', 66:'switch.fan_medium', 100:'switch.fan_high'} %}
+            {% set id_mapp = {0:'button.fan_low', 50:'button.fan_medium', 100:'button.fan_high'} %}
             {{id_mapp[percentage]}}
       speed_count: 2
+      
+      
+# Test if this fan works better
+    - name: "Fan test"
+      unique_id: fan_test
+      state: >
+        {{ "off" if is_state('sensor.fan_speed', 'Low') else "on" }}
+      preset_mode: >
+        {{ states('sensor.fan_speed') | lower }}
+      preset_modes:
+        - "low"
+        - "medium"
+        - "high"
+      turn_on:
+        service: button.press
+        target:
+          entity_id: button.fan_high
+      turn_off:
+        service: button.press
+        target:
+          entity_id: button.fan_low
+      set_preset_mode:
+        service: button.press
+        target:
+          entity_id: >
+            {% if preset_mode == "low" %}
+              button.fan_low
+            {% elif preset_mode == "medium" %}
+              button.fan_medium
+            {% else %}
+              button.fan_high
+            {% endif %}
