@@ -4689,5 +4689,6 @@ watchman_report.txt
 # Exclusions via Blueprint Studio
 not_in_use_anymore
 not_in_use_anymore/twitter_random_post.yaml
-other
-other/downdetector.sh
+
+
+# Exclusions via Blueprint Studio
