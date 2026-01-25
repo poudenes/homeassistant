@@ -34,7 +34,7 @@
       
       
 # Test if this fan works better
-    - name: "Fan test"
+    - name: "Fan bathroom"
       unique_id: fan_test
       state: >
         {{ "off" if is_state('sensor.fan_speed', 'Low') else "on" }}

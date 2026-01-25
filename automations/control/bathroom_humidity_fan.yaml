@@ -52,16 +52,15 @@
         - "{{ is_state('sensor.fan_remote', 'Home Assistant') }}"
 
       then:
-        - parallel:
-            - delay: "00:20:00"
+        - delay: "00:20:00"
 
-            - action: button.press
-              target:
-                entity_id: button.fan_low # switch.fan_timer_20min
+        - action: button.press
+          target:
+            entity_id: button.fan_low # switch.fan_timer_20min
 
-            - action: script.mobile_notify_no_actionable
-              data:
-                title: "HA - System"
-                message: |
-                  Fan timer started 20 minutes. Then it's turning off.
-                thread_id: "ha_system"
+        - action: script.mobile_notify_no_actionable
+          data:
+            title: "HA - System"
+            message: |
+              Fan timer started 20 minutes. Then it's turning off.
+            thread_id: "ha_system"
