@@ -127,6 +127,21 @@ button:
       - lambda: id(itho_hub).send_command(3);
 
   - platform: template
+    name: "Fan High 10"
+    on_press:
+      - lambda: id(itho_hub).send_command(13);
+
+  - platform: template
+    name: "Fan High 20"
+    on_press:
+      - lambda: id(itho_hub).send_command(23);
+
+  - platform: template
+    name: "Fan High 30"
+    on_press:
+      - lambda: id(itho_hub).send_command(33);
+
+  - platform: template
     name: "Fan Jion"
     on_press:
       - lambda: id(itho_hub).send_join();
