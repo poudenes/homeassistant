@@ -1,3 +1,4 @@
+# ORIGINAL
 #########################################################
 # Below all fixed settings for ITHO PCB
 #########################################################
@@ -34,10 +35,10 @@ external_components:
   - source:
       type: local
       path: components
-    components: [itho_fan]
+    components: [itho_fan_20260125]
 
 logger:
-  level: VERBOSE # DEBUG
+  level: DEBUG
 
 wifi:
   ssid: !secret wifi_ssid
@@ -90,7 +91,7 @@ ota:
 safe_mode:
   reboot_timeout: 0s
 
-itho_fan:
+itho_fan_20260125:
   id: itho_hub
   device_id: "ID3"
   device_name: "Home Assistant"
@@ -100,6 +101,12 @@ itho_fan:
       room_name: "Kitchen"
     - remote_id:  "3c,c,51" #"106,89,106"  # First 3 bytes of 6a:59:6a (converted from hex to decimal)
       room_name: "Bathroom"
+
+  # remote_ids:
+  #   - remote_id: "65:99:96:55:96:a9:9a:56"
+  #     room_name: "Kitchen"
+  #   - remote_id: "6a:59:6a:55:96:a9:9a:56"
+  #     room_name: "Bathroom"
 
 button:
   - platform: factory_reset
