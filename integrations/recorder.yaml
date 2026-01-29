@@ -205,7 +205,6 @@ include:
     - input_boolean.function_burglar
     - input_boolean.function_dnc
     - input_boolean.function_full_manual_mode
-    - input_boolean.function_kay_learning
     - input_boolean.function_disco
     - input_boolean.function_lux_low
     - input_boolean.function_romantic

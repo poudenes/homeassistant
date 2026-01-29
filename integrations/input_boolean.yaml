@@ -140,10 +140,6 @@ function_test_below_horizon:
   name: "function Test Below Horizon"
   icon: mdi:nintendo-switch
 
-function_kay_learning:
-  name: "function Kay Learning"
-  icon: mdi:nintendo-switch
-
 function_vacation:
   name: "function Vacation"
   icon: mdi:palm-tree

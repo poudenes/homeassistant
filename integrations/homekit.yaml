@@ -168,7 +168,6 @@
       - input_boolean.function_romantic
       - input_boolean.function_disco
       - input_boolean.function_cooking
-      - input_boolean.function_kay_learning
       - input_boolean.function_dnc
       - switch.momentary_peter_early_up
       - input_boolean.function_tvonly
@@ -200,8 +199,6 @@
       name: "Function Disco"
     input_boolean.function_cooking:
       name: "Function Cooking"
-    input_boolean.function_kay_learning:
-      name: "Function Kay Learning"
     switch.momentary_peter_early_up:
       name: "Peter Early Up"
     input_boolean.function_dnc:
