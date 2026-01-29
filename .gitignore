@@ -13,6 +13,9 @@ watchman_report.txt
 
 
 
+
+automations/backup_master/
+
 .bash_history
 .bashrc
 .cache/
@@ -29,6 +32,8 @@ watchman_report.txt
 .vscode/
 ESPSomfyRTS_8BE5C4/
 addons_config/
+automations/backup/
+backup_master/
 blueprints/
 core
 custom-cont-init.d/
