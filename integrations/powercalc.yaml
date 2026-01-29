@@ -9,16 +9,16 @@
 ###########################################################################################
 sensors:
   - entity_id: light.sink_1
-    manufacturer: Gledopto
-    model: GL-D-004P
+    manufacturer: "Gledopto"
+    model: "GL-D-004P"
 
   - entity_id: light.sink_2
-    manufacturer: Gledopto
-    model: GL-D-004P
+    manufacturer: "Gledopto"
+    model: "GL-D-004P"
 
   - entity_id: light.sink_3
-    manufacturer: Gledopto
-    model: GL-D-004P
+    manufacturer: "Gledopto"
+    model: "GL-D-004P"
 
   - create_group: "PowerCalc Bedroom"
     entities:

@@ -31,9 +31,6 @@ helpers_kay_home_homekit:
 helpers_peter_home_homekit:
   name: "Peter"
 
-helpers_post_twitter_random:
-  name: "Post twitter random"
-
 helpers_radio_play:
   name: "Radio play"
 

@@ -73,7 +73,6 @@
     - property: "24h_volume"
       unit_of_measurement: "$"
 
-# NEW ADDED
 - platform: cryptoinfo_advanced
   id: "AVAX USD"
   unique_id: "195faa94-8ca2-4d02-90f9-8df4baaf08a4"
