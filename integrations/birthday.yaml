@@ -41,10 +41,3 @@ birthdays:
     icon: "mdi:zodiac-pisces"
     attributes:
       past_away: "no"
-
-  - unique_id: "86588bff-63e4-459d-ba11-a330bff7f0fa"
-    name: !secret family_name_5
-    date_of_birth: !secret date_of_birth_5
-    icon: "mdi:zodiac-leo"
-    attributes:
-      past_away: "no"

@@ -11,9 +11,6 @@
   alias: "Scene - Evening"
   mode: restart
   triggers:
-    # - trigger: time_pattern
-    #   minutes: "/5"
-
     - trigger: state
       entity_id: input_select.helpers_scenes
       
@@ -28,8 +25,8 @@
     - trigger: state
       entity_id:
         - binary_sensor.group_family_manual
-        - input_select.helpers_scenes
-        - input_select.helpers_sunrise_sunset
+#        - input_select.helpers_scenes
+#        - input_select.helpers_sunrise_sunset
 
   conditions:
     - condition: time
@@ -104,7 +101,7 @@
           target:
             entity_id: >
               {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
-                | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.kay_wall']) | list }}
+                | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.bed_left_wall']) | list }}
 
     - action: light.turn_on
       target:

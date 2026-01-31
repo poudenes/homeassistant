@@ -257,8 +257,8 @@ include:
     - sensor.fridge_watt
     - sensor.imac_kwh
     - sensor.imac_watt
-    - sensor.kay_kwh
-    - sensor.kay_watt
+    - sensor.bed_left_kwh
+    - sensor.bed_left_watt
     - sensor.peter_kwh
     - sensor.peter_watt
     - sensor.toog_kwh
@@ -381,7 +381,7 @@ include:
     - switch.dryer_wall
     - switch.fridge_wall
     - switch.imac_wall
-    - switch.kay_wall
+    - switch.bed_left_wall
     - switch.peter_wall
     - switch.toog_wall
     - switch.washer_wall

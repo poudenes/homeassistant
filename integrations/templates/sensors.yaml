@@ -325,13 +325,13 @@
         {% endif %}
 
 - sensor:
-    - name: "Neo plug kay"
-      unique_id: "0eccf3e2-c450-4545-a545-3731c898cb20"
+    - name: "Neo plug bed left"
+      unique_id: "0eccf3e2-c450-4545-a545-3731c898cb21"
       unit_of_measurement: kWh
       device_class: energy
       state_class: total_increasing
       state: >-
-        {% set value = states('sensor.kay_kwh') | float(0) %}
+        {% set value = states('sensor.bed_left_kwh') | float(0) %}
         {% set const = 21474836.47 %}
         {% if value < 0 %}
           {{ (value + const) | round(2) }}
