@@ -35,7 +35,6 @@ include:
     - sensor.neo_plug_dryer
     - sensor.neo_plug_fridge
     - sensor.neo_plug_imac
-    - sensor.neo_plug_kay
     - sensor.neo_plug_peter
     - sensor.neo_plug_toog
     - sensor.neo_plug_washer
