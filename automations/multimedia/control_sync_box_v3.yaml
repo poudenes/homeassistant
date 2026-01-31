@@ -55,8 +55,6 @@
                 input: input1
                 entertainment_area: "{{ 'TV room' if is_state('input_boolean.function_tvonly', 'off') and state_attr('media_player.woonkamer_4k', 'app_id') not in ['com.apple.TVMusic', 'com.apple.TVAirPlay'] else 'TV only' }}"
                 device_id: ca734212663336331243ffd0104937dc
-              # target:
-              #   device_id: ca734212663336331243ffd0104937dc
 
             - parallel:
                 - action: light.turn_on
@@ -65,38 +63,38 @@
                       - light.nanoleaf
                   data:
                     brightness_pct: 5
-                    transition: 2
+                    transition: 3
 
                 - action: light.turn_on
                   target:
                     entity_id: light.wall_all
                   data:
-                    transition: 2
+                    transition: 3
                     brightness_pct: 40
 
-                - delay: "00:00:03"
+                - delay: "00:00:04"
 
                 - action: light.turn_on
                   target:
                     entity_id: light.window_all
                   data:
-                    transition: 2
+                    transition: 3
                     brightness_pct: 5
 
-                - delay: "00:00:03"
+                - delay: "00:00:04"
 
                 - action: light.turn_on
                   target:
                     entity_id: light.dressoir_all
                   data:
-                    transition: 2
+                    transition: 3
                     brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 15 }}"
 
                 - action: light.turn_on
                   target:
                     entity_id: light.balcony_all
                   data:
-                    transition: 2
+                    transition: 3
                     brightness_pct: 5
 
         ###########################################################################################
@@ -116,14 +114,12 @@
                 input: input1
                 entertainment_area: TV only
                 device_id: ca734212663336331243ffd0104937dc
-              # target:
-              #   device_id: ca734212663336331243ffd0104937dc
 
             - delay: "00:00:01"
 
             - action: hue.activate_scene
               data:
-                transition: 2
+                transition: 1
                 brightness: 255
               target:
                 entity_id: >-
@@ -147,7 +143,7 @@
                     entity_id: light.nanoleaf
                   data:
                     brightness_pct: 50
-                    transition: 2
+                    transition: 1
 
                 - action: light.turn_on
                   target:
@@ -155,21 +151,21 @@
                       - light.livingroom_all
                       - light.balcony_all
                   data:
-                    transition: 2
+                    transition: 1
                     brightness_pct: 100
 
                 - action: light.turn_on
                   target:
                     entity_id: light.dressoir_all
                   data:
-                    transition: 2
+                    transition: 1
                     brightness_pct: "{{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}"
 
                 - action: light.turn_on
                   target:
                     entity_id: light.balcony_all
                   data:
-                    transition: 2
+                    transition: 1
                     brightness_pct: 100
 
         ###########################################################################################
@@ -188,5 +184,3 @@
                 input: input1
                 entertainment_area: TV only
                 device_id: ca734212663336331243ffd0104937dc
-              # target:
-              #   device_id: ca734212663336331243ffd0104937dc

@@ -38,6 +38,13 @@
               destructive: true
               behavior: "default"
 
+            - action: "Took medicine 3 pills"
+              title: "I took 3 medicine"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+              
             - action: "Medicine snooze"
               title: "Remind me later again"
               activationMode: "background"
@@ -78,6 +85,12 @@
       variables:
         amount_pills: 2
 
+    - trigger: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: "Took medicine 3 pills"
+      variables:
+        amount_pills: 3
   conditions: []
 
   actions:
@@ -157,6 +170,13 @@
               destructive: true
               behavior: "default"
 
+            - action: "Took medicine 3 pills"
+              title: "I took 3 medicine"
+              activationMode: "background"
+              authenticationRequired: false
+              destructive: true
+              behavior: "default"
+              
             - action: "Medicine snooze"
               title: "Remind me later again"
               activationMode: "background"

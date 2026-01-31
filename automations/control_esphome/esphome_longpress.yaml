@@ -13,14 +13,6 @@
   trigger:
     - platform: state
       entity_id:
-        # - switch.balcony_light_switch_longpress
-        # - switch.bathroom_light_switch_longpress
-        # - switch.bedroom_light_switch_longpress
-        # - switch.dressoir_light_switch_longpress
-        # - switch.hallway_light_switch_longpress
-        # - switch.seeling_light_switch_longpress # NOT DONE YET
-        # - switch.sink_light_switch_longpress # NOT DONE YET
-        # - switch.toilet_light_switch_longpress # NOT DONE YET
         - switch.wall_switch_longpress
         - switch.window_switch_longpress
 

@@ -31,8 +31,6 @@
                     {% elif trigger.to_state.state == '4' %} switch.imac_wall
                     {% endif %}
 
-              # - delay: "00:00:05"
-
           - conditions: 
               - "{{ not is_state('sensor.holidays', 'Christmas') }}"
               - "{{ state_attr('sensor.hue_remote_sensor', 'press_type') == 'short_release' }}"
@@ -50,5 +48,3 @@
                     brightness_pct: 98
                     kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
                     effect: "none"
-
-                # - delay: "00:00:05"

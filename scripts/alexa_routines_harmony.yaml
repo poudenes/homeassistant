@@ -182,6 +182,7 @@ alexa_turn_on_chromecast:
         option: Cromecast
       target:
         entity_id: select.logitech_harmony_activities
+        
 # ###########################################################################################
 # # ALEXA HA Routine OPEN NETFLIX
 # ###########################################################################################
@@ -458,69 +459,3 @@ alexa_turn_on_chromecast:
 #           - down
 #           - right
 #           - select
-
-# alexa_turn_on_appletv_pause:
-#   alias: "HA Routine AppleTV - Pause"
-#   icon: mdi:script
-#   sequence:
-#     - action: remote.send_command
-#       target:
-#         entity_id: remote.logitech_harmony
-#       data:
-#         command: Pause
-#         device: Apple TV
-
-# alexa_turn_on_appletv_play:
-#   alias: "HA Routine AppleTV - Play"
-#   icon: mdi:script
-#   sequence:
-#     - action: remote.send_command
-#       target:
-#         entity_id: remote.logitech_harmony
-#       data:
-#         command: Play
-#         device: Apple TV
-
-# alexa_turn_on_appletv_stop:
-#   alias: "HA Routine AppleTV - Stop"
-#   icon: mdi:script
-#   sequence:
-#     - action: remote.send_command
-#       target:
-#         entity_id: remote.logitech_harmony
-#       data:
-#         command: Back
-#         device: Apple TV
-
-# alexa_turn_on_tv_pause:
-#   alias: "HA Routine TV - Pause"
-#   icon: mdi:script
-#   sequence:
-#     - action: remote.send_command
-#       target:
-#         entity_id: remote.logitech_harmony
-#       data:
-#         command: Pause
-#         device: T-mobile remote
-
-# alexa_turn_on_tv_play:
-#   alias: "HA Routine TV - Play"
-#   icon: mdi:script
-#   sequence:
-#     - action: remote.send_command
-#       target:
-#         entity_id: remote.logitech_harmony
-#       data:
-#         command: Play
-#         device: T-mobile remote
-
-# alexa_turn_on_tv_stop:
-#   alias: "HA Routine TV - Stop"
-#   icon: mdi:script
-#   sequence:
-#     - action: remote.send_command
-#       target:
-#         entity_id: remote.logitech_harmony
-#       data:
-#         command: Stop
-#         device: T-mobile remote

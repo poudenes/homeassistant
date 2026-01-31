@@ -26,7 +26,6 @@
             message: >-
               {{ trigger.to_state.name }} Presence
               {{ trigger.to_state.name }} left home
-#              at {{as_timestamp (states.trigger.to_state.last_changed) timestamp_custom("%H:%M")}}
             thread_id: "ha_persons"
 
       else:
