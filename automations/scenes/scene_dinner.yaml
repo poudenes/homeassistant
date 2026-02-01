@@ -31,7 +31,7 @@
         entity_id: light.nanoleaf
       data:
         brightness_pct: 30
-        effect: Kay
+        effect: "Default"
 
     - action: light.turn_on
       target:

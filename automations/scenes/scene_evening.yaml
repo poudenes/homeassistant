@@ -80,7 +80,7 @@
                 'Valentine': 'Valentine',
                 'Special Day': 'Valentine'
               } %}
-              {{ holiday_effects.get(states('sensor.holidays'), 'Kay') }} 
+              {{ holiday_effects.get(states('sensor.holidays'), 'Default') }} 
 
         - action: hue.activate_scene
           data:

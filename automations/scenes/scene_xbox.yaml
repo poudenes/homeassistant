@@ -64,7 +64,7 @@
                 'Valentine': 'Valentine',
                 'Special Day': 'Valentine'
               } %}
-              {{ holiday_effects.get(states('sensor.holidays'), 'Kay') }} 
+              {{ holiday_effects.get(states('sensor.holidays'), 'Default') }} 
 
         - action: input_select.select_option
           target:
