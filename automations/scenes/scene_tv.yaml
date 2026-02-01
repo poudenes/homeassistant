@@ -91,7 +91,7 @@
           target:
             entity_id: >
               {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
-                | reject('in', ['switch.peter_wall','switch.bedroom_wall','switch.bed_left_wall']) | list }}
+                | reject('in', ['switch.bed_right_wall','switch.bedroom_wall','switch.bed_left_wall']) | list }}
 
         - action: light.turn_on
           target:

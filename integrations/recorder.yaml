@@ -256,8 +256,8 @@ include:
     - sensor.imac_watt
     - sensor.bed_left_kwh
     - sensor.bed_left_watt
-    - sensor.peter_kwh
-    - sensor.peter_watt
+    - sensor.bed_right_kwh
+    - sensor.bed_right_watt	
     - sensor.toog_kwh
     - sensor.toog_watt
     - sensor.washer_kwh
@@ -379,7 +379,7 @@ include:
     - switch.fridge_wall
     - switch.imac_wall
     - switch.bed_left_wall
-    - switch.peter_wall
+    - switch.bed_right_wall
     - switch.toog_wall
     - switch.washer_wall
     - switch.xmas_1_wall

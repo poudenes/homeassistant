@@ -310,13 +310,13 @@
         {% endif %}
 
 - sensor:
-    - name: "Neo plug peter"
+    - name: "Neo plug bed right"
       unique_id: "227a8418-104c-4660-81bf-fd8dbbd90db5"
       unit_of_measurement: kWh
       device_class: energy
       state_class: total_increasing
       state: >-
-        {% set value = states('sensor.peter_kwh') | float(0) %}
+        {% set value = states('sensor.bed_right_kwh') | float(0) %}
         {% set const = 21474836.47 %}
         {% if value < 0 %}
           {{ (value + const) | round(2) }}

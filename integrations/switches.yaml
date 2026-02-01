@@ -37,7 +37,7 @@
     - switch.imac_wall
     - switch.toog_wall
     - switch.bed_left_wall
-    - switch.peter_wall
+    - switch.bed_right_wall
     - switch.balcony_wall
     - switch.bedroom_wall
     - switch.xmas_1_wall
