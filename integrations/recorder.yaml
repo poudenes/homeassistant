@@ -142,8 +142,6 @@ include:
     - sensor.nextsunrise
     - sensor.nextsunset
     - sensor.season
-    - sensor.toyota_ago_apk_expiration
-    - sensor.toyota_ago_ascription_date
     - sensor.uptime
     - sensor.watchman_last_updated
     - sensor.watchman_missing_entities
@@ -345,7 +343,7 @@ include:
     - sensor.neo_plug_dryer
     - sensor.neo_plug_fridge
     - sensor.neo_plug_imac
-    - sensor.neo_plug_kay
+    - sensor.neo_plug_bed_left
     - sensor.neo_plug_peter
     - sensor.neo_plug_toog
     - sensor.neo_plug_washer
