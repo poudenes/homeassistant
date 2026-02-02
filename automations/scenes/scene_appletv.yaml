@@ -86,7 +86,7 @@
                 'Valentine': 'scene.scenes_romantic'
               } %}
               {{ holiday_scenes.get(states('sensor.holidays'), 'scene.scenes_appletv') }}
-
+              
         - action: "{{ 'switch.turn_on' if is_state('sensor.holidays', 'Christmas') else 'script.none' }}"
           target:
             entity_id: >

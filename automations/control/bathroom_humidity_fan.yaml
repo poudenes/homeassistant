@@ -58,7 +58,7 @@
 
         - action: script.mobile_notify_no_actionable
           data:
-            title: "HA - System"
+            title: "HA - Fan started 20min timer"
             message: |
               Fan timer started 20 minutes. Then it's turning off.
             thread_id: "ha_system"
