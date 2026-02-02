@@ -34,12 +34,6 @@ helpers_peter_home_homekit:
 helpers_radio_play:
   name: "Radio play"
 
-helpers_tracker_kay: # For pull down menus in Dashbaord
-  name: "Tracker Kay"
-
-helpers_tracker_peter: # For pull down menus in Dashbaord
-  name: "Tracker Peter"
-
 helpers_tracker_icloud3_log: # For pull down menus in Dashbaord
   name: "Tracker iCloud3 log"
 
