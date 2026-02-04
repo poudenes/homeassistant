@@ -19,7 +19,6 @@
     - "{{ is_state('input_boolean.function_full_manual_mode', 'off') }}"
     - "{{ states('input_select.helpers_scenes') not in ['scene daytime', 'scene goodnight'] }}"
 
-
   actions:
     - if:
         - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"

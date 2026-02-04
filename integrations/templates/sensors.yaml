@@ -9,6 +9,51 @@
 ##########################################################################################
 ---
 #########################################################################################
+# Calculatehow far my sun screen must go to block the sun
+#########################################################################################
+- sensor:
+    - name: "Sun blinds percentage"
+      unique_id: "1eafe237-1236-4da0-a6e0-9d2c32c1481b"
+      unit_of_measurement: "%"
+      state: >
+        {% set sun_elevation = state_attr('sun.sun', 'elevation') | float %}
+        {% set month = now().month %}
+
+        {# In juni 60% is de “basiswaarde” bij hoge zon #}
+        {%- set june_pct = 60 %}
+        {%- set winter_pct = 20 %}
+        {%- set summer_pct = 60 %}
+
+        {%- if month in [12,1,2] %}
+          {%- set base_pct = winter_pct %}
+        {%- elif month in [6,7] %}
+          {%- set base_pct = summer_pct %}
+        {%- else %}
+          {%- set base_pct = winter_pct + ((summer_pct - winter_pct) * ((month - 3) / 4)) | round %}
+        {%- endif %}
+
+        {# Binnen de zonstand (0–90°) bepalen we hoeveel extra uitklap #}
+        {%- set min_elev = 0 %}
+        {%- set mid_elev = 30 %}
+        {%- set max_elev = 60 %}
+
+        {%- if sun_elevation <= min_elev %}
+          {%- set pct = 100 %}    {# Bij zon net boven horizon: 100% uit #}
+        {%- elif sun_elevation <= mid_elev %}
+          {%- set pct = 100 %}    {# Bij lage zon: nog steeds 100% uit #}
+        {%- elif sun_elevation <= max_elev %}
+          {%- set pct = base_pct %}
+        {%- else %}
+          {%- set pct = base_pct %}
+        {%- endif %}
+
+        {# Cap op 0–100% #}
+        {%- set pct = [pct, 100] | min %}
+        {%- set pct = [pct, 0] | max %}
+
+        {{ pct | int }}
+
+#########################################################################################
 # Calculate when my medication run out on what date
 #########################################################################################
 - sensor:
@@ -24,7 +69,6 @@
           {% set days_left = (tablets / 2) | round(0, 'floor') %}
           {{ (now().date() + timedelta(days=days_left)) }}
         {% endif %}
-          
           
 #########################################################################################
 # Cost low and high energy usage for energy dashboard
