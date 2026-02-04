@@ -12,22 +12,22 @@
 
   conditions: []
 
-  variables:
-    balcony: >-
-      {% set maand = now().month %}
-      {% if maand in [1, 2, 3] %} 25
-      {% elif maand in [4, 5, 6] %} 60
-      {% elif maand in [7, 8, 9] %} 75
-      {% elif maand in [10, 11, 12] %} 90
-      {% endif %}
+#   variables:
+#     balcony: >-
+#       {% set maand = now().month %}
+#       {% if maand in [1, 2, 3] %} 25
+#       {% elif maand in [4, 5, 6] %} 60
+#       {% elif maand in [7, 8, 9] %} 75
+#       {% elif maand in [10, 11, 12] %} 90
+#       {% endif %}
 
-    livingroom: >-
-      {% set maand = now().month %}
-      {% if maand in [1, 2, 3] %} 25
-      {% elif maand in [4, 5, 6] %} 50
-      {% elif maand in [7, 8, 9] %} 75
-      {% elif maand in [10, 11, 12] %} 90
-      {% endif %}
+#     livingroom: >-
+#       {% set maand = now().month %}
+#       {% if maand in [1, 2, 3] %} 25
+#       {% elif maand in [4, 5, 6] %} 50
+#       {% elif maand in [7, 8, 9] %} 75
+#       {% elif maand in [10, 11, 12] %} 90
+#       {% endif %}
   
   actions:
     - if:
@@ -37,13 +37,13 @@
           target:
             entity_id: cover.balcony
           data:
-            position: "{{ balcony }}"
-
+            position: "{{ states('sensor.sun_blinds_percentage') }}"
+            
         - action: cover.set_cover_position
           target:
             entity_id: cover.livingroom
           data:
-            position: "{{ livingroom }}"
+            position: "{{ states('sensor.sun_blinds_percentage') }}"
 
       else:
         - action: cover.set_cover_position
