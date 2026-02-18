@@ -60,8 +60,8 @@
                 'Eurovision': 'Euro 2023',
                 'Kingsday': 'Kingsday',
                 'Birthday': 'Kingsday',
-                'Valentine': 'Valentine',
-                'Special Day': 'Valentine'
+                'Valentine': 'Default',
+                'Special Day': 'Default'
               } %}
               {{ holiday_effects.get(states('sensor.holidays'), 'Default') }} 
 
@@ -83,7 +83,7 @@
                 'Eurovision': 'scene.scenes_evening_eurovision',
                 'Kingsday': 'scene.scenes_birthday',
                 'Birthday': 'scene.scenes_birthday',
-                'Valentine': 'scene.scenes_romantic'
+                'Valentine': 'scene.scenes_evening_evening'
               } %}
               {{ holiday_scenes.get(states('sensor.holidays'), 'scene.scenes_evening_evening') }}
 

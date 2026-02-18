@@ -158,17 +158,24 @@
               sequence:
                 - action: light.turn_on
                   target:
-                    entity_id: light.sink_all
+                    entity_id: light.kitchen_all
                   data:
                     brightness_pct: 98
                     kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
+                    
+#                 - action: light.turn_on
+#                   target:
+#                     entity_id: light.sink_all
+#                   data:
+#                     brightness_pct: 98
+#                     kelvin: "{{ states('sensor.adaptive_lighting_color_temperature') }}"
 
-                - action: light.turn_on
-                  target:
-                    entity_id: light.ceiling_all
-                  data:
-                    brightness_pct: 98
-                    color_name: red
+#                 - action: light.turn_on
+#                   target:
+#                     entity_id: light.ceiling_all
+#                   data:
+#                     brightness_pct: 98
+#                     color_name: red
 
             ###########################################################################################
             # NOTHING

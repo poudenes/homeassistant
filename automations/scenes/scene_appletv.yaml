@@ -60,8 +60,8 @@
                 'Eurovision': 'Euro 2023',
                 'Kingsday': 'Kingsday',
                 'Birthday': 'Kingsday',
-                'Valentine': 'Valentine',
-                'Special Day': 'Valentine'
+                'Valentine': 'Default',
+                'Special Day': 'Default'
               } %}
               {{ holiday_effects.get(states('sensor.holidays'), 'Default') }}
 
@@ -83,7 +83,7 @@
                 'Eurovision': 'scene.scenes_eurovision',
                 'Kingsday': 'scene.scenes_birthday',
                 'Birthday': 'scene.scenes_birthday',
-                'Valentine': 'scene.scenes_romantic'
+                'Valentine': 'scene.scenes_appletv'
               } %}
               {{ holiday_scenes.get(states('sensor.holidays'), 'scene.scenes_appletv') }}
               
@@ -93,17 +93,25 @@
               {{ state_attr('switch.helpers_zwave_wallswitches', 'entity_id')
                 | reject('in', ['switch.bed_right_wall','switch.bedroom_wall','switch.bed_left_wall']) | list }}
 
-    - action: light.turn_on
+    - action: hue_dimmer.lower
       target:
         entity_id: light.window_all
       data:
-        brightness_pct: "{{ 20 if is_state('media_player.woonkamer_4k', 'playing') else 100 }}"
+        sweep_time: 3
+        limit: "{{ 10 if is_state('media_player.woonkamer_4k', 'playing') else 100 }}"
+        
+#     - action: light.turn_on
+#       target:
+#         entity_id: light.window_all
+#       data:
+#         brightness_pct: "{{ 20 if is_state('media_player.woonkamer_4k', 'playing') else 100 }}"
 
-    - action: light.turn_on
+    - action: hue_dimmer.lower
       target:
         entity_id: light.dressoir_all
       data:
-        brightness_pct: >-
+        sweep_time: 3
+        limit:  >-
           {% if is_state('media_player.woonkamer_4k', 'playing') %} 
             {{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 25 }}
           {% elif states('media_player.woonkamer_4k') in ['standby', 'paused'] %}  
@@ -111,10 +119,30 @@
           {% else %} 
             100
           {% endif %}
+  
+#     - action: light.turn_on
+#       target:
+#         entity_id: light.dressoir_all
+#       data:
+#         brightness_pct: >-
+#           {% if is_state('media_player.woonkamer_4k', 'playing') %} 
+#             {{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 25 }}
+#           {% elif states('media_player.woonkamer_4k') in ['standby', 'paused'] %}  
+#             {{ 0 if is_state('binary_sensor.diningroom_door_contact', 'on') else 100 }}
+#           {% else %} 
+#             100
+#           {% endif %}
 
-    - action: light.turn_on
+    - action: hue_dimmer.lower
       target:
-        entity_id: light.balcony_all
+        entity_id: light.dressoir_all
       data:
-        brightness_pct:
-          "{{ 20 if is_state('media_player.woonkamer_4k', 'playing') else 100 }}"
+        sweep_time: 3
+        limit:  "{{ 10 if is_state('media_player.woonkamer_4k', 'playing') else 100 }}"
+        
+#     - action: light.turn_on
+#       target:
+#         entity_id: light.balcony_all
+#       data:
+#         brightness_pct:
+#           "{{ 20 if is_state('media_player.woonkamer_4k', 'playing') else 100 }}"

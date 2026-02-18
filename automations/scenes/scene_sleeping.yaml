@@ -19,11 +19,18 @@
     - "{{ is_state('switch.momentary_peter_early_up', 'off') }}"
 
   actions:
-    - action: light.turn_off
-      data:
-        transition: 11
+#     - action: light.turn_off
+#       data:
+#         transition: 11
+#       target:
+#         entity_id: light.bedroom_all
+        
+    - action: hue_dimmer.lower
       target:
         entity_id: light.bedroom_all
+      data:
+        sweep_time: 11
+        limit: 0
 
     - delay: "00:00:10"
 
